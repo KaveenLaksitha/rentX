@@ -1,10 +1,16 @@
+/*page-body*/
+.page-body {
+  margin-top: -4rem;
+}
+.page-component-body {
+  margin-top: -4rem;
+  margin-left: -30rem;
+}
 /*side nav bar*/
 .navbar {
   background-color: #3f3f3f;
 }
-.fa-2x {
-  font-size: 2em;
-}
+
 .fa {
   position: relative;
   display: table-cell;
@@ -242,7 +248,7 @@ li.nav-item {
 }
 
 .btn-login {
-  background-color: #00ffb0;
+  background-color: #1ec290;
   color: black;
   width: 200px;
 }
@@ -253,4 +259,67 @@ li.nav-item {
   margin: 3rem 0 0rem 0;
 }
 
-/*test*/
+/*tab-content*/
+.tab-content {
+  background-color: rgb(235, 235, 235);
+}
+.formInput {
+  background-color: rgb(235, 235, 235);
+}
+.formInput:focus {
+  background-color: rgb(235, 235, 235);
+}
+
+.input-main-form {
+  width: 800px;
+}
+
+/*add rental form*/
+textarea {
+  resize: none;
+}
+.form-label {
+  font-size: 12px;
+  color: #5e9bfc;
+  margin: 0;
+  display: block;
+  opacity: 1;
+  -webkit-transition: 0.333s ease top, 0.333s ease opacity;
+  transition: 0.333s ease top, 0.333s ease opacity;
+}
+.form-control {
+  border-radius: 0;
+  border-color: #ccc;
+  border-width: 0 0 2px 0;
+  border-style: none none solid none;
+  box-shadow: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #5e9bfc;
+}
+.js-hide-label {
+  opacity: 0;
+}
+.js-unhighlight-label {
+  color: #999;
+}
+.btn-start-order {
+  background: 0 0 #ffffff;
+  border: 1px solid #2f323a;
+  border-radius: 3px;
+  color: #2f323a;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  line-height: inherit;
+  margin: 30px 0;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  transition: all 0.25s ease 0s;
+}
+.btn-start-order:hover,
+.btn-start-order:active,
+.btn-start-order:focus {
+  border-color: #5e9bfc;
+  color: #5e9bfc;
+}

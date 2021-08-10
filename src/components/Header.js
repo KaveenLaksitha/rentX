@@ -57,27 +57,61 @@ function Header(props) {
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="/empList">
-                <i class="fa fa-clock-o fa-2x"></i>
-                <span class="nav-text">Rentals</span>
-                <i class="fa fa-angle-right fa-2x"></i>
-              </a>
+              <li data-toggle="collapse" data-target="#new1" class="collapsed">
+                <a href="javascript:void(0)">  <i class="fa fa-clock-o fa-2x"></i> <span class="nav-text">Rentals</span> <i class="fa fa-angle-down fa-2x"></i></a>
+              </li>
+              <ul class="sub-menu collapse" id="new1">
+                <li class="has-subnav ">
+                  <a href="/addRental">
+                    <i class="fa"></i>
+                    <span class="nav-text">Add Rentals</span>
+                    <i class="fa fa-angle-right fa-3x"></i>
+                  </a>
+                </li>
+              </ul>
+              <li>
+              </li>
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="/addEmp">
-                <i class="fa fa-calendar fa-2x"></i>
-                <span class="nav-text">Reservations</span>
-                <i class="fa fa-angle-right fa-2x"></i>
-              </a>
+              <li data-toggle="collapse" data-target="#new2" class="collapsed">
+                <a href="javascript:void(0)">  <i class="fa fa-calendar fa-2x"></i> <span class="nav-text">Reservations</span> <i class="fa fa-angle-down fa-2x"></i></a>
+              </li>
+              <ul class="sub-menu collapse" id="new2">
+                <li class="has-subnav ">
+                  <a href="/addLeave">
+                    <i class="fa"></i>
+                    <span class="nav-text">Add Reservation</span>
+                    <i class="fa fa-angle-right fa-3x"></i>
+                  </a>
+                </li>
+              </ul>
+              <li>
+              </li>
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="/leaveList">
-                <i class="fa fa-car fa-2x"></i>
-                <span class="nav-text">Vehicle Inventory</span>
-                <i class="fa fa-angle-right fa-2x"></i>
-              </a>
+              <li data-toggle="collapse" data-target="#new3" class="collapsed">
+                <a href="javascript:void(0)">  <i class="fa fa-car fa-2x"></i> <span class="nav-text">Vehicle Inventory</span> <i class="fa fa-angle-down fa-2x"></i></a>
+              </li>
+              <ul class="sub-menu collapse" id="new3">
+                <li class="has-subnav ">
+                  <a href="/addLeave">
+                    <i class="fa"></i>
+                    <span class="nav-text">Add Vehicle</span>
+                    <i class="fa fa-angle-right fa-3x"></i>
+                  </a>
+                </li>
+                <li class="has-subnav">
+                  <a href="/addLeave">
+                    <i class="fa  fa-2x"></i>
+                    <span class="nav-text">Vehicle List</span>
+                    <i class="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
+              </ul>
+              <li>
+              </li>
             </li>
             <hr></hr>
             <li class="has-subnav">
@@ -89,52 +123,43 @@ function Header(props) {
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="#">
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#">  <i class="fa fa-file-pdf-o fa-2x"></i> <span class="nav-text">Reports</span> <i class="fa fa-angle-right fa-2x"></i></a>
+              <li data-toggle="collapse" data-target="#new" class="collapsed">
+                <a href="javascript:void(0)">  <i class="fa fa-file-pdf-o fa-2x"></i> <span class="nav-text">Reports</span> <i class="fa fa-angle-down fa-2x"></i></a>
+              </li>
+              <ul class="sub-menu collapse" id="new">
+                <li class="has-subnav ">
+                  <a href="/addLeave">
+                    <i class="fa"></i>
+                    <span class="nav-text">Employees</span>
+                    <i class="fa fa-angle-right fa-3x"></i>
+                  </a>
                 </li>
-                <ul class="sub-menu collapse" id="new">
-                  <li class="has-subnav ">
-                    <a href="/addLeave">
-                      <i class="fa  fa-2x"></i>
-                      <span class="nav-text">Employees</span>
-                      <i class="fa fa-plus "></i>
-                    </a>
-                  </li>
-                  <li class="has-subnav">
-                    <a href="/addLeave">
-                      <i class="fa  fa-2x"></i>
-                      <span class="nav-text">Employees</span>
-                      <i class="fa fa-angle-right fa-2x"></i>
-                    </a>
-                  </li>
-                  <li class="has-subnav">
-                    <a href="/addLeave">
-                      <i class="fa fa-2x"></i>
-                      <span class="nav-text">Employees</span>
-                      <i class="fa fa-angle-right fa-2x"></i>
-                    </a>
-                  </li>
-                  <li class="has-subnav">
-                    <a href="/addLeave">
-                      <i class="fa fa-2x"></i>
-                      <span class="nav-text">Employees</span>
-                      <i class="fa fa-angle-right fa-2x"></i>
-                    </a>
-                  </li>
-                </ul>
-
-
-                <li>
-
+                <li class="has-subnav">
+                  <a href="/addLeave">
+                    <i class="fa  fa-2x"></i>
+                    <span class="nav-text">Rentals</span>
+                    <i class="fa fa-angle-right fa-2x"></i>
+                  </a>
                 </li>
-
-              </a>
+                <li class="has-subnav">
+                  <a href="/addLeave">
+                    <i class="fa fa-2x"></i>
+                    <span class="nav-text">Vehicle Inventory</span>
+                    <i class="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
+                <li class="has-subnav">
+                  <a href="/addLeave">
+                    <i class="fa fa-2x"></i>
+                    <span class="nav-text">Reservations</span>
+                    <i class="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
+              </ul>
+              <li>
+              </li>
             </li>
             <hr></hr>
-
-
-
           </ul>
         </nav>
       </div>
