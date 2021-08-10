@@ -90,7 +90,6 @@ function Header(props) {
             <hr></hr>
             <li class="has-subnav">
               <a href="#">
-
                 <li data-toggle="collapse" data-target="#new" class="collapsed">
                   <a href="#">  <i class="fa fa-file-pdf-o fa-2x"></i> <span class="nav-text">Reports</span> <i class="fa fa-angle-right fa-2x"></i></a>
                 </li>
