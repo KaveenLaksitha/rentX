@@ -1,5 +1,7 @@
 import React from "react";
+
 import "./test.scss";
+import { Link } from "react-router-dom";
 
 function Header(props) {
     return (
@@ -91,18 +93,32 @@ function Header(props) {
             <li class="has-subnav">
               <a href="/attendaceMark">
                 <i class="fa fa-file-pdf-o fa-2x"></i>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-text">Reports</span></button>
+                <span class="nav-text">Reports</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
             <hr></hr>
+            <li class="dropdown">
+		<p class="btn btn-secondary dropdown-toggle"id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  > 
+        Submenu links  </p>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<li><a class="dropdown-item" href="#">Submenu item 1 </a></li>
+		    <li><a class="dropdown-item" href="#">Submenu item 2 </a></li>
+		    <li><a class="dropdown-item" href="#">Submenu item 3 </a> </li>
+		</ul>
+
+	</li>
+            
+            
+
           </ul>
         </nav>
       </div>
       <div>
         <br />
         <br />
+
+   
 
         <br />
         <br />
