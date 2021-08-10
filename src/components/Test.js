@@ -4,77 +4,125 @@ import "./test.scss";
 function Header(props) {
     return (
         <div>
-            <div id="throbber" style="display:none; min-height:120px;"></div>
-            <div id="noty-holder"></div>
-            <div id="wrapper">
-                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="https://bryanrojasq.wordpress.com">
-                            <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO" />
-                        </a>
-                    </div>
-                    <ul class="nav navbar-right top-nav">
-                        <li><a href="##" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
-                        </a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="##" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="##"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                                <li><a href="##"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
-                                <li class="divider"></li>
-                                <li><a href="##"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="collapse navbar-collapse navbar-ex1-collapse">
-                        <ul class="nav navbar-nav side-nav">
-                            <li>
-                                <a href="##" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i> MENU 1 <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                                <ul id="submenu-1" class="collapse">
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 1.1</a></li>
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 1.2</a></li>
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 1.3</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="##" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-fw fa-star"></i>  MENU 2 <i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                                <ul id="submenu-2" class="collapse">
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 2.1</a></li>
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 2.2</a></li>
-                                    <li><a href="##"><i class="fa fa-angle-double-right"></i> SUBMENU 2.3</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="investigaciones/favoritas"><i class="fa fa-fw fa-user-plus"></i>  MENU 3</a>
-                            </li>
-                            <li>
-                                <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
-                            </li>
-                            <li>
-                                <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+      <header>
+        <nav
+          class="navbar navbar-expand-lg navbar-light fixed-top"
+          id="mainNav"
+        >
+          <div class="container-fluid">
+            <a class="navbar-brand js-scroll-trigger" href="index.html">
+              <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
 
-                <div id="page-wrapper">
-                    <div class="container-fluid">
-                        <div class="row" id="main" >
-                            <div class="col-sm-12 col-md-12 well" id="content">
-                                <h1>Welcome Admin!</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link text-light" href="index.html">
+                    Home <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="contact.html">
+                    Logout
+                  </a>
+                </li>
+              </ul>
             </div>
-        </div>
+          </div>
+        </nav>
+      </header>
+
+      <div>
+        <div class="area"></div>
+        <nav class="main-menu fixed-top">
+          <ul>
+            <hr></hr>
+            <li>
+              <a href="/">
+                <i class="fa fa-th fa-2x"></i>
+                <span class="nav-text">Dashboard</span>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+            <li class="has-subnav">
+              <a href="/empList">
+                <i class="fa fa-clock-o fa-2x"></i>
+                <span class="nav-text">Rentals</span>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+            <li class="has-subnav">
+              <a href="/addEmp">
+                <i class="fa fa-calendar fa-2x"></i>
+                <span class="nav-text">Reservations</span>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+            <li class="has-subnav">
+              <a href="/leaveList">
+                <i class="fa fa-car fa-2x"></i>
+                <span class="nav-text">Vehicle Inventory</span>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+            <li class="has-subnav">
+              <a href="/addLeave">
+                <i class="fa fa-users fa-2x"></i>
+                <span class="nav-text">Employees</span>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+            <li class="has-subnav">
+              <a href="/attendaceMark">
+                <i class="fa fa-file-pdf-o fa-2x"></i>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-text">Reports</span></button>
+                <i class="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
+          </ul>
+        </nav>
+      </div>
+      <div>
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+      </div>
+      {/*<div class="footer-basic">
+        <footer>
+          <p class="copyright">Company Name © 2018</p>
+        </footer>
+      </div>
+  */}
+    </div >
     );
 }
 
