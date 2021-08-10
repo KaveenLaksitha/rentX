@@ -89,19 +89,61 @@ function Header(props) {
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="/attendaceMark">
-                <i class="fa fa-file-pdf-o fa-2x"></i>
-                <span class="nav-text">Reports</span>
-                <i class="fa fa-angle-right fa-2x"></i>
+              <a href="#">
+
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                  <a href="#">  <i class="fa fa-file-pdf-o fa-2x"></i> <span class="nav-text">Reports</span> <i class="fa fa-angle-right fa-2x"></i></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                  <li class="has-subnav ">
+                    <a href="/addLeave">
+                      <i class="fa  fa-2x"></i>
+                      <span class="nav-text">Employees</span>
+                      <i class="fa fa-plus "></i>
+                    </a>
+                  </li>
+                  <li class="has-subnav">
+                    <a href="/addLeave">
+                      <i class="fa  fa-2x"></i>
+                      <span class="nav-text">Employees</span>
+                      <i class="fa fa-angle-right fa-2x"></i>
+                    </a>
+                  </li>
+                  <li class="has-subnav">
+                    <a href="/addLeave">
+                      <i class="fa fa-2x"></i>
+                      <span class="nav-text">Employees</span>
+                      <i class="fa fa-angle-right fa-2x"></i>
+                    </a>
+                  </li>
+                  <li class="has-subnav">
+                    <a href="/addLeave">
+                      <i class="fa fa-2x"></i>
+                      <span class="nav-text">Employees</span>
+                      <i class="fa fa-angle-right fa-2x"></i>
+                    </a>
+                  </li>
+                </ul>
+
+
+                <li>
+
+                </li>
+
               </a>
             </li>
             <hr></hr>
+
+
+
           </ul>
         </nav>
       </div>
       <div>
         <br />
         <br />
+
+
 
         <br />
         <br />
@@ -116,11 +158,11 @@ function Header(props) {
         <br />
       </div>
       {/*<div class="footer-basic">
-        <footer>
-          <p class="copyright">Company Name © 2018</p>
-        </footer>
-      </div>
-  */}
+<footer>
+  <p class="copyright">Company Name © 2018</p>
+</footer>
+</div>
+*/}
     </div >
   );
 }
