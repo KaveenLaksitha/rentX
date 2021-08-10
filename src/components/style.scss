@@ -40,7 +40,6 @@ nav.main-menu.expanded {
   bottom: 0;
   height: 86.5%;
   left: 0;
-  padding-top: 2rem;
   width: 50px;
   overflow: hidden;
   -webkit-transition: width 0.05s linear;
@@ -124,7 +123,7 @@ nav.main-menu li.active > a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
   color: #fff;
-  background-color: #5fa2db;
+  background-color: #207159;
 }
 .area {
   float: left;
@@ -164,7 +163,7 @@ li.nav-item {
 
 /*footer*/
 .footer-basic {
-  position: absolute;
+  position: relative;
   padding: 40px 0;
   background-color: #3b3b3b;
   width: 100%;
@@ -224,4 +223,41 @@ li.nav-item {
   font-size: 13px;
   color: #aaa;
   margin-bottom: 0;
+}
+
+/*login*/
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url("https://i.ibb.co/c6kFNFX/19199058.png");
+  background-size: cover;
+  background-position: center center;
+}
+
+.login-container {
+  display: flex;
+  background-color: rgb(235, 235, 235);
+  max-width: 500px;
+  min-height: 600px;
+  justify-content: center;
+  padding: 6rem 1rem 1rem 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.btn-login {
+  background-color: #00ffb0;
+  color: black;
+  width: 200px;
+}
+
+.login-form-input {
+  width: 400px;
+  height: 3rem;
+  margin: 3rem 0 0rem 0;
 }

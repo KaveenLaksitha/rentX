@@ -47,65 +47,80 @@ function Header(props) {
         <div class="area"></div>
         <nav class="main-menu fixed-top">
           <ul>
+            <hr></hr>
             <li>
               <a href="/">
-                <i class="fa fa-home fa-2x"></i>
-                <span class="nav-text">Home</span>
+                <i class="fa fa-th fa-2x"></i>
+                <span class="nav-text">Dashboard</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
+            <hr></hr>
             <li class="has-subnav">
               <a href="/empList">
-                <i class="fa fa-users fa-2x"></i>
-                <span class="nav-text">View Employee List</span>
+                <i class="fa fa-clock-o fa-2x"></i>
+                <span class="nav-text">Rentals</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
+            <hr></hr>
             <li class="has-subnav">
               <a href="/addEmp">
-                <i class="fa fa-user-plus fa-2x"></i>
-                <span class="nav-text">Add New Employee</span>
+                <i class="fa fa-calendar fa-2x"></i>
+                <span class="nav-text">Reservations</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
             <hr></hr>
             <li class="has-subnav">
               <a href="/leaveList">
-                <i class="fa fa-calendar fa-2x"></i>
-                <span class="nav-text">View Leave List</span>
+                <i class="fa fa-car fa-2x"></i>
+                <span class="nav-text">Vehicle Inventory</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
+            <hr></hr>
             <li class="has-subnav">
               <a href="/addLeave">
-                <i class="fa fa-calendar-plus-o fa-2x"></i>
-                <span class="nav-text">Add Leave Details</span>
+                <i class="fa fa-users fa-2x"></i>
+                <span class="nav-text">Employees</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
             <hr></hr>
             <li class="has-subnav">
               <a href="/attendaceMark">
-                <i class="fa fa-edit fa-2x"></i>
-                <span class="nav-text">Mark Attendance</span>
+                <i class="fa fa-file-pdf-o fa-2x"></i>
+                <span class="nav-text">Reports</span>
                 <i class="fa fa-angle-right fa-2x"></i>
               </a>
             </li>
-            <li class="has-subnav">
-              <a href="/attendanceList">
-                <i class="fa fa-tasks fa-2x"></i>
-                <span class="nav-text">View Attendance List</span>
-                <i class="fa fa-angle-right fa-2x"></i>
-              </a>
-            </li>
+            <hr></hr>
           </ul>
         </nav>
       </div>
-      <div class="footer-basic">
+      <div>
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+      </div>
+      {/*<div class="footer-basic">
         <footer>
           <p class="copyright">Company Name © 2018</p>
         </footer>
       </div>
+  */}
     </div >
   );
 }
