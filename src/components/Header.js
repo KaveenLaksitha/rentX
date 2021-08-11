@@ -79,7 +79,7 @@ function Header(props) {
               </li>
               <ul class="sub-menu collapse" id="new2">
                 <li class="has-subnav ">
-                  <a href="/addLeave">
+                  <a href="/addReservation">
                     <i class="fa"></i>
                     <span class="nav-text">Add Reservation</span>
                     <i class="fa fa-angle-right fa-3x"></i>
