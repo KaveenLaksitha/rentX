@@ -115,7 +115,7 @@ function Header(props) {
             </li>
             <hr></hr>
             <li class="has-subnav">
-              <a href="/addLeave">
+              <a href="/addEmployee">
                 <i class="fa fa-users fa-2x"></i>
                 <span class="nav-text">Employees</span>
                 <i class="fa fa-angle-right fa-2x"></i>
