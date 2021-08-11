@@ -184,7 +184,7 @@ function addEmployee() {
                                             <div className="row">
                                                 <div className="form-group col-md-6">
                                                     <div className="form-group">
-                                                        <label for="empPic">Photo of the employee:</label>
+                                                        <label class="form-label-emp" for="empPic">Photo of the employee:</label>
                                                         <input
                                                             required
                                                             id="empPic"
@@ -198,7 +198,7 @@ function addEmployee() {
                                                 </div>
                                                 <div className="form-group col-md-6">
                                                     <div className="form-group">
-                                                        <label for="cv">CV:</label>
+                                                        <label class="form-label-emp" for="cv">CV:</label>
                                                         <input
                                                             required
                                                             id="cv"
