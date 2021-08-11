@@ -3,7 +3,7 @@ import "./style.scss";
 
 function login() {
     return (
-        <div class="container-fluid">
+        <div class="container-fluid page-body">
             <div class="row no-gutter">
                 <div class="col-md-6 d-none d-md-flex bg-image"></div>
 
