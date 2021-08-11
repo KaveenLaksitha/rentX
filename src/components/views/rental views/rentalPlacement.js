@@ -5,7 +5,7 @@ function rentalPlacement() {
 
 
     return (
-        <div className="page-component-body1 ">
+        <div className="page-component-body1">
             <div class="container input-main-form">
                 <h2>Rental Placement</h2>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -90,8 +90,8 @@ function rentalPlacement() {
                                         </div>
                                         <div class="text-left">
                                             <br></br>
-                                            <button type="submit" class="btn btn-success mb-3"> SAVE</button>
-                                            <button type="submit" class="btn btn-warning mb-3 ml-5">CANCEL</button>
+                                            <button type="submit" className="btn btn-ok"> SAVE</button>
+                                            <button type="reset" className="btn btn-reset">CANCEL</button>
                                             <br></br>
                                         </div>
                                     </form>
