@@ -5,6 +5,15 @@ import "./style.scss";
 function Header(props) {
   return (
     <div className="page-body">
+
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
       <header>
         <nav
           className="navbar navbar-expand-lg navbar-light fixed-top"
@@ -109,16 +118,16 @@ function Header(props) {
               <li data-toggle="collapse" data-target="#new3" className="collapsed">
                 <a href="javascript:void(0)">  <i className="fa fa-car fa-2x"></i> <span className="nav-text">Vehicle Inventory</span> <i className="fa fa-angle-right fa-animate fa-2x"></i></a>
               </li>
-              <ul className="sub-menu collapse" id="new3">
-                <li className="has-subnav ">
-                  <a href="/addLeave">
-                    <i className="fa"></i>
-                    <span className="nav-text">Add Vehicle</span>
-                    <i className="fa fa-angle-right fa-3x"></i>
+              <ul class="sub-menu collapse" id="new3">
+                <li class="has-subnav ">
+                  <a href="/addVehicle">
+                    <i class="fa"></i>
+                    <span class="nav-text">Add Vehicle</span>
+                    <i class="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
                 <li className="has-subnav">
-                  <a href="/addLeave">
+                  <a href="/vehicleList">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text">Vehicle List</span>
                     <i className="fa fa-angle-right fa-2x"></i>
@@ -211,11 +220,11 @@ function Header(props) {
         <br />
       </div>
       {/*<div class="footer-basic">
-<footer>
-  <p class="copyright">Company Name © 2018</p>
-</footer>
-</div>
-*/}
+        <footer>
+          <p class="copyright">Company Name © 2018</p>
+        </footer>
+      </div>
+  */}
     </div >
   );
 }
