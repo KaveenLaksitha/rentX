@@ -1,0 +1,1 @@
+{"version":3,"sources":["viewreservation.js"],"names":["viewreservation"],"mappings":";;;;;;;AAAA;;;;AAGA,SAASA,eAAT,GAA2B,CAE1B;;eAEcA,e","sourcesContent":["import React from 'react'\r\n\r\n\r\nfunction viewreservation() {\r\n    \r\n}\r\n\r\nexport default viewreservation"],"file":"viewreservation.dev.js"}

@@ -1,23 +1,14 @@
 /*page-body*/
 .page-body {
-  margin-top: -4rem;
+  max-height: 8rem;
+  margin-bottom: 2rem;
 }
+
 .page-component-body {
-  margin-top: -4rem;
-  margin-left: -30rem;
-}
+  height: 900px;
 
-/*
-.nav-link{
-  background-color: #1ec290;
 }
-*/
-
-.page-component-body-new {
-  margin-top: -4rem;
-  position:center;
-}
-/*side nav bar*/
+/*side nav bar and header*/
 .navbar {
   background-color: #3f3f3f;
 }
@@ -162,13 +153,6 @@ li.nav-item {
   padding: 10px 20px;
 }
 
-/*css for body*/
-.component-body {
-  margin-top: 8rem;
-  padding-left: 100px;
-  padding-right: 50px;
-}
-
 /*footer*/
 .footer-basic {
   position: relative;
@@ -259,7 +243,7 @@ li.nav-item {
 }
 
 .btn-login {
-  background-color: #1ec290;
+  background-color: #1fc191;
   color: black;
   width: 200px;
 }
@@ -270,27 +254,43 @@ li.nav-item {
   margin: 3rem 0 0rem 0;
 }
 
+/*empForm*/
+.tab-content-emp {
+  background-color: rgb(255, 255, 255);
+}
+
 /*tab-content*/
 .tab-content {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(255, 255, 255);
 }
 .formInput {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(255, 255, 255);
 }
 .formInput:focus {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(255, 255, 255);
 }
 
 .input-main-form {
   width: 800px;
+  position: relative;
+  margin-left: 4rem;
+}
+.input-main-form-emp {
+  width: 800px;
+  position: relative;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 /*add rental form*/
 textarea {
   resize: none;
 }
+
+
 .form-label {
-  font-size: 12px;
+  font-size: 14px;
   color: #5e9bfc;
   margin: 0;
   display: block;
@@ -335,22 +335,49 @@ textarea {
   color: #5e9bfc;
 }
 
-.btn-create{
-  background-color: #1ec290;
-  width: 100px;
+/*add employee form*/
+.form-label-emp {
+  font-size: 14px;
+  color: #5e9bfc;
+  margin: 0;
+  display: block;
 }
 
-.btn-cancel{
+/*css for buttons*/
+.btn-ok {
+  background-color: #1fc191;
+  color: black;
+  width: 200px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+.btn-reset {
   background-color: #ffd200;
-  width: 100px;
+  color: black;
+  width: 200px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
-hr {
-    height: 0px;
-    border: none;
-    border-top: 1px solid rgb(136, 134, 134);
+/*Thisara*/
+.tbtn{
+  width: 8rem;
 }
 
-h4{
-  font-size: 15px;
+h3{
+  font-size: 14px;
+}
+
+a.nav-link:visited,
+a.nav-link:hover,
+a.nav-link:focus,
+a.nav-link:link
+{
+  background-color:#1fc191;
+  color: white;
 }
