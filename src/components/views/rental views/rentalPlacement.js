@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
 
 
 function rentalPlacement() {
+
     return (
         <div className="page-component-body">
             <div class="container input-main-form ">
@@ -18,7 +19,7 @@ function rentalPlacement() {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-content-emp"></div>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form>
+                        <form >
                             <div class="container">
                                 <br></br>
                                 <h6 className="customersize2">Rental Dates</h6>
@@ -31,7 +32,9 @@ function rentalPlacement() {
                                                 <label for="rfrom" class="form-label-emp">From</label>
                                                 <input type="date" class="form-control"
                                                     id="rfrom"
-                                                    name="rfrom" required />
+                                                    name="rfrom" required
+
+                                                />
                                             </div>
                                             <div class="col-3.5" >
                                                 <label for="rto" class="form-label-emp">To</label>
@@ -128,10 +131,10 @@ function rentalPlacement() {
                             <div className="row">
 
                                 <div className="col py-3 text-center">
-                                    <button type="submit" className="btn btn-ok">SAVE</button>
+                                    <button type="submit" className="btn btn-ok" >SAVE</button>
                                 </div>
                                 <div className="col py-3 text-center">
-                                    <button type="reset" className="btn btn-reset">RESET</button>
+                                    <button type="reset" className="btn btn-reset" >RESET</button>
                                 </div>
                             </div>
                         </form>
@@ -203,7 +206,7 @@ function rentalPlacement() {
                     <br></br>
                     <center>
                         <h2>Rental Summary</h2></center>
-                    <div class="form-row">
+                    <div class="form-row ">
                         <div class="col-6">
                             <label class="form-label-h" for="rentalStatus">Rental Status : </label>
                         </div>
@@ -213,10 +216,10 @@ function rentalPlacement() {
                     </div>
                     <div class="form-row">
                         <div class="col-6">
-                            <label class="form-label-h" for="rentalDuration">Rental Duration : </label>
+                            <label class="form-label-h" for="rentalDuration" >Rental Duration : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" id="rentalDuration" />
                         </div>
                     </div>
                     <div class="form-row">
@@ -234,9 +237,10 @@ function rentalPlacement() {
                         <div class="col-4">
                             <input type="text" class="form-control" />
                         </div>
+                        <hr></hr>
                     </div>
 
-                    <hr></hr>
+
 
                     <div class="form-row">
                         <div class="col-6">
@@ -253,9 +257,10 @@ function rentalPlacement() {
                         <div class="col-4">
                             <input type="text" class="form-control" />
                         </div>
+                        <hr></hr>
                     </div>
 
-                    <hr></hr>
+
                     <div class="form-row">
                         <div class="col-6">
                             <label class="form-label-h" for="advancePay">Advanced Payment : </label>

@@ -45,7 +45,7 @@ function addEmployee() {
                                         </div>
                                         <div className="row">
                                             <div className="form-group col-md-6">
-                                                <label class="form-label-emp" for="gender">Gender:</label>
+                                                <label class="form-label-emp" for="gender" >Gender:</label>
                                                 {/* <select
                                                         id="gender"
                                                         className="form-control "
