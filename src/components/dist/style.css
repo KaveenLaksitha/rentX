@@ -1,4 +1,3 @@
-
 /*page-body*/
 .page-body {
   max-height: 8rem;
@@ -8,6 +7,7 @@
 .page-component-body {
   height: 900px;
 }
+
 /*side nav bar and header*/
 .navbar {
   background-color: #3f3f3f;
@@ -62,7 +62,7 @@ nav.main-menu.expanded {
   display: table;
   border-collapse: collapse;
   border-spacing: 0;
-  color: rgb(255, 255, 255);
+  color: white;
   font-family: arial;
   font-size: 16px;
   text-decoration: none;
@@ -117,6 +117,7 @@ nav li {
   margin: 0;
   padding: 0;
 }
+
 .main-menu li:hover > a,
 nav.main-menu li.active > a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
@@ -124,23 +125,22 @@ nav.main-menu li.active > a,
   color: #fff;
   background-color: #207159;
 }
+
 .area {
   float: left;
   background: #e2e2e2;
   width: 100%;
   height: 100%;
 }
+
 @font-face {
   font-family: "Titillium Web";
   font-style: normal;
   font-weight: 300;
-  src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
-      format("woff");
+  src: local("Titillium WebLight"), local("TitilliumWeb-Light"), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff");
 }
 
 /*header css part*/
-
 .main-menubox {
   display: none;
 }
@@ -231,7 +231,7 @@ li.nav-item {
 
 .login-container {
   display: flex;
-  background-color: rgb(235, 235, 235);
+  background-color: #ebebeb;
   max-width: 500px;
   min-height: 600px;
   justify-content: center;
@@ -239,8 +239,7 @@ li.nav-item {
   border-top-left-radius: 0;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 .btn-login {
@@ -257,35 +256,34 @@ li.nav-item {
 
 /*empForm*/
 .tab-content-emp {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
 
 /*tab-content*/
 .tab-content {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 .formInput {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 .formInput:focus {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
 
 .input-main-form {
   width: 800px;
   position: relative;
-  margin-left: 8rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  margin-left: 4rem;
 }
+
 /*for center a form*/
 .input-main-form-emp {
   width: 800px;
   position: relative;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 /*add rental form*/
@@ -302,6 +300,7 @@ textarea {
   -webkit-transition: 0.333s ease top, 0.333s ease opacity;
   transition: 0.333s ease top, 0.333s ease opacity;
 }
+
 .form-control {
   border-radius: 0;
   border-color: #ccc;
@@ -309,16 +308,20 @@ textarea {
   border-style: none none solid none;
   box-shadow: none;
 }
+
 .form-control:focus {
   box-shadow: none;
   border-color: #5e9bfc;
 }
+
 .js-hide-label {
   opacity: 0;
 }
+
 .js-unhighlight-label {
   color: #999;
 }
+
 .btn-start-order {
   background: 0 0 #ffffff;
   border: 1px solid #2f323a;
@@ -332,6 +335,7 @@ textarea {
   text-transform: uppercase;
   transition: all 0.25s ease 0s;
 }
+
 .btn-start-order:hover,
 .btn-start-order:active,
 .btn-start-order:focus {
@@ -354,8 +358,7 @@ textarea {
   width: 200px;
   font-size: 1.1rem;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 .btn-reset {
@@ -364,64 +367,25 @@ textarea {
   width: 200px;
   font-size: 1.1rem;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
-/*hasani*/
-.rental-summary-body {
-  position: absolute; 
-  top:10rem;
-  left: 65%;
-  width: 400px;
-  height: 650px; 
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-  0px 0px 10px 0px rgba(0, 0, 0, 0.19);
-  
-}
-
-.form-label-h {
-   font-size: 14px;
-   margin: 20px;
-   display: block;
-   
-}
-
-.form-label-h2 {
-  font-size: 18px;
-  margin: 2px;
-  display: block;
-  
+/*Thisara*/
+.tbtn {
+  width: 8rem;
 }
 
 a.nav-link:visited,
 a.nav-link:hover,
 a.nav-link:focus,
-a.nav-link:link
-{
-  background-color:#1fc191;
+a.nav-link:link {
+  background-color: #1fc191;
   color: white;
 }
 
-.customersize2{
-  position: relative;
-  font-size: 16px;
-  font-weight: bold;
+.h3size {
+  font-size: 14px;
 }
-
-.customersize2:after {
-  content: "";
-  display: block;
-  width: 37rem;
-  height: 1px;
-  background: #656568;
-  left: 155px;
-  top: 60%;
-  position: absolute;
-
-}
-
 
 /*emp table */
 .table-emp {
@@ -430,14 +394,14 @@ a.nav-link:link
   padding: 1rem 2rem;
   width: auto;
   border-radius: 0.5rem;
-  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 .table-head {
   margin-bottom: 1rem;
   padding: 0 1rem 0 1rem;
 }
+
 .table-head-search {
   margin-bottom: 1rem;
   padding: 0 0rem 0 1rem;
@@ -449,7 +413,6 @@ a.nav-link:link
 }
 
 /*searchbar*/
-
 .searchbar {
   margin-right: -5px;
   height: 40px;
@@ -486,7 +449,4 @@ a.nav-link:link
   margin: 0 auto;
 }
 
-.fa-animate:hover {
-  -ms-transform: rotate(90deg); /* IE 9 */
-  transform: rotate(90deg);
-}
+/*# sourceMappingURL=style.css.map */
