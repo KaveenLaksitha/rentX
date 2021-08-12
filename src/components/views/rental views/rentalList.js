@@ -1,21 +1,21 @@
 import React from 'react'
 
-function empList() {
+function rentalList() {
     return (
         <div className="page-component-body">
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Employees</h3>
+                        <h3 className="float-left">List of Rentals</h3>
                     </div>
-                    <a href="/addEmployee" class="float-right">
+                    <a href="/addRental" class="float-right">
                         <button class="btn btn-ok white">
-                            Add Employee
+                            + Add Rental
                         </button>
                     </a>
-                    <a href="#" class="float-right ml-4">
+                    <a href="/updateRental" class="float-right ml-4">
                         <button class="btn btn-ok white">
-                            Past Employees
+                            Pending Rental
                         </button>
                     </a>
                 </div>
@@ -35,27 +35,13 @@ function empList() {
 
                 <table class="table table-striped table-primary">
                     <tr>
-                        {/*<th>Employee ID</th>*/}
-                        <th>Name</th>
-                        {/*<th>Last Name</th>*/}
-                        <th>NIC</th>
-                        <th>e-mail</th>
-                        <th>Date of Birth</th>
-                        {/*<th>Age</th>
-              <th>Gender</th>
-              <th>Marital Status</th>
-              <th>Current Address</th>
-              <th>Permanent Address</th>
-                        <th>Mobile Number</th>
-                        <th>Land Line Number</th>
-              <th>Emergency Contact Number</th>
-                        <th>Designation</th>
-                        <th>Department</th>
-                        {/*<th>Joined Date</th>
-              <th>Previosly Worked Company</th>
-              <th>Years Of Experiance</th>
-              <th>Employee Picture</th>
-              <th>CV</th>*/}
+                        <th>Rent Id</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Vehicle</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     {/* {this.generateTableRows(EmployeeList)} */}
@@ -65,4 +51,4 @@ function empList() {
     )
 }
 
-export default empList
+export default rentalList
