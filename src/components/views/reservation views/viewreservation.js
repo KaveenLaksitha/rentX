@@ -33,13 +33,13 @@ function viewreservation() {
                 </div>
                 <table class="table table-striped table-primary">
                     <tr>                       
-                        <th>Client</th>
-                        <th>Event Type</th>
-                        <th>Package Name</th>
-                        <th>Rental Period</th>
-                        <th>Total Reservation</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th class="text-center">Client</th>
+                        <th class="text-center">Event Type</th>
+                        <th class="text-center">Package Name</th>
+                        <th class="text-center">Rental Period</th>
+                        <th class="text-center">Total Reservation</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
                     </tr>
                     <tbody>           
                 <tr>
@@ -49,7 +49,13 @@ function viewreservation() {
                   <td class="text-center">E</td>
                   <td class="text-center">7</td>
                   <td class="text-center">y</td>
-                  <td class="text-center"></td>
+                  <td class="text-center">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="left">Left</button>
+                       
+                        <button type="button" class="right">Right</button>
+                    </div></td>
+
                 </tr>
             
           </tbody>
