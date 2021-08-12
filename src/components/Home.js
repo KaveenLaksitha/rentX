@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./Header";
 import Login from "./login"
 import addRental from "./views/rental views/rentalPlacement"
+import rentalList from "./views/rental views/rentalList"
+import updateRental from "./views/rental views/updateRental"
 import addReservation from "./views/reservation views/reservation"
 import viewReservation from "./views/reservation views/viewreservation"
 import updateReservation from "./views/reservation views/updatereservation"
@@ -19,8 +21,8 @@ function Home() {
                 <Header />
                 <Route path="/login" exact component={Login} />
                 <Route path="/addRental" exact component={addRental} />
-                {/* <Route path="/rentalList" exact component={rentalList} />
-                <Route path="/updateRental" exact component={updateRental} /> */}
+                <Route path="/rentalList" exact component={rentalList} />
+                <Route path="/updateRental" exact component={updateRental} />
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
                 <Route path="/updateReservation" exact component={updateReservation} />
