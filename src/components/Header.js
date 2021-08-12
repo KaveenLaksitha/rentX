@@ -3,7 +3,7 @@ import "./style.scss";
 
 function Header(props) {
   return (
-    <div>
+    <div className="page-body">
       <header>
         <nav
           class="navbar navbar-expand-lg navbar-light fixed-top"
@@ -28,12 +28,12 @@ function Header(props) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link text-light" href="index.html">
+                  <a class="text-light" href="index.html">
                     Home <span class="sr-only">(current)</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-light" href="contact.html">
+                  <a class="text-light" href="contact.html">
                     Logout
                   </a>
                 </li>
