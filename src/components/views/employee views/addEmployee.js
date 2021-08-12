@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { React, useState } from "react";
 import { addEmployeeService } from "../../services/employeeService";
 
 function AddEmployee() {
@@ -35,6 +34,7 @@ function AddEmployee() {
             empPic,
             cv,
         };
+
         addEmployeeService(newEmployee).then((response) => {
             // const message = response.ok
             //     ? "Employee insertion successful"

@@ -20,7 +20,7 @@ function Header(props) {
           id="mainNav"
         >
           <div className="container-fluid">
-            <a className="navbar-brand js-scroll-trigger" href="index.html">
+            <a className="navbar-brand js-scroll-trigger" href="/login">
               <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
 
             </a>
@@ -105,7 +105,7 @@ function Header(props) {
                 <li className="has-subnav">
                   <a href="/viewReservation">
                     <i className="fa  fa-2x"></i>
-                    <span className="nav-text">View Reservation</span>
+                    <span className="nav-text"> Reservations List</span>
                     <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>
@@ -219,12 +219,6 @@ function Header(props) {
         <br />
         <br />
       </div>
-      {/*<div class="footer-basic">
-        <footer>
-          <p class="copyright">Company Name © 2018</p>
-        </footer>
-      </div>
-  */}
     </div >
   );
 }
