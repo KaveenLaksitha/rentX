@@ -21,7 +21,7 @@ function rentalPlacement() {
                         <form>
                             <div class="container">
                                 <br></br>
-                                <p>Rental Dates</p>
+                                <h6>Rental Dates</h6>
 
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -65,7 +65,7 @@ function rentalPlacement() {
 
                             <hr></hr>
                             <div class="container">
-                                <p>Vehicle Details</p>
+                                <h6>Vehicle Details</h6>
                                 <div class="form-group">
                                     <div class="row">
 
@@ -106,7 +106,7 @@ function rentalPlacement() {
                             </div>
                             <hr></hr>
                             <div class="container">
-                                <p>Payment Details</p>
+                                <h6>Payment Details</h6>
                                 <div class="form-group">
                                     <div class="col-12" >
                                         <label class="form-label" for="additionalPrice">Additional Price</label>
@@ -168,12 +168,12 @@ function rentalPlacement() {
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlFile1">NIC Soft Copy</label>
+                                                    <label class="form-label" for="exampleFormControlFile1">NIC Soft Copy</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+                                                    <input type="file" class="form-control formInput" id="exampleFormControlFile1" />
                                                 </div>
                                             </div>
 
