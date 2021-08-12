@@ -289,7 +289,6 @@ textarea {
   resize: none;
 }
 
-
 .form-label {
   font-size: 14px;
   color: #5e9bfc;
@@ -366,20 +365,19 @@ textarea {
 }
 
 /*Thisara*/
-.tbtn{
+.tbtn {
   width: 8rem;
 }
 
 a.nav-link:visited,
 a.nav-link:hover,
 a.nav-link:focus,
-a.nav-link:link
-{
-  background-color:#1fc191;
+a.nav-link:link {
+  background-color: #1fc191;
   color: white;
 }
 
-.h3size{
+.h3size {
   font-size: 14px;
 }
 
@@ -444,4 +442,9 @@ a.nav-link:link
   background-color: #ffd200;
   text-decoration: none;
   margin: 0 auto;
+}
+
+.fa-animate:hover {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  transform: rotate(90deg);
 }
