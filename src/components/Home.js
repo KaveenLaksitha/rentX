@@ -19,8 +19,8 @@ function Home() {
                 <Header />
                 <Route path="/login" exact component={Login} />
                 <Route path="/addRental" exact component={addRental} />
-                <Route path="/rentalList" exact component={rentalList} />
-                <Route path="/updateRental" exact component={updateRental} />
+                {/* <Route path="/rentalList" exact component={rentalList} />
+                <Route path="/updateRental" exact component={updateRental} /> */}
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
                 <Route path="/updateReservation" exact component={updateReservation} />
