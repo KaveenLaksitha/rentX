@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.scss";
 
+
 function Header(props) {
   return (
     <div className="page-body">
@@ -68,6 +69,13 @@ function Header(props) {
                     <i className="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
+                <li className="has-subnav">
+                  <a href="/rentalList">
+                    <i className="fa  fa-2x"></i>
+                    <span className="nav-text">Rentals List</span>
+                    <i className="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
               </ul>
               <li>
               </li>
@@ -83,6 +91,13 @@ function Header(props) {
                     <i className="fa"></i>
                     <span className="nav-text">Add Reservation</span>
                     <i className="fa fa-angle-right fa-3x"></i>
+                  </a>
+                </li>
+                <li className="has-subnav">
+                  <a href="/viewReservation">
+                    <i className="fa  fa-2x"></i>
+                    <span className="nav-text">View Reservation</span>
+                    <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>
               </ul>
