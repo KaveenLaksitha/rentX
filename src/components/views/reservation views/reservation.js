@@ -28,19 +28,19 @@ function reservation() {
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <form id="contact-form" class="form" action="#" method="POST" role="form">
                                             <div class="row">
+                                                <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                                    <h3 className="text-left mt-4 mb-3 h3size">Customer Details</h3>
-                                                    <hr></hr>
+                                                    <h3 className="text-left mt-4 mb-3 customersize">Customer Details</h3>
                                                 </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="customer_name">Customer Name</label>
+                                                <label class="form-label" for="customerName">Customer Name</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="customer_name" 
-                                                    name="customer_name" 
+                                                    id="customerName" 
+                                                    name="customerName" 
                                                     placeholder="Customer Name" 
                                                     tabindex="1" 
                                                     required />
@@ -48,12 +48,12 @@ function reservation() {
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="contact_no">Contact Number</label>
+                                                <label class="form-label" for="contactNo">Contact Number</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="contact_no" 
-                                                    name="contact_no" 
+                                                    id="contactNo" 
+                                                    name="contactNo" 
                                                     placeholder="Contact Number" t
                                                     abindex="2" 
                                                     required />
@@ -71,22 +71,23 @@ function reservation() {
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="customer_address">Customer Address</label>
+                                                <label class="form-label" for="customerAddress">Customer Address</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="customer_address" 
-                                                    name="customer_address" 
+                                                    id="customerAddress" 
+                                                    name="customerAddress" 
                                                     placeholder="Customer Address" 
                                                     tabindex="4" 
                                                     required/>
                                             </div>
                                             <div class="row">
+                                            <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                                    <h3 className="text-left mt-4 mb-4 h3size">Reservation Details</h3>
-                                                    <hr></hr>
+                                                    <h3 className="text-left mt-4 mb-4 reservesize">Reservation Details</h3>
                                                 </div>
                                             </div>
+                                            
                                             <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="from">From</label>
@@ -126,21 +127,21 @@ function reservation() {
 
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="event_type">Event Type</label>
+                                                <label class="form-label" for="eventType">Event Type</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="event_type" 
-                                                    name="event_type" 
+                                                    id="eventType" 
+                                                    name="eventType" 
                                                     placeholder="Event Type" 
                                                     tabindex="7" 
                                                     required />
                                             </div>
                                             </div>
                                             <div class="form-group">
-                                            <label class="form-label-emp" for="package_name">Package Name</label>
+                                            <label class="form-label-emp" for="packageName">Package Name</label>
                                                 <select
-                                                        id="package_name"
+                                                        id="packageName"
                                                         className="form-control "
                                                         tabindex="8" 
                                                     // onChange={(e) => {
@@ -153,24 +154,24 @@ function reservation() {
                                             
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="advanced_payment">Advanced Payment</label>
+                                                <label class="form-label" for="advancedPayment">Advanced Payment</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="advanced_payment" 
-                                                    name="advanced_payment" 
+                                                    id="advancedPayment" 
+                                                    name="advancedPayment" 
                                                     placeholder="Advanced Payment" 
                                                     tabindex="9" />
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="reservation_price">Total Reservation Price</label>
+                                                <label class="form-label" for="reservationPrice">Total Reservation Price</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="reservation_price" 
-                                                    name="reservation_price" 
+                                                    id="reservationPrice" 
+                                                    name="reservationPrice" 
                                                     placeholder="Total Reservation Price" 
                                                     tabindex="10" />
                                             </div>
@@ -202,32 +203,32 @@ function reservation() {
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <form id="contact-form" class="form" action="#" method="POST" role="form">
                                         <div class="form-group">
-                                            <label class="form-label" for="package_name">Package Name</label>
+                                            <label class="form-label" for="packageName">Package Name</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control formInput" 
-                                                id="package_name" 
-                                                name="package_name" 
+                                                id="packageName" 
+                                                name="packageName" 
                                                 placeholder="Package Name" 
                                                 tabindex="1" 
                                                 required />
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="date_range">Date Range</label>
+                                            <label class="form-label" for="dateRange">Date Range</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control formInput" 
-                                                id="date_range" 
-                                                name="date_range" 
+                                                id="dateRange" 
+                                                name="dateRange" 
                                                 placeholder="Date Range" 
                                                 tabindex="2" 
                                                 required />
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="vehicle_type">Vehicle Type</label>
+                                                <label class="form-label-emp" for="vehicleType">Vehicle Type</label>
                                                 <select
-                                                        id="vehicle_type"
+                                                        id="vehicleType"
                                                         className="form-control "
                                                         tabindex="3" 
                                                     // onChange={(e) => {
@@ -240,9 +241,9 @@ function reservation() {
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="vehicle_model">Vehicle Model</label>
+                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
                                                 <select
-                                                        id="vehicle_model"
+                                                        id="vehicleModel"
                                                         className="form-control "
                                                         tabindex="4" 
                                                     // onChange={(e) => {
@@ -255,12 +256,12 @@ function reservation() {
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="no_vehicle">No of Vehicle</label>
+                                                <label class="form-label-emp" for="noVehicle">No of Vehicle</label>
                                                 <input 
                                                     type="number" 
                                                     class="form-control formInput" 
-                                                    id="no_vehicle" 
-                                                    name="no_vehicle" 
+                                                    id="noVehicle" 
+                                                    name="noVehicle" 
                                                     placeholder="No of Vehicle" 
                                                     min="1"
                                                     tabindex="5" />
@@ -281,12 +282,12 @@ function reservation() {
                                         </div>
                                         <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label class="form-label" for="total_price">Total Price</label>
+                                            <label class="form-label" for="totalPrice">Total Price</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control formInput" 
-                                                id="total_price" 
-                                                name="total_price" 
+                                                id="totalPrice" 
+                                                name="totalPrice" 
                                                 placeholder="Total Price" 
                                                 tabindex="7" 
                                                 required />
