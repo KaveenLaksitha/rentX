@@ -7,11 +7,10 @@ import addReservation from "./views/reservation views/reservation"
 import viewReservation from "./views/reservation views/viewreservation"
 import updateReservation from "./views/reservation views/updatereservation"
 import addEmployee from "./views/employee views/addEmployee"
-import empList from "./views/employee views/empList"
-import makeInquiry from "./views/employee views/makeInquiry"
-import rentalList from "./views/rental views/rentalList";
-import updateRental from "./views/rental views/updateRental";
-
+import addVehicle from "./views/vehicle views/addVehicle";
+import empList from "./views/employee views/empList";
+import vehicleList from "./views/vehicle views/vehicleList";
+import updateVehicle from "./views/vehicle views/updateVehicle";
 
 function Home() {
     return (
@@ -20,14 +19,16 @@ function Home() {
                 <Header />
                 <Route path="/login" exact component={Login} />
                 <Route path="/addRental" exact component={addRental} />
-                <Route path="/rentalList" exact component={rentalList} />
-                <Route path="/updateRental" exact component={updateRental} />
+                {/* <Route path="/rentalList" exact component={rentalList} />
+                <Route path="/updateRental" exact component={updateRental} /> */}
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
                 <Route path="/updateReservation" exact component={updateReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
+                <Route path="/addVehicle" exact component={addVehicle} />
                 <Route path="/empList" exact component={empList} />
-                <Route path="/makeInquiry" exact component={makeInquiry} />
+                <Route path="/vehicleList" exact component={vehicleList} />
+                <Route path="/updateVehicle" exact component={updateVehicle} />
             </div>
         </Router>
     );
