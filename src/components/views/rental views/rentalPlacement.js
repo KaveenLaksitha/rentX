@@ -32,9 +32,7 @@ function rentalPlacement() {
                                                 <label for="rfrom" class="form-label-emp">From</label>
                                                 <input type="date" class="form-control"
                                                     id="rfrom"
-                                                    name="rfrom" required
-
-                                                />
+                                                    name="rfrom" required />
                                             </div>
                                             <div class="col-3.5" >
                                                 <label for="rto" class="form-label-emp">To</label>
