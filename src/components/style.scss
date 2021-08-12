@@ -379,9 +379,53 @@ a.nav-link:link
   color: white;
 }
 
-.h3size{
+.customersize{
   font-size: 14px;
+  position: relative;
 }
+
+.customersize:after {
+  content: "";
+  display: block;
+  width: 39rem;
+  height: 1px;
+  background: #656568;
+  right: 0;
+  top: 60%;
+  position: absolute;
+}
+
+.reservesize{
+  font-size: 14px;
+  position: relative;
+}
+
+.reservesize:after {
+  content: "";
+  display: block;
+  width: 38rem;
+  height: 1px;
+  background: #656568;
+  right: 0;
+  top: 60%;
+  position: absolute;
+}
+
+/*.right{
+  background-color:#ff5050 ;
+  height: 35px;
+  width: 80px;
+  float: right;
+  display: flex;
+  border-radius: 1rem;
+  color: white;
+  text-decoration: none;
+  
+}
+
+.left{
+  background-color: white;
+}*/
 
 /*emp table */
 .table-emp {
