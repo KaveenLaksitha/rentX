@@ -13,6 +13,7 @@ import addVehicle from "./views/vehicle views/addVehicle";
 import empList from "./views/employee views/empList";
 import vehicleList from "./views/vehicle views/vehicleList";
 import updateVehicle from "./views/vehicle views/updateVehicle";
+import Footer from "./Footer";
 
 function Home() {
     return (
@@ -31,6 +32,7 @@ function Home() {
                 <Route path="/empList" exact component={empList} />
                 <Route path="/vehicleList" exact component={vehicleList} />
                 <Route path="/updateVehicle" exact component={updateVehicle} />
+                <Footer />
             </div>
         </Router>
     );
