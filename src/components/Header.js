@@ -105,7 +105,7 @@ function Header(props) {
                 <li className="has-subnav">
                   <a href="/viewReservation">
                     <i className="fa  fa-2x"></i>
-                    <span className="nav-text">View Reservation</span>
+                    <span className="nav-text"> Reservations List</span>
                     <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>
