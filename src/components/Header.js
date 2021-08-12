@@ -75,7 +75,7 @@ function Header(props) {
             <hr></hr>
             <li className="has-subnav">
               <li data-toggle="collapse" data-target="#new2" className="collapsed">
-                <a href="javascript:void(0)">  <i className="fa fa-calendar fa-2x"></i> <span className="nav-text">Reservations</span> <i className="fa fa-angle-down fa-2x"></i></a>
+                <a href="javascript:void(0)" >  <i className="fa fa-calendar fa-2x"></i> <span className="nav-text">Reservations</span> <i className="fa fa-angle-down fa-2x"></i></a>
               </li>
               <ul className="sub-menu collapse" id="new2">
                 <li className="has-subnav ">
@@ -128,7 +128,7 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new">
                 <li className="has-subnav ">
-                  <a href="/addLeave">
+                  <a href="/empList">
                     <i className="fa"></i>
                     <span className="nav-text">Employees</span>
                     <i className="fa fa-angle-right fa-3x"></i>
@@ -160,24 +160,26 @@ function Header(props) {
               </li>
             </li>
             <hr></hr>
+            <li>
+              <a href="/makeInquiry">
+                <i className="fa fa-question-circle-o fa-2x"></i>
+                <span className="nav-text">Make an Inquiry</span>
+                <i className="fa fa-angle-right fa-2x"></i>
+              </a>
+            </li>
+            <hr></hr>
           </ul>
         </nav>
       </div>
       <div>
         <br />
         <br />
-
-
-
         <br />
         <br />
-
         <br />
         <br />
-
         <br />
         <br />
-
         <br />
         <br />
       </div>

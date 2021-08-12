@@ -29,7 +29,7 @@ function reservation() {
                                         <form id="contact-form" class="form" action="#" method="POST" role="form">
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                                    <h3 className="text-left mt-4 mb-3">Customer Details</h3>
+                                                    <h3 className="text-left mt-4 mb-3 h3size">Customer Details</h3>
                                                     <hr></hr>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@ function reservation() {
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                                    <h3 className="text-left mt-4 mb-4">Reservation Details</h3>
+                                                    <h3 className="text-left mt-4 mb-4 h3size">Reservation Details</h3>
                                                     <hr></hr>
                                                 </div>
                                             </div>

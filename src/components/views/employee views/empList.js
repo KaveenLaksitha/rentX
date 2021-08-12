@@ -1,22 +1,21 @@
 import React from 'react'
 
-
-function viewreservation() {
+function empList() {
     return (
         <div className="page-component-body">
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Reservation</h3>
+                        <h3 className="float-left">List of Employees</h3>
                     </div>
                     <a href="/empReport" class="float-right">
                         <button class="btn btn-ok white">
-                            Add Reservation
+                            Add Employee
                         </button>
                     </a>
                     <a href="/empReport" class="float-right ml-4">
                         <button class="btn btn-ok white">
-                            Pending Reservation
+                            Past Employees
                         </button>
                     </a>
                 </div>
@@ -31,32 +30,39 @@ function viewreservation() {
                         </div>
                     </div>
                 </div>
+
+
+
                 <table class="table table-striped table-primary">
-                    <tr>                       
-                        <th>Client</th>
-                        <th>Event Type</th>
-                        <th>Package Name</th>
-                        <th>Rental Period</th>
-                        <th>Total Reservation</th>
-                        <th>Status</th>
+                    <tr>
+                        {/*<th>Employee ID</th>*/}
+                        <th>Name</th>
+                        {/*<th>Last Name</th>*/}
+                        <th>NIC</th>
+                        <th>e-mail</th>
+                        <th>Date of Birth</th>
+                        {/*<th>Age</th>
+              <th>Gender</th>
+              <th>Marital Status</th>
+              <th>Current Address</th>
+              <th>Permanent Address</th>
+                        <th>Mobile Number</th>
+                        <th>Land Line Number</th>
+              <th>Emergency Contact Number</th>
+                        <th>Designation</th>
+                        <th>Department</th>
+                        {/*<th>Joined Date</th>
+              <th>Previosly Worked Company</th>
+              <th>Years Of Experiance</th>
+              <th>Employee Picture</th>
+              <th>CV</th>*/}
                         <th>Action</th>
                     </tr>
-                    <tbody>           
-                <tr>
-                  <td class="text-center">A</td>
-                  <td class="text-center">C</td>
-                  <td class="text-center">D</td>
-                  <td class="text-center">E</td>
-                  <td class="text-center">7</td>
-                  <td class="text-center">y</td>
-                  <td class="text-center"></td>
-                </tr>
-            
-          </tbody>
+                    {/* {this.generateTableRows(EmployeeList)} */}
                 </table>
             </div>
         </div>
     )
 }
 
-export default viewreservation
+export default empList
