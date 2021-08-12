@@ -32,12 +32,15 @@ function viewreservation() {
                     </div>
                 </div>
                 <table class="table table-striped table-primary">
-                    <tr>                       
-                        <th class="text-center">Client</th>
+                    <tr>   
+                        <th class="text-center">Reserve ID</th>                    
+                        <th class="text-center">Customer</th>
+                        <th class="text-center">From</th>
+                        <th class="text-center">To</th>
                         <th class="text-center">Event Type</th>
                         <th class="text-center">Package Name</th>
-                        <th class="text-center">Rental Period</th>
-                        <th class="text-center">Total Reservation</th>
+                        <th class="text-center">Reserve Period</th>
+                        <th class="text-center">Total</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -46,6 +49,9 @@ function viewreservation() {
                   <td class="text-center">A</td>
                   <td class="text-center">C</td>
                   <td class="text-center">D</td>
+                  <td class="text-center">A</td>
+                  <td class="text-center">A</td>
+                  <td class="text-center">A</td>
                   <td class="text-center">E</td>
                   <td class="text-center">7</td>
                   <td class="text-center">y</td>
