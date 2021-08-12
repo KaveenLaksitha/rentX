@@ -3,6 +3,7 @@ import React from 'react'
 function empList() {
     return (
         <div className="page-component-body">
+
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
@@ -61,7 +62,7 @@ function empList() {
                     {/* {this.generateTableRows(EmployeeList)} */}
                 </table>
             </div>
-        </div>
+        </div >
     )
 }
 

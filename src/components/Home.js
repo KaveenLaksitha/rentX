@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./Header";
 import Login from "./login"
 import addRental from "./views/rental views/rentalPlacement"
+import rentalList from "./views/rental views/rentalList"
+import updateRental from "./views/rental views/updateRental"
 import addReservation from "./views/reservation views/reservation"
 import viewReservation from "./views/reservation views/viewreservation"
 import updateReservation from "./views/reservation views/updatereservation"
@@ -25,10 +27,10 @@ function Home() {
                 <Route path="/viewReservation" exact component={viewReservation} />
                 <Route path="/updateReservation" exact component={updateReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
-                <Route path= "/addVehicle" exact component ={addVehicle} />
-                <Route path = "/empList" exact component = {empList} />
-                <Route path = "/vehicleList" exact component = {vehicleList} />
-                <Route path = "/updateVehicle" exact component = {updateVehicle} />
+                <Route path="/addVehicle" exact component={addVehicle} />
+                <Route path="/empList" exact component={empList} />
+                <Route path="/vehicleList" exact component={vehicleList} />
+                <Route path="/updateVehicle" exact component={updateVehicle} />
             </div>
         </Router>
     );

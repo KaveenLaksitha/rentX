@@ -1,4 +1,3 @@
-
 /*page-body*/
 .page-body {
   max-height: 8rem;
@@ -370,41 +369,38 @@ textarea {
 
 /*hasani*/
 .rental-summary-body {
-  position: absolute; 
-  top:10rem;
+  position: absolute;
+  top: 10rem;
   left: 65%;
   width: 400px;
-  height: 650px; 
+  height: 650px;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
-  0px 0px 10px 0px rgba(0, 0, 0, 0.19);
-  
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
 .form-label-h {
-   font-size: 14px;
-   margin: 20px;
-   display: block;
-   
+  font-size: 14px;
+  margin: 20px;
+  display: block;
 }
 
 .form-label-h2 {
   font-size: 18px;
   margin: 2px;
   display: block;
-  
 }
+
 
 a.nav-link:visited,
 a.nav-link:hover,
 a.nav-link:focus,
-a.nav-link:link
-{
-  background-color:#1fc191;
+a.nav-link:link {
+  background-color: #1fc191;
   color: white;
 }
 
-.customersize{
+.customersize {
   font-size: 14px;
   position: relative;
 }
@@ -420,7 +416,7 @@ a.nav-link:link
   position: absolute;
 }
 
-.reservesize{
+.reservesize {
   font-size: 14px;
   position: relative;
 }
@@ -451,7 +447,7 @@ a.nav-link:link
 .left{
   background-color: white;
 }*/
-.customersize2{
+.customersize2 {
   position: relative;
   font-size: 16px;
   font-weight: bold;
@@ -466,9 +462,7 @@ a.nav-link:link
   left: 155px;
   top: 60%;
   position: absolute;
-
 }
-
 
 /*emp table */
 .table-emp {
@@ -538,14 +532,74 @@ a.nav-link:link
   transform: rotate(90deg);
 }
 
+/*bg*/
+.cube {
+  position: absolute;
+  top: 80vh;
+  left: 45vw;
+  width: 10px;
+  height: 10px;
+  border: solid 1px #088076;
+  transform-origin: top left;
+  transform: scale(0) rotate(0deg) translate(-50%, -50%);
+  animation: cube 12s ease-in forwards infinite;
+  z-index: -1;
+}
+.cube:nth-child(2n) {
+  border-color: rgb(54, 54, 54);
+}
+.cube:nth-child(2) {
+  animation-delay: 2s;
+  left: 25vw;
+  top: 40vh;
+}
+.cube:nth-child(3) {
+  animation-delay: 4s;
+  left: 75vw;
+  top: 50vh;
+}
+.cube:nth-child(4) {
+  animation-delay: 6s;
+  left: 90vw;
+  top: 10vh;
+}
+.cube:nth-child(5) {
+  animation-delay: 8s;
+  left: 10vw;
+  top: 85vh;
+}
+.cube:nth-child(6) {
+  animation-delay: 10s;
+  left: 50vw;
+  top: 10vh;
+}
+.cube:nth-child(7) {
+  animation-delay: 12s;
+  left: 50vw;
+  top: 35vh;
+}
+.cube:nth-child(8) {
+  animation-delay: 14s;
+  left: 80vw;
+  top: 90vh;
+}
+@keyframes cube {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(10) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
 
 /*vehicle adding form*/
-.topic-V{
-  font-size: 20px; 
+.topic-V {
+  font-size: 20px;
 }
 .input-main-form-V {
   width: 800px;
   position: relative;
   border-radius: 0.5rem;
-  
 }
