@@ -8,12 +8,12 @@ function empList() {
                     <div class="col">
                         <h3 className="float-left">List of Employees</h3>
                     </div>
-                    <a href="/empReport" class="float-right">
+                    <a href="/addEmployee" class="float-right">
                         <button class="btn btn-ok white">
                             Add Employee
                         </button>
                     </a>
-                    <a href="/empReport" class="float-right ml-4">
+                    <a href="#" class="float-right ml-4">
                         <button class="btn btn-ok white">
                             Past Employees
                         </button>

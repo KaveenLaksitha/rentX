@@ -1,92 +1,51 @@
 import React from 'react'
 
-function addVehicle() {
+function updateVehicle() {
     return (
-        <div className="page-component-body ">
-            
-            <div class="container input-main-form-emp pt-3">
-            <h2 class ="pb-2 pl-3">Add vehicle details</h2>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Owner Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle Paymnet Details</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h3 className="topic-V text-left mt-4 mb-4">Owner Details</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <form id="contact-form" class="form" action="#" method="POST" role="form">
-                                            <div class="form-group">
-                                                <label class="form-label" for="name">Owner Name </label>
-                                                <input required type="text" class="form-control formInput" id="name" name="name" placeholder="Customer Name" tabindex="1" required />
-                                            </div>
-
-                                            <div className="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="email">Owner NIC </label>
-                                                <input required type="email" class="form-control formInput" id="NIC" name="Owner NIC" placeholder="Owner NIC" tabindex="2" required />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label" for="subject">Telephone No</label>
-                                                <input  required type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3" />
-                                            </div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label class="form-label" for="subject">Address</label>
-                                                <input  required type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" />
-                                            </div>
-                                            
-                                            <div class="form-group ">
-                                                <label class="form-label" for="subject">E-mail</label>
-                                                <input required type="text" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" />
-                                            </div>
-                                            <div class="form-group ">
-                                                <label class="form-label" for="subject">Date</label>
-                                                <input required type="Date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3" />
-                                            </div>
-                                            
-                                            
-                                            <div className="row pt-3 pb-4">
-                                            <div className="col py-3 text-center">
-                                                <button type="submit" className="btn btn-ok">
-                                                    Save
-                                                </button>
-                                            </div>
-                                            <div className="col py-3 text-center">
-                                                <button type="reset" className="btn btn-reset">
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
+        <div className="page-component-body">
+        <div class="container input-main-form-emp">
+            <div class="tab-content-emp" id="myTabContent">
+                <form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                <h3 className="text-left mt-3 mb-4">Update Vehicle Details</h3>
                             </div>
-                        </form>
-
-
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container">
-                            <div class="row">
+                        </div>
+                        <hr></hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <form id="contact-form" class="form" action="#" method="POST" role="form">
+                                <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                    <h3 className="topic-V text-left mt-4 mb-4">Vehicle Details</h3>
+                                    <h3 className="topic-V text-left mt-1 mb-4">Vehicle Details</h3>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form" action="#" method="POST" role="form">
                                     <div className="row">
+                                       
+                                        
+                                            <div class="form-group ">
+                                                
+                                                <div  class =" row ml-1">
+                                                <div class="col-6">
+                                                    <label class="form-label-V mt-2" for="RegNo">Vehicle Registration Number  </label>
+                                                </div>
+                                                <div class="col-5">
+                                                <input
+                                                disabled
+                                                id="regNo"
+                                                type="text"
+                                                className="form-control "
+                                                placeholder="ABC-XXXX"
+                                            // onChange={(e) => {
+                                            // setfName(e.target.value);
+                                            // }}
+                                            />
+                                                </div>
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div className="row">
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="name">Vehicle Brand</label>
                                             <input type="text" class="form-control formInput" id="VehicleBrand" name="VehicleBrand" placeholder="eg : Toyota , Nissan" tabindex="1" required />
@@ -112,19 +71,9 @@ function addVehicle() {
                                         </div>
                                     </div>
 
-                                    
 
-                                    <div className="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="RegNo">Vehicle Registration Number  </label>
-                                                <input required type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="ABC-XXXX" tabindex="2" required />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="subject">Current Mileage (Km) </label>
-                                                <input  required type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3" />
-                                            </div>
-                                    </div>
-                                    
+                                    <hr></hr>
+
 
                                     <div className="row">
                                             <div class="form-group col-md-6">
@@ -148,6 +97,7 @@ function addVehicle() {
                                                 <input required type="text" class="form-control formInput" id="InsCom" name="InsCom" placeholder="Insurance Company Name" tabindex="2" required />
                                             </div>
                                     </div>
+
 
 
                                     <div className="row">
@@ -231,29 +181,27 @@ function addVehicle() {
                                             <input type="file" class="form-control-file pt-3" id="Agreement" />
                                         </div>
                                     </div>
-
-                                        <div className="row mt-2 mb-3">
-                                            <div className="col py-3 text-center">
-                                                <button type="submit" className="btn btn-ok">
-                                                    Save
-                                                </button>
-                                            </div>
-                                            <div className="col py-3 text-center">
-                                                <button type="reset" className="btn btn-reset">
-                                                    Cancel
-                                                </button>
-                                            </div>
+                                    <div className="row mt-3 mb-4">
+                                        <div className="col py-3 text-center">
+                                            <button type="submit" className="btn btn-ok">
+                                                Submit
+                                            </button>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div className="col py-3 text-center">
+                                            <button type="reset" className="btn btn-reset">
+                                                reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     )
 }
 
-export default addVehicle
-
+export default updateVehicle
