@@ -1,15 +1,29 @@
 import { React, useState } from "react";
+
+import DatePicker from 'react-datetime';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
+
 import { addEmployeeService } from "../../services/employeeService";
 
 function AddEmployee() {
 
+    // disable future dates
+    const day = moment().subtract(18, 'years');
+    const disableFutureDt = current => {
+        return current.isBefore(day)
+    }
+
+
+
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [gender, setGender] = useState("");
-    const [DOB, setDOB] = useState("");
+    const [DOB, setDOB] = useState(moment());
     const [email, setEmail] = useState("");
-    const [maritalStat, setMaritalStat] = useState("");
+    const [maritalStat, setMaritalStatus] = useState("");
     const [nic, setNIC] = useState("");
+    const [designation, setDesignation] = useState("");
     const [currAdd, setCurrAdd] = useState("");
     const [permAdd, setPermAdd] = useState("");
     const [mobileNo, setMobileNo] = useState("");
@@ -24,6 +38,7 @@ function AddEmployee() {
             lName,
             email,
             nic,
+            designation,
             DOB,
             gender,
             maritalStat,
@@ -36,11 +51,11 @@ function AddEmployee() {
         };
 
         addEmployeeService(newEmployee).then((response) => {
-            // const message = response.ok
-            //     ? "Employee insertion successful"
-            //     : "Failed to insert employee";
-            // alert(message);
-            // window.location.replace("/empList");
+            const message = response.ok
+                ? "Employee insertion successful"
+                : response.err;
+            alert(message);
+            //window.location.replace("/empList");
         });
     }
 
@@ -51,7 +66,7 @@ function AddEmployee() {
                     <div className="container">
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                <h3 className="text-left mt-3 mb-4">Add new employee</h3>
+                                <h3 className="text-left mt-4 mb-4">Add new employee</h3>
                             </div>
                         </div>
                         <div className="row">
@@ -87,18 +102,8 @@ function AddEmployee() {
                                     </div>
                                     <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp" for="gender">Gender:</label>
-                                            {/* <select
-                                                id="gender"
-                                                className="form-control "
-                                            // // onChange={(e) => {
-                                            // // setGender(e.target.value);
-                                            // // }}
-                                            // >
-                                            //     <option id="male">Male</option>
-                                            //     <option id="female">Female</option>
-                                            // </select> */}
-                                            <div className="form-check">
+                                            <label className="form-label-emp " for="gender">Gender:</label>
+                                            <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
                                                         onChange={(e) => {
@@ -106,7 +111,7 @@ function AddEmployee() {
                                                         }}
                                                         value="male" />Male</label>
                                             </div>
-                                            <div className="form-check">
+                                            <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
                                                         onChange={(e) => {
@@ -117,7 +122,7 @@ function AddEmployee() {
                                         </div>
                                         <div className="col-md-6">
                                             <label className="form-label-emp" for="dob">Date of Birth:</label>
-                                            <input
+                                            {/* <input
                                                 required
                                                 id="dob"
                                                 type="date"
@@ -126,11 +131,22 @@ function AddEmployee() {
                                                 onChange={(e) => {
                                                     setDOB(e.target.value);
                                                 }}
+                                            /> */}
+                                            <DatePicker
+                                                required
+                                                id="dob"
+                                                name="dob"
+                                                onChange={(e) => {
+                                                    setDOB(e);
+                                                }}
+                                                dateFormat="YYYY-MM-DD"
+                                                timeFormat={false}
+                                                isValidDate={disableFutureDt}
                                             />
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="form-group col-md-6">
+                                        <div className="form-group col-md-6 mt-1">
                                             <label className="form-label" for="email">e-mail:</label>
                                             <input
                                                 required
@@ -143,22 +159,27 @@ function AddEmployee() {
                                                 }}
                                             />
                                         </div>
-                                        <div className="form-group col-md-6">
-                                            <label className="form-label-emp" for="maritalStatus">Marital Status:</label>
-                                            <select
-                                                id="maritalStatus"
-                                                className="form-control "
-                                                onChange={(e) => {
-                                                    setMaritalStat(e.target.value);
-                                                }}
-                                            >
-                                                <option id="married">Married</option>
-                                                <option id="unmarried">Unmarried</option>
-                                            </select>
+                                        <div className="form-group col-md-6 mt-2">
+                                            <label className="form-label-emp pb-3" for="maritalStatus">Marital Status:</label>
+                                            <div className="form-check form-check-inline ml-2 mr-5">
+                                                <label className="form-check-label" for="inlineCheckbox1">
+                                                    <input className="form-check-input" type="radio" id="married" name="maritalStat"
+                                                        onChange={(e) => {
+                                                            setMaritalStatus(e.target.value);
+                                                        }}
+                                                        value="married" />Married</label>
+                                            </div>
+                                            <div className="form-check form-check-inline ml-5">
+                                                <label className="form-check-label" for="inlineCheckbox2">
+                                                    <input className="form-check-input" type="radio" id="unmarried" name="maritalStat"
+                                                        onChange={(e) => {
+                                                            setMaritalStatus(e.target.value);
+                                                        }} value="unmarried" />Unmarried</label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="form-group col">
+                                        <div className="form-group col-md-6">
                                             <label className="form-label" for="NIC">NIC:</label>
                                             <input
                                                 required
@@ -170,6 +191,21 @@ function AddEmployee() {
                                                     setNIC(e.target.value);
                                                 }}
                                             />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label className="form-label-emp" for="designation">Designation:</label>
+                                            <select
+                                                id="designation"
+                                                className="form-control "
+                                                onChange={(e) => {
+                                                    setDesignation(e.target.value);
+                                                }}
+                                            >
+                                                <option id="rental sales agent">Rental Sales Agent</option>
+                                                <option id="driver">Driver</option>
+                                                <option id="service agent">Service Agent</option>
+                                                <option id="automotive technician">Automotive Technician</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -233,7 +269,7 @@ function AddEmployee() {
                                     <div className="row">
                                         <div className="form-group col-md-6">
                                             <div className="form-group">
-                                                <label className="form-label-emp" for="empPic">Photo of the employee:</label>
+                                                <label className="form-label-emp pb-3" for="empPic">Photo of the employee:</label>
                                                 <input
                                                     // required
                                                     id="empPic"
@@ -247,7 +283,7 @@ function AddEmployee() {
                                         </div>
                                         <div className="form-group col-md-6">
                                             <div className="form-group">
-                                                <label className="form-label-emp" for="cv">CV:</label>
+                                                <label className="form-label-emp pb-3" for="cv">CV:</label>
                                                 <input
                                                     // required
                                                     id="cv"
@@ -260,7 +296,7 @@ function AddEmployee() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    <div className="row mb-4">
                                         <div className="col py-3 text-center">
                                             <button type="submit" className="btn btn-ok">
                                                 Submit
@@ -268,7 +304,7 @@ function AddEmployee() {
                                         </div>
                                         <div className="col py-3 text-center">
                                             <button type="reset" className="btn btn-reset">
-                                                reset
+                                                Reset
                                             </button>
                                         </div>
                                     </div>
