@@ -32,8 +32,7 @@ function viewreservation() {
                     </div>
                 </div>
                 <table class="table table-striped table-primary">
-                    <tr>   
-                        <th class="text-center">Reserve ID</th>                    
+                    <tr>                      
                         <th class="text-center">Customer</th>
                         <th class="text-center">From</th>
                         <th class="text-center">To</th>
@@ -49,7 +48,6 @@ function viewreservation() {
                   <td class="text-center">A</td>
                   <td class="text-center">C</td>
                   <td class="text-center">D</td>
-                  <td class="text-center">A</td>
                   <td class="text-center">A</td>
                   <td class="text-center">A</td>
                   <td class="text-center">E</td>

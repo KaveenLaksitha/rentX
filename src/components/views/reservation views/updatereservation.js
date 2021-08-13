@@ -153,6 +153,16 @@ function updatereservation() {
                                                     placeholder="Advanced Payment" 
                                                     tabindex="10" />
                                             </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label" for="TotalreservationPrice">Total Reservation Payment</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="TotalreservationPrice" 
+                                                    name="TotalreservationPrice" 
+                                                    placeholder="Total Reservation Payment" 
+                                                    tabindex="11" />
+                                            </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
