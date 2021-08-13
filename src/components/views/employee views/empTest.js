@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import moment from 'moment';
+import { Redirect } from "react-router";
+
+
 
 import { getAllEmployeesService } from "../../services/employeeService";
+import moment from 'moment';
 
-import TestModal from "./viewEmployee";
+function EmpTest() {
 
-export default function EmpList() {
+    const [isFetching, setFetch] = useState(false);
     const [empList, setEmp] = useState([]);
+    const [redirect, setRedirect] = useState(null);
     const [modalData, setData] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
+
+
+
+
+    const [showModal, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     useEffect(() => {
+        setFetch({ isFetching: true });
         getAllEmployeesService().then((data) => {
             setEmp(data.data);
             console.log(data.data, "component did mount on new list")
         }
         )
     }, []);
+
+    // useEffect(() => {
+    //     handleViewOnClick().then((data) => {
+    //         setData(data);
+    //     })
+    // });
 
     const openModal = (emp) => {
         setData(emp);
@@ -26,28 +45,61 @@ export default function EmpList() {
 
     const handleViewOnClick = () => {
         console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
-        setModalShow(true);
+        console.log(modalData, "data came for modalzzzz");
+        handleShow()
+        // this.setState({ redirect: `/viewEmp/${userId}` });
     }
 
 
     return (
-        <div className="page-component-body " >
+        <div className="page-component-body" >
 
-            <Modal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <TestModal
-                    data={modalData}
-                    onHide={() => setModalShow(false)}
-                />
+            <Modal show={showModal} onHide={handleClose} className="d-flex align-items-center justify-content-center mt-5">
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!
+                    <div className="row">
+                        <div className="col-12">
+                            <table class="table table-striped table-dark ">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-left" scope="row">
+                                            Employee ID
+                                        </th>
+                                        <td class="text-left">{modalData.empId}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left" scope="row">
+                                            First Name
+                                        </th>
+                                        <td class="text-left">{modalData.fName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left" scope="row">
+                                            Last Name
+                                        </th>
+                                        <td class="text-left">fdsafdsaf</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-left" scope="row">
+                                            e-mail
+                                        </th>
+                                        <td class="text-left">fdsafdsaf</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
             </Modal>
 
-            <div className="table-emp ">
+            <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
                         <h3 className="float-left">List of Employees</h3>
@@ -57,7 +109,7 @@ export default function EmpList() {
                             Add Employee
                         </button>
                     </a>
-                    <a href="##" class="float-right ml-4">
+                    <a href="/testModal" class="float-right ml-4">
                         <button class="btn btn-ok white">
                             Past Employees
                         </button>
@@ -74,6 +126,9 @@ export default function EmpList() {
                         </div>
                     </div>
                 </div>
+
+
+
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -90,7 +145,7 @@ export default function EmpList() {
                             return (
 
                                 <tr>
-                                    <td onClick={() => openModal(employee)} >
+                                    <td onClick={() => openModal(employee)}>
                                         {employee.fName + " " + employee.lName}
                                     </td>
                                     <td>{employee.nic}</td>
@@ -120,3 +175,5 @@ export default function EmpList() {
         </div >
     );
 }
+
+export default EmpTest
