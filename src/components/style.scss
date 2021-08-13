@@ -577,11 +577,3 @@ a.nav-link:link {
   position: relative;
   border-radius: 0.5rem;
 }
-
-/*for modal*/
-
-.blur-bg {
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-  z-index: -1;
-}

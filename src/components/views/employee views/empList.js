@@ -90,7 +90,7 @@ export default function EmpList() {
                             return (
 
                                 <tr>
-                                    <td onClick={() => openModal(employee)} >
+                                    <td onClick={() => openModal(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details">
                                         {employee.fName + " " + employee.lName}
                                     </td>
                                     <td>{employee.nic}</td>
