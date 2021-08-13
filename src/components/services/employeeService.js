@@ -2,18 +2,20 @@ import axios from "axios";
 
 const HOST = "http://localhost:4000";
 
+//for add employee
 export const addEmployeeService = async (employeePayload) => {
   console.log(employeePayload, "<<<<<<<<<<<<<<<<<<<<<<<<");
-  // try {
-  //   await axios.post(`${HOST}/api/employee`, employeePayload);
-  //   return {
-  //     ok: true,
-  //   };
-  // } catch (error) {
-  //   return {
-  //     ok: false,
-  //   };
-  // }
+  try {
+    await axios.post(`${HOST}/api/employee`, employeePayload);
+    return {
+      ok: true,
+    };
+  } catch (error) {
+    //console.log(error.response.data.status)
+    return {
+      ok: false, err: error.response.data.status
+    };
+  }
 };
 
 export const getEmployeeService = async (employeeId) => {
@@ -48,7 +50,8 @@ export const getAllEmployeesService = async () => {
   console.log("done;");
   try {
     const response = await axios.get(`${HOST}/api/employee`);
-    console.log(response, "res");
+    console.log("response came", response);
+    // console.log(response.data, "res data");
     return {
       ok: true,
       data: response.data.data,
