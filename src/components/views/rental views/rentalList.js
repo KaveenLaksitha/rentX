@@ -12,8 +12,7 @@ function RentalList() {
 
         if (document.getElementById('submit').clicked) {//this get executed if we are specifically searching
             searchRentals();
-            /*} else if (document.getElementById('pending').clicked) {
-                pendingRecords();*/
+
         } else {
             function getRentals() {
                 axios.get("http://localhost:4000/rental/displayRentals").then((res) => { //normally the fetched rental record details are displayed through this
