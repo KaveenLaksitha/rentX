@@ -6,44 +6,48 @@ import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
 function Reservation() {
-const yesterday = moment().subtract(1, 'day');
 
-        // disable past dates
-    const day = moment().subtract(1, 'day');
+
+    // disable past dates
+    const yesterday = moment().subtract(1, 'day');
     const disablePastDt = current => {
         return current.isAfter(yesterday)
     }
 
-    let history = useHistory();
-    const [reservations , setReservations] = useState("");
+     //disable future dates
+    const today = moment().add(30, 'days');;
+    const disableFutureDt = current => {
+        return current.isBefore(today)
+    }
 
-    const[reservationid , setreservationid] = useState("");
+    let history = useHistory();
+    const [reservations , setReservations] = useState([]);
+
     const[customername,setcustomername] = useState("");
     const[contactnumber,setcontactnumber] = useState("");
     const[nic,setnic] = useState("");
     const[customeraddress,setcustomeraddress] = useState("");
     const[packagename,setpackagename] = useState("");
     const[eventtype,seteventtype] = useState("");
-    const[vehicletype,setvehicletype] = useState("");
-    const[vehiclemodel,setvehiclemodel] = useState("");
-    const[noofvehicle,setnoofvehicle] = useState("");
     const[from,setfrom] = useState(moment());
     const[to,setto] = useState(moment());
-    const[daterange,setdaterange] = useState("");
     const[discount,setdiscount] = useState("");
     const[advancedpayment,setadvancedpayment] = useState("");
     const[totalreservation,settotalreservation] = useState("");
     const[status,setstatus] = useState("");
-    const[select,setselect] = useState("");
 
     function sendData(e){
         e.preventDefault();
 
-        //alert( customername+ contactnumber+ nic+ customeraddress+ packagename+eventtype+ from+ to+ daterange+ discount+ advancedpayment+ totalreservation+ status);
+        document.getElementById('FinalreservationPrice').value = (totalreservation - advancedpayment);
+
+        const finalpay = (totalreservation - advancedpayment);
+
+        alert("Your ramaining balance is " + `${finalpay}`);
 
         const answer = window.confirm("Are you sure you want to confirm submission?");
         if (answer) {
-          const newReservation = { customername, contactnumber, nic, customeraddress, packagename,eventtype, from, to, daterange, discount, advancedpayment, totalreservation, status}
+          const newReservation = { customername, contactnumber, nic, customeraddress, packagename,eventtype, from, to, discount, advancedpayment, totalreservation, status}
     
           axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
             alert("Reservation added successfully")
@@ -58,20 +62,41 @@ const yesterday = moment().subtract(1, 'day');
     
           })
         }
-
+        
       }
 
-    /*function sendpackageName(){
-      var   select = document.getElementById("select"),
-              txtpackage = document.getElementById("packageName"),
-              newoption = document.createElement("OPTION"),
-              newoptionval = document.createTextNode(txtpackage);
+      function addtemporaryilyData(e) {
+            e.preventDefault();
 
-        newoption.appendChild(newoptionval);
-        select.insertBefore(newoptionval, select.lastChild);
+            document.getElementById('reservationPrice').value = totalreservation;
+            document.getElementById('select').value = packagename;
 
-    }*/
+            var admission = moment(from, 'DD-MM-YYYY');
+            var discharge = moment(to, 'DD-MM-YYYY');
+            const diffDuration = discharge.diff(admission, 'days');
+            document.getElementById('dateRange').value = diffDuration;
 
+        alert("Package Created");   
+      }
+
+    function showDelivery(){
+       
+        if(document.getElementById("entry").click) {
+            document.getElementById("hide11").style.display = "block";
+            document.getElementById("hide22").style.display = "block";
+            document.getElementById("hide33").style.display = "block";
+            document.getElementById("hide44").style.display = "block";
+         
+        }
+    }
+    
+    /*function showsecond(){
+        if(document.getElementById("entry").click.onDoubleClick) {
+            document.getElementById("hide111").style.display = "block";
+            document.getElementById("hide222").style.display = "block";
+            document.getElementById("hide333").style.display = "block";
+        }*/
+    
     return (
         <div className="page-component-body ">
             
@@ -130,6 +155,7 @@ const yesterday = moment().subtract(1, 'day');
                                                     placeholder="Contact Number(0703814914)" t
                                                     abindex="2" 
                                                     required 
+                                                    pattern="[0-9]{10}"
                                                     onChange={(event) => 
                                                         {
                                                             setcontactnumber(event.target.value);
@@ -144,7 +170,7 @@ const yesterday = moment().subtract(1, 'day');
                                                     id="nic" 
                                                     name="nic" 
                                                     placeholder="NIC (965169472v)" 
-                                                    tabindex="3" 
+                                                    tabindex="3"                                               
                                                     //required
                                                     onChange={(event) => 
                                                         {
@@ -175,65 +201,19 @@ const yesterday = moment().subtract(1, 'day');
                                                     <h3 className="text-left mt-4 mb-4 reservesize">Reservation Details</h3>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker  
-                                                    //type="date" 
+                                              <div class="form-group">
+                                            <label class="form-label-emp" for="select">Package Name</label>
+                                            <input 
+                                                    type="text" 
                                                     class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    //required 
-                                                    onChange={(event) => 
-                                                        {
-                                                            setfrom(event);
-                                                        }
-                                                    }
-                                                    timeFormat={false}
-                                                    isValidDate={disablePastDt}
+                                                    id="select" 
+                                                    name="select" 
+                                                    placeholder="Event Type (Wedding)" 
+                                                    tabindex="7" 
+                                                    required 
                                                     />
+                                    
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker  
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    onChange={(event) => 
-                                                        {
-                                                            setto(event);
-                                                        }
-                                                    }
-                                                    timeFormat={false}
-                                                    isValidDate={disablePastDt}
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="status">Status</label>
-                                                <select
-                                                        id="status"
-                                                        className="form-control "
-                                                        onChange={(event) => 
-                                                            {
-                                                                setstatus(event.target.value);
-                                                            }
-                                                        }
-                                                    // onChange={(e) => {
-                                                    // setMaritalStat(e.target.value);
-                                                    // }}
-                                                    >
-                                                        <option id="pending">Pending</option>
-                                                        <option id="complete">Complete</option>
-                                                    </select>
-                                            </div>
-                                            </div>
-
                                             <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="eventType">Event Type</label>
@@ -251,22 +231,27 @@ const yesterday = moment().subtract(1, 'day');
                                                         }
                                                     }/>
                                             </div>
-                                            </div>
-                                            <div class="form-group">
-                                            <label class="form-label-emp" for="select">Package Name</label>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label-emp" for="status">Status</label>
                                                 <select
-                                                        id="select"
+                                                        id="status"
                                                         className="form-control "
-                                                        tabindex="8"
+                                                        onChange={(event) => 
+                                                            {
+                                                                setstatus(event.target.value);
+                                                            }
+                                                        }
+                                                    
                                                     >
-                                                        <option >option1</option>
-                                                        <option >option2</option>
+                                                        <option id="pending">Select</option>
+                                                        <option id="pending">Pending</option>
+                                                        <option id="complete">Complete</option>
                                                     </select>
-                                            </div>
-                                            
+                                            </div>                                           
+                                            </div>      
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="advancedPayment">Advanced Payment</label>
+                                                <label class="form-label" for="advancedPayment" >Advanced Payment</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -315,7 +300,7 @@ const yesterday = moment().subtract(1, 'day');
                                             </div>
                                             <div className="row">
                                                 <div className="col py-3 text-center">
-                                                    <button type="submit" className="btn btn-ok">
+                                                    <button type="submit" className="btn btn-ok" >
                                                         Reserve
                                                     </button>
                                                 </div>
@@ -338,7 +323,7 @@ const yesterday = moment().subtract(1, 'day');
                             <br></br>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form  id="contact-form" class="form"  role="form">
+                                    <form onSubmit={addtemporaryilyData} id="contact-form" class="form"  role="form">
                                         <div class="form-group">
                                             <label class="form-label" for="packageName">Package Name</label>
                                             <input 
@@ -355,8 +340,48 @@ const yesterday = moment().subtract(1, 'day');
                                                         }
                                                     }/>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label" for="dateRange">Date Range</label>
+                                        <br></br>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="from">From</label>
+                                                <DatePicker  
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="from" 
+                                                    name="from" 
+                                                    placeholder="" 
+                                                    tabindex="5" 
+                                                    required 
+                                                    onChange={(event) => 
+                                                        {
+                                                            setfrom(event);
+                                                        }
+                                                    }
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="to">To</label>
+                                                <DatePicker 
+                                                    required 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="to" 
+                                                    name="to" 
+                                                    placeholder="" 
+                                                    tabindex="6" 
+                                                    onChange={(event) => 
+                                                        {
+                                                            setto(event);
+                                                        }
+                                                    }
+                                                    timeFormat={false}
+                                                    isValidDate={disableFutureDt}
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label" for="dateRange">Date Range</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control formInput" 
@@ -364,71 +389,123 @@ const yesterday = moment().subtract(1, 'day');
                                                 name="dateRange" 
                                                 placeholder="Date Range" 
                                                 tabindex="2" 
-                                                //required 
-                                                onChange={(event) => 
-                                                        {
-                                                            setdaterange(event.target.value);
-                                                        }
-                                                    }/>
+                                                pattern="[0-9]"
+                                                />
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="vehicleType">Vehicle Type</label>
+                                        </div>
+                                        <br></br>
+                                        <div class="form-group col-md-2">
+                                                <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} onDoubleClick={showDelivery}/>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="form-group col-md-4"  id="hide1">
+                                                <label class="form-label-emp" for="vehicleTypehide1">Vehicle Type</label>
                                                 <select 
-                                                        id="vehicleType"
+                                                        id="vehicleTypehide1"
                                                         className="form-control "
-                                                        tabindex="3" 
-                                                        /*onChange={(event) => 
-                                                        {
-                                                            setvehicletype(event.target.value);
-                                                        }
-                                                    }*/
-                                                    // onChange={(e) => {
-                                                    // setMaritalStat(e.target.value);
-                                                    // }}
+                                                        tabindex="3"                                           
                                                     >
-                                                        <option value="1">Car</option>
-                                                        <option value="2">Van</option>
-                                                        <option value="3">Bus</option>
+                                                        <option value="1">Select</option>
+                                                        <option value="2">Car</option>
+                                                        <option value="3">Van</option>
+                                                        <option value="4">Bus</option>
                                                     </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
+                                            <div class="form-group col-md-4"  id="hide2">
+                                                <label class="form-label-emp" for="vehicleModelhide1">Vehicle Model</label>
                                                 <select
-                                                        id="vehicleModel"
+                                                        id="vehicleModelhide1"
                                                         className="form-control "
-                                                        tabindex="4" 
-                                                        /*onChange={(event) => 
-                                                        {
-                                                            setvehiclemodel(event.target.value);
-                                                        }
-                                                    }*/
-                                                    // onChange={(e) => {
-                                                    // setMaritalStat(e.target.value);
-                                                    // }}
-                                                    >
-                                                        <option id="married">vitz</option>
-                                                        <option id="unmarried">hybrid</option>
-                                                        <option id="unmarried">Bus</option>
+                                                        tabindex="4"  >
+
+                                                        <option id="1">Select</option>
+                                                        <option id="2">vitz</option>
+                                                        <option id="3">hybrid</option>
+                                                        <option id="4">Bus</option>
                                                     </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="noVehicle">No of Vehicle</label>
+                                            <div class="form-group col-md-2"  id="hide3">
+                                                <label class="form-label-emp" for="noVehiclehide1">No of Vehicle</label>
                                                 <input 
                                                     type="number" 
                                                     class="form-control formInput" 
-                                                    id="noVehicle" 
-                                                    name="noVehicle" 
-                                                    placeholder="No of Vehicle" 
+                                                    id="noVehiclehide1" 
+                                                    name="noVehiclehide1" 
+                                                    placeholder="Count" 
                                                     min="1"
                                                     tabindex="5" 
-                                                    /*onChange={(event) => 
-                                                        {
-                                                            setnoofvehicle(event.target.value);
-                                                        }
-                                                    }*//>
+                                                    pattern="[0-9]"
+                                                    />
                                             </div>
+                                            <div class="form-group col-md-2"  id="hide4" >
+                                                <label class="form-label-emp" for="hide4price">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="hide4price" 
+                                                    name="hide4price" 
+                                                    placeholder="Price" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    //pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            
                                         </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide11" >
+                                                <label class="form-label-emp" for="vehicleTypehide2">Vehicle Type</label>
+                                                <select 
+                                                        id="vehicleTypehide2"
+                                                        className="form-control "
+                                                        tabindex="3"  >
+                                                        <option value="1">Select</option>
+                                                        <option value="2">Car</option>
+                                                        <option value="3">Van</option>
+                                                        <option value="4">Bus</option>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide22">
+                                                <label class="form-label-emp" for="vehicleModelhide2">Vehicle Model</label>
+                                                <select
+                                                        id="vehicleModelhide2"
+                                                        className="form-control "
+                                                        tabindex="4"  >
+                                                        <option id="1">Select</option>
+                                                        <option id="2">vitz</option>
+                                                        <option id="3">hybrid</option>
+                                                        <option id="4">Bus</option>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide33" >
+                                                <label class="form-label-emp" for="noVehiclehide2">No of Vehicle</label>
+                                                <input 
+                                                    type="number" 
+                                                    class="form-control formInput" 
+                                                    id="noVehiclehide2" 
+                                                    name="noVehiclehide2" 
+                                                    placeholder="Count" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide44" >
+                                                <label class="form-label-emp" for="hide44price">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="hide44price" 
+                                                    name="hide44price" 
+                                                    placeholder="Price" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    //pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            
+                                        </div>
+            
                                         <div class="row">
                                         <div class="form-group col-md-6">
                                             <label class="form-label" for="discount">Discount</label>
@@ -439,6 +516,7 @@ const yesterday = moment().subtract(1, 'day');
                                                 name="discount" 
                                                 placeholder="Discount (5)" 
                                                 tabindex="6" 
+                                                //pattern="[0-9]"
                                                 //required 
                                                 onChange={(event) => 
                                                         {

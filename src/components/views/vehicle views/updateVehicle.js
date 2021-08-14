@@ -184,12 +184,12 @@ function updateVehicle() {
                                     <div className="row mt-3 mb-4">
                                         <div className="col py-3 text-center">
                                             <button type="submit" className="btn btn-ok">
-                                                Submit
+                                                Update
                                             </button>
                                         </div>
                                         <div className="col py-3 text-center">
                                             <button type="reset" className="btn btn-reset">
-                                                reset
+                                                Cancel
                                             </button>
                                         </div>
                                     </div>
