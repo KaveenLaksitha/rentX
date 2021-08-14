@@ -25,10 +25,21 @@ function AddVehicle() {
     const[YearsRent, setYearsRent] = useState("");
     const[vehPic, setVehiPic] = useState("");
     const[vehDoc, setVehDoc] = useState("");
+
+    const[RegNoErr, setRegNoErr] = useState("");
     
 
     function sendData(e) {
 
+        e.preventDefault();
+
+        const isValid = formValidation();
+
+        if(isValid){
+
+            
+
+        
         const newVehicle = {
             
             OwnerName,
@@ -66,6 +77,25 @@ function AddVehicle() {
         })
 
     }
+}
+
+    const formValidation =() =>{//validate function
+
+        const RegNoErr ={}; //State
+        let isValid = true; //setting flag
+
+
+        if(VehicleRegNo.trim().length > 8 && VehicleRegNo.trim().length <8 ){
+
+            RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
+            isValid = false;
+        }
+
+        setRegNoErr(RegNoErr);//update error objects
+        return isValid;
+
+
+    }
 
 
 
@@ -86,11 +116,15 @@ function AddVehicle() {
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle Paymnet Details</a>
                     </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
+                    
+                   <hr></hr>
+                                            
+                    
+                
+                <div class="tab-content tab-content-V  col-12" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         
-                            <div class="container">
+                            <div class="container border-top ">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h3 className="topic-V text-left mt-4 mb-4">Owner Details</h3>
@@ -101,7 +135,7 @@ function AddVehicle() {
                                         <form id="contact-form" class="form" role="form" >
                                             <div class="form-group">
                                                 <label class="form-label" for="name">Owner Name </label>
-                                                <input required type="text" class="form-control formInput" id="name" name="name" placeholder="Customer Name" tabindex="1"
+                                                <input  type="text" class="form-control formInput" id="name" name="name" placeholder="Customer Name" tabindex="1"
                                                     onChange={(e) => {
                                                         setOwnerName(e.target.value); // assign value
                                                          }}
@@ -113,7 +147,7 @@ function AddVehicle() {
                                             <div className="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="email">Owner NIC </label>
-                                                <input required type="text" class="form-control formInput" id="NIC" name="Owner NIC" placeholder="Owner NIC" tabindex="2"  
+                                                <input  type="text" class="form-control formInput" id="NIC" name="Owner NIC" placeholder="Owner NIC" tabindex="2"  
                                                 
                                                         onChange={(e) => {
                                                             setOwnerNIC(e.target.value); // assign value
@@ -123,7 +157,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="subject">Telephone No</label>
-                                                <input  required type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setTeleNo(e.target.value); // assign value
@@ -135,7 +169,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">Address</label>
-                                                <input  required type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" 
+                                                <input   type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" 
                                                 
                                                 
                                                 onChange={(e) => {
@@ -147,7 +181,7 @@ function AddVehicle() {
                                             
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">E-mail</label>
-                                                <input required type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
+                                                <input  type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
                                                 
                                                 onChange={(e) => {
                                                     setEmail(e.target.value); // assign value
@@ -157,7 +191,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">Date</label>
-                                                <input required type="Date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"
+                                                <input  type="Date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setDate(e.target.value); // assign value
@@ -169,9 +203,37 @@ function AddVehicle() {
                                             
                                             <div className="row pt-3 pb-4">
                                             <div className="col py-3 text-center">
-                                                <button type="submit" className="btn btn-ok">
-                                                    Save
-                                                </button>
+
+
+
+                                                        
+
+
+
+
+
+
+
+                                            {/* <a  id="profile-tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                                             <button  className="btn btn-ok" >
+                                                     console.alert("")
+                                            </button>
+                                            </a> */}
+
+
+
+
+                                            <li>
+                                                <a class="btn btn-ok-V" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Next</a>
+                                            </li>
+                                            
+
+                                           
+
+                                                
+                                                
+                                                
+                                                
                                             </div>
                                             <div className="col py-3 text-center">
                                                 <button type="reset" className="btn btn-reset">
@@ -228,6 +290,7 @@ function AddVehicle() {
                                                         setVehicleType(e.target.value); // assign value
                                                          }}
                                                 >
+                                                    <option id="choose1">Choose</option>
                                                     <option value="car">Car</option>
                                                     <option value="van">Van</option>
                                                     <option value="bus">Bus</option>
@@ -248,7 +311,13 @@ function AddVehicle() {
                                                          
                                                 
                                                 />
+                                            
+                                            {Object.keys(RegNoErr).map((key)=>{
+                                                return<div style={{color :"red"}}>{RegNoErr[key]}</div>
+                                            })}
                                             </div>
+
+
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Current Mileage (Km) </label>
                                                 <input  required type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
@@ -273,8 +342,9 @@ function AddVehicle() {
                                                     setInstType(e.target.value);
                                                 }}
                                                 >
-                                                    <option id="InsF">Full Insurance</option>
-                                                    <option id="InsT">Third-party Insurance</option>
+                                                    <option id="choose2">Choose</option>
+                                                    <option value="InsF">Full Insurance</option>
+                                                    <option value="InsT">Third-party Insurance</option>
                                                     
                                                 </select>
                                 
@@ -302,6 +372,7 @@ function AddVehicle() {
                                                     setTransmission(e.target.value);
                                                 }}
                                                 >
+                                                    <option id="Chosse3">Choose</option>
                                                     <option value="Auto">Auto </option>
                                                     <option value="Mannual">Mannual</option>
                 
@@ -313,15 +384,16 @@ function AddVehicle() {
                                             
 
                                             <select
-                                                    value="AirC"
+                                                    id="AirC"
                                                     className="form-control "
                                                 onChange={(e) => {
                                                     setAirC(e.target.value);
                                                 }}
                                                 >
+                                                    <option id="choose4">Choose </option>
                                                     <option value="FAC">Full - AC </option>
                                                     <option value="NAC">Non - AC </option>
-                                                </select>
+                                            </select>
                                         </div>
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="subject">Number of seats </label>
@@ -424,6 +496,8 @@ function AddVehicle() {
                         </div>
                     </div>
                 </div>
+                </ul>
+            
             </div>
         </div>
     )
