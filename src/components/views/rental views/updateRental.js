@@ -27,6 +27,21 @@ function UpdateRental() {
     const [customerAdd, setCustomerAdd] = useState("");
     const [contactNo, setContactNo] = useState("");
     const [NICcopy, setNICcopy] = useState("");
+    const [returnDate, setReturnDate] = useState("");
+    const [penaltyDays, setPenaltyDays] = useState("");
+    const [penalty, setPenalty] = useState("");
+    const [Remaining, setRemaining] = useState("");
+
+    //disable past dates
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday);
+
+    };
+
+    // calculate the penalty
+
+
 
 
     const onSubmit = async e => {
@@ -37,7 +52,7 @@ function UpdateRental() {
 
             const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-            await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newCustomer).then(() => {
+            await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
                 alert("Rental Record successfully Updated");
 
             }).catch((err) => {
@@ -84,7 +99,7 @@ function UpdateRental() {
         <div className="page-component-body">
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -111,11 +126,11 @@ function UpdateRental() {
                                                 id="cName"
                                                 type="text"
                                                 className="form-control "
-                                                placeholder="K.H.P. Karunathilake"
+                                                value={customerName}
                                                 disabled
-                                            // onChange={(e) => {
-                                            // setfName(e.target.value);
-                                            // }}
+                                                onChange={(e) => {
+                                                    setCustomerName(e.target.value);
+                                                }}
                                             />
                                         </div>
                                         <div className="form-group col-md-6">
@@ -125,11 +140,11 @@ function UpdateRental() {
                                                 id="contactNo"
                                                 type="text"
                                                 className="form-control "
-                                                placeholder="0774125639"
+                                                value={contactNo}
                                                 disabled
-                                            // onChange={(e) => {
-                                            // setlName(e.target.value);
-                                            // // }}
+                                                onChange={(e) => {
+                                                    setContactNo(e.target.value);
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -145,11 +160,11 @@ function UpdateRental() {
                                                         id="cAddress"
                                                         type="text"
                                                         className="form-control "
-                                                        placeholder="No 178/ 4 Thalahena, Malabe"
+                                                        value={customerAdd}
                                                         disabled
-                                                    // onChange={(e) => {
-                                                    // setfName(e.target.value);
-                                                    // }}
+                                                        onChange={(e) => {
+                                                            setCustomerAdd(e.target.value);
+                                                        }}
                                                     />
                                                 </div>
                                             </div>
@@ -159,7 +174,7 @@ function UpdateRental() {
                             </div>
                             <div class="form-row">
                                 <div class="col-md-3">
-                                    <label class="customersize2" for="Vehicle">Return Details </label>
+                                    <label class="customersize2" for="Vehicle">Return Vehicle Details </label>
                                 </div>
                             </div>
 
@@ -172,21 +187,44 @@ function UpdateRental() {
                                         <div class="col-4">
                                             <label for="rStatus" class="form-label-emp">Status</label>
                                             <select class="form-select" class="form-control"
-                                                name="rStatus" id="rStatus" required>
-                                                <option id="choose1" >select</option>
+                                                name="rStatus" id="rStatus" required
+                                                value={status}
+                                                onChange={(e) => {
+                                                    setStatus(e.target.value);
+                                                }}>
                                                 <option id="pending" >pending</option>
                                                 <option id="completed">completed</option>
                                             </select>
                                         </div>
                                         <div class="col-4 mr-2"  >
                                             <label for="rFrom" class="form-label-emp">From</label>
-                                            <input type="date" class="form-control" id="rFrom"
-                                                name="rFrom" required />
+                                            {/*<input type="date" class="form-control" id="rFrom"
+                                                name="rFrom" required
+                                                value={from}
+                                                onChange={(e) => {
+                                                    setFrom(e.target.value);
+                                                }} />*/}
+                                            <DatePicker required id="rfo"
+                                                name="rfo"
+                                                value={moment(from).format('MM-DD-YYYY')}
+                                                onChange={(e) => { setTo(e); }}
+                                                timeFormat={false}
+                                            />
                                         </div>
                                         <div class="col-4" >
                                             <label for="rTo" class="form-label-emp">To</label>
-                                            <input type="date" class="form-control" id="rTo"
-                                                name="rTo" required />
+                                            {/*<input type="date" class="form-control" id="rTo"
+                                                name="rTo" required
+                                                value={to}
+                                                onChange={(e) => {
+                                                    setTo(e.target.value);
+                                                }} />*/}
+                                            <DatePicker required id="rto"
+                                                name="rto"
+                                                value={moment(to).format('MM-DD-YYYY')}
+                                                onChange={(e) => { setTo(e); }}
+                                                timeFormat={false}
+                                            />
                                         </div>
                                     </div>
 
@@ -201,8 +239,25 @@ function UpdateRental() {
 
                                         <div class="col-4 mr-2"  >
                                             <label for="returnDate" class="form-label-emp">Return Date</label>
-                                            <input type="date" class="form-control" id="returnDate"
-                                                name="returnDate" required />
+                                            {/*<input type="date" class="form-control" id="returnDate"
+                                                name="returnDate" required
+                                                onChange={(e) => {
+                                                    setReturnDate(e.target.value);
+                                                }} />*/}
+                                            <DatePicker required id="returnDate"
+                                                name="returnDate"
+                                                onChange={(e) => { setTo(e); }}
+                                                timeFormat={false}
+                                                isValidDate={disablePastDt}
+                                            />
+                                        </div>
+
+                                        <div class="col-4 mr-2"  >
+                                            <label for="vehicle" class="form-label-emp">Vehicle Model</label>
+                                            <input type="text" class="form-control" id="vehicleModel"
+                                                name="vehicleModel" required disabled
+                                                value={vehicleType + " " + model}
+                                            />
                                         </div>
 
                                     </div>
@@ -222,9 +277,9 @@ function UpdateRental() {
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="0"
-                                            // onChange={(e) => {
-                                            // setfName(e.target.value);
-                                            // }}
+                                                onChange={(e) => {
+                                                    setPenaltyDays(e.target.value);
+                                                }}
                                             />
                                         </div>
 
@@ -236,9 +291,9 @@ function UpdateRental() {
                                                 type="text"
                                                 className="form-control "
                                                 placeholder="2500.00"
-                                            // onChange={(e) => {
-                                            // setfName(e.target.value);
-                                            // }}
+                                                onChange={(e) => {
+                                                    setPenalty(e.target.value);
+                                                }}
                                             />
                                         </div>
 
@@ -259,10 +314,10 @@ function UpdateRental() {
                                                 id="advancedPayment"
                                                 type="text"
                                                 className="form-control "
-                                                placeholder="5000.00"
-                                            // onChange={(e) => {
-                                            // setfName(e.target.value);
-                                            // }}
+                                                value={advPayment}
+                                                onChange={(e) => {
+                                                    setAdvPayment(e.target.value);
+                                                }}
                                             />
                                         </div>
 
@@ -274,9 +329,9 @@ function UpdateRental() {
                                                 type="text"
                                                 className="form-control "
                                                 placeholder="13250.00"
-                                            // onChange={(e) => {
-                                            // setfName(e.target.value);
-                                            // }}
+                                                onChange={(e) => {
+                                                    setRemaining(e.target.value);
+                                                }}
                                             />
                                         </div>
 

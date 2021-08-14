@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory, Link } from "react-router-dom";
-import moment from 'moment';
+import { Link } from "react-router-dom";
 
 function RentalList() {
 
@@ -142,9 +141,9 @@ function RentalList() {
                             return (
 
                                 <tr >
-                                    <Link to={`/rental/getRentalByID/${rentals.id}`}>
-                                        <td >{moment(rentals.from).format('YYYY-MMMM-DD')}</td></Link>
-                                    <td >{moment(rentals.to).format('YYYY-MMMM-DD')}</td>
+                                    <Link class="link" to={`/rental/getRentalByID/${rentals.id}`}>
+                                        <td >{rentals.from}</td></Link>
+                                    <td >{rentals.to}</td>
                                     <td >{rentals.vehicleType}</td>
                                     <td >{rentals.customerNIC}</td>
                                     <td >{rentals.finalPrice}</td>
