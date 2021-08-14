@@ -4,7 +4,7 @@ import "./style.scss";
 
 function Header(props) {
   return (
-    <div className="page-body">
+    <div className="page-body ">
 
       <div class="cube"></div>
       <div class="cube"></div>
@@ -166,7 +166,7 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new">
                 <li className="has-subnav ">
-                  <a href="/empList">
+                  <a href="/">
                     <i className="fa"></i>
                     <span className="nav-text">Employees</span>
                     <i className="fa fa-angle-right fa-3x"></i>
