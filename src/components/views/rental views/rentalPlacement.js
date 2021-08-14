@@ -39,6 +39,9 @@ function RentalPlacement() {
     const [contactNo, setContactNo] = useState("");
     const [NICcopy, setNICcopy] = useState("");
 
+    const [rentals, setRentals] = useState([]);
+    const [exists, setExists] = useState("");
+
     function getDateDiff() {
         var admission = moment(from, 'DD-MM-YYYY');
         var discharge = moment(to, 'DD-MM-YYYY');
@@ -69,26 +72,54 @@ function RentalPlacement() {
 
     function sendData(e) {
         e.preventDefault();//to prevent the default submission by submit button
-        const answer = window.confirm("Are you sure you want to confirm submission?");
-        if (answer) {
+        checkForPendingCustomer();
+        //alert(rentals.length);
 
-            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
+        if (rentals.length !== 0) {
+            alert('Customer already has unsettled rentals')
+        } else if (rentals.length === 0) {
+            const answer = window.confirm("Are you sure you want to confirm submission?");
+            if (answer) {
 
-            axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
-                alert("Rental Record added successfully")
-                function refreshPage() {
-                    window.location.reload();
-                }
-                refreshPage();
+                const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-            }).catch((err) => {
-                alert(err.response.data.error)
+                axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
+                    alert("Rental Record added successfully")
+                    /*function refreshPage() {
+                        window.location.reload();
+                    }
+                    refreshPage();*/
+                    history.push("/rentalList");
 
-                //alert(err.response.data.errorCode)
+                }).catch((err) => {
+                    alert(err.response.data.error)
 
-            })
+                    //alert(err.response.data.errorCode)
+
+                })
+            }
         }
     }
+
+    function checks() {
+        checkForPendingCustomer();
+        //alert(rentals.length);
+    }
+
+
+    function checkForPendingCustomer() {
+        function checkUserExistance() {
+            axios.get(`http://localhost:4000/rental/searchRentalRecs/${customerNIC}`).then((res) => {
+                setRentals(res.data)
+                return rentals.length
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+        checkUserExistance();
+    }
+
+
 
     return (
 
@@ -206,7 +237,7 @@ function RentalPlacement() {
                                 </div>
                                 <div class="form-group">
                                     <div class="col-12" >
-                                        <label class="form-label" for="pAddress">Pick Up Address</label>
+                                        <label class="form-label-emp" for="pAddress">Pick Up Address</label>
                                         <input type="text" class="form-control formInput"
                                             id="pAddress"
                                             name="pAddress"
@@ -226,9 +257,9 @@ function RentalPlacement() {
 
                                 <div class="form-group">
                                     <div class="col-6" >
-                                        <label class="form-label" for="additionalPrice">Additional Price</label>
+                                        <label class="form-label-emp" for="additionalPrice">Additional Price</label>
 
-                                        <input type="text" class="form-control formInput"
+                                        <input type="number" class="form-control formInput"
                                             id="additionalPrice"
                                             name="additionalPrice"
                                             placeholder="Additional Price(Rs: 5000.00)"
@@ -240,8 +271,8 @@ function RentalPlacement() {
 
                                     <div class="col-6" >
                                         <br></br>
-                                        <label class="form-label" for="advPayment">Advanced Payment</label>
-                                        <input type="text" class="form-control formInput"
+                                        <label class="form-label-emp" for="advPayment">Advanced Payment</label>
+                                        <input type="number" class="form-control formInput"
                                             id="advPayment"
                                             name="advPayment"
                                             placeholder="Advanced Payment(Rs: 3000.00)"
@@ -299,7 +330,7 @@ function RentalPlacement() {
                                             <div class="col-6" >
                                                 <div class="form-group">
                                                     <label class="form-label" for="cNumber">Contact Number</label>
-                                                    <input type="text" class="form-control formInput"
+                                                    <input type="number" class="form-control formInput"
                                                         id="cNumber"
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
@@ -335,7 +366,8 @@ function RentalPlacement() {
                                                         name="nicSoftCopy"
                                                         onChange={(event) => { setNICcopy(event.target.value); }}
                                                         pattern="*.[doc,pdf]"
-                                                        required />
+                                                        required
+                                                        onClick={checks} />
                                                 </div>
                                             </div>
 
@@ -344,7 +376,7 @@ function RentalPlacement() {
                                         <div className="row">
 
                                             <div className="col py-3 text-center">
-                                                <button type="submit" className="btn btn-ok">SAVE</button>
+                                                <button type="submit" id="btnSub" className="btn btn-ok">SAVE</button>
                                             </div>
                                             <div className="col py-3 text-center">
                                                 <button type="reset" className="btn btn-reset">RESET</button>
@@ -413,7 +445,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="subRent">Sub Rental Price : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="subRent" />
+                            <input type="text" class="form-control" id="subRent" onFocus={(event) => { setFinalPrice(event.target.value); }} />
                         </div>
                         <hr></hr>
                     </div>
@@ -432,7 +464,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="finalPay">Final Rental Price : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="finalPrice" onFocus={(event) => { setFinalPrice(event.target.value); }}
+                            <input type="text" class="form-control" id="finalPrice"
                             />
                         </div>
                     </div>

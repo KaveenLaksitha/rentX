@@ -3,6 +3,7 @@ import axios from "axios";
 import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
 
 function UpdateRental() {
     let history = useHistory();
@@ -39,9 +40,32 @@ function UpdateRental() {
 
     };
 
-    // calculate the penalty
+    // calculate the penalty Day
+    function getDateDiff() {
+        var TO = moment(to).format('DD/MM/YYYY');
+        var Ret = moment(returnDate).format('DD/MM/YYYY');
+        var admission = moment(TO, 'DD-MM-YYYY');
+        var discharge = moment(Ret, 'DD-MM-YYYY');
+        const diffDuration = discharge.diff(admission, 'days');
+        return (diffDuration);
+    }
 
+    // calculate the penalty Cost
+    function calculatePenaltyCost() {
+        const Price = (finalPrice * (3 / 100)) * getDateDiff()
+        return Price;
+    }
 
+    //get the remaining payment to be made
+    function calculateRemainingPayment() {
+        return ((finalPrice - advPayment) + calculatePenaltyCost())
+    }
+
+    function calculateCharges() {
+        document.getElementById('penaltyDays').value = getDateDiff();
+        document.getElementById('penaltyCharges').value = calculatePenaltyCost();
+        document.getElementById('remPayment').value = calculateRemainingPayment();
+    }
 
 
     const onSubmit = async e => {
@@ -80,7 +104,7 @@ function UpdateRental() {
             setFinalPrice(res.data.rental.finalPrice);
             setCustomerName(res.data.rental.customerName);
             setCustomerNIC(res.data.rental.customerNIC);
-            setCustomerAdd(res.data.rental.setCustomerAdd);
+            setCustomerAdd(res.data.rental.customerAdd);
             setContactNo(res.data.rental.contactNo);
             setNICcopy(res.data.rental.NICcopy);
         }).catch((err) => {
@@ -110,7 +134,7 @@ function UpdateRental() {
 
                             <div class="form-row">
                                 <div class="col-md-3">
-                                    <label class="customersize2" for="customer">Customer Details </label>
+                                    <label class="customersize2" for="customer">Customer Details :</label>
                                 </div>
                             </div>
 
@@ -120,7 +144,7 @@ function UpdateRental() {
                                     <div class="d-grid gap-2 d-md-flex justify-content-md"  >
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label" for="cName">Customer name:</label>
+                                            <label class="form-label" for="cName">Customer name :</label>
                                             <input
                                                 required
                                                 id="cName"
@@ -167,7 +191,30 @@ function UpdateRental() {
                                                         }}
                                                     />
                                                 </div>
+
+
+                                                <div className="form-group col-md-6 ">
+                                                    <label class="form-label" for="cNIC">Customer NIC:</label>
+                                                    <input
+                                                        required
+                                                        id="cNIC"
+                                                        type="text"
+                                                        className="form-control "
+                                                        value={customerNIC}
+                                                        disabled
+                                                        onChange={(e) => {
+                                                            setCustomerNIC(e.target.value);
+                                                        }}
+                                                    />
+                                                </div>
+
                                             </div>
+
+
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -198,32 +245,25 @@ function UpdateRental() {
                                         </div>
                                         <div class="col-4 mr-2"  >
                                             <label for="rFrom" class="form-label-emp">From</label>
-                                            {/*<input type="date" class="form-control" id="rFrom"
-                                                name="rFrom" required
-                                                value={from}
-                                                onChange={(e) => {
-                                                    setFrom(e.target.value);
-                                                }} />*/}
                                             <DatePicker required id="rfo"
                                                 name="rfo"
-                                                value={moment(from).format('MM-DD-YYYY')}
+                                                value={moment(from).format('MM/DD/YYYY')}
                                                 onChange={(e) => { setTo(e); }}
                                                 timeFormat={false}
+                                                required
+                                                disabled
                                             />
                                         </div>
                                         <div class="col-4" >
                                             <label for="rTo" class="form-label-emp">To</label>
-                                            {/*<input type="date" class="form-control" id="rTo"
-                                                name="rTo" required
-                                                value={to}
-                                                onChange={(e) => {
-                                                    setTo(e.target.value);
-                                                }} />*/}
+
                                             <DatePicker required id="rto"
                                                 name="rto"
-                                                value={moment(to).format('MM-DD-YYYY')}
+                                                value={moment(to).format('MM/DD/YYYY')}
                                                 onChange={(e) => { setTo(e); }}
                                                 timeFormat={false}
+                                                required
+                                                disabled
                                             />
                                         </div>
                                     </div>
@@ -239,16 +279,12 @@ function UpdateRental() {
 
                                         <div class="col-4 mr-2"  >
                                             <label for="returnDate" class="form-label-emp">Return Date</label>
-                                            {/*<input type="date" class="form-control" id="returnDate"
-                                                name="returnDate" required
-                                                onChange={(e) => {
-                                                    setReturnDate(e.target.value);
-                                                }} />*/}
                                             <DatePicker required id="returnDate"
                                                 name="returnDate"
-                                                onChange={(e) => { setTo(e); }}
+                                                onChange={(e) => { setReturnDate(e); }}
                                                 timeFormat={false}
                                                 isValidDate={disablePastDt}
+                                                onClose={calculateCharges}
                                             />
                                         </div>
 
@@ -257,6 +293,14 @@ function UpdateRental() {
                                             <input type="text" class="form-control" id="vehicleModel"
                                                 name="vehicleModel" required disabled
                                                 value={vehicleType + " " + model}
+                                            />
+                                        </div>
+
+                                        <div class="col-4 mr-2"  >
+                                            <label for="lastTot" class="form-label-emp">Last Total</label>
+                                            <input type="text" class="form-control" id="vehicleModel"
+                                                name="lastTot" required disabled
+                                                value={finalPrice}
                                             />
                                         </div>
 
@@ -270,25 +314,23 @@ function UpdateRental() {
                                     <div class="d-grid gap-2 d-md-flex justify-content-md"  >
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label" for="penaltyDays">Penalty Days</label>
+                                            <label class="form-label-emp" for="penaltyDays">Penalty Days</label>
                                             <input
-                                                required
+
                                                 id="penaltyDays"
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="0"
-                                                onChange={(e) => {
-                                                    setPenaltyDays(e.target.value);
-                                                }}
+
                                             />
                                         </div>
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label" for="penaltyCharges">Penalty Charges:</label>
+                                            <label class="form-label-emp" for="penaltyCharges">Penalty Charges:</label>
                                             <input
-                                                required
+
                                                 id="penaltyCharges"
-                                                type="text"
+                                                type="number"
                                                 className="form-control "
                                                 placeholder="2500.00"
                                                 onChange={(e) => {
@@ -308,11 +350,11 @@ function UpdateRental() {
                                     <div class="d-grid gap-2 d-md-flex justify-content-md"  >
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label" for="advancedPayment">Advanced Payments:</label>
+                                            <label class="form-label-emp" for="advancedPayment">Advanced Payments:</label>
                                             <input
                                                 required
                                                 id="advancedPayment"
-                                                type="text"
+                                                type="number"
                                                 className="form-control "
                                                 value={advPayment}
                                                 onChange={(e) => {
@@ -322,13 +364,14 @@ function UpdateRental() {
                                         </div>
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label" for="remPayment">Remaining Payment:</label>
+                                            <label class="form-label-emp" for="remPayment">Remaining Payment:</label>
                                             <input
-                                                required
+
                                                 id="remPayment"
-                                                type="text"
+                                                type="number"
                                                 className="form-control "
                                                 placeholder="13250.00"
+
                                                 onChange={(e) => {
                                                     setRemaining(e.target.value);
                                                 }}

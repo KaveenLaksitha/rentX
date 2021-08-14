@@ -141,8 +141,8 @@ function RentalList() {
                             return (
 
                                 <tr >
-                                    <Link class="link" to={`/rental/getRentalByID/${rentals.id}`}>
-                                        <td >{rentals.from}</td></Link>
+
+                                    <td> <Link class="link" to={`/rental/getRentalByID/${rentals.id}`}>{rentals.from}</Link></td>
                                     <td >{rentals.to}</td>
                                     <td >{rentals.vehicleType}</td>
                                     <td >{rentals.customerNIC}</td>
