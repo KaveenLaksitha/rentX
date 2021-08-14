@@ -1,6 +1,34 @@
-import React from 'react'
+import axios from 'axios'
+import React ,{ useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
-function vehicleList() {
+function VehicleList() {
+
+    const [vehicles, setVehicles] = useState([]);
+    
+   
+    useEffect(() => {
+
+        function getVehicles() {
+            axios.get("http://localhost:4000/vehicle/view").then((res)=>{
+
+
+                setVehicles(res.data.reverse());
+                console.log("Data recieved");
+            }).catch((error) => {
+                    alert(error.message);
+            })
+            
+        }
+
+        getVehicles();
+
+    }, []);
+
+
+
+
+
     return (
 
         <div className="page-component-body">
@@ -9,7 +37,7 @@ function vehicleList() {
                 <div class="col">
                     <h3 className="float-left">List of vehicle</h3>
                 </div>
-                <a href="/addEmployee" class="float-right">
+                <a href="/addVehicle" class="float-right">
                     <button class="btn btn-ok white">
                         Add Vehicle
                     </button>
@@ -35,6 +63,7 @@ function vehicleList() {
 
 
             <table class="table table-striped table-primary">
+            <thead class="thead-dark">
                 <tr>
                     <th>Vehicle Reg No</th>
                     <th>Brand</th>
@@ -44,10 +73,47 @@ function vehicleList() {
                     <th>Action</th>
                 </tr>
                 {/* {this.generateTableRows(EmployeeList)} */}
+                </thead>
+                <tbody>
+                    {vehicles.map((vehicles)=>{
+
+                        return(
+                            <tr>
+                               {/* <Link to = {} /> */}
+                               <td>{vehicles.VehicleRegNo}</td>
+                               <td>{vehicles.VehicleBrand}</td>
+                               <td>{vehicles.VehicleModel}</td>
+                               <td>{vehicles.VehicleType}</td>
+                               <td>{vehicles.RatePDay}</td>
+                               <td>
+
+                                        <Link class="btn btn-danger btn-sm" 
+                                        
+                                                // to={`/updateRental/${rentals.id}`}
+                                        
+                                        role="button"> Update</Link>
+                                        <Link class="btn btn-light btn-sm"
+                                        
+                                                // onClick={() => deleteRental(rentals.id)} 
+                                                
+                                                
+                                                role="button"> Remove</Link>
+
+                               </td>
+
+
+                            </tr>
+                        );
+
+
+                    })}
+                  
+
+                </tbody>
             </table>
         </div>
     </div>
     )
 }
 
-export default vehicleList
+export default VehicleList;
