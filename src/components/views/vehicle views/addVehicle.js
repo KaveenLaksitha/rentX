@@ -27,6 +27,15 @@ function AddVehicle() {
     const[vehDoc, setVehDoc] = useState("");
 
     const[RegNoErr, setRegNoErr] = useState("");
+    const[TeleErr, setTeleNoErr] = useState("");
+
+    // const[File, setFile] = useState('');
+    // const [fileName, setfileName] = useState('');
+    // const [uploadFiles, setUploadFile] = useState[{}];
+
+
+    
+
     
 
     function sendData(e) {
@@ -34,8 +43,9 @@ function AddVehicle() {
         e.preventDefault();
 
         const isValid = formValidation();
+        const teleValid = TeleValidation();
 
-        if(isValid){
+        if(isValid && teleValid){
 
             
 
@@ -70,7 +80,7 @@ function AddVehicle() {
         axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
 
         .then(() => {
-            alert("Vehicle added")
+            alert("Vehicle added Successfully !!")
 
         }).catch((err) => {
             alert(err)
@@ -85,17 +95,46 @@ function AddVehicle() {
         let isValid = true; //setting flag
 
 
-        if(VehicleRegNo.trim().length > 8 && VehicleRegNo.trim().length <8 ){
+        if(VehicleRegNo.trim().length > 8){
 
             RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
             isValid = false;
+        }else if(VehicleRegNo.trim().length < 8){
+            RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
+            isValid = false;
         }
-
+        
+        
         setRegNoErr(RegNoErr);//update error objects
         return isValid;
 
 
     }
+
+
+    const TeleValidation =() =>{//validate function
+
+        const TeleErr ={}; //State
+        let teleValid = true; //setting flag
+
+
+        if( TeleNo.trim().length > 10 ){
+
+            TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+            teleValid = false;
+        }else if(TeleNo.trim().length < 10){
+            TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+            teleValid = false;
+        }
+        
+        alert("**Invalid Telephone Number");
+        setTeleNoErr(TeleErr);//update error objects
+        return teleValid;
+
+
+    }
+
+    
 
 
 
@@ -124,7 +163,7 @@ function AddVehicle() {
                 <div class="tab-content tab-content-V  col-12" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         
-                            <div class="container border-top ">
+                            <div class="container border-top">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                         <h3 className="topic-V text-left mt-4 mb-4">Owner Details</h3>
@@ -157,19 +196,22 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="subject">Telephone No</label>
-                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input  type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setTeleNo(e.target.value); // assign value
                                                      }}
-                                            
-                                                
+
                                                 />
+
+                                                    {Object.keys(TeleErr).map((key)=>{
+                                                        return<div style={{color :"red"}}>{TeleErr[key]}</div>
+                                                    })}
                                             </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">Address</label>
-                                                <input   type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" 
+                                                <input  type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" 
                                                 
                                                 
                                                 onChange={(e) => {
@@ -181,7 +223,7 @@ function AddVehicle() {
                                             
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">E-mail</label>
-                                                <input  type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
+                                                <input type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
                                                 
                                                 onChange={(e) => {
                                                     setEmail(e.target.value); // assign value
@@ -190,9 +232,8 @@ function AddVehicle() {
                                                 />
                                             </div>
                                             <div class="form-group ">
-                                                <label class="form-label" for="subject">Date</label>
-                                                <input  type="Date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"
-                                                
+                                                <label class="form-label" for="date">Date</label>
+                                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"                                                
                                                 onChange={(e) => {
                                                     setDate(e.target.value); // assign value
                                                      }}
@@ -250,7 +291,7 @@ function AddVehicle() {
 
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container">
+                        <div class="container border-top">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                     <h3 className="topic-V text-left mt-4 mb-4">Vehicle Details</h3>
@@ -262,7 +303,7 @@ function AddVehicle() {
                                     <div className="row">
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="name">Vehicle Brand</label>
-                                            <input type="text" class="form-control formInput" id="VehicleBrand" name="VehicleBrand" placeholder="eg : Toyota , Nissan" tabindex="1" required
+                                            <input type="text" class="form-control formInput" id="VehicleBrand" name="VehicleBrand" placeholder="eg : Toyota , Nissan" tabindex="1" 
 
                                                                 onChange={(e) => {
                                                                     setVehicleVBrand(e.target.value); // assign value
@@ -273,7 +314,7 @@ function AddVehicle() {
                                         </div>
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="email">Vehicle Modal</label>
-                                            <input type="text" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" required
+                                            <input type="text" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" 
                                             
                                             onChange={(e) => {
                                                 setVehicleModel(e.target.value); // assign value
@@ -303,7 +344,7 @@ function AddVehicle() {
                                     <div className="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="RegNo">Vehicle Registration Number  </label>
-                                                <input required type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="ABC-XXXX" tabindex="2" required 
+                                                <input  type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="ABC-XXXX" tabindex="2"  
                                                 
                                                     onChange={(e) => {
                                                         setRegNo(e.target.value); // assign value
@@ -320,7 +361,7 @@ function AddVehicle() {
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Current Mileage (Km) </label>
-                                                <input  required type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
 
                                                             onChange={(e) => {
                                                                 setMileage(e.target.value); // assign value
@@ -343,15 +384,15 @@ function AddVehicle() {
                                                 }}
                                                 >
                                                     <option id="choose2">Choose</option>
-                                                    <option value="InsF">Full Insurance</option>
-                                                    <option value="InsT">Third-party Insurance</option>
+                                                    <option value="Full Insurance">Full Insurance</option>
+                                                    <option value="Third-party Insurance">Third-party Insurance</option>
                                                     
                                                 </select>
                                 
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Insurance Company Name </label>
-                                                <input required type="text" class="form-control formInput" id="InsCom" name="InsCom" placeholder="Insurance Company Name" tabindex="2" required
+                                                <input  type="text" class="form-control formInput" id="InsCom" name="InsCom" placeholder="Insurance Company Name" tabindex="2" 
 
                                                             onChange={(e) => {
                                                                 setComName(e.target.value);
@@ -391,13 +432,13 @@ function AddVehicle() {
                                                 }}
                                                 >
                                                     <option id="choose4">Choose </option>
-                                                    <option value="FAC">Full - AC </option>
-                                                    <option value="NAC">Non - AC </option>
+                                                    <option value="Full - AC">Full - AC </option>
+                                                    <option value="Non - AC">Non - AC </option>
                                             </select>
                                         </div>
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="subject">Number of seats </label>
-                                            <input type="text" class="form-control formInput" id="seat" name="seat"  placeholder=" Number of seats" tabindex="2" required 
+                                            <input type="text" class="form-control formInput" id="seat" name="seat"  placeholder=" Number of seats" tabindex="2"  
                                             
                                             onChange={(e) => {
                                                 setNoOfSeats(e.target.value);
@@ -424,7 +465,7 @@ function AddVehicle() {
                                                     <label class="form-label-V mt-2" for="RegNo">Rs </label>
                                                 </div>
                                                 <div class="col-10">
-                                                    <input required type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="0.00" tabindex="2" 
+                                                    <input  type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="0.00" tabindex="2" 
                                                         
                                                         onChange={(e) => {
                                                             setRatePDay(e.target.value);
@@ -438,7 +479,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Years of Rental </label>
-                                                <input  required type="text" class="form-control formInput" id="NoYears" name="NoYears" placeholder="Years of Rental" tabindex="3"
+                                                <input   type="text" class="form-control formInput" id="NoYears" name="NoYears" placeholder="Years of Rental" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setYearsRent(e.target.value);
