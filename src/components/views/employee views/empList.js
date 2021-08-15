@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
 import { getAllEmployeesService } from "../../services/employeeService";
 
-import TestModal from "./viewEmployee";
+import ViewEmpModal from "./modals/viewEmployee";
+import DeleteModal from "./modals/deleteEmployee"
 
 export default function EmpList() {
     const [empList, setEmp] = useState([]);
+
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+
+
+    const [modalDataDelete, setModalDataDelete] = useState([]);
+    const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
         getAllEmployeesService().then((data) => {
@@ -19,7 +26,15 @@ export default function EmpList() {
         )
     }, []);
 
-    const openModal = (emp) => {
+    useEffect(() => {
+
+        console.log("component did update", modalDataDelete)
+
+    }, [modalDataDelete]);
+
+
+
+    const openModalView = (emp) => {
         setData(emp);
         handleViewOnClick();
     }
@@ -30,22 +45,15 @@ export default function EmpList() {
         setModalShow(true);
     }
 
+    const openModalDelete = (data) => {
+        setModalDataDelete(data);
+        setModalDeleteConfirm(true);
+    }
+
+
 
     return (
         <div className="page-component-body " >
-
-            <Modal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <TestModal
-                    data={modalData}
-                    onHide={() => setModalShow(false)}
-                />
-            </Modal>
 
             <div className="table-emp ">
                 <div class="row table-head">
@@ -90,7 +98,7 @@ export default function EmpList() {
                             return (
 
                                 <tr>
-                                    <td onClick={() => openModal(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    <td onClick={() => openModalView(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details">
                                         {employee.fName + " " + employee.lName}
                                     </td>
                                     <td>{employee.nic}</td>
@@ -105,8 +113,9 @@ export default function EmpList() {
                                             update
                                         </button>
                                         <button
+                                            id="btnDelete"
                                             class="btn btn-danger btn-sm"
-                                        // onClick={() => this.handleDeleteOnClick(employee.userId)}
+                                            onClick={() => openModalDelete(employee)}
                                         >
                                             delete
                                         </button>
@@ -117,6 +126,61 @@ export default function EmpList() {
                     </tbody>
                 </table>
             </div>
+
+            {/* modal for view details of selected employee */}
+            <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <ViewEmpModal
+                    data={modalData}
+                    onHide={() => setModalShow(false)}
+                />
+            </Modal>
+
+            {/* modal for delete employee record*/}
+            <Modal show={modalDeleteConfirm} size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Are you want to delete this item ?</p>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
+                            Confirm
+                        </button>
+                    </div>
+                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
+                        <button type="reset" className="btn btn-reset">
+                            cancel
+                        </button>
+                    </div>
+                </Modal.Footer>
+            </Modal>
+
+            {/* open delete form */}
+            <Modal
+                show={modalDelete}
+                onHide={() => setModalDelete(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <DeleteModal
+                    data={modalDataDelete}
+                    onHide={() => setModalDelete(false)}
+                />
+            </Modal>
+
         </div >
     );
 }
