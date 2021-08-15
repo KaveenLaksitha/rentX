@@ -11,7 +11,6 @@ export const addEmployeeService = async (employeePayload) => {
       ok: true,
     };
   } catch (error) {
-    //console.log(error.response.data.status)
     return {
       ok: false, err: error.response.data.status
     };
@@ -51,7 +50,6 @@ export const getAllEmployeesService = async () => {
   try {
     const response = await axios.get(`${HOST}/api/employee`);
     console.log("response came", response);
-    // console.log(response.data, "res data");
     return {
       ok: true,
       data: response.data.data,
@@ -63,15 +61,38 @@ export const getAllEmployeesService = async () => {
   }
 };
 
-export const deleteEmployeeService = async (userId) => {
+export const deleteEmployeeService = async (data, reason) => {
+
+  console.log(data, "<<<<<<<<<<<<<<<<deleteeeeeeee");
+  console.log(reason, "<<<<<<<<<<<<<<<<deleteeeeeeee reasonnnnnn");
+
   try {
-    await axios.delete(`${HOST}/api/employee/${userId}`);
+    await axios.post(`${HOST}/api/resignation`, { reason, ...data });
+    const response = await axios.post(`${HOST}/api/removeEmployee`, data);
+    if (response) {
+      return {
+        ok: true,
+      };
+    }
+  } catch (error) {
+    return {
+      ok: false, err: error.response.data.status
+    };
+  }
+
+};
+
+//for make inquiry
+export const addInquiry = async (data) => {
+  console.log(data, "<<<<<<<<<<<<<<<<<<<<<<<<");
+  try {
+    await axios.post(`${HOST}/api/inquiry`, data);
     return {
       ok: true,
     };
   } catch (error) {
     return {
-      ok: false,
+      ok: false, err: error.response.data.status
     };
   }
 };
