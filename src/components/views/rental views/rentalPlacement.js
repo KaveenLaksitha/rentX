@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import DatePicker from 'react-datetime';
@@ -7,6 +7,96 @@ import 'react-datetime/css/react-datetime.css';
 
 
 function RentalPlacement() {
+
+    const [CarList, setCarList] = useState([]);
+    const [BusList, setBusList] = useState([]);
+    const [VanList, setVanList] = useState([]);
+
+    useEffect(() => {
+
+        function getCarList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Car").then((res) => {
+                setCarList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        function getBusList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Bus").then((res) => {
+                setBusList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        function getVanList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Van").then((res) => {
+                setVanList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        getCarList();
+        getBusList();
+        getVanList();
+
+    }, [])
+
+
+    function populate() {
+        var Stringsplit1 = CarList.split(',')
+        var Stringsplit2 = VanList.split(",")
+        var Stringsplit3 = BusList.split(",")
+
+        var s1 = document.getElementById('vehicleType')
+        var s2 = document.getElementById('vehicleModel')
+
+        var arry1 = [Stringsplit1.length];
+
+        for (var a = 0; a < Stringsplit1.length; a++) {
+            arry1[a] = Stringsplit1[a].toLowerCase() + "|" + Stringsplit1[a];
+        }
+        arry1.unshift("choose|Choose");
+        //alert(arry1)
+
+        var arry2 = [Stringsplit2.length];
+
+        for (var a = 0; a < Stringsplit2.length; a++) {
+            arry2[a] = Stringsplit2[a].toLowerCase() + "|" + Stringsplit2[a];
+        }
+        arry2.unshift("choose|Choose");
+        //alert(arry2)
+
+        var arry3 = [Stringsplit3.length];
+
+        for (var a = 0; a < Stringsplit3.length; a++) {
+            arry3[a] = Stringsplit3[a].toLowerCase() + "|" + Stringsplit3[a];
+        }
+        arry3.unshift("choose|Choose");
+        //alert(arry3)
+
+        s2.innerjs = " ";
+        if (s1.value == "Car") {
+            var optionArray = arry1;
+        } else if (s1.value == "Van") {
+            var optionArray = arry2;
+        } else if (s1.value == "Bus") {
+            var optionArray = arry3;
+        }
+
+        for (var option in optionArray) {
+            var pair = optionArray[option].split('|');
+            var newoption = document.createElement("option")
+            newoption.value = pair[0];
+            newoption.innerHTML = pair[1];
+            s2.options.add(newoption);
+
+
+        }
+
+    }
 
     //disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -40,7 +130,9 @@ function RentalPlacement() {
     const [NICcopy, setNICcopy] = useState("");
 
     const [rentals, setRentals] = useState([]);
-    const [exists, setExists] = useState("");
+    const [perDayCharge, setPerDayCharge] = useState("");
+
+    const [PayErr, setPayErr] = useState("");
 
     function getDateDiff() {
         var admission = moment(from, 'DD-MM-YYYY');
@@ -51,17 +143,28 @@ function RentalPlacement() {
 
 
     function temporarilysendData(e) {
+
         e.preventDefault();//to prevent the default submission by submit button
 
-        document.getElementById('rentalStatus').value = status;
-        document.getElementById('rentalDuration').value = getDateDiff();
-        var val3 = document.getElementById('perDayCharge').value;
-        val3 = 5000;
-        document.getElementById('addPrice').value = addPrice;
-        document.getElementById('tax').value = 1500;
-        document.getElementById('subRent').value = (((getDateDiff() * val3) + Number(addPrice) + Number(document.getElementById('tax').value)));
-        document.getElementById('advancePay').value = advPayment;
-        document.getElementById('finalPrice').value = ((Number(document.getElementById('subRent').value) - Number(advPayment)));
+        //from and to is not validated since it is originally set to current date
+        if ((status == "" || payment == "" || vehicleType == "" || model == "" || advPayment == "")) {
+            alert("Please fill the form details ")
+        } else {
+            alert(vehicleType, model)
+            getRentChargePerDay();
+            alert(perDayCharge);
+            document.getElementById('rentalStatus').value = status;
+            document.getElementById('rentalDuration').value = getDateDiff();
+            var val3 = document.getElementById('perDayCharge').value = perDayCharge;
+            document.getElementById('addPrice').value = addPrice;
+            document.getElementById('tax').value = 1500;
+            document.getElementById('subRent').value = (((getDateDiff() * val3) + Number(addPrice) + Number(document.getElementById('tax').value)));
+            document.getElementById('advancePay').value = advPayment;
+            document.getElementById('finalPrice').value = ((Number(document.getElementById('subRent').value) - Number(advPayment)));
+            document.getElementById('totalRent').value = document.getElementById('subRent').value
+        }
+
+
 
     }
 
@@ -72,11 +175,16 @@ function RentalPlacement() {
 
     function sendData(e) {
         e.preventDefault();//to prevent the default submission by submit button
+
+
+
         checkForPendingCustomer();
         //alert(rentals.length);
 
         if (rentals.length !== 0) {
             alert('Customer already has unsettled rentals')
+            history.push("/rentalList")
+
         } else if (rentals.length === 0) {
             const answer = window.confirm("Are you sure you want to confirm submission?");
             if (answer) {
@@ -99,6 +207,7 @@ function RentalPlacement() {
                 })
             }
         }
+
     }
 
     function checks() {
@@ -119,15 +228,26 @@ function RentalPlacement() {
         checkUserExistance();
     }
 
-
+    function getRentChargePerDay() {
+        function getRent() {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
+                setPerDayCharge(res.data)
+                console.log(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+        getRent();
+    }
 
     return (
 
 
         <div className="page-component-body">
             <div class="container input-main-form ">
-                <h2>Rental Placement</h2>
                 <br></br>
+                <h2>Rental Placement</h2>
+
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Rental Details</a>
@@ -174,8 +294,8 @@ function RentalPlacement() {
                                                     required
                                                     onChange={(event) => { setStatus(event.target.value); }}>
                                                     <option id="pending" >choose...</option>
-                                                    <option id="pending" >pending</option>
-                                                    <option id="completed">completed</option>
+                                                    <option id="pending" >Pending</option>
+                                                    <option id="completed">Completed</option>
                                                 </select>
                                             </div>
                                             <div class="col-3" >
@@ -186,8 +306,8 @@ function RentalPlacement() {
                                                     required
                                                     onChange={(event) => { setPayment(event.target.value); }}>
                                                     <option id="pending" >choose...</option>
-                                                    <option id="cash" >cash</option>
-                                                    <option id="card">card</option>
+                                                    <option id="cash" >Cash payment</option>
+                                                    <option id="card">Card payment</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -208,12 +328,13 @@ function RentalPlacement() {
                                                     <select class="form-select" class="form-control"
                                                         name="vehicleType"
                                                         id="vehicleType"
+                                                        onChange={e => { setVehicleType(e.target.value); populate() }}
                                                         required
-                                                        onChange={(event) => { setVehicleType(event.target.value); }}>
-                                                        <option id="choose3" >choose</option>
-                                                        <option id="car" >car</option>
-                                                        <option id="van">van</option>
-                                                        <option id="bus">bus</option>
+                                                    >
+                                                        <option  >choose</option>
+                                                        <option value="Car" >Car</option>
+                                                        <option value="Van">Van</option>
+                                                        <option value="Bus">Bus</option>
                                                     </select>
                                                 </div>
 
@@ -226,9 +347,7 @@ function RentalPlacement() {
                                                         id="vehicleModel"
                                                         required
                                                         onChange={(event) => { setModel(event.target.value); }}>
-                                                        <option id="choose1" >choose</option>
-                                                        <option id="customized" >cash</option>
-                                                        <option id="ready-made">card</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -256,30 +375,54 @@ function RentalPlacement() {
                                 <h6 className="customersize2">Payment Details</h6>
 
                                 <div class="form-group">
-                                    <div class="col-6" >
-                                        <label class="form-label-emp" for="additionalPrice">Additional Price</label>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md"  >
+                                            <div class="col-6">
+                                                <br></br>
+                                                <label class="form-label-emp" for="additionalPrice">Additional Price</label>
 
-                                        <input type="number" class="form-control formInput"
-                                            id="additionalPrice"
-                                            name="additionalPrice"
-                                            placeholder="Additional Price(Rs: 5000.00)"
-                                            tabindex="3"
-                                            onChange={(event) => { setAddPrice(event.target.value); }}
-                                            max="10000" />
+                                                <input type="number" class="form-control formInput"
+                                                    id="additionalPrice"
+                                                    name="additionalPrice"
+                                                    placeholder="Additional Price(Rs: 5000.00)"
+                                                    tabindex="3"
+                                                    onChange={(event) => { setAddPrice(event.target.value); }}
+                                                    max="10000"
+                                                    min="0" />
+                                            </div>
+                                            <div class="col-6" >
+                                                <br></br>
+                                                <label class="form-label-emp" for="advPayment">Advanced Payment</label>
+                                                <input type="number" class="form-control formInput"
+                                                    id="advPayment"
+                                                    name="advPayment"
+                                                    placeholder="Advanced Payment(Rs: 3000.00)"
+                                                    tabindex="3"
+                                                    min="0"
+                                                    onChange={(event) => { setAdvPayment(event.target.value); }}
+                                                    onFocus={getRentChargePerDay} />
+                                            </div>
+
+                                        </div>
                                     </div>
 
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md"  >
+                                            <div class="col-6">
+                                                <br></br>
+                                                <label class="form-label-emp" for="totalRent">Rental Charge</label>
 
-                                    <div class="col-6" >
-                                        <br></br>
-                                        <label class="form-label-emp" for="advPayment">Advanced Payment</label>
-                                        <input type="number" class="form-control formInput"
-                                            id="advPayment"
-                                            name="advPayment"
-                                            placeholder="Advanced Payment(Rs: 3000.00)"
-                                            tabindex="3"
-                                            onChange={(event) => { setAdvPayment(event.target.value); }} />
+                                                <input type="number" class="form-control formInput"
+                                                    id="totalRent"
+                                                    name="totalRent"
+                                                    placeholder="TotalRent(Rs: 5000.00)"
+                                                    tabindex="3"
+                                                    onClickCapture={(event) => { setFinalPrice(event.target.value); }}
+                                                    max="10000000"
+                                                    min="0" />
+                                            </div>
+                                        </div>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -287,6 +430,7 @@ function RentalPlacement() {
 
                                 <div className="col py-3 text-center">
                                     <button type="submit" className="btn btn-ok" >SUMMARY</button>
+
                                 </div>
                                 <div className="col py-3 text-center">
                                     <button type="reset" className="btn btn-reset" >RESET</button>
@@ -302,6 +446,7 @@ function RentalPlacement() {
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
                                     <form id="contact-form" class="form" role="form" onSubmit={sendData}>
                                         <div class="form-group">
                                             <label class="form-label" for="cname">Customer Name</label>
@@ -360,7 +505,7 @@ function RentalPlacement() {
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label class="form-label" for="form-control formInput">NIC Soft Copy</label>
+                                                    <label class="form-label-emp" for="form-control formInput">NIC Upload</label>
                                                     <input type="file" class="form-control formInput"
                                                         id="exampleFormControlFile1"
                                                         name="nicSoftCopy"
@@ -401,7 +546,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="rentalStatus">Rental Status : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="rentalStatus" />
+                            <input type="text" class="form-control" id="rentalStatus" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -409,7 +554,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="rentalDuration" >Rental Duration : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="rentalDuration" />
+                            <input type="text" class="form-control" id="rentalDuration" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -417,7 +562,10 @@ function RentalPlacement() {
                             <label class="form-label-h" for="perDayCharge">Rental Per Day : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="perDayCharge" />
+                            <input type="text" class="form-control"
+                                id="perDayCharge"
+                                name="perDayCharge"
+                                readOnly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -425,7 +573,8 @@ function RentalPlacement() {
                             <label class="form-label-h" for="additionalPrice">Additional Price : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="addPrice" />
+                            <input type="text" class="form-control" id="addPrice"
+                                readOnly />
                         </div>
                         <hr></hr>
                     </div>
@@ -437,7 +586,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="tax">Tax : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="tax" />
+                            <input type="text" class="form-control" id="tax" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -445,7 +594,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="subRent">Sub Rental Price : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="subRent" onFocus={(event) => { setFinalPrice(event.target.value); }} />
+                            <input type="text" class="form-control" id="subRent" readOnly />
                         </div>
                         <hr></hr>
                     </div>
@@ -456,7 +605,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="advancePay">Advanced Payment : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="advancePay" />
+                            <input type="text" class="form-control" id="advancePay" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -464,7 +613,7 @@ function RentalPlacement() {
                             <label class="form-label-h" for="finalPay">Final Rental Price : </label>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="finalPrice"
+                            <input type="text" class="form-control" id="finalPrice" readOnly
                             />
                         </div>
                     </div>

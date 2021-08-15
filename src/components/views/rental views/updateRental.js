@@ -67,6 +67,9 @@ function UpdateRental() {
         document.getElementById('remPayment').value = calculateRemainingPayment();
     }
 
+    const Days = getDateDiff();
+    const penaltyCharges = calculatePenaltyCost();
+    const remainder = calculateRemainingPayment();
 
     const onSubmit = async e => {
         e.preventDefault();//to prevent the default submission by submit button
@@ -74,7 +77,7 @@ function UpdateRental() {
         const answer = window.confirm("Are you sure you want to update details?");
         if (answer) {
 
-            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
+            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penaltyDays, penaltyCharges, remainder, returnDate }
 
             await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
                 alert("Rental Record successfully Updated");
@@ -82,7 +85,9 @@ function UpdateRental() {
             }).catch((err) => {
                 alert(err.response.data.error);
             })
-            history.push("/rentalList")
+            history.push(
+                '/rentalList',
+            )
 
         } else {
 
@@ -107,6 +112,10 @@ function UpdateRental() {
             setCustomerAdd(res.data.rental.customerAdd);
             setContactNo(res.data.rental.contactNo);
             setNICcopy(res.data.rental.NICcopy);
+            setPenaltyDays(res.data.rental.penaltyDays);
+            setRemaining(res.data.rental.lastPaidAmount);
+            setReturnDate(res.data.rental.returnDate);
+            setPenalty(res.data.rental.penaltyCharges);
         }).catch((err) => {
             alert(err.response.data.error);
         })
@@ -116,8 +125,6 @@ function UpdateRental() {
     function refreshPage() {
         window.location.reload();
     }
-
-
 
     return (
         <div className="page-component-body">
@@ -192,7 +199,6 @@ function UpdateRental() {
                                                     />
                                                 </div>
 
-
                                                 <div className="form-group col-md-6 ">
                                                     <label class="form-label" for="cNIC">Customer NIC:</label>
                                                     <input
@@ -209,11 +215,6 @@ function UpdateRental() {
                                                 </div>
 
                                             </div>
-
-
-
-
-
 
                                         </div>
                                     </div>
@@ -250,8 +251,8 @@ function UpdateRental() {
                                                 value={moment(from).format('MM/DD/YYYY')}
                                                 onChange={(e) => { setTo(e); }}
                                                 timeFormat={false}
-                                                required
-                                                disabled
+
+                                                readonly="readonly"
                                             />
                                         </div>
                                         <div class="col-4" >
@@ -262,12 +263,10 @@ function UpdateRental() {
                                                 value={moment(to).format('MM/DD/YYYY')}
                                                 onChange={(e) => { setTo(e); }}
                                                 timeFormat={false}
-                                                required
-                                                disabled
+                                                readonly="readonly"
                                             />
                                         </div>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -281,6 +280,7 @@ function UpdateRental() {
                                             <label for="returnDate" class="form-label-emp">Return Date</label>
                                             <DatePicker required id="returnDate"
                                                 name="returnDate"
+                                                value={moment(returnDate).format('MM/DD/YYYY')}
                                                 onChange={(e) => { setReturnDate(e); }}
                                                 timeFormat={false}
                                                 isValidDate={disablePastDt}
@@ -321,6 +321,10 @@ function UpdateRental() {
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="0"
+                                                value={penaltyDays}
+                                                onFocus={(e) => {
+                                                    setPenaltyDays(e.target.value);
+                                                }}
 
                                             />
                                         </div>
@@ -333,6 +337,7 @@ function UpdateRental() {
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="2500.00"
+                                                value={penalty}
                                                 onChange={(e) => {
                                                     setPenalty(e.target.value);
                                                 }}
@@ -371,13 +376,12 @@ function UpdateRental() {
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="13250.00"
-
+                                                value={Number(Remaining)}
                                                 onChange={(e) => {
                                                     setRemaining(e.target.value);
                                                 }}
                                             />
                                         </div>
-
 
                                     </div>
                                 </div>

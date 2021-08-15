@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import moment from 'moment';
 import TestModal from "./viewRental";
@@ -12,6 +12,7 @@ function RentalList() {
     const [rentalList, setRentalList] = useState([]);
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+
 
     useEffect(() => {
 
@@ -158,7 +159,6 @@ function RentalList() {
                 </div>
 
 
-
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -198,6 +198,9 @@ function RentalList() {
                     </tbody>
                 </table>
             </div>
+
+
+
         </div >
     )
 }

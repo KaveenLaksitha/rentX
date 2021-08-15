@@ -13,7 +13,8 @@ import addVehicle from "./views/vehicle views/addVehicle";
 import empList from "./views/employee views/empList";
 import vehicleList from "./views/vehicle views/vehicleList";
 import updateVehicle from "./views/vehicle views/updateVehicle";
-import makeInquiry from "./views/employee views/makeInquiry"
+import makeInquiry from "./views/employee views/makeInquiry";
+
 
 import Footer from "./Footer";
 
