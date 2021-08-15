@@ -82,6 +82,7 @@ function RentalList() {
     }
 
 
+
     const deleteRental = async id => {
 
         const answer = window.confirm("Are you sure you want to permenantly delete?");
