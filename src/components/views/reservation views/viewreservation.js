@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import TestModal from "./reservationview";
 import { Modal, Button } from "react-bootstrap";
+import { useParams} from "react-router";
 
 function Viewreservation() {
 
+const { RID } = useParams();
 
     const [reservations, setReservations] = useState([]);
     const [modalData, setData] = useState([]);
@@ -50,7 +52,7 @@ function Viewreservation() {
         }
     }, [])*/
 
-    /*const deleteOrder = async orderId => {
+    const deleteReservation = async reservationid => {
 
 
 
@@ -58,23 +60,12 @@ function Viewreservation() {
 
         if (answer) {
 
-            await axios.delete(`http://localhost:8060/orderItem/deleteOrderItem/${orderId}`)
-            alert("OrderItems successfully deleted");
+            await axios.delete(`http://localhost:4000/reservations/deleteReservation/${reservationid}`)
+            alert("Reservation successfully deleted");
 
-            await axios.delete(`http://localhost:8060/order/deleteOrder/${orderId}`)
-            alert("Order successfully deleted");
-
-            function getOrders() {
-                axios.get("http://localhost:8060/order/displayOrders").then((res) => {
-                    setOrders(res.data.reverse());
-                }).catch((error) => {
-                    alert(error.message);
-                })
-
-            }
-            getOrders();
         }
-    }*/
+            
+    }
 
 
     /*function searchOrders(e) {
@@ -173,7 +164,7 @@ function Viewreservation() {
                                 {/*<button type="button" class="btn btn-light btn-sm">Update</button>*/}
                                     <Link class="btn btn-light btn-sm" to={`/updateReservation/${reservations.reservationid}`} role="button">Update</Link>
 
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-danger btn-sm" onClick={() => deleteReservation(reservations.reservationid)}>Delete</button>
                     </div></td>
 
                 </tr>

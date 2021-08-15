@@ -36,6 +36,8 @@ function Reservation() {
     const[totalreservation,settotalreservation] = useState("");
     const[status,setstatus] = useState("");
 
+    //const[ResNoErr,setRegNoErr] = useState("");
+
     function sendData(e){
         e.preventDefault();
 
@@ -44,7 +46,8 @@ function Reservation() {
         const finalpay = (totalreservation - advancedpayment);
 
         alert("Your ramaining balance is " + `${finalpay}`);
-
+        //const isValid = formValidation();
+        //if(isValid){
         const answer = window.confirm("Are you sure you want to confirm submission?");
         if (answer) {
           const newReservation = { customername, contactnumber, nic,customernic, customeraddress, packagename,eventtype, from, to, discount, advancedpayment, totalreservation, status}
@@ -61,9 +64,33 @@ function Reservation() {
 
     
           })
-        }
+        }//}
         
       }
+
+      //const [vehicles, setVehicles] = useState([]);
+
+     { /*useEffect(() => {
+          axios.get("http://localhost:4000/vehicle/view").then((res) => {
+              console.log(res.data);
+              setVehicles(res.data);
+          }).catch((error) => {
+              alert(error.message);
+          })
+      }, []);*/}
+
+      {/*const formValidation =() =>{
+          const ResNoErr ={};
+          let isValid = true;
+
+          if(contactnumber.trim().length>10 && contactnumber.trim().length <10){
+              ResNoErr.InValidRegNo = "* Invalid Number ";
+              isValid = false;
+          }
+
+          setRegNoErr(ResNoErr);
+          return isValid;
+      }*/}
 
       function addtemporaryilyData(e) {
             e.preventDefault();
@@ -75,6 +102,8 @@ function Reservation() {
             var discharge = moment(to, 'DD-MM-YYYY');
             const diffDuration = discharge.diff(admission, 'days');
             document.getElementById('dateRange').value = diffDuration;
+
+
 
         alert("Package Created");   
       }
@@ -89,14 +118,9 @@ function Reservation() {
          
         }
     }
+
     
-    /*function showsecond(){
-        if(document.getElementById("entry").click.onDoubleClick) {
-            document.getElementById("hide111").style.display = "block";
-            document.getElementById("hide222").style.display = "block";
-            document.getElementById("hide333").style.display = "block";
-        }*/
-    
+     
     return (
         <div className="page-component-body ">
             
@@ -109,7 +133,7 @@ function Reservation() {
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Reservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Package</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" >Package</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -150,7 +174,7 @@ function Reservation() {
                                                     class="form-control formInput" 
                                                     id="customerNic" 
                                                     name="customerNic" 
-                                                    placeholder="Customer NIC" 
+                                                    placeholder="Customer NIC - 985732984V" 
                                                     tabindex="1" 
                                                     required 
                                                     //pattern="V[0-9]{10}"
@@ -159,6 +183,8 @@ function Reservation() {
                                                             setcustomernic(event.target.value);
                                                         }
                                                     }/>
+
+                                                    
                                             </div>
                                             </div>
                                             <div class="row">
@@ -178,6 +204,9 @@ function Reservation() {
                                                             setcontactnumber(event.target.value);
                                                         }
                                                     }/>
+                                                    {/*{Object.keys(ResNoErr).map((key) => {
+                                                        return<div style={{color :"red"}}>{ResNoErr[key]}</div>
+                                                    })}*/}
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="nic">NIC</label>
@@ -419,14 +448,19 @@ function Reservation() {
                                             <div class="form-group col-md-4"  id="hide1">
                                                 <label class="form-label-emp" for="vehicleTypehide1">Vehicle Type</label>
                                                 <select 
-                                                        id="vehicleTypehide1"
+                                                        id="select"
                                                         className="form-control "
-                                                        tabindex="3"                                           
-                                                    >
-                                                        <option value="1">Select</option>
-                                                        <option value="2">Car</option>
-                                                        <option value="3">Van</option>
-                                                        <option value="4">Bus</option>
+                                                        tabindex="3" 
+                                                        //onChange={changeSelectOptionHandler}
+                                                         > 
+                                                        <option >Select</option>                                        
+                                                        <option >Car</option>
+                                                        <option >Van</option>
+                                                        <option >Bus</option>
+                                                        
+                                                       {/* {optionss.map((option) => (
+                                                                <option value={option.value}>{option.label}</option>
+                                                            ))}*/}
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-4"  id="hide2">
@@ -434,12 +468,15 @@ function Reservation() {
                                                 <select
                                                         id="vehicleModelhide1"
                                                         className="form-control "
-                                                        tabindex="4"  >
+                                                        tabindex="4" 
+                                                         >
+                                                
 
                                                         <option id="1">Select</option>
                                                         <option id="2">vitz</option>
                                                         <option id="3">hybrid</option>
                                                         <option id="4">Bus</option>
+
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-2"  id="hide3">
@@ -476,11 +513,16 @@ function Reservation() {
                                                 <select 
                                                         id="vehicleTypehide2"
                                                         className="form-control "
-                                                        tabindex="3"  >
-                                                        <option value="1">Select</option>
-                                                        <option value="2">Car</option>
-                                                        <option value="3">Van</option>
-                                                        <option value="4">Bus</option>
+                                                        tabindex="3" 
+                                                       
+                                                        >
+                                                        {/*{optionss.map((option) => (
+                                                                <option value={option.value}>{option.label}</option>
+                                                            ))}*/}
+                                                        <option >Select</option>
+                                                        <option >Car</option>
+                                                        <option>Van</option>
+                                                        <option >Bus</option>
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-4" style={{ display: "none" }} id="hide22">
@@ -489,10 +531,14 @@ function Reservation() {
                                                         id="vehicleModelhide2"
                                                         className="form-control "
                                                         tabindex="4"  >
-                                                        <option id="1">Select</option>
+                                                        <option>Select</option>
+                                                        <option>vitz</option>
+                                                        <option>hybrid</option>
+                                                        <option>Bus</option>
+                                                        {/*<option id="1">Select</option>
                                                         <option id="2">vitz</option>
                                                         <option id="3">hybrid</option>
-                                                        <option id="4">Bus</option>
+                                                        <option id="4">Bus</option>*/}
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-2" style={{ display: "none" }} id="hide33" >
