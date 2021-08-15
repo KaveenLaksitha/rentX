@@ -35,6 +35,8 @@ import 'react-datetime/css/react-datetime.css';
     const[eventtype,seteventtype] = useState("");
     const[from,setfrom] = useState(moment());
     const[to,setto] = useState(moment());
+    //const[from,setfrom] = useState("");
+    //const[to,setto] = useState("");
     const[discount,setdiscount] = useState("");
     const[advancedpayment,setadvancedpayment] = useState("");
     const[totalreservation,settotalreservation] = useState("");
@@ -159,6 +161,41 @@ import 'react-datetime/css/react-datetime.css';
                                             </div>
                                             
                                             <div class="row">
+                                            
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="from">From</label>
+                                                <input 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="from" 
+                                                    name="from" 
+                                                    placeholder="" 
+                                                    tabindex="5" 
+                                                    required
+                                                    disabled 
+                                                    value={moment(from).format("DD-MMMM-YYYY")}
+                                                    //value={from}
+                                                    timeFormat={false}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setfrom(event) }}/>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="to">To</label>
+                                                <input 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="to" 
+                                                    name="to" 
+                                                    placeholder="" 
+                                                    tabindex="6" 
+                                                    disabled
+                                                    value={moment(to).format("DD-MMMM-YYYY")}
+                                                    //value={to}
+                                                    timeFormat={false}
+                                                    //isValidDate={disableFutureDt}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setto(event) }}/>
+                                            </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="status">Status</label>
                                                 <select
@@ -172,36 +209,6 @@ import 'react-datetime/css/react-datetime.css';
                                                         <option id="select2">Pending</option>
                                                         <option id="select3">Complete</option>
                                                     </select>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker 
-                                                    //type="date" 
-                                                    //class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    required 
-                                                    value={moment(from).format("MM-DD-YYYY")}
-                                                    timeFormat={false}
-                                                    //isValidDate={disablePastDt}
-                                                    onChange={(event) => { setfrom(event) }}/>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    //type="date" 
-                                                    //class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    value={moment(to).format("MM-DD-YYYY")}
-                                                    timeFormat={false}
-                                                    //isValidDate={disableFutureDt}
-                                                    //isValidDate={disablePastDt}
-                                                    onChange={(event) => { setto(event) }}/>
                                             </div>
                                             </div>
                                             <div class="row">
@@ -255,6 +262,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     id="advancedpayment" 
                                                     name="advancedpayment" 
                                                     placeholder="Advanced Payment" 
+                                                    disabled
                                                     tabindex="10" 
                                                     value={advancedpayment}
                                                     onChange={(event) => { setadvancedpayment(event.target.value) }}/>

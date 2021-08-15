@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from 'moment';
-
+import TestModal from "./reservationview";
+import { Modal, Button } from "react-bootstrap";
 
 function Viewreservation() {
 
+
     const [reservations, setReservations] = useState([]);
+    const [modalData, setData] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
 
    
         axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
@@ -16,6 +20,16 @@ function Viewreservation() {
         })
   
 
+    const openModal = (reserve) => {
+        setData(reserve);
+        handleViewOnClick();
+    }
+
+    const handleViewOnClick = () => {
+        console.log("req came for modal");
+        console.log(modalData, "data came for modalllllll");
+        setModalShow(true);
+    }
    
 
      /*useEffect(() => {
@@ -88,6 +102,21 @@ function Viewreservation() {
 
     return (
         <div className="page-component-body">
+
+        <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <TestModal
+                    data={modalData}
+                    onHide={() => setModalShow(false)}
+                />
+            </Modal>
+
+
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
@@ -122,8 +151,7 @@ function Viewreservation() {
                         <th class="text-center">Package Name</th>
                         <th class="text-center">Event Type</th>
                         <th class="text-center">From</th>
-                        <th class="text-center">To</th> 
-                        <th class="text-center">Discount</th>                      
+                        <th class="text-center">To</th>                       
                         <th class="text-center">Total</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
@@ -133,12 +161,11 @@ function Viewreservation() {
                     {reservations.map((reservations) => {  
                          return (        
                              <tr>
-                                    <td class="text-center">{reservations.customername}</td>
+                                    <td class="text-center" onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view reservation">{reservations.customername}</td>
                                     <td class="text-center">{reservations.packagename}</td>
                                     <td class="text-center">{reservations.eventtype}</td>
                                     <td class="text-center">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
                                     <td class="text-center">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
-                                    <td class="text-center">{reservations.discount}</td>
                                     <td class="text-center">{reservations.totalreservation}</td>
                                     <td class="text-center">{reservations.status}</td>
                                     <td class="text-center">
