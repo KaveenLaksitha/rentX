@@ -1,10 +1,16 @@
 import axios from 'axios'
 import React ,{ useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { Modal, Button } from "react-bootstrap";
+
+
+import TestModal from "./viewVehicle";
 
 function VehicleList() {
 
     const [vehicles, setVehicles] = useState([]);
+    const [modalData, setData] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
     
    
     useEffect(() => {
@@ -26,12 +32,43 @@ function VehicleList() {
     }, []);
 
 
+    const openModal = (vehicle) => {
+        setData(vehicle);
+        handleViewOnClick();
+    }
+
+    
+    const handleViewOnClick = () => {
+        console.log("req came for modal");
+        console.log(modalData, "data came for modalllllll");
+        setModalShow(true);
+    }
+
+
+
+
+
 
 
 
     return (
 
         <div className="page-component-body">
+
+            <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <TestModal
+                    data={modalData}
+                    onHide={() => setModalShow(false)}
+                />
+            </Modal>
+
+
         <div className="table-emp">
             <div class="row table-head">
                 <div class="col">
@@ -62,7 +99,7 @@ function VehicleList() {
 
 
 
-            <table class="table table-striped table-primary">
+            <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>Vehicle Reg No</th>
@@ -72,15 +109,17 @@ function VehicleList() {
                     <th>Rate</th>
                     <th>Action</th>
                 </tr>
-                {/* {this.generateTableRows(EmployeeList)} */}
+                
                 </thead>
                 <tbody>
                     {vehicles.map((vehicles)=>{
 
                         return(
                             <tr>
-                               {/* <Link to = {} /> */}
-                               <td>{vehicles.VehicleRegNo}</td>
+                                <td onClick={() => openModal(vehicles)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    {vehicles.VehicleRegNo}
+                                </td>
+                               
                                <td>{vehicles.VehicleBrand}</td>
                                <td>{vehicles.VehicleModel}</td>
                                <td>{vehicles.VehicleType}</td>
