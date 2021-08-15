@@ -12,6 +12,10 @@ function RentalPlacement() {
     const [BusList, setBusList] = useState([]);
     const [VanList, setVanList] = useState([]);
 
+
+    const[MobileErr, setMobileNoErr] = useState("");
+    const[NICErr, setNICErr] = useState("");
+
     useEffect(() => {
 
         function getCarList() {
@@ -186,8 +190,17 @@ function RentalPlacement() {
             history.push("/rentalList")
 
         } else if (rentals.length === 0) {
+
+            const MobileValid = MobileValidation();
+            const NICValid = NICValidation();
+
+            if(MobileValid && NICValid){
             const answer = window.confirm("Are you sure you want to confirm submission?");
             if (answer) {
+
+                
+
+
 
                 const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
@@ -205,10 +218,62 @@ function RentalPlacement() {
                     //alert(err.response.data.errorCode)
 
                 })
+
+                }
             }
         }
 
     }
+
+    const MobileValidation =() =>{//validate function
+
+        const MobileErr ={}; //State
+        let MobileValid = true; //setting flag
+
+
+        if( contactNo.trim().length > 10 ){
+
+            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+            MobileValid = false;
+        }else if(contactNo.trim().length < 10){
+            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+            MobileValid = false;
+        }
+        
+        
+        setMobileNoErr(MobileErr);//update error objects
+        return MobileValid;
+
+
+    }
+
+    const NICValidation =() =>{//validate function
+
+        const NICErr ={}; //State
+        let NICValid = true; //setting flag
+
+
+        if(customerNIC.trim().length > 12 ){
+
+            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+            NICValid = false;
+        }else if(customerNIC.trim().length < 10){
+            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+            NICValid = false;
+        }
+        
+        
+        setNICErr(NICErr);//update error objects
+        return NICValid;
+
+
+    }
+
+
+
+
+
+
 
     function checks() {
         checkForPendingCustomer();
@@ -479,11 +544,15 @@ function RentalPlacement() {
                                                         id="cNumber"
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
-                                                        maxLength="9"
-                                                        minLength="9"
-                                                        pattern="[0-9]{9}"
+                                                        
                                                         onChange={(event) => { setContactNo(event.target.value); }}
                                                         required />
+
+                                                    {Object.keys(MobileErr).map((key)=>{
+                                                        return<div style={{color :"red"}}>{MobileErr[key]}</div>
+                                                    })}
+
+
                                                 </div>
                                             </div>
                                             <div class="col-6" >
@@ -494,10 +563,13 @@ function RentalPlacement() {
                                                         name="cNIC"
                                                         placeholder="National ID(978412351V)"
                                                         onChange={(event) => { setCustomerNIC(event.target.value); }}
-                                                        maxLength="10"
-                                                        minLength="10"
-                                                        pattern="[0-9]{9}V"
+                                                        
                                                         required />
+
+
+                                                    {Object.keys(NICErr).map((key)=>{
+                                                        return<div style={{color :"red"}}>{NICErr[key]}</div>
+                                                    })}
                                                 </div>
                                             </div>
                                         </div>

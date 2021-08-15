@@ -129,7 +129,7 @@ function AddEmployee() {
 
             NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
             NICValid = false;
-        }else if(nic.trim().length < 12){
+        }else if(nic.trim().length < 10){
             NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
             NICValid = false;
         }
