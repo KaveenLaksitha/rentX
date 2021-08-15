@@ -343,6 +343,16 @@ textarea {
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
+.btn-delete {
+  background-color: #db3643;
+  color: white;
+  width: 200px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
 /*hasani*/
 .rental-summary-body {
   position: absolute;
@@ -390,6 +400,14 @@ a.nav-link:link {
   top: 60%;
   position: absolute;
 }
+
+.link {
+  color: black;
+}
+.link :hover{
+  color: black;
+}
+
 
 .reservesize {
   font-size: 14px;

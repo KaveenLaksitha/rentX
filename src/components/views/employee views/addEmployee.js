@@ -122,16 +122,6 @@ function AddEmployee() {
                                         </div>
                                         <div className="col-md-6">
                                             <label className="form-label-emp" for="dob">Date of Birth:</label>
-                                            {/* <input
-                                                required
-                                                id="dob"
-                                                type="date"
-                                                className="form-control "
-                                                name="dob"
-                                                onChange={(e) => {
-                                                    setDOB(e.target.value);
-                                                }}
-                                            /> */}
                                             <DatePicker
                                                 required
                                                 id="dob"

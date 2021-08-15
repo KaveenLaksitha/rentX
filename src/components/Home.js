@@ -13,7 +13,8 @@ import addVehicle from "./views/vehicle views/addVehicle";
 import empList from "./views/employee views/empList";
 import vehicleList from "./views/vehicle views/vehicleList";
 import updateVehicle from "./views/vehicle views/updateVehicle";
-import makeInquiry from "./views/employee views/makeInquiry"
+import makeInquiry from "./views/employee views/makeInquiry";
+
 
 import Footer from "./Footer";
 
@@ -28,7 +29,7 @@ function Home() {
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
-                <Route path="/updateReservation" exact component={updateReservation} />
+                <Route path="/updateReservation/:RID" exact component={updateReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
                 <Route path="/addVehicle" exact component={addVehicle} />
                 <Route path="/empList" exact component={empList} />
