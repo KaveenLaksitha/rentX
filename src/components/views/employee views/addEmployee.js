@@ -32,114 +32,132 @@ function AddEmployee() {
     const [cv, setCV] = useState("");
 
 
-    const[TeleErr, setTeleNoErr] = useState("");
-    const[EmgTeleErr, setEmgTeleNoErr] = useState("");
-    const[NICErr, setNICErr] = useState("");
+    const [TeleErr, setTeleNoErr] = useState("");
+    const [EmgTeleErr, setEmgTeleNoErr] = useState("");
+    const [NICErr, setNICErr] = useState("");
 
 
-     function sendData(e) {
+    function sendData(e) {
         e.preventDefault();
 
         const teleValid = TeleValidation();
         const EmgteleValid = EmgTeleValidation();
         const NICValid = NICValidation();
 
-        if(teleValid && EmgteleValid && NICValid){
+        if (teleValid && EmgteleValid && NICValid) {
 
-        const newEmployee = {
-            fName,
-            lName,
-            email,
-            nic,
-            designation,
-            DOB,
-            gender,
-            maritalStat,
-            currAdd,
-            permAdd,
-            mobileNo,
-            emgContact,
-            empPic,
-            cv,
-        };
+            const newEmployee = {
+                fName,
+                lName,
+                email,
+                nic,
+                designation,
+                DOB,
+                gender,
+                maritalStat,
+                currAdd,
+                permAdd,
+                mobileNo,
+                emgContact,
+                empPic,
+                cv,
+            };
 
-        addEmployeeService(newEmployee).then((response) => {
-            const message = response.ok
-                ? "Employee insertion successful"
-                : response.err;
-            alert(message);
-            //window.location.replace("/empList");
-        });
+            addEmployeeService(newEmployee).then((response) => {
+                const message = response.ok
+                    ? "Employee insertion successful"
+                    : response.err;
+                alert(message);
+                //window.location.replace("/empList");
+            });
         }
-  
+
     }
 
-    const TeleValidation =() =>{//validate function
+    //validate function
+    const TeleValidation = () => {
 
-        const TeleErr ={}; //State
+        const TeleErr = {}; //State
         let teleValid = true; //setting flag
 
 
-        if( mobileNo.trim().length > 10 ){
+        if (mobileNo.trim().length > 10) {
 
-            TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+            TeleErr.InValidTeleNo = " *Invalid Telephone Number"; // error msg
             teleValid = false;
-        }else if(mobileNo.trim().length < 10){
-            TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+        } else if (mobileNo.trim().length < 10) {
+            TeleErr.InValidTeleNo = " *Invalid Telephone Number"; // error msg
             teleValid = false;
         }
-        
-        
+
+
         setTeleNoErr(TeleErr);//update error objects
         return teleValid;
 
 
     }
 
-    
-    const EmgTeleValidation =() =>{//validate function
+    //validate function
+    const EmgTeleValidation = () => {
 
-        const EmgTeleErr ={}; //State
+        const EmgTeleErr = {}; //State
         let EmgteleValid = true; //setting flag
 
 
-        if( emgContact.trim().length > 10 ){
+        if (emgContact.trim().length > 10) {
 
-            EmgTeleErr.InValidTeleNo =" *Invalid  Emergency contact number:"; // error msg
+            EmgTeleErr.InValidTeleNo = " *Invalid  Emergency contact number:"; // error msg
             EmgteleValid = false;
-        }else if(emgContact.trim().length < 10){
-            EmgTeleErr.InValidTeleNo =" *Invalid Emergency contact number:"; // error msg
+        } else if (emgContact.trim().length < 10) {
+            EmgTeleErr.InValidTeleNo = " *Invalid Emergency contact number:"; // error msg
             EmgteleValid = false;
         }
-        
-        
+
+
         setEmgTeleNoErr(EmgTeleErr);//update error objects
         return EmgteleValid;
 
 
     }
 
-    const NICValidation =() =>{//validate function
+    //validate function
+    const NICValidation = () => {
 
-        const NICErr ={}; //State
+        const NICErr = {}; //State
         let NICValid = true; //setting flag
 
 
-        if(nic.trim().length > 12 ){
+        if (nic.trim().length > 12) {
 
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+            NICErr.InValidNIC = " Invalid NIC Number"; // error msg
             NICValid = false;
-        }else if(nic.trim().length < 12){
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+        } else if (nic.trim().length < 10) {
+            NICErr.InValidNIC = " Invalid NIC Number"; // error msg
             NICValid = false;
         }
-        
-        
+
+
         setNICErr(NICErr);//update error objects
         return NICValid;
 
 
     }
+
+    const [isValid, setIsValid] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+
+    const validateEmail = (event) => {
+        const email = event.target.value;
+        if (emailRegex.test(email)) {
+            setIsValid(true);
+            setMessage('Your email looks good!');
+        } else {
+            setIsValid(false);
+            setMessage('Please enter a valid email!');
+        }
+    };
 
 
     return (
@@ -228,9 +246,15 @@ function AddEmployee() {
                                                 className="form-control "
                                                 placeholder="email"
                                                 onChange={(e) => {
-                                                    setEmail(e.target.value);
+                                                    {
+                                                        setEmail(e.target.value);
+                                                        validateEmail(e);
+                                                    }
                                                 }}
                                             />
+                                            <div className={`message ${isValid ? 'success' : 'error'}`}>
+                                                {message}
+                                            </div>
                                         </div>
                                         <div className="form-group col-md-6 mt-2">
                                             <label className="form-label-emp pb-3" for="maritalStatus">Marital Status:</label>
@@ -266,9 +290,9 @@ function AddEmployee() {
                                             />
 
 
-                                                    {Object.keys(NICErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{NICErr[key]}</div>
-                                                    })}
+                                            {Object.keys(NICErr).map((key) => {
+                                                return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                            })}
 
 
                                         </div>
@@ -331,9 +355,9 @@ function AddEmployee() {
                                                     setMobileNo(e.target.value);
                                                 }}
                                             />
-                                                    {Object.keys(TeleErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{TeleErr[key]}</div>
-                                                    })}
+                                            {Object.keys(TeleErr).map((key) => {
+                                                return <div style={{ color: "red" }}>{TeleErr[key]}</div>
+                                            })}
 
                                         </div>
                                         <div className="form-group col-md-6">
@@ -348,9 +372,9 @@ function AddEmployee() {
                                                     setEmgContact(e.target.value);
                                                 }}
                                             />
-                                                     {Object.keys(EmgTeleErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{EmgTeleErr[key]}</div>
-                                                    })}
+                                            {Object.keys(EmgTeleErr).map((key) => {
+                                                return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
+                                            })}
 
 
                                         </div>
