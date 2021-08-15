@@ -1,14 +1,95 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory, useParams, Link } from "react-router-dom";
+import DatePicker from 'react-datetime';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
 
 
-function updatereservation() {
+ function Updatereservation() {
+
+   {/* //disable past dates
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday)
+    }
+
+     //disable future dates
+    const today = moment().add(1, 'days');;
+    const disableFutureDt = current => {
+        return current.isBefore(today)
+    }
+
+*/}
+    let history = useHistory();
+    const { RID } = useParams();
 
 
+
+    const[customername,setcustomername] = useState("");
+    const[contactnumber,setcontactnumber] = useState("");
+    const[nic,setnic] = useState("");
+    const[customernic,setcustomernic] = useState("");
+    const[customeraddress,setcustomeraddress] = useState("");
+    const[packagename,setpackagename] = useState("");
+    const[eventtype,seteventtype] = useState("");
+    const[from,setfrom] = useState(moment());
+    const[to,setto] = useState(moment());
+    const[discount,setdiscount] = useState("");
+    const[advancedpayment,setadvancedpayment] = useState("");
+    const[totalreservation,settotalreservation] = useState("");
+    const[status,setstatus] = useState("");
+
+    useEffect(() => {
+        loadReservation();
+    }, []);
+
+    const onSubmit = async e => {
+        e.preventDefault();
+    
+    const answer = window.confirm("Are you sure you want to update the Reservation details?");
+    
+    if (answer) {
+
+      const newReservation = {customername, contactnumber,nic,customernic, customeraddress,packagename,eventtype, from, to,discount, advancedpayment, totalreservation, status}
+      await axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
+        alert("Reservation details successfully Updated");
+
+
+      }).catch((err) => {
+        alert(err.response.data.error);
+      })
+
+    } 
+    } 
+    const loadReservation = async () => {
+       await axios.get(`http://localhost:4000/reservations/getReservation/${RID}`).then((res) => {
+            console.log(res.data)
+            setcustomername(res.data.reservation.customername);
+            setcontactnumber(res.data.reservation.contactnumber);
+            setnic(res.data.reservation.customernic);
+            setcustomernic(res.data.reservation.nic);
+            setcustomeraddress(res.data.reservation.customeraddress);
+            setpackagename(res.data.reservation.packagename);
+            seteventtype(res.data.reservation.eventtype);
+            setfrom(res.data.reservation.from);
+            setto(res.data.reservation.to);
+            setdiscount(res.data.reservation.discount);
+            setadvancedpayment(res.data.reservation.advancedpayment);
+            settotalreservation(res.data.reservation.totalreservation);
+            setstatus(res.data.reservation.status);
+
+        }).catch((error) => {
+            alert(error.message);
+        })
+       console.log("customer name", customername);
+
+    };
     return (
             <div className="page-component-body">
                 <div class="container input-main-form-emp">
                     <div class="tab-content-emp" id="myTabContent">
-                        <form>
+                        
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -18,7 +99,7 @@ function updatereservation() {
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <form id="contact-form" class="form" action="#" method="POST" role="form">
+                                        <form id="contact-form" class="form" onSubmit={onSubmit} >
                                         <div class="row">
                                                 <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -27,39 +108,48 @@ function updatereservation() {
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="customerName">Customer Name</label>
+                                                <label class="form-label-emp" for="customername">Customer Name</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="customerName" 
-                                                    name="customerName" 
+                                                    id="customername" 
+                                                    name="customername" 
                                                     placeholder="Customer Name" t
                                                     tabindex="1" 
-                                                    required />
+                                                    required 
+                                                    disabled
+                                                    value={customername}
+                                                    onChange={(event) => { setcustomername(event.target.value) }}/>
                                             </div>
                                             <div class="form-group col-md-6">
-                                            <label class="form-label" for="contactNumber">Contact Number</label>
+                                            <label class="form-label-emp" for="contactnumber">Contact Number</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="contactNumber" 
-                                                    name="contactNumber" 
+                                                    id="contactnumber" 
+                                                    name="contactnumber" 
                                                     placeholder="Contact Number" 
                                                     tabindex="2" 
-                                                    required/>
+                                                    required
+                                                    disabled
+                                                    value={contactnumber}
+                                                    onChange={(event) => { setcontactnumber(event.target.value) }}/>
                                             </div>
                                             </div>
                                             
                                             <div class="form-group">
-                                            <label class="form-label" for="customerAddress">Customer Address</label>
+                                            <label class="form-label-emp" for="customeraddress">Customer Address</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="customerAddress" 
-                                                    name="customerAddress" 
+                                                    id="customeraddress" 
+                                                    name="customeraddress" 
                                                     placeholder="Customer Address" 
                                                     tabindex="3" 
-                                                    required />
+                                                    required 
+                                                    disabled
+                                                    value={customeraddress}
+                                                    onChange={(event) => { setcustomeraddress(event.target.value) }}/>
                                             </div>
                                             <div class="row">
                                             <br></br>
@@ -75,63 +165,77 @@ function updatereservation() {
                                                         id="status"
                                                         className="form-control "
                                                         tabindex="4" 
-                                                    // onChange={(e) => {
-                                                    // setMaritalStat(e.target.value);
-                                                    // }}
+                                                        value={status}
+                                                    onChange={(event) => { setstatus(event.target.value) }}
                                                     >
-                                                        <option id="pending">Pending</option>
-                                                        <option id="complete">Complete</option>
+                                                        <option id="select1">Select</option>
+                                                        <option id="select2">Pending</option>
+                                                        <option id="select3">Complete</option>
                                                     </select>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="from">From</label>
-                                                <input 
-                                                    type="date" 
-                                                    class="form-control formInput" 
+                                                <DatePicker 
+                                                    //type="date" 
+                                                    //class="form-control formInput" 
                                                     id="from" 
                                                     name="from" 
                                                     placeholder="" 
                                                     tabindex="5" 
-                                                    required />
+                                                    required 
+                                                    value={moment(from).format("MM-DD-YYYY")}
+                                                    timeFormat={false}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setfrom(event) }}/>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="to">To</label>
-                                                <input 
-                                                    type="date" 
-                                                    class="form-control formInput" 
+                                                <DatePicker 
+                                                    //type="date" 
+                                                    //class="form-control formInput" 
                                                     id="to" 
                                                     name="to" 
                                                     placeholder="" 
-                                                    tabindex="6" />
+                                                    tabindex="6" 
+                                                    value={moment(to).format("MM-DD-YYYY")}
+                                                    timeFormat={false}
+                                                    //isValidDate={disableFutureDt}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setto(event) }}/>
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="returnDate">Return Date</label>
-                                                <input 
-                                                    type="date" 
-                                                    class="form-control formInput" 
+                                                <DatePicker
+                                                    //type="date" 
+                                                    //class="form-control formInput" 
                                                     id="returnDate" 
                                                     name="returnDate" 
                                                     placeholder="" 
-                                                    tabindex="7" />
+                                                    tabindex="7" 
+                                                    timeFormat={false}
+                                                    //isValidDate={disableFutureDt}
+                                                    //isValidDate={disablePastDt}
+                                                    />
                                             </div>
                                             </div>
 
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="penaltyDay">Penalty Days</label>
+                                                <label class="form-label-emp" for="penaltyDay">Penalty Days</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="Number" 
                                                     class="form-control formInput" 
                                                     id="penaltyDay" 
                                                     name="penaltyDay" 
                                                     placeholder="Penalty Days" t
                                                     tabindex="8" 
-                                                    required />
+                                                    required 
+                                                    />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="penaltyCharge">Penalty Charge</label>
+                                                <label class="form-label-emp" for="penaltyCharge">Penalty Charge</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -144,19 +248,33 @@ function updatereservation() {
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="advancedPayment">Advanced Payment</label>
+                                                <label class="form-label-emp" for="advancedpayment">Advanced Payment</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="advancedPayment" 
-                                                    name="advancedPayment" 
+                                                    id="advancedpayment" 
+                                                    name="advancedpayment" 
                                                     placeholder="Advanced Payment" 
-                                                    tabindex="10" />
+                                                    tabindex="10" 
+                                                    value={advancedpayment}
+                                                    onChange={(event) => { setadvancedpayment(event.target.value) }}/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label-emp" for="totalreservation">Total Reservation Payment</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="totalreservation" 
+                                                    name="totalreservation" 
+                                                    placeholder="Total Reservation Payment" 
+                                                    tabindex="11" 
+                                                    value={totalreservation}
+                                                    onChange={(event) => { settotalreservation(event.target.value) }}/>
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="reservationPrice">Remaining Reservation Payment</label>
+                                                <label class="form-label-emp" for="reservationPrice">Remaining Reservation Payment</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -182,11 +300,10 @@ function updatereservation() {
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
         )
     }
 
-export default updatereservation
+export default Updatereservation;

@@ -29,7 +29,7 @@ function Home() {
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
-                <Route path="/updateReservation" exact component={updateReservation} />
+                <Route path="/updateReservation/:RID" exact component={updateReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
                 <Route path="/addVehicle" exact component={addVehicle} />
                 <Route path="/empList" exact component={empList} />
