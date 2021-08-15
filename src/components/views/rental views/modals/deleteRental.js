@@ -9,7 +9,7 @@ function DeleteRental(rental) {
 
     const [modalData, setData] = useState(rental);
     const [resReason, setResReason] = useState("");
-    const [comment, setComment] = useState("");
+    //const [comment, setComment] = useState("");
     const [rentalData, setRentalData] = useState({});
 
     console.log("model openingggg deleteee", rental.data)
@@ -26,9 +26,6 @@ function DeleteRental(rental) {
                 alert("Permenantly deleted the customer");
                 window.location.replace("/rentalList");
             }
-
-
-
 
         }).catch((err) => {
             alert(err.response.data.error)
@@ -106,21 +103,6 @@ function DeleteRental(rental) {
                                 </div>
                             </div>
 
-                            <div className="row">
-                                <div className="form-group col-md-12">
-                                    <label class="form-label" for="Reason">Comment:</label>
-                                    <input
-                                        required
-                                        id="reason"
-                                        type="textarea"
-                                        className="form-control "
-                                        placeholder="Reason"
-                                        onChange={(e) => {
-                                            setResReason(e.target.value);
-                                        }}
-                                    />
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
