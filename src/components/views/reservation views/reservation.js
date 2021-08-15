@@ -21,11 +21,11 @@ function Reservation() {
     }
 
     let history = useHistory();
-    const [reservations , setReservations] = useState([]);
 
     const[customername,setcustomername] = useState("");
     const[contactnumber,setcontactnumber] = useState("");
     const[nic,setnic] = useState("");
+    const[customernic,setcustomernic] = useState("");
     const[customeraddress,setcustomeraddress] = useState("");
     const[packagename,setpackagename] = useState("");
     const[eventtype,seteventtype] = useState("");
@@ -47,7 +47,7 @@ function Reservation() {
 
         const answer = window.confirm("Are you sure you want to confirm submission?");
         if (answer) {
-          const newReservation = { customername, contactnumber, nic, customeraddress, packagename,eventtype, from, to, discount, advancedpayment, totalreservation, status}
+          const newReservation = { customername, contactnumber, nic,customernic, customeraddress, packagename,eventtype, from, to, discount, advancedpayment, totalreservation, status}
     
           axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
             alert("Reservation added successfully")
@@ -119,7 +119,7 @@ function Reservation() {
                             <div class="container">  
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <form onSubmit={sendData} id="contact-form" class="form"   role="form">
+                                        <form onSubmit={sendData} id="contact-form" class="form"  >
                                             <div class="row">
                                                 <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -140,6 +140,23 @@ function Reservation() {
                                                     onChange={(event) => 
                                                         {
                                                             setcustomername(event.target.value);
+                                                        }
+                                                    }/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label" for="customerNic">Customer NIC</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="customerNic" 
+                                                    name="customerNic" 
+                                                    placeholder="Customer NIC" 
+                                                    tabindex="1" 
+                                                    required 
+                                                    //pattern="V[0-9]{10}"
+                                                    onChange={(event) => 
+                                                        {
+                                                            setcustomernic(event.target.value);
                                                         }
                                                     }/>
                                             </div>
@@ -266,7 +283,7 @@ function Reservation() {
                                                     }/>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="reservationPrice">Total Reservation Price</label>
+                                                <label class="form-label-emp" for="reservationPrice">Total Reservation Price</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -323,7 +340,7 @@ function Reservation() {
                             <br></br>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form onSubmit={addtemporaryilyData} id="contact-form" class="form"  role="form">
+                                    <form onSubmit={addtemporaryilyData} id="contact-form" class="form"  >
                                         <div class="form-group">
                                             <label class="form-label" for="packageName">Package Name</label>
                                             <input 
@@ -377,6 +394,7 @@ function Reservation() {
                                                         }
                                                     }
                                                     timeFormat={false}
+                                                    isValidDate={disablePastDt}
                                                     isValidDate={disableFutureDt}
                                                     />
                                             </div>
@@ -389,7 +407,7 @@ function Reservation() {
                                                 name="dateRange" 
                                                 placeholder="Date Range" 
                                                 tabindex="2" 
-                                                pattern="[0-9]"
+                                                //pattern="[0-9]"
                                                 />
                                         </div>
                                         </div>

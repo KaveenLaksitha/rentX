@@ -115,8 +115,8 @@ function Viewreservation() {
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-primary">
-                    <thead>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
                     <tr>                      
                         <th class="text-center">Customer</th>
                         <th class="text-center">Package Name</th>
@@ -136,8 +136,8 @@ function Viewreservation() {
                                     <td class="text-center">{reservations.customername}</td>
                                     <td class="text-center">{reservations.packagename}</td>
                                     <td class="text-center">{reservations.eventtype}</td>
-                                    <td class="text-center">{moment(reservations.from).format('YYYY-MMMM-D')}</td>
-                                    <td class="text-center">{moment(reservations.to).format('YYYY-MMMM-D')}</td>
+                                    <td class="text-center">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
+                                    <td class="text-center">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
                                     <td class="text-center">{reservations.discount}</td>
                                     <td class="text-center">{reservations.totalreservation}</td>
                                     <td class="text-center">{reservations.status}</td>
