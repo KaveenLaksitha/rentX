@@ -13,8 +13,8 @@ function RentalPlacement() {
     const [VanList, setVanList] = useState([]);
 
 
-    const[MobileErr, setMobileNoErr] = useState("");
-    const[NICErr, setNICErr] = useState("");
+    const [MobileErr, setMobileNoErr] = useState("");
+    const [NICErr, setNICErr] = useState("");
 
     useEffect(() => {
 
@@ -136,7 +136,7 @@ function RentalPlacement() {
     const [rentals, setRentals] = useState([]);
     const [perDayCharge, setPerDayCharge] = useState("");
 
-    const [PayErr, setPayErr] = useState("");
+
 
     function getDateDiff() {
         var admission = moment(from, 'DD-MM-YYYY');
@@ -194,30 +194,30 @@ function RentalPlacement() {
             const MobileValid = MobileValidation();
             const NICValid = NICValidation();
 
-            if(MobileValid && NICValid){
-            const answer = window.confirm("Are you sure you want to confirm submission?");
-            if (answer) {
-
-                
+            if (MobileValid && NICValid) {
+                const answer = window.confirm("Are you sure you want to confirm submission?");
+                if (answer) {
 
 
 
-                const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-                axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
-                    alert("Rental Record added successfully")
-                    /*function refreshPage() {
-                        window.location.reload();
-                    }
-                    refreshPage();*/
-                    history.push("/rentalList");
 
-                }).catch((err) => {
-                    alert(err.response.data.error)
+                    const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-                    //alert(err.response.data.errorCode)
+                    axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
+                        alert("Rental Record added successfully")
+                        /*function refreshPage() {
+                            window.location.reload();
+                        }
+                        refreshPage();*/
+                        history.push("/rentalList");
 
-                })
+                    }).catch((err) => {
+                        alert(err.response.data.error)
+
+                        //alert(err.response.data.errorCode)
+
+                    })
 
                 }
             }
@@ -225,44 +225,44 @@ function RentalPlacement() {
 
     }
 
-    const MobileValidation =() =>{//validate function
+    const MobileValidation = () => {//validate function
 
-        const MobileErr ={}; //State
+        const MobileErr = {}; //State
         let MobileValid = true; //setting flag
 
 
-        if( contactNo.trim().length > 10 ){
+        if (contactNo.trim().length > 10) {
 
-            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+            MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
             MobileValid = false;
-        }else if(contactNo.trim().length < 10){
-            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+        } else if (contactNo.trim().length < 10) {
+            MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
             MobileValid = false;
         }
-        
-        
+
+
         setMobileNoErr(MobileErr);//update error objects
         return MobileValid;
 
 
     }
 
-    const NICValidation =() =>{//validate function
+    const NICValidation = () => {//validate function
 
-        const NICErr ={}; //State
+        const NICErr = {}; //State
         let NICValid = true; //setting flag
 
 
-        if(customerNIC.trim().length > 12 ){
+        if (customerNIC.trim().length > 12) {
 
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+            NICErr.InValidNIC = " *Invalid NIC Number"; // error msg
             NICValid = false;
-        }else if(customerNIC.trim().length < 10){
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+        } else if (customerNIC.trim().length < 10) {
+            NICErr.InValidNIC = " *Invalid NIC Number"; // error msg
             NICValid = false;
         }
-        
-        
+
+
         setNICErr(NICErr);//update error objects
         return NICValid;
 
@@ -544,12 +544,12 @@ function RentalPlacement() {
                                                         id="cNumber"
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
-                                                        
+
                                                         onChange={(event) => { setContactNo(event.target.value); }}
                                                         required />
 
-                                                    {Object.keys(MobileErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{MobileErr[key]}</div>
+                                                    {Object.keys(MobileErr).map((key) => {
+                                                        return <div style={{ color: "red" }}>{MobileErr[key]}</div>
                                                     })}
 
 
@@ -563,12 +563,12 @@ function RentalPlacement() {
                                                         name="cNIC"
                                                         placeholder="National ID(978412351V)"
                                                         onChange={(event) => { setCustomerNIC(event.target.value); }}
-                                                        
+
                                                         required />
 
 
-                                                    {Object.keys(NICErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{NICErr[key]}</div>
+                                                    {Object.keys(NICErr).map((key) => {
+                                                        return <div style={{ color: "red" }}>{NICErr[key]}</div>
                                                     })}
                                                 </div>
                                             </div>

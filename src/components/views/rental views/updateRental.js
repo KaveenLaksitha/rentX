@@ -298,7 +298,7 @@ function UpdateRental() {
 
                                         <div class="col-4 mr-2"  >
                                             <label for="lastTot" class="form-label-emp">Last Total</label>
-                                            <input type="text" class="form-control" id="vehicleModel"
+                                            <input type="text" class="form-control" id="lastTot"
                                                 name="lastTot" required disabled
                                                 value={finalPrice}
                                             />
