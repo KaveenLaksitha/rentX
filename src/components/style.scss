@@ -237,7 +237,6 @@ li.nav-item {
 /*tab-content*/
 .tab-content {
   background-color: rgb(255, 255, 255);
-  
 }
 .formInput {
   background-color: rgb(255, 255, 255);
@@ -404,10 +403,9 @@ a.nav-link:link {
 .link {
   color: black;
 }
-.link :hover{
+.link :hover {
   color: black;
 }
-
 
 .reservesize {
   font-size: 14px;
@@ -607,4 +605,15 @@ a.nav-link:link {
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
+//validation styles
+.message {
+  font-size: 14px;
+}
 
+.success {
+  color: #1fc191;
+}
+
+.error {
+  color: #980000;
+}
