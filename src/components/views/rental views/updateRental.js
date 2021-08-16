@@ -31,6 +31,9 @@ function UpdateRental() {
     const [returnDate, setReturnDate] = useState("");
     const [penaltyDays, setPenaltyDays] = useState("");
     const [penalty, setPenalty] = useState("");
+    const [lastPaid, setLastPaid] = useState("");
+    const [rem, SetRem] = useState("");
+    const [penDay, SetPenDays] = useState("");
 
     //disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -70,13 +73,26 @@ function UpdateRental() {
     const penaltyCharges = calculatePenaltyCost();
     const remainder = calculateRemainingPayment();
 
+    function UpdatedPenaltyDays() {
+        var value = getDateDiff();
+        SetPenDays(value);
+    }
+
+    function UpdatedRemainder() {
+        SetRem(calculateRemainingPayment());
+    }
+
+
     const onSubmit = async e => {
         e.preventDefault();//to prevent the default submission by submit button
+
+        alert(penDay);
+        alert(rem);
 
         const answer = window.confirm("Are you sure you want to update details?");
         if (answer) {
 
-            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penaltyDays, penaltyCharges, returnDate }
+            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penDay, penaltyCharges, returnDate, rem }
 
             await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
                 alert("Rental Record successfully Updated");
@@ -114,6 +130,7 @@ function UpdateRental() {
             setPenaltyDays(res.data.rental.penaltyDays);
             setReturnDate(res.data.rental.returnDate);
             setPenalty(res.data.rental.penaltyCharges);
+            setLastPaid(res.data.rental.lastPaid);
         }).catch((err) => {
             alert(err.response.data.error);
         })
@@ -237,6 +254,8 @@ function UpdateRental() {
                                                 value={status}
                                                 onChange={(e) => {
                                                     setStatus(e.target.value);
+                                                    UpdatedPenaltyDays();
+                                                    UpdatedRemainder();
                                                 }}>
                                                 <option id="pending" >pending</option>
                                                 <option id="completed">completed</option>
@@ -312,7 +331,7 @@ function UpdateRental() {
                                     <div class="d-grid gap-2 d-md-flex justify-content-md"  >
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label-emp" for="penaltyDays">Penalty Days</label>
+                                            <label class="form-label-emp" for="penaltyDays">Total Penalty Days</label>
                                             <input
 
                                                 id="penaltyDays"
@@ -320,16 +339,16 @@ function UpdateRental() {
                                                 className="form-control "
                                                 placeholder="0"
                                                 value={penaltyDays}
-                                                onFocus={(e) => {
+                                                onChange={(e) => {
                                                     setPenaltyDays(e.target.value);
-                                                    calculateCharges();
+                                                    //calculateCharges();
                                                 }}
 
                                             />
                                         </div>
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label-emp" for="penaltyCharges">Penalty Charges:</label>
+                                            <label class="form-label-emp" for="penaltyCharges">Current Penalty Charges:</label>
                                             <input
 
                                                 id="penaltyCharges"
@@ -369,18 +388,18 @@ function UpdateRental() {
                                         </div>
 
                                         <div className="form-group col-md-6 ">
-                                            <label class="form-label-emp" for="remPayment">Remaining Payment:</label>
+                                            <label class="form-label-emp" for="remPayment">Remaining Payment to be made:</label>
                                             <input
 
                                                 id="remPayment"
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="13250.00"
-                                                //value={Number(Remaining)}
-                                                onFocus={(e) => {
-                                                    calculateCharges();
-                                                }}
-                                            />
+                                                value={lastPaid}
+                                                onChange={(e) => {
+                                                    setLastPaid(e.target.value);
+                                                }} />
+
                                         </div>
 
                                     </div>

@@ -80,7 +80,15 @@ function RentalList() {
 
     function searchRentals(e) {
         e.preventDefault();
-        if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
+        if (search.substring(0, 4) === "2021") {
+            axios.get(`http://localhost:4000/rental/searchByFromDate/${search}`).then((res) => {
+                //setRentals(res.data);
+                setRentalList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+        else if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
             axios.get(`http://localhost:4000/rental/searchRentalRecs/${search}`).then((res) => {
                 //setRentals(res.data);
                 setRentalList(res.data);
@@ -96,6 +104,7 @@ function RentalList() {
                 alert(error.message);
             })
         }
+
     }
 
 
