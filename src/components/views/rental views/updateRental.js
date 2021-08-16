@@ -31,7 +31,6 @@ function UpdateRental() {
     const [returnDate, setReturnDate] = useState("");
     const [penaltyDays, setPenaltyDays] = useState("");
     const [penalty, setPenalty] = useState("");
-    const [Remaining, setRemaining] = useState("");
 
     //disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -77,7 +76,7 @@ function UpdateRental() {
         const answer = window.confirm("Are you sure you want to update details?");
         if (answer) {
 
-            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penaltyDays, penaltyCharges, remainder, returnDate }
+            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penaltyDays, penaltyCharges, returnDate }
 
             await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
                 alert("Rental Record successfully Updated");
@@ -113,7 +112,6 @@ function UpdateRental() {
             setContactNo(res.data.rental.contactNo);
             setNICcopy(res.data.rental.NICcopy);
             setPenaltyDays(res.data.rental.penaltyDays);
-            setRemaining(res.data.rental.lastPaidAmount);
             setReturnDate(res.data.rental.returnDate);
             setPenalty(res.data.rental.penaltyCharges);
         }).catch((err) => {
@@ -324,6 +322,7 @@ function UpdateRental() {
                                                 value={penaltyDays}
                                                 onFocus={(e) => {
                                                     setPenaltyDays(e.target.value);
+                                                    calculateCharges();
                                                 }}
 
                                             />
@@ -340,6 +339,7 @@ function UpdateRental() {
                                                 value={penalty}
                                                 onChange={(e) => {
                                                     setPenalty(e.target.value);
+                                                    //calculateCharges();
                                                 }}
                                             />
                                         </div>
@@ -376,9 +376,9 @@ function UpdateRental() {
                                                 type="number"
                                                 className="form-control "
                                                 placeholder="13250.00"
-                                                value={Number(Remaining)}
-                                                onChange={(e) => {
-                                                    setRemaining(e.target.value);
+                                                //value={Number(Remaining)}
+                                                onFocus={(e) => {
+                                                    calculateCharges();
                                                 }}
                                             />
                                         </div>
@@ -392,7 +392,7 @@ function UpdateRental() {
                                     <button type="submit" className="btn btn-ok">UPDATE</button>
                                 </div>
                                 <div className="col py-3 text-center">
-                                    <button type="reset" className="btn btn-reset"> CANCEL</button>
+                                    <button type="reset" className="btn btn-reset" onClick={refreshPage}> CANCEL</button>
                                 </div>
                             </div>
 

@@ -198,10 +198,6 @@ function RentalPlacement() {
                 const answer = window.confirm("Are you sure you want to confirm submission?");
                 if (answer) {
 
-
-
-
-
                     const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
                     axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
