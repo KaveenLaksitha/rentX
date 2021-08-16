@@ -129,8 +129,6 @@ function Reservation() {
 
     const [perDayCharge, setPerDayCharge] = useState("");
 
-    const [PayErr, setPayErr] = useState("");
-
     //const[ResNoErr,setRegNoErr] = useState("");
 
     function sendData(e){
@@ -167,25 +165,20 @@ function Reservation() {
             return diffDuration;
         }
  
-        function charge(){
-
-            getRentChargePerDay();
-            const pricepeday = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge * getDateDiff() ;
-            return pricepeday;
-        }
 
       function addtemporaryilyData(e) {
             e.preventDefault();
 
             //alert(vehicleType, model)
-            //getRentChargePerDay();
+            getRentChargePerDay();
             //alert(perDayCharge);
             console.log(perDayCharge);
 
-            document.getElementById('dateRange').value = getDateDiff();
-            document.getElementById('totalreservation').value = totalreservation;
+            document.getElementById('dateRange').value = getDateDiff();   
+            var val3 = document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;         
+            document.getElementById('totalreservation').value = (getDateDiff() * val3);
+            document.getElementById('total').value = document.getElementById('totalreservation').value;
             document.getElementById('packagename').value = packagename;
-            document.getElementById('perDayCharge').value = charge() ;
             
 
 
@@ -409,24 +402,20 @@ function Reservation() {
                                                     onFocus={getRentChargePerDay}/>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="totalreservation">Total Reservation Price</label>
+                                                <label class="form-label-emp" for="total">Total Reservation Price</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
-                                                    id="totalreservation" 
-                                                    name="totalreservation" 
+                                                    id="total" 
+                                                    name="total" 
                                                     placeholder="Total Reservation Price (25000.00)" 
                                                     tabindex="10" 
-                                                    /*onChange={(event) => 
-                                                        {
-                                                            settotalreservation(event.target.value);
-                                                        }
-                                                    }*//>
+                                                    />
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="FinalreservationPrice">Final Reservation Price</label>
+                                                <label class="form-label" for="FinalreservationPrice">Final Remaining Price</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -514,14 +503,15 @@ function Reservation() {
                                                     name="to" 
                                                     placeholder="" 
                                                     tabindex="6" 
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
+                                                    isValidDate={disableFutureDt}
                                                     onChange={(event) => 
                                                         {
                                                             setto(event);
                                                         }
                                                     }
-                                                    timeFormat={false}
-                                                    isValidDate={disablePastDt}
-                                                    isValidDate={disableFutureDt}
+                                                    
                                                     />
                                             </div>
                                             <div class="form-group col-md-4">
@@ -564,7 +554,7 @@ function Reservation() {
                                                         className="form-control "
                                                         tabindex="4" 
                                                          required
-                                                         onChange={(event) => { setModel(event.target.value); }}>>                                            
+                                                         onChange={(event) => { setModel(event.target.value); }}>                                           
                                                         
                                                     </select>
                                             </div>
@@ -671,20 +661,20 @@ function Reservation() {
                                         </div>
                                         <div class="row">
                                         <div class="form-group col-md-6">
-                                            <label class="form-label" for="totalPrice">Total Price</label>
+                                            <label class="form-label" for="totalreservation">Total Price</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control formInput" 
-                                                id="totalPrice" 
-                                                name="totalPrice" 
+                                                id="totalreservation" 
+                                                name="totalreservation" 
                                                 placeholder="Total Price (25000.00)" 
                                                 tabindex="7" 
                                                 //required 
-                                                onChange={(event) => 
-                                                        {
-                                                            settotalreservation(event.target.value);
-                                                        }
-                                                    }/>
+                                                onClickCapture={(event) => 
+                                                    {
+                                                        settotalreservation(event.target.value);
+                                                    }
+                                                }/>
                                         </div>
                                         </div>
                                         <div className="row">
