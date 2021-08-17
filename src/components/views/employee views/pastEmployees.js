@@ -9,6 +9,10 @@ import ViewEmpModal from "./modals/viewPastEmployees";
 export default function PastEmpList() {
     const [pastRmpList, setEmp] = useState([]);
 
+
+    const [isFetching, setIsFetching] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false);
+
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
@@ -16,8 +20,14 @@ export default function PastEmpList() {
 
     useEffect(() => {
         getAllPastEmployeesService().then((data) => {
-            setEmp(data.data);
-            console.log(data.data, "component did mount on new list")
+            if (data.ok && !isFetching) {
+
+                setIsFetching(true);
+                setEmp(data.data);
+                console.log(data.data, "component did mount on new list")
+            } else {
+                setModalLoading(true);
+            }
         }
         )
     }, []);
@@ -113,6 +123,33 @@ export default function PastEmpList() {
                     data={modalData}
                     onHide={() => setModalShow(false)}
                 />
+            </Modal>
+
+            {/* modal for display while loading or on error */}
+            <Modal show={modalLoading} size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Body>
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="spinner-grow text-danger" role="status">
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                        </div><div class="spinner-grow text-danger" role="status">
+                        </div>
+
+                        <span class="sr-only">something went wrong...</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4 h5"> something went wrong</div>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { window.location.reload() }}>
+                            Try again
+                        </button>
+                    </div>
+                </Modal.Footer>
             </Modal>
         </div >
     );
