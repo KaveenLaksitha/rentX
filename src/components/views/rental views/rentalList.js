@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 import TestModal from "./modals/viewRental";
 import DeleteModal from "./modals/deleteRental"
@@ -9,7 +9,6 @@ import DeleteModal from "./modals/deleteRental"
 
 function RentalList() {
 
-    const [rentals, setRentals] = useState([]);
     const [search, setSearch] = useState("");
     const [rentalList, setRentalList] = useState([]);
     const [modalData, setData] = useState([]);
@@ -18,6 +17,8 @@ function RentalList() {
     const [modalDataDelete, setModalDataDelete] = useState([]);
     const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
+
+    const [modalLoading, setModalLoading] = useState(false);
 
     useEffect(() => {
 
@@ -30,7 +31,8 @@ function RentalList() {
                     //setRentals(res.data.reverse());
                     setRentalList(res.data.reverse());
                 }).catch((error) => {
-                    alert(error.message);
+                    //alert(error.message);
+                    setModalLoading(true);
                 })
             }
             getRentals();
@@ -218,16 +220,17 @@ function RentalList() {
 
                 </Modal.Body>
                 <Modal.Footer>
-
-                    <div className="col py-3 text-center">
-                        <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
-                            Confirm
-                        </button>
-                    </div>
-                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
-                        <button type="reset" className="btn btn-reset">
-                            cancel
-                        </button>
+                    <div className="row">
+                        <div className="col -6">
+                            <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
+                                Confirm
+                            </button>
+                        </div>
+                        <div className="col-6 text-right" onClick={() => setModalDeleteConfirm(false)}>
+                            <button type="reset" className="btn btn-reset">
+                                cancel
+                            </button>
+                        </div>
                     </div>
                 </Modal.Footer>
             </Modal>
@@ -244,6 +247,32 @@ function RentalList() {
                     data={modalDataDelete}
                     onHide={() => setModalDelete(false)}
                 />
+            </Modal>
+
+            <Modal show={modalLoading} size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Body>
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="spinner-grow text-danger" role="status">
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                        </div><div class="spinner-grow text-danger" role="status">
+                        </div>
+
+                        <span class="sr-only">something went wrong...</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4 h5"> something went wrong</div>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { window.location.reload() }}>
+                            Try again
+                        </button>
+                    </div>
+                </Modal.Footer>
             </Modal>
 
 

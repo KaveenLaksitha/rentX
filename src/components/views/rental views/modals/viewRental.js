@@ -93,7 +93,7 @@ function ViewRental(rental) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={rental.onHide}>Close</Button>
+                <button className="btn btn-close" onClick={rental.onHide}>Close</button>
             </Modal.Footer>
         </div>
     )
