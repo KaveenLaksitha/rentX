@@ -65,7 +65,7 @@ import 'react-datetime/css/react-datetime.css';
 
     // calculate the penalty Cost
     function calculatePenaltyCost() {
-        const Price = (totalreservation * (3 / 100)) * getDateDiff()
+        const Price = (totalreservation * (5 / 100)) * getDateDiff()
         return Price;
     }
 
@@ -79,12 +79,15 @@ import 'react-datetime/css/react-datetime.css';
         document.getElementById('remaining').value = calculateRemainingPayment();
     }
 
-    const Days = getDateDiff();
-    const penaltyCharges = calculatePenaltyCost();
-    const remainder = calculateRemainingPayment();
+    //const Days = getDateDiff();
+    //const penaltyCharge = calculatePenaltyCost();
+    //const remaining = calculateRemainingPayment();
 
     const onSubmit = async e => {
         e.preventDefault();
+        const finalpay = document.getElementById('remaining').value = (totalreservation - advancedpayment);
+
+        alert("Your ramaining balance is " + `${finalpay}`);
     
     const answer = window.confirm("Are you sure you want to update the Reservation details?");
     
@@ -123,8 +126,8 @@ import 'react-datetime/css/react-datetime.css';
             console.log(res.data)
             setcustomername(res.data.reservation.customername);
             setcontactnumber(res.data.reservation.contactnumber);
-            setnic(res.data.reservation.customernic);
-            setcustomernic(res.data.reservation.nic);
+            setnic(res.data.reservation.nic);
+            setcustomernic(res.data.reservation.customernic);
             setcustomeraddress(res.data.reservation.customeraddress);
             setpackagename(res.data.reservation.packagename);
             seteventtype(res.data.reservation.eventtype);
@@ -195,8 +198,22 @@ import 'react-datetime/css/react-datetime.css';
                                                     onChange={(event) => { setcontactnumber(event.target.value) }}/>
                                             </div>
                                             </div>
-                                            
-                                            <div class="form-group">
+                                            <div class="row">
+                                            <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="customernic">Customer NIC</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="customernic" 
+                                                    name="customernic" 
+                                                    placeholder="Customer Address" 
+                                                    tabindex="3" 
+                                                    required 
+                                                    disabled
+                                                    value={customernic}
+                                                    onChange={(event) => { setcustomernic(event.target.value) }}/>
+                                            </div>
+                                            <div class="form-group col-md-6">
                                             <label class="form-label-emp" for="customeraddress">Customer Address</label>
                                                 <input 
                                                     type="text" 
@@ -209,6 +226,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     disabled
                                                     value={customeraddress}
                                                     onChange={(event) => { setcustomeraddress(event.target.value) }}/>
+                                            </div>
                                             </div>
                                             <div class="row">
                                             <br></br>
@@ -282,7 +300,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     tabindex="7" 
                                                     value={moment(returnDay).format('MM/DD/YYYY')}
                                                     timeFormat={false}
-                                                   
+                                                    onChange={(event) => { setreturnDay(event.target.value) }}
                                                     isValidDate={disablePastDt}
                                                     onClose={calculateCharges}
                                                     />
@@ -299,9 +317,9 @@ import 'react-datetime/css/react-datetime.css';
                                                     name="penaltyDay" 
                                                     placeholder="Penalty Days" t
                                                     tabindex="8" 
-                                                    required 
+                                                    //required 
                                                     value={penaltyDay}
-                                                    onFocus={(event) => { setpenaltyDay(event.target.value) }}
+                                                    onChange={(event) => { setpenaltyDay(event.target.value) }}
 
                                                     />
                                             </div>
@@ -314,7 +332,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     name="penaltyCharge" 
                                                     placeholder="Penalty Charge" 
                                                     tabindex="9" 
-                                                    required 
+                                                    //required 
                                                     value={penaltyCharge}
                                                     onChange={(e) => {
                                                         setpenaltyCharge(e.target.value);
@@ -339,7 +357,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="totalreservation">Total Reservation Payment</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control formInput" 
                                                     id="totalreservation" 
                                                     name="totalreservation" 
@@ -355,7 +373,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="remaining">Remaining Reservation Payment</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control formInput" 
                                                     id="remaining" 
                                                     name="remaining" 

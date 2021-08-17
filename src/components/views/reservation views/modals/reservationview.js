@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 
-function Reservationview(reserve) {
+function Reservationview(reservations) {
 
-    console.log("model openingggg", reserve)
+    console.log("model openingggg", reservations)
 
     return (
         <div>
             <Modal.Header closeButton>
-                <Modal.Title>Customer Name : {reserve.data.customername}</Modal.Title>
+                <Modal.Title>Customer Name : {reservations.data.customername}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row">
@@ -20,66 +20,66 @@ function Reservationview(reserve) {
                                     <th class="text-left" scope="row">
                                         Customer Name : 
                                     </th>
-                                    <td class="text-left">{reserve.data.customername}</td>
+                                    <td class="text-left">{reservations.data.customername}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Customer Contact No :
                                     </th>
-                                    <td class="text-left">{reserve.data.contactnumber}</td>
+                                    <td class="text-left">{reservations.data.contactnumber}</td>
                                 </tr><tr>
                                     <th class="text-left" scope="row">
                                         Customer Address :
                                     </th>
-                                    <td class="text-left">{reserve.data.customeraddress}</td>
+                                    <td class="text-left">{reservations.data.customeraddress}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Customer NIC :
                                     </th>
-                                    <td class="text-left">{reserve.data.customernic}</td>
+                                    <td class="text-left">{reservations.data.customernic}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Package Name :
                                     </th>
-                                    <td class="text-left">{reserve.data.packagename}</td>
+                                    <td class="text-left">{reservations.data.packagename}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Event Type : 
                                     </th>
-                                    <td class="text-left">{reserve.data.eventtype}</td>
+                                    <td class="text-left">{reservations.data.eventtype}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         From :
                                     </th>
-                                    <td class="text-left">{reserve.data.from}</td>
+                                    <td class="text-left">{reservations.data.from}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         To :
                                     </th>
-                                    <td class="text-left">{reserve.data.to}</td>
+                                    <td class="text-left">{reservations.data.to}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Advanced Payment :
                                     </th>
-                                    <td class="text-left">{reserve.data.advancedpayment}</td>
+                                    <td class="text-left">{reservations.data.advancedpayment}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Total Reservation : 
                                     </th>
-                                    <td class="text-left">{reserve.data.totalreservation}</td>
+                                    <td class="text-left">{reservations.data.totalreservation}</td>
                                 </tr>
                                  <tr>
                                     <th class="text-left" scope="row">
                                         Status : 
                                     </th>
-                                    <td class="text-left">{reserve.data.status}</td>
+                                    <td class="text-left">{reservations.data.status}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -87,7 +87,7 @@ function Reservationview(reserve) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={reserve.onHide}>Close</Button>
+                <Button onClick={reservations.onHide}>Close</Button>
             </Modal.Footer>
         </div>
     )

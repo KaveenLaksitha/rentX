@@ -7,7 +7,7 @@ import 'react-datetime/css/react-datetime.css';
 
 function Reservation() {
 
-    const [CarList, setCarList] = useState([]);
+    {/*const [CarList, setCarList] = useState([]);
     const [BusList, setBusList] = useState([]);
     const [VanList, setVanList] = useState([]);
 
@@ -94,7 +94,7 @@ function Reservation() {
 
         }
 
-    }
+    }*/}
 
     // disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -123,20 +123,22 @@ function Reservation() {
     const[advancedpayment,setadvancedpayment] = useState("");
     const[totalreservation,settotalreservation] = useState("");
     const[status,setstatus] = useState("");
+    //const[finaltotal,setfinaltotal]=useState("");
 
     const [vehicleType, setVehicleType] = useState("");
     const [model, setModel] = useState("");
 
-    const [perDayCharge, setPerDayCharge] = useState("");
+    const [vehicleType1, setVehicleType1] = useState("");
+    const [model1, setModel1] = useState("");
 
-    //const[ResNoErr,setRegNoErr] = useState("");
+    const [perDayCharge, setPerDayCharge] = useState("");
+    const [perDayCharge1, setPerDayCharge1] = useState("");
+
 
     function sendData(e){
         e.preventDefault();
 
-        document.getElementById('FinalreservationPrice').value = (totalreservation - advancedpayment);
-
-        const finalpay = (totalreservation - advancedpayment);
+        const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
 
         alert("Your ramaining balance is " + `${finalpay}`);
     
@@ -151,36 +153,93 @@ function Reservation() {
     
           }).catch((err) => {
             alert(err.response.data.error)
-
     
           })
         }
         
       }
 
+      function searchModel(){
+          if(document.getElementById('vehicleType').value == 'Car' ){
+                document.getElementById('model1').value = "Axio";
+                document.getElementById('model1').innerHTML = "Axio";
+                document.getElementById('model2').value = "Bxio";
+                document.getElementById('model2').innerHTML = "Bxio";                 
+                document.getElementById('model3').value = "Cxio";
+                document.getElementById('model3').innerHTML = "Cxio";
+          }else if(document.getElementById('vehicleType').value == 'Van'){
+                document.getElementById('model1').value = "DF";
+                document.getElementById('model1').innerHTML = "DF";
+                document.getElementById('model2').value = "Bvan";
+                document.getElementById('model2').innerHTML = "Bvan";
+                document.getElementById('model3').value = "Cvan";
+                document.getElementById('model3').innerHTML = "Cvan";               
+          }else if(document.getElementById('vehicleType').value == 'Bus'){
+                document.getElementById('model1').value = "Abus";
+                document.getElementById('model1').innerHTML = "Abus";
+                document.getElementById('model2').value = "Bbus";
+                document.getElementById('model2').innerHTML = "Bbus";
+                document.getElementById('model3').value = "Cbus";
+                document.getElementById('model3').innerHTML = "Cbus";
+          }
+      }
+
+        function searchModel1(){
+          if(document.getElementById('vehicleType1').value == 'Car' ){
+                document.getElementById('model11').value = "Axio";
+                document.getElementById('model11').innerHTML = "Axio";
+                document.getElementById('model22').value = "Bxio";
+                document.getElementById('model22').innerHTML = "Bxio";          
+                document.getElementById('model33').value = "Cxio";
+                document.getElementById('model33').innerHTML = "Cxio";
+          }else if(document.getElementById('vehicleType1').value == 'Van'){
+                document.getElementById('model11').value = "DF";
+                document.getElementById('model11').innerHTML = "DF";
+                document.getElementById('model22').value = "Bvan";
+                document.getElementById('model22').innerHTML = "Bvan";
+                document.getElementById('model33').value = "Cvan";
+                document.getElementById('model33').innerHTML = "Cvan";               
+          }else if(document.getElementById('vehicleType1').value == 'Bus'){
+                document.getElementById('model11').value = "Abus";
+                document.getElementById('model11').innerHTML = "Abus";
+                document.getElementById('model22').value = "Bbus";
+                document.getElementById('model22').innerHTML = "Bbus";
+                document.getElementById('model33').value = "Cbus";
+                document.getElementById('model33').innerHTML = "Cbus";
+          }
+      }
         function getDateDiff() {
             var admission = moment(from, 'DD-MM-YYYY');
             var discharge = moment(to, 'DD-MM-YYYY');
             const diffDuration = discharge.diff(admission, 'days');
             return diffDuration;
         }
- 
+
+       
+
+        function showDateRange(){
+            getRentChargePerDay();
+            getRentChargePerDay1()
+            document.getElementById('dateRange').value = getDateDiff();
+            document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge ;
+            document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;   
+            var result =  Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value) ;
+            //var dis = Number(document.getElementById('discount').value) / 100;       
+            var finalresult = document.getElementById('totalreservation').value = result + (1 * getDateDiff()); 
+            return finalresult; 
+        }
 
       function addtemporaryilyData(e) {
             e.preventDefault();
 
-            //alert(vehicleType, model)
             getRentChargePerDay();
-            //alert(perDayCharge);
-            console.log(perDayCharge);
-
-            document.getElementById('dateRange').value = getDateDiff();   
-            var val3 = document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;         
-            document.getElementById('totalreservation').value = (getDateDiff() * val3);
-            document.getElementById('total').value = document.getElementById('totalreservation').value;
+            getRentChargePerDay1()
+           // var result =  Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value) ;
+            var dis = Number(document.getElementById('discount').value) / 100;       
+            var final = document.getElementById('totalreservation').value = showDateRange() - (showDateRange() * dis);      
+            document.getElementById('total').value = final ;
             document.getElementById('packagename').value = packagename;
             
-
 
         alert("Package Created");   
       }
@@ -197,6 +256,18 @@ function Reservation() {
         getRent();
     }
 
+     function getRentChargePerDay1() {
+        function getRent1() {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
+                setPerDayCharge1(res.data)
+                console.log(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+        getRent1();
+    }
+
     function showDelivery(){
        
         if(document.getElementById("entry").click) {
@@ -209,6 +280,7 @@ function Reservation() {
     }
 
     
+    
      
     return (
         <div className="page-component-body ">
@@ -219,10 +291,10 @@ function Reservation() {
                 <br></br>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Reservation</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Package</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" >Package</a>
+                        <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" >Reservation</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -232,7 +304,275 @@ function Reservation() {
                             <div class="container">  
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <form onSubmit={sendData} id="contact-form" class="form"  >
+                                    <form onSubmit={addtemporaryilyData} id="contact-form" class="form"  >
+                                        <div class="form-group">
+                                            <label class="form-label" for="packageName">Package Name</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control formInput" 
+                                                id="packageName" 
+                                                name="packageName" 
+                                                placeholder="Package Name" 
+                                                tabindex="1" 
+                                                required 
+                                                onChange={(event) => 
+                                                        {
+                                                            setpackagename(event.target.value);
+                                                        }
+                                                    }/>
+                                        </div>
+                                        <br></br>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="from">From</label>
+                                                <DatePicker  
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="from" 
+                                                    name="from" 
+                                                    placeholder="" 
+                                                    tabindex="5" 
+                                                    required 
+                                                    onChange={(event) => 
+                                                        {
+                                                            setfrom(event);
+                                                        }
+                                                    }
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="to">To</label>
+                                                <DatePicker 
+                                                    required 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="to" 
+                                                    name="to" 
+                                                    placeholder="" 
+                                                    tabindex="6" 
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
+                                                    //isValidDate={disableFutureDt}
+                                                    onChange={(event) => 
+                                                        {
+                                                            setto(event);
+                                                        }
+                                                    }
+                                                    
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label" for="dateRange">Date Range</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control formInput" 
+                                                id="dateRange" 
+                                                name="dateRange" 
+                                                placeholder="Date Range" 
+                                                tabindex="2" 
+                                                //pattern="[0-9]"
+                                                />
+                                        </div>
+                                        </div>
+                                        <br></br>
+                                        
+                                        <div class="row" >
+                                            <div class="form-group col-md-4"  id="hide1">
+                                                <label class="form-label-emp" for="vehicleType">Vehicle Type</label>
+                                                <select 
+                                                        id="vehicleType"
+                                                        className="form-control "
+                                                        tabindex="3" 
+                                                        onChange={e => { setVehicleType(e.target.value); searchModel() }}
+                                                        required
+                                                    >
+                                                        <option  >choose</option>
+                                                        <option id="type1" value="Car" >Car</option>
+                                                        <option id="type2" value="Van">Van</option>
+                                                        <option id="type3" value="Bus">Bus</option>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-4"  id="hide2">
+                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
+                                                <select
+                                                        id="vehicleModel"
+                                                        className="form-control "
+                                                        tabindex="4" 
+                                                         required
+                                                         onChange={(event) => { setModel(event.target.value); }}
+                                                         >
+                                                        <option  >choose</option>
+                                                        <option id="model1" ></option>
+                                                        <option id="model2"></option>
+                                                        <option id="model3"></option>
+                                       
+                                                        
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-2"  id="hide3">
+                                                <label class="form-label-emp" for="noVehiclehide1">No of Vehicle</label>
+                                                <input 
+                                                    type="number" 
+                                                    class="form-control formInput" 
+                                                    id="noVehiclehide1" 
+                                                    name="noVehiclehide1" 
+                                                    placeholder="Count" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-2"  id="hide4" >
+                                                <label class="form-label-emp" for="perDayCharge">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="perDayCharge" 
+                                                    name="perDayCharge" 
+                                                    placeholder="Price"         
+                                                    tabindex="5"
+                                                    required 
+                                                    //pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide11" >
+                                                <label class="form-label-emp" for="vehicleType1">Vehicle Type</label>
+                                                <select 
+                                                        id="vehicleType1"
+                                                        className="form-control "
+                                                        tabindex="3" 
+                                                      onChange={e => { setVehicleType1(e.target.value); searchModel1() }}
+                                                        required
+                                                    >
+                                                        <option  >choose</option>
+                                                        <option id="type11" value="Car" >Car</option>
+                                                        <option id="type22" value="Van">Van</option>
+                                                        <option id="type33" value="Bus">Bus</option>
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide22">
+                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
+                                                <select
+                                                        id="vehicleModelnew"
+                                                        className="form-control "
+                                                        tabindex="4"  
+                                                        onChange={(event) => { setModel1(event.target.value); }}
+                                                         >
+                                                        <option  >choose</option>
+                                                        <option id="model11"></option>
+                                                        <option id="model22"></option>
+                                                        <option id="model33"></option>
+                                                
+                                                    </select>
+                                            </div>
+                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide33" >
+                                                <label class="form-label-emp" for="noVehiclehide2">No of Vehicle</label>
+                                                <input 
+                                                    type="number" 
+                                                    class="form-control formInput" 
+                                                    id="noVehiclehide2" 
+                                                    name="noVehiclehide2" 
+                                                    placeholder="Count" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    pattern="[0-9]"
+                                                    required
+                                                    />
+                                            </div>
+                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide44" >
+                                                <label class="form-label-emp" for="perDayCharge1">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="perDayCharge1" 
+                                                    name="perDayCharge1" 
+                                                    placeholder="Price" 
+                                                    min="1"
+                                                    tabindex="5" 
+                                                    //pattern="[0-9]"
+                                                    />
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row" >
+                                        <div class="form-group col-md-2">
+                                                <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                                <input type="button" class="btn btn-info" id="entry" value=" Get Range And Price" onClick={showDateRange} />
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label" for="discount">Discount</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control formInput" 
+                                                id="discount" 
+                                                name="discount" 
+                                                placeholder="Discount (5)" 
+                                                tabindex="6" 
+                                                //pattern="[0-9]"
+                                                //required 
+                                                onChange={(event) => 
+                                                        {
+                                                            setdiscount(event.target.value);
+                                                        }
+                                                    }/>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label" for="totalreservation">Total Price</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control formInput" 
+                                                id="totalreservation" 
+                                                name="totalreservation" 
+                                                placeholder="Total Price (25000.00)" 
+                                                tabindex="7" 
+                                                //required 
+                                                
+                                                onClickCapture={(event) => 
+                                                    {
+                                                        settotalreservation(event.target.value);
+                                                    }
+                                                } 
+                                                />
+                                        </div>
+                                        </div>
+                                        <div className="row">
+                                                <div className="col py-3 text-center">
+                                                    <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
+                                                        Create
+                                                    </button>
+                                                </div>
+                                                <div className="col py-3 text-center">
+                                                    <button type="reset" className="btn btn-reset">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    </form>
+                                        
+                                        <br></br>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                    
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="container">
+                            <br></br>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <form onSubmit={sendData} id="contact-form" class="form"  >
                                             <div class="row">
                                                 <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -287,7 +627,7 @@ function Reservation() {
                                                     placeholder="Contact Number(0703814914)" t
                                                     abindex="2" 
                                                     required 
-                                                    pattern="[0-9]{10}"
+                                                    //pattern="[0-9]{10}"
                                                     onChange={(event) => 
                                                         {
                                                             setcontactnumber(event.target.value);
@@ -409,7 +749,8 @@ function Reservation() {
                                                     id="total" 
                                                     name="total" 
                                                     placeholder="Total Reservation Price (25000.00)" 
-                                                    tabindex="10" 
+                                                    tabindex="10"
+                                                    
                                                     />
                                             </div>
                                             </div>
@@ -443,253 +784,7 @@ function Reservation() {
                                                 </div>
                                             </div>
                                         </form>
-                                        <br></br>
-                                    </div>
-                                </div>
-                            </div>
-                       
-                    </div>
-                    
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="container">
-                            <br></br>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form onSubmit={addtemporaryilyData} id="contact-form" class="form"  >
-                                        <div class="form-group">
-                                            <label class="form-label" for="packageName">Package Name</label>
-                                            <input 
-                                                type="text" 
-                                                class="form-control formInput" 
-                                                id="packageName" 
-                                                name="packageName" 
-                                                placeholder="Package Name" 
-                                                tabindex="1" 
-                                                required 
-                                                onChange={(event) => 
-                                                        {
-                                                            setpackagename(event.target.value);
-                                                        }
-                                                    }/>
-                                        </div>
-                                        <br></br>
-                                        <div class="row">
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker  
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    required 
-                                                    onChange={(event) => 
-                                                        {
-                                                            setfrom(event);
-                                                        }
-                                                    }
-                                                    timeFormat={false}
-                                                    isValidDate={disablePastDt}
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    required 
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    timeFormat={false}
-                                                    isValidDate={disablePastDt}
-                                                    isValidDate={disableFutureDt}
-                                                    onChange={(event) => 
-                                                        {
-                                                            setto(event);
-                                                        }
-                                                    }
-                                                    
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label" for="dateRange">Date Range</label>
-                                            <input 
-                                                type="text" 
-                                                class="form-control formInput" 
-                                                id="dateRange" 
-                                                name="dateRange" 
-                                                placeholder="Date Range" 
-                                                tabindex="2" 
-                                                //pattern="[0-9]"
-                                                />
-                                        </div>
-                                        </div>
-                                        <br></br>
-                                        <div class="form-group col-md-2">
-                                                <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} onDoubleClick={showDelivery}/>
-                                        </div>
-                                        <div class="row" >
-                                            <div class="form-group col-md-4"  id="hide1">
-                                                <label class="form-label-emp" for="vehicleType">Vehicle Type</label>
-                                                <select 
-                                                        id="vehicleType"
-                                                        className="form-control "
-                                                        tabindex="3" 
-                                                        onChange={e => { setVehicleType(e.target.value); populate() }}
-                                                        required
-                                                    >
-                                                        <option  >choose</option>
-                                                        <option value="Car" >Car</option>
-                                                        <option value="Van">Van</option>
-                                                        <option value="Bus">Bus</option>
-                                                    </select>
-                                            </div>
-                                            <div class="form-group col-md-4"  id="hide2">
-                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
-                                                <select
-                                                        id="vehicleModel"
-                                                        className="form-control "
-                                                        tabindex="4" 
-                                                         required
-                                                         onChange={(event) => { setModel(event.target.value); }}>                                           
-                                                        
-                                                    </select>
-                                            </div>
-                                            <div class="form-group col-md-2"  id="hide3">
-                                                <label class="form-label-emp" for="noVehiclehide1">No of Vehicle</label>
-                                                <input 
-                                                    type="number" 
-                                                    class="form-control formInput" 
-                                                    id="noVehiclehide1" 
-                                                    name="noVehiclehide1" 
-                                                    placeholder="Count" 
-                                                    min="1"
-                                                    tabindex="5" 
-                                                    pattern="[0-9]"
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-2"  id="hide4" >
-                                                <label class="form-label-emp" for="perDayCharge">Price</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="perDayCharge" 
-                                                    name="perDayCharge" 
-                                                    placeholder="Price"         
-                                                    tabindex="5" 
-                                                    //pattern="[0-9]"
-                                                    />
-                                            </div>
-                                            
-                                        </div>
-                                        {/*<div class="row">
-                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide11" >
-                                                <label class="form-label-emp" for="vehicleType">Vehicle Type</label>
-                                                <select 
-                                                        id="vehicleType"
-                                                        className="form-control "
-                                                        tabindex="3" 
-                                                       onChange={ populate() }
-                                                        >
-                                                    
-                                                        <option >Choose</option>
-                                                        <option >Car</option>
-                                                        <option>Van</option>
-                                                        <option >Bus</option>
-                                                    </select>
-                                            </div>
-                                            <div class="form-group col-md-4" style={{ display: "none" }} id="hide22">
-                                                <label class="form-label-emp" for="vehicleModel">Vehicle Model</label>
-                                                <select
-                                                        id="vehicleModel"
-                                                        className="form-control "
-                                                        tabindex="4"  >
-                                                        
-                                                
-                                                    </select>
-                                            </div>
-                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide33" >
-                                                <label class="form-label-emp" for="noVehiclehide2">No of Vehicle</label>
-                                                <input 
-                                                    type="number" 
-                                                    class="form-control formInput" 
-                                                    id="noVehiclehide2" 
-                                                    name="noVehiclehide2" 
-                                                    placeholder="Count" 
-                                                    min="1"
-                                                    tabindex="5" 
-                                                    pattern="[0-9]"
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-2" style={{ display: "none" }} id="hide44" >
-                                                <label class="form-label-emp" for="perDayCharge">Price</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="perDayCharge" 
-                                                    name="perDayCharge" 
-                                                    placeholder="Price" 
-                                                    min="1"
-                                                    tabindex="5" 
-                                                    //pattern="[0-9]"
-                                                    />
-                                            </div>
-                                            
-                                        </div>*/}
-            
-                                        <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="form-label" for="discount">Discount</label>
-                                            <input 
-                                                type="text" 
-                                                class="form-control formInput" 
-                                                id="discount" 
-                                                name="discount" 
-                                                placeholder="Discount (5)" 
-                                                tabindex="6" 
-                                                //pattern="[0-9]"
-                                                //required 
-                                                onChange={(event) => 
-                                                        {
-                                                            setdiscount(event.target.value);
-                                                        }
-                                                    }/>
-                                        </div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label class="form-label" for="totalreservation">Total Price</label>
-                                            <input 
-                                                type="text" 
-                                                class="form-control formInput" 
-                                                id="totalreservation" 
-                                                name="totalreservation" 
-                                                placeholder="Total Price (25000.00)" 
-                                                tabindex="7" 
-                                                //required 
-                                                onClickCapture={(event) => 
-                                                    {
-                                                        settotalreservation(event.target.value);
-                                                    }
-                                                }/>
-                                        </div>
-                                        </div>
-                                        <div className="row">
-                                                <div className="col py-3 text-center">
-                                                    <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
-                                                        Create
-                                                    </button>
-                                                </div>
-                                                <div className="col py-3 text-center">
-                                                    <button type="reset" className="btn btn-reset">
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </div>
-                                    </form>
+                                    
                                     <br></br>
                                 </div>
                             </div>
