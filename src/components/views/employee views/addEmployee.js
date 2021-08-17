@@ -4,7 +4,10 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
+import { FilePond } from 'react-filepond';
+
 import { addEmployeeService } from "../../services/employeeService";
+
 
 function AddEmployee() {
 
@@ -29,7 +32,7 @@ function AddEmployee() {
     const [mobileNo, setMobileNo] = useState("");
     const [emgContact, setEmgContact] = useState("");
     const [empPic, setEmpPic] = useState("");
-    const [cv, setCV] = useState("");
+    const [cv, setCV] = useState([]);
 
 
     const [TeleErr, setTeleNoErr] = useState("");
@@ -245,12 +248,7 @@ function AddEmployee() {
                                                 type="email"
                                                 className="form-control "
                                                 placeholder="email"
-                                                onChange={(e) => {
-                                                    {
-                                                        setEmail(e.target.value);
-                                                        validateEmail(e);
-                                                    }
-                                                }}
+                                                onChange={(e) => { { setEmail(e.target.value); validateEmail(e); } }}
                                             />
                                             <div className={`message ${isValid ? 'success' : 'error'}`}>
                                                 {message}
@@ -396,15 +394,20 @@ function AddEmployee() {
                                         </div>
                                         <div className="form-group col-md-6">
                                             <div className="form-group">
-                                                <label className="form-label-emp pb-3" for="cv">CV:</label>
+                                                {/* <label className="form-label-emp pb-3" for="cv">CV:</label>
                                                 <input
                                                     // required
                                                     id="cv"
                                                     type="file"
-                                                    className="form-control-file"
+                                                    className="form-control-file fliepond"
                                                     onChange={(e) => {
                                                         setCV(e.target.value);
                                                     }}
+                                                /> */}
+                                                <FilePond
+                                                    files={cv}
+                                                    onupdatefiles={setCV}
+                                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                                                 />
                                             </div>
                                         </div>
