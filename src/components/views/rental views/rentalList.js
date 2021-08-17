@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-import moment from 'moment';
-import TestModal from "./viewRental";
+
+import TestModal from "./modals/viewRental";
+import DeleteModal from "./modals/deleteRental"
+
 
 function RentalList() {
 
@@ -13,6 +15,9 @@ function RentalList() {
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
+    const [modalDataDelete, setModalDataDelete] = useState([]);
+    const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
 
@@ -35,6 +40,13 @@ function RentalList() {
 
     }, [])
 
+    useEffect(() => {
+
+        console.log("component did update", modalDataDelete)
+
+    }, [modalDataDelete]);
+
+
 
     const openModal = (rental) => {
         setData(rental);
@@ -45,6 +57,11 @@ function RentalList() {
         console.log("req came for modal");
         console.log(modalData, "data came for modalllllll");
         setModalShow(true);
+    }
+
+    const openModalDelete = (data) => {
+        setModalDataDelete(data);
+        setModalDeleteConfirm(true);
     }
 
 
@@ -83,26 +100,7 @@ function RentalList() {
 
 
 
-    const deleteRental = async id => {
 
-        const answer = window.confirm("Are you sure you want to permenantly delete?");
-
-        if (answer) {
-
-            await axios.delete(`http://localhost:4000/rental/deleteRental/${id}`);
-            alert(`Permenantly deleted the customer ${id}`);
-
-            function getRentals() {
-                axios.get("http://localhost:4000/rental/displayRentals").then((res) => {
-                    //setRentals(res.data.reverse());
-                    setRentalList(res.data.reverse());
-                }).catch((error) => {
-                    alert(error.message);
-                })
-            }
-            getRentals();
-        }
-    }
 
     function refreshPage() {
         window.location.reload();
@@ -189,8 +187,8 @@ function RentalList() {
                                     <td >{rental.status}</td>
                                     <td>
 
-                                        <Link class="btn btn-danger btn-sm" to={`/updateRental/${rental.id}`} role="button"> Update</Link>
-                                        <Link class="btn btn-light btn-sm" onClick={() => deleteRental(rental.id)} role="button"> Remove</Link>
+                                        <Link class="btn btn-light btn-sm" to={`/updateRental/${rental.id}`} role="button"> Update</Link>
+                                        <Link class="btn btn-danger btn-sm" onClick={() => openModalDelete(rental)} role="button"> Remove</Link>
 
                                     </td>
                                 </tr>
@@ -199,6 +197,45 @@ function RentalList() {
                     </tbody>
                 </table>
             </div>
+
+            <Modal show={modalDeleteConfirm} size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Are you want to delete this item ?</p>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
+                            Confirm
+                        </button>
+                    </div>
+                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
+                        <button type="reset" className="btn btn-reset">
+                            cancel
+                        </button>
+                    </div>
+                </Modal.Footer>
+            </Modal>
+
+            {/* open delete form */}
+            <Modal
+                show={modalDelete}
+                onHide={() => setModalDelete(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <DeleteModal
+                    data={modalDataDelete}
+                    onHide={() => setModalDelete(false)}
+                />
+            </Modal>
 
 
 

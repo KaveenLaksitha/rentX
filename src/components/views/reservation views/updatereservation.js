@@ -24,7 +24,9 @@ import 'react-datetime/css/react-datetime.css';
     let history = useHistory();
     const { RID } = useParams();
 
-
+    useEffect(() => {
+        loadReservation();
+    }, []);
 
     const[customername,setcustomername] = useState("");
     const[contactnumber,setcontactnumber] = useState("");
@@ -39,19 +41,76 @@ import 'react-datetime/css/react-datetime.css';
     const[advancedpayment,setadvancedpayment] = useState("");
     const[totalreservation,settotalreservation] = useState("");
     const[status,setstatus] = useState("");
+    const[returnDay, setreturnDay] = useState("");
+    const[penaltyDay, setpenaltyDay] = useState("");
+    const[penaltyCharge, setpenaltyCharge] = useState("");
+    const[remaining, setremaining] = useState("");
 
-    useEffect(() => {
-        loadReservation();
-    }, []);
+    //disable past dates
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday);
+
+    };
+
+    // calculate the penalty Day
+    function getDateDiff() {
+        var TO = moment(to).format('DD/MM/YYYY');
+        var Ret = moment(returnDay).format('DD/MM/YYYY');
+        var admission = moment(TO, 'DD-MM-YYYY');
+        var discharge = moment(Ret, 'DD-MM-YYYY');
+        const diffDuration = discharge.diff(admission, 'days');
+        return (diffDuration);
+    }
+
+    // calculate the penalty Cost
+    function calculatePenaltyCost() {
+        const Price = (totalreservation * (5 / 100)) * getDateDiff()
+        return Price;
+    }
+
+    function calculateRemainingPayment() {
+        return ((totalreservation - advancedpayment) + calculatePenaltyCost())
+    }
+
+    function calculateCharges() {
+        document.getElementById('penaltyDay').value = getDateDiff();
+        document.getElementById('penaltyCharge').value = calculatePenaltyCost();
+        document.getElementById('remaining').value = calculateRemainingPayment();
+    }
+
+    //const Days = getDateDiff();
+    //const penaltyCharge = calculatePenaltyCost();
+    //const remaining = calculateRemainingPayment();
 
     const onSubmit = async e => {
         e.preventDefault();
+        const finalpay = document.getElementById('remaining').value = (totalreservation - advancedpayment);
+
+        alert("Your ramaining balance is " + `${finalpay}`);
     
     const answer = window.confirm("Are you sure you want to update the Reservation details?");
     
     if (answer) {
 
-      const newReservation = {customername, contactnumber,nic,customernic, customeraddress,packagename,eventtype, from, to,discount, advancedpayment, totalreservation, status}
+      const newReservation = {customername, 
+                                contactnumber,
+                                nic,
+                                customernic, 
+                                customeraddress,
+                                packagename,
+                                eventtype, 
+                                from, 
+                                to,
+                                discount, 
+                                advancedpayment, 
+                                totalreservation, 
+                                status,
+                                returnDay,
+                                penaltyDay,
+                                penaltyCharge,
+                                remaining
+                            }
       await axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
         alert("Reservation details successfully Updated");
 
@@ -67,8 +126,8 @@ import 'react-datetime/css/react-datetime.css';
             console.log(res.data)
             setcustomername(res.data.reservation.customername);
             setcontactnumber(res.data.reservation.contactnumber);
-            setnic(res.data.reservation.customernic);
-            setcustomernic(res.data.reservation.nic);
+            setnic(res.data.reservation.nic);
+            setcustomernic(res.data.reservation.customernic);
             setcustomeraddress(res.data.reservation.customeraddress);
             setpackagename(res.data.reservation.packagename);
             seteventtype(res.data.reservation.eventtype);
@@ -78,11 +137,14 @@ import 'react-datetime/css/react-datetime.css';
             setadvancedpayment(res.data.reservation.advancedpayment);
             settotalreservation(res.data.reservation.totalreservation);
             setstatus(res.data.reservation.status);
+            setreturnDay(res.data.reservation.returnDay);
+            setpenaltyDay(res.data.reservation.penaltyDay);
+            setpenaltyCharge(res.data.reservation.penaltyCharge);
+            setremaining(res.data.reservation.remaining);
 
-        }).catch((error) => {
-            alert(error.message);
+        }).catch((err) => {
+            alert(err.response.data.error);
         })
-       console.log("customer name", customername);
 
     };
     return (
@@ -136,8 +198,22 @@ import 'react-datetime/css/react-datetime.css';
                                                     onChange={(event) => { setcontactnumber(event.target.value) }}/>
                                             </div>
                                             </div>
-                                            
-                                            <div class="form-group">
+                                            <div class="row">
+                                            <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="customernic">Customer NIC</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control formInput" 
+                                                    id="customernic" 
+                                                    name="customernic" 
+                                                    placeholder="Customer Address" 
+                                                    tabindex="3" 
+                                                    required 
+                                                    disabled
+                                                    value={customernic}
+                                                    onChange={(event) => { setcustomernic(event.target.value) }}/>
+                                            </div>
+                                            <div class="form-group col-md-6">
                                             <label class="form-label-emp" for="customeraddress">Customer Address</label>
                                                 <input 
                                                     type="text" 
@@ -151,6 +227,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     value={customeraddress}
                                                     onChange={(event) => { setcustomeraddress(event.target.value) }}/>
                                             </div>
+                                            </div>
                                             <div class="row">
                                             <br></br>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -159,6 +236,43 @@ import 'react-datetime/css/react-datetime.css';
                                             </div>
                                             
                                             <div class="row">
+                                            
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="from">From</label>
+                                                <input 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="from" 
+                                                    name="from" 
+                                                    placeholder="" 
+                                                    tabindex="5" 
+                                                    required
+                                                    disabled 
+                                                    value={moment(from).format("DD-MMMM-YYYY")}
+                                                    //value={from}
+                                                    timeFormat={false}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setfrom(event) }}
+                                                    readonly="readonly"/>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label-emp" for="to">To</label>
+                                                <input 
+                                                    //type="date" 
+                                                    class="form-control formInput" 
+                                                    id="to" 
+                                                    name="to" 
+                                                    placeholder="" 
+                                                    tabindex="6" 
+                                                    disabled
+                                                    value={moment(to).format("DD-MMMM-YYYY")}
+                                                    //value={to}
+                                                    timeFormat={false}
+                                                    //isValidDate={disableFutureDt}
+                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setto(event) }}
+                                                    readonly="readonly"/>
+                                            </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="status">Status</label>
                                                 <select
@@ -168,55 +282,27 @@ import 'react-datetime/css/react-datetime.css';
                                                         value={status}
                                                     onChange={(event) => { setstatus(event.target.value) }}
                                                     >
-                                                        <option id="select1">Select</option>
-                                                        <option id="select2">Pending</option>
-                                                        <option id="select3">Complete</option>
+                                                        
+                                                        <option id="pending">Pending</option>
+                                                        <option id="completed">Completed</option>
                                                     </select>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker 
-                                                    //type="date" 
-                                                    //class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    required 
-                                                    value={moment(from).format("MM-DD-YYYY")}
-                                                    timeFormat={false}
-                                                    //isValidDate={disablePastDt}
-                                                    onChange={(event) => { setfrom(event) }}/>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    //type="date" 
-                                                    //class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    value={moment(to).format("MM-DD-YYYY")}
-                                                    timeFormat={false}
-                                                    //isValidDate={disableFutureDt}
-                                                    //isValidDate={disablePastDt}
-                                                    onChange={(event) => { setto(event) }}/>
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-4">
-                                                <label class="form-label-emp" for="returnDate">Return Date</label>
+                                                <label class="form-label-emp" for="returnDay">Return Date</label>
                                                 <DatePicker
                                                     //type="date" 
                                                     //class="form-control formInput" 
-                                                    id="returnDate" 
-                                                    name="returnDate" 
+                                                    id="returnDay" 
+                                                    name="returnDay" 
                                                     placeholder="" 
                                                     tabindex="7" 
+                                                    value={moment(returnDay).format('MM/DD/YYYY')}
                                                     timeFormat={false}
-                                                    //isValidDate={disableFutureDt}
-                                                    //isValidDate={disablePastDt}
+                                                    onChange={(event) => { setreturnDay(event.target.value) }}
+                                                    isValidDate={disablePastDt}
+                                                    onClose={calculateCharges}
                                                     />
                                             </div>
                                             </div>
@@ -231,55 +317,67 @@ import 'react-datetime/css/react-datetime.css';
                                                     name="penaltyDay" 
                                                     placeholder="Penalty Days" t
                                                     tabindex="8" 
-                                                    required 
+                                                    //required 
+                                                    value={penaltyDay}
+                                                    onChange={(event) => { setpenaltyDay(event.target.value) }}
+
                                                     />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="penaltyCharge">Penalty Charge</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number"
                                                     class="form-control formInput" 
                                                     id="penaltyCharge" 
                                                     name="penaltyCharge" 
                                                     placeholder="Penalty Charge" 
                                                     tabindex="9" 
-                                                    required />
+                                                    //required 
+                                                    value={penaltyCharge}
+                                                    onChange={(e) => {
+                                                        setpenaltyCharge(e.target.value);
+                                                }}/>
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="advancedpayment">Advanced Payment</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control formInput" 
                                                     id="advancedpayment" 
                                                     name="advancedpayment" 
                                                     placeholder="Advanced Payment" 
+                                                    disabled
                                                     tabindex="10" 
+                                                    required
                                                     value={advancedpayment}
                                                     onChange={(event) => { setadvancedpayment(event.target.value) }}/>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="totalreservation">Total Reservation Payment</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control formInput" 
                                                     id="totalreservation" 
                                                     name="totalreservation" 
                                                     placeholder="Total Reservation Payment" 
                                                     tabindex="11" 
                                                     value={totalreservation}
-                                                    onChange={(event) => { settotalreservation(event.target.value) }}/>
+                                                    required 
+                                                    disabled
+                                                    />
                                             </div>
                                             </div>
                                             <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="reservationPrice">Remaining Reservation Payment</label>
+                                                <label class="form-label-emp" for="remaining">Remaining Reservation Payment</label>
                                                 <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     class="form-control formInput" 
-                                                    id="reservationPrice" 
-                                                    name="reservationPrice" 
+                                                    id="remaining" 
+                                                    name="remaining" 
+                                                    value={Number(remaining)}
                                                     placeholder="Remaining Reservation Payment" 
                                                     tabindex="11" />
                                             </div>

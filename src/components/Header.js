@@ -166,33 +166,34 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new">
                 <li className="has-subnav ">
-                  <a href="/">
+                  <a href="/employee/report">
                     <i className="fa"></i>
                     <span className="nav-text">Employees</span>
                     <i className="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
                 <li className="has-subnav">
-                  <a href="/addLeave">
+                  <a href="/rental/report">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text">Rentals</span>
                     <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>
                 <li className="has-subnav">
-                  <a href="/addLeave">
-                    <i className="fa fa-2x"></i>
-                    <span className="nav-text">Vehicle Inventory</span>
-                    <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
-                </li>
-                <li className="has-subnav">
-                  <a href="/addLeave">
+                <a href="/reservation/report">
                     <i className="fa fa-2x"></i>
                     <span className="nav-text">Reservations</span>
                     <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>
+                <li className="has-subnav">
+                  <a href="/vehicle/report">
+                    <i className="fa fa-2x"></i>
+                    <span className="nav-text">Vehicle Inventory</span>
+                    <i className="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
+                
               </ul>
             </li>
             <hr></hr>
