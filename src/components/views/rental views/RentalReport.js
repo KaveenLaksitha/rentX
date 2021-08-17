@@ -18,7 +18,7 @@ import 'react-datetime/css/react-datetime.css';
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                        <form>
                                         <center>
-                                        <h3 className=" mt-3 mb-4">Generate Report on Reservation Records </h3>
+                                        <h3 className=" mt-3 mb-4">Generate Report on Rental Records </h3>
                                         </center>
                                         <hr></hr>
                                         </form>
@@ -77,7 +77,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <br></br>
 
                                             <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Event name</label>
+                                                <label class="form-label-emp" for="customeraddress">Customer Name</label>
                                                 <input 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -101,7 +101,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
-                                                         />Complete</label>
+                                                         />Completed</label>
                                             </div>
 
                                         </div>

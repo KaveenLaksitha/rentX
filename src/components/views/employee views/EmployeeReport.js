@@ -18,7 +18,7 @@ import 'react-datetime/css/react-datetime.css';
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                        <form>
                                         <center>
-                                        <h3 className=" mt-3 mb-4">Generate Report on Reservation Records </h3>
+                                        <h3 className=" mt-3 mb-4">Generate Report on Employee Records </h3>
                                         </center>
                                         <hr></hr>
                                         </form>
@@ -62,7 +62,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <br></br>
 
                                             <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Type</label>
+                                                <label class="form-label-emp" for="customeraddress">Designation</label>
                                                 <select 
                                                     type="text" 
                                                     class="form-control formInput" 
@@ -75,33 +75,52 @@ import 'react-datetime/css/react-datetime.css';
                                             </div>
 
                                             <br></br>
+                                            <div class="row">
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Event name</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="customeraddress" 
-                                                    name="customeraddress" 
-                                                    placeholder="" 
-                                                    tabindex="4" 
-                                                    //required
+                                                    <div className="form-group col-md-2">
+                                                    <label class="form-label-emp" for="customeraddress">Age Between</label>
+                                                    </div>
+                                                    
+                                                    <div className="form-group col-md-2">
+                                                    <input 
+                                                        type="number" 
+                                                        class="form-control formInput" 
+                                                        id="customeraddress" 
+                                                        name="customeraddress" 
+                                                        placeholder="" 
+                                                        tabindex="4" 
+                                                        //required
+                                                        />
+                                                    </div>
+
+                                                    <div className="form-group col-md-2">
+                                                    <input 
+                                                        type="number" 
+                                                        class="form-control formInput" 
+                                                        id="customeraddress" 
+                                                        name="customeraddress" 
+                                                        placeholder="" 
+                                                        tabindex="4" 
+                                                        //required
                                                     />
+                                                    </div>
                                             </div>
+                                           
+                                            
                                         <br></br>
                                         <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp " for="gender">Status:</label>
+                                            <label className="form-label-emp " for="gender">Gender:</label>
                                             <br></br>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
-                                                        />Pending</label>
+                                                        />Male</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
-                                                         />Complete</label>
+                                                         />Female</label>
                                             </div>
 
                                         </div>
