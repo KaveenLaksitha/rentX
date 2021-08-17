@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 
 
-function ViewEmployee(emp) {
+function ViewPastEmployee(emp) {
 
     console.log("model openingggg", emp)
 
@@ -39,11 +39,12 @@ function ViewEmployee(emp) {
                                     </th>
                                     <td class="text-left">{emp.data.email}</td>
                                 </tr>
+
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Marital Status
+                                        Mobile Number
                                     </th>
-                                    <td class="text-left">{emp.data.maritalStat}</td>
+                                    <td class="text-left">{emp.data.mobileNo}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
@@ -53,27 +54,15 @@ function ViewEmployee(emp) {
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Current Address
+                                        Designation
                                     </th>
-                                    <td class="text-left">{emp.data.currAdd}</td>
+                                    <td class="text-left">{emp.data.designation}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Permanent Address
+                                        Reason for Resignaiion
                                     </th>
-                                    <td class="text-left">{emp.data.permAdd}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-left" scope="row">
-                                        Mobile Number
-                                    </th>
-                                    <td class="text-left">{emp.data.mobileNo}</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-left" scope="row">
-                                        Emergency Contact Number
-                                    </th>
-                                    <td class="text-left">{emp.data.emgContact}</td>
+                                    <td class="text-left">{emp.data.resReason}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -87,4 +76,4 @@ function ViewEmployee(emp) {
     )
 }
 
-export default ViewEmployee
+export default ViewPastEmployee

@@ -24,7 +24,7 @@ function MakeInquiry() {
                 ? "Your inquiry successfully submitted!"
                 : response.err;
             alert(message);
-            //window.location.replace("/empList");
+            window.location.replace("/empList");
         });
     }
 

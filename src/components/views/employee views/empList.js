@@ -10,18 +10,32 @@ import DeleteModal from "./modals/deleteEmployee"
 export default function EmpList() {
     const [empList, setEmp] = useState([]);
 
+    const [isFetching, setIsFetching] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false);
+
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
-
 
     const [modalDataDelete, setModalDataDelete] = useState([]);
     const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
+
         getAllEmployeesService().then((data) => {
-            setEmp(data.data);
-            console.log(data.data, "component did mount on new list")
+
+            console.log("data for table", data);
+
+            if (data.ok && !isFetching) {
+
+                setIsFetching(true);
+                setModalLoading(false);
+                setEmp(data.data);
+
+            } else {
+                setModalLoading(true);
+            }
+
         }
         )
     }, []);
@@ -35,28 +49,33 @@ export default function EmpList() {
 
 
     const openModalView = (emp) => {
+
         setData(emp);
         handleViewOnClick();
+
     }
 
     const handleViewOnClick = () => {
+
         console.log("req came for modal");
         console.log(modalData, "data came for modalllllll");
         setModalShow(true);
+
     }
 
     const openModalDelete = (data) => {
+
         setModalDataDelete(data);
         setModalDeleteConfirm(true);
-    }
 
+    }
 
 
     return (
         <div className="page-component-body " >
 
-            <div className="table-emp ">
-                <div class="row table-head">
+            <div className="table-emp">
+                <div class="row table-head  mt-3">
                     <div class="col">
                         <h3 className="float-left">List of Employees</h3>
                     </div>
@@ -65,7 +84,7 @@ export default function EmpList() {
                             Add Employee
                         </button>
                     </a>
-                    <a href="##" class="float-right ml-4">
+                    <a href="/pastEmpList" class="float-right ml-4">
                         <button class="btn btn-ok white">
                             Past Employees
                         </button>
@@ -142,7 +161,7 @@ export default function EmpList() {
             </Modal>
 
             {/* modal for delete employee record*/}
-            <Modal show={modalDeleteConfirm} size="md"
+            <Modal show={modalDeleteConfirm} onHide={() => setModalDeleteConfirm(false)} size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Header closeButton>
@@ -153,16 +172,17 @@ export default function EmpList() {
 
                 </Modal.Body>
                 <Modal.Footer>
-
-                    <div className="col py-3 text-center">
-                        <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
-                            Confirm
-                        </button>
-                    </div>
-                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
-                        <button type="reset" className="btn btn-reset">
-                            cancel
-                        </button>
+                    <div className="row">
+                        <div className="col -6">
+                            <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
+                                Confirm
+                            </button>
+                        </div>
+                        <div className=" col-6 text-right" onClick={() => setModalDeleteConfirm(false)}>
+                            <button type="reset" className="btn btn-reset">
+                                cancel
+                            </button>
+                        </div>
                     </div>
                 </Modal.Footer>
             </Modal>
@@ -179,6 +199,33 @@ export default function EmpList() {
                     data={modalDataDelete}
                     onHide={() => setModalDelete(false)}
                 />
+            </Modal>
+
+            {/* modal for display while loading or on error */}
+            <Modal show={modalLoading} size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Body>
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="spinner-grow text-danger" role="status">
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                        </div><div class="spinner-grow text-danger" role="status">
+                        </div>
+
+                        <span class="sr-only">something went wrong...</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4 h5"> something went wrong</div>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { window.location.reload() }}>
+                            Try again
+                        </button>
+                    </div>
+                </Modal.Footer>
             </Modal>
 
         </div >

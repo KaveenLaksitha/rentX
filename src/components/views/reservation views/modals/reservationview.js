@@ -1,15 +1,15 @@
-import React from "react";
-import { Modal } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 
-function ViewEmployee(emp) {
+function Reservationview(reservations) {
 
-    console.log("model openingggg", emp)
+    console.log("model openingggg", reservations)
 
     return (
         <div>
             <Modal.Header closeButton>
-                <Modal.Title>Employee Name : {emp.data.fName + " " + emp.data.lName}</Modal.Title>
+                <Modal.Title>Customer Name : {reservations.data.customername}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="row">
@@ -18,62 +18,68 @@ function ViewEmployee(emp) {
                             <tbody>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Full Name
+                                        Customer Name : 
                                     </th>
-                                    <td class="text-left">{emp.data.fName + " " + emp.data.lName}</td>
+                                    <td class="text-left">{reservations.data.customername}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Gender
+                                        Customer Contact No :
                                     </th>
-                                    <td class="text-left">{emp.data.gender}</td>
+                                    <td class="text-left">{reservations.data.contactnumber}</td>
                                 </tr><tr>
                                     <th class="text-left" scope="row">
-                                        Date of Birth
+                                        Customer Address :
                                     </th>
-                                    <td class="text-left">{emp.data.DOB}</td>
+                                    <td class="text-left">{reservations.data.customeraddress}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Email
+                                        Customer NIC :
                                     </th>
-                                    <td class="text-left">{emp.data.email}</td>
+                                    <td class="text-left">{reservations.data.customernic}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Marital Status
+                                        Package Name :
                                     </th>
-                                    <td class="text-left">{emp.data.maritalStat}</td>
+                                    <td class="text-left">{reservations.data.packagename}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        NIC
+                                        Event Type : 
                                     </th>
-                                    <td class="text-left">{emp.data.nic}</td>
+                                    <td class="text-left">{reservations.data.eventtype}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Current Address
+                                        From :
                                     </th>
-                                    <td class="text-left">{emp.data.currAdd}</td>
+                                    <td class="text-left">{reservations.data.from}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Permanent Address
+                                        To :
                                     </th>
-                                    <td class="text-left">{emp.data.permAdd}</td>
+                                    <td class="text-left">{reservations.data.to}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Mobile Number
+                                        Advanced Payment :
                                     </th>
-                                    <td class="text-left">{emp.data.mobileNo}</td>
+                                    <td class="text-left">{reservations.data.advancedpayment}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Emergency Contact Number
+                                        Total Reservation : 
                                     </th>
-                                    <td class="text-left">{emp.data.emgContact}</td>
+                                    <td class="text-left">{reservations.data.totalreservation}</td>
+                                </tr>
+                                 <tr>
+                                    <th class="text-left" scope="row">
+                                        Status : 
+                                    </th>
+                                    <td class="text-left">{reservations.data.status}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,10 +87,10 @@ function ViewEmployee(emp) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <button className="btn btn-close" onClick={emp.onHide}>Close</button>
+                <Button onClick={reservations.onHide}>Close</Button>
             </Modal.Footer>
         </div>
     )
 }
 
-export default ViewEmployee
+export default Reservationview
