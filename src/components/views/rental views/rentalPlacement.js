@@ -510,14 +510,14 @@ function RentalPlacement() {
                                                 <br></br>
                                                 <label class="form-label-emp" for="totalRent">Rental Charge</label>
 
-                                                <input type="number" class="form-control formInput"
+                                                <input type="number" class="form-control-plaintext"
                                                     id="totalRent"
                                                     name="totalRent"
                                                     placeholder="TotalRent(Rs: 5000.00)"
                                                     tabindex="3"
                                                     //onKeyPress={(event) => {  }}
                                                     max="10000000"
-                                                    min="0" />
+                                                    min="0" readOnly />
                                             </div>
                                         </div>
                                     </div>

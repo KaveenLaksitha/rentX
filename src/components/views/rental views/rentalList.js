@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
 import TestModal from "./modals/viewRental";
@@ -8,6 +8,8 @@ import DeleteModal from "./modals/deleteRental"
 
 
 function RentalList() {
+
+    let history = useHistory();
 
     const [search, setSearch] = useState("");
     const [rentalList, setRentalList] = useState([]);
@@ -19,6 +21,7 @@ function RentalList() {
     const [modalDelete, setModalDelete] = useState(false);
 
     const [modalLoading, setModalLoading] = useState(false);
+    const [refresgPage, setRefreshPage] = useState(false);
 
     useEffect(() => {
 
@@ -40,11 +43,14 @@ function RentalList() {
         }
 
 
+
+
     }, [])
 
     useEffect(() => {
 
         console.log("component did update", modalDataDelete)
+
 
     }, [modalDataDelete]);
 
@@ -68,12 +74,16 @@ function RentalList() {
 
 
     function pendingRecords() {
+        document.getElementById('addRec').value = "Completed Rentals";
+        document.getElementById('addRec').innerHTML = "Completed Rentals";
+        document.getElementById('addRecs').href = "/rental/removedRentalList";
         function getPendingRentals() {
             axios.get("http://localhost:4000/rental/searchPendingRentalRecords/").then((res) => {
                 //setRentals(res.data.reverse());
                 setRentalList(res.data.reverse());
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                setModalLoading(true);
             })
         }
         getPendingRentals();
@@ -87,7 +97,8 @@ function RentalList() {
                 //setRentals(res.data);
                 setRentalList(res.data);
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                setModalLoading(true);
             })
         }
         else if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
@@ -95,7 +106,8 @@ function RentalList() {
                 //setRentals(res.data);
                 setRentalList(res.data);
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                setModalLoading(true);
             })
         } else {
 
@@ -103,7 +115,8 @@ function RentalList() {
                 //setRentals(res.data);
                 setRentalList(res.data);
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                setModalLoading(true);
             })
         }
 
@@ -133,13 +146,13 @@ function RentalList() {
                     onHide={() => setModalShow(false)}
                 />
             </Modal>
-            <div className="table-emp">
+            <div className="table-emp mt-3">
                 <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Rentals</h3>
+                        <h3 className="float-left" onClick={refreshPage}>List of Rentals</h3>
                     </div>
-                    <a href="/addRental" class="float-right">
-                        <button class="btn btn-ok white">
+                    <a href="/addRental" class="float-right" id="addRecs">
+                        <button class="btn btn-ok white" id="addRec">
                             + Add Rental
                         </button>
                     </a>

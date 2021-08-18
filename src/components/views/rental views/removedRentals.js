@@ -17,6 +17,8 @@ function RemovedRentalList() {
 
     const [modalLoading, setModalLoading] = useState(false);
 
+
+
     useEffect(() => {
 
         /*if (document.getElementById('submit').clicked) {//this get executed if we are specifically searching
@@ -72,27 +74,17 @@ function RemovedRentalList() {
                     onHide={() => setModalShow(false)}
                 />
             </Modal>
-            <div className="table-emp">
-                <h2>LIST OF REMOVED RENTAL RECORDS</h2>
-                <div class="row table-head-search">
-                    <div className="col-md-8"></div>
-
-                    <div className="col">
-                        <div class="input-group input-group-search">
-                            <div class="searchbar">
-                                <form >
-                                    <input class="search_input" type="text" name="search" placeholder="Search..."
-                                        value={search} onChange={(event) => { setSearch(event.target.value) }} require />
-                                    <button class="btn search_icon" type="submit" id="submit" name="submit"
-                                        d>
-                                        <i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
+            <div className="table-emp mt-3">
+                <div class="row table-head">
+                    <div class="col">
+                        <h3 className="float-left">Completed Rentals</h3>
                     </div>
-
+                    <p class="float-right ml-4">
+                        <Link class="link" to={`/rentalList`}><button class="btn btn-ok white" id="pending" >
+                            Main List
+                        </button> </Link>
+                    </p>
                 </div>
-
 
                 <table class="table table-hover">
                     <thead class="thead-dark">
