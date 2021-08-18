@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
-import { getAllEmployeesService } from "../../services/employeeService";
+import { getAllPastEmployeesService } from "../../services/employeeService";
 
-import ViewEmpModal from "./modals/viewEmployee";
-import DeleteModal from "./modals/deleteEmployee"
+import ViewEmpModal from "./modals/viewPastEmployees";
 
-export default function EmpList() {
-    const [empList, setEmp] = useState([]);
+export default function PastEmpList() {
+    const [pastRmpList, setEmp] = useState([]);
+
 
     const [isFetching, setIsFetching] = useState(false);
     const [modalLoading, setModalLoading] = useState(false);
@@ -17,25 +17,17 @@ export default function EmpList() {
     const [modalShow, setModalShow] = useState(false);
 
     const [modalDataDelete, setModalDataDelete] = useState([]);
-    const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
-    const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
-
-        getAllEmployeesService().then((data) => {
-
-            console.log("data for table", data);
-
+        getAllPastEmployeesService().then((data) => {
             if (data.ok && !isFetching) {
 
                 setIsFetching(true);
-                setModalLoading(false);
                 setEmp(data.data);
-
+                console.log(data.data, "component did mount on new list")
             } else {
                 setModalLoading(true);
             }
-
         }
         )
     }, []);
@@ -49,44 +41,29 @@ export default function EmpList() {
 
 
     const openModalView = (emp) => {
-
         setData(emp);
         handleViewOnClick();
-
     }
 
     const handleViewOnClick = () => {
-
         console.log("req came for modal");
         console.log(modalData, "data came for modalllllll");
         setModalShow(true);
-
     }
 
-    const openModalDelete = (data) => {
-
-        setModalDataDelete(data);
-        setModalDeleteConfirm(true);
-
-    }
 
 
     return (
         <div className="page-component-body " >
 
-            <div className="table-emp">
-                <div class="row table-head  mt-3">
+            <div className="table-emp ">
+                <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Employees</h3>
+                        <h3 className="float-left">List of Past Employees</h3>
                     </div>
-                    <a href="/addEmployee" class="float-right">
+                    <a href="/empList" class="float-right ml-4">
                         <button class="btn btn-ok white">
-                            Add Employee
-                        </button>
-                    </a>
-                    <a href="/pastEmpList" class="float-right ml-4">
-                        <button class="btn btn-ok white">
-                            Past Employees
+                            Current Employees
                         </button>
                     </a>
                 </div>
@@ -105,40 +82,28 @@ export default function EmpList() {
                     <thead class="thead-dark">
                         <tr>
                             <th>Name</th>
-                            <th>NIC</th>
-                            <th>e-mail</th>
+                            <th>Gender</th>
                             <th>Date of Birth</th>
+                            <th>e-mail</th>
                             <th>Mobile Number</th>
-                            <th>Action</th>
+                            <th>NIC</th>
+                            <th>Designation</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {empList.map((employee) => {
+                        {pastRmpList.map((employee) => {
                             return (
 
                                 <tr>
                                     <td onClick={() => openModalView(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details">
                                         {employee.fName + " " + employee.lName}
                                     </td>
-                                    <td>{employee.nic}</td>
-                                    <td>{employee.email}</td>
+                                    <td>{employee.gender}</td>
                                     <td>{moment(employee.DOB).format('YYYY-MMMM-D')}</td>
+                                    <td>{employee.email}</td>
                                     <td>{employee.mobileNo}</td>
-                                    <td>
-                                        <button
-                                            class="btn btn-light btn-sm"
-                                        // onClick={() => this.handleUpdateOnClick(employee.userId)}
-                                        >
-                                            update
-                                        </button>
-                                        <button
-                                            id="btnDelete"
-                                            class="btn btn-danger btn-sm"
-                                            onClick={() => openModalDelete(employee)}
-                                        >
-                                            delete
-                                        </button>
-                                    </td>
+                                    <td>{employee.nic}</td>
+                                    <td>{employee.designation}</td>
                                 </tr>
                             );
                         })}
@@ -157,47 +122,6 @@ export default function EmpList() {
                 <ViewEmpModal
                     data={modalData}
                     onHide={() => setModalShow(false)}
-                />
-            </Modal>
-
-            {/* modal for delete employee record*/}
-            <Modal show={modalDeleteConfirm} onHide={() => setModalDeleteConfirm(false)} size="md"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Confirm Deletion</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>Are you want to delete this item ?</p>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <div className="row">
-                        <div className="col -6">
-                            <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
-                                Confirm
-                            </button>
-                        </div>
-                        <div className=" col-6 text-right" onClick={() => setModalDeleteConfirm(false)}>
-                            <button type="reset" className="btn btn-reset">
-                                cancel
-                            </button>
-                        </div>
-                    </div>
-                </Modal.Footer>
-            </Modal>
-
-            {/* open delete form */}
-            <Modal
-                show={modalDelete}
-                onHide={() => setModalDelete(false)}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <DeleteModal
-                    data={modalDataDelete}
-                    onHide={() => setModalDelete(false)}
                 />
             </Modal>
 
@@ -227,7 +151,6 @@ export default function EmpList() {
                     </div>
                 </Modal.Footer>
             </Modal>
-
         </div >
     );
 }

@@ -5,7 +5,7 @@
 }
 
 .page-component-body {
-  height: 900px;
+  min-height: 900px;
 }
 /*side nav bar and header*/
 .navbar {
@@ -159,7 +159,7 @@ li.nav-item {
   background-color: #3b3b3b;
   width: 1520px;
   bottom: 0;
-  top: 8rem;
+  top: 2rem;
   height: 8rem;
 }
 
@@ -324,8 +324,17 @@ textarea {
 /*css for buttons*/
 .btn-ok {
   background-color: #1fc191;
-  color: black;
+  color: white;
   width: 200px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+.btn-close {
+  background-color: #1fc191;
+  color: white;
+  width: 100px;
   font-size: 1.1rem;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
@@ -334,7 +343,7 @@ textarea {
 
 .btn-reset {
   background-color: #ffd200;
-  color: black;
+  color: whte;
   width: 200px;
   font-size: 1.1rem;
   border-radius: 0.5rem;

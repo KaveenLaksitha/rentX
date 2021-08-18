@@ -4,7 +4,10 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
+import { FilePond } from 'react-filepond';
+
 import { addEmployeeService } from "../../services/employeeService";
+
 
 function AddEmployee() {
 
@@ -29,7 +32,7 @@ function AddEmployee() {
     const [mobileNo, setMobileNo] = useState("");
     const [emgContact, setEmgContact] = useState("");
     const [empPic, setEmpPic] = useState("");
-    const [cv, setCV] = useState("");
+    const [cv, setCV] = useState([]);
 
 
     const [TeleErr, setTeleNoErr] = useState("");
@@ -203,7 +206,7 @@ function AddEmployee() {
                                     </div>
                                     <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp " for="gender">Gender:</label>
+                                            <label className="form-label-emp mb-3" for="gender">Gender:</label>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
@@ -245,12 +248,7 @@ function AddEmployee() {
                                                 type="email"
                                                 className="form-control "
                                                 placeholder="email"
-                                                onChange={(e) => {
-                                                    {
-                                                        setEmail(e.target.value);
-                                                        validateEmail(e);
-                                                    }
-                                                }}
+                                                onChange={(e) => { { setEmail(e.target.value); validateEmail(e); } }}
                                             />
                                             <div className={`message ${isValid ? 'success' : 'error'}`}>
                                                 {message}
@@ -396,16 +394,21 @@ function AddEmployee() {
                                         </div>
                                         <div className="form-group col-md-6">
                                             <div className="form-group">
-                                                <label className="form-label-emp pb-3" for="cv">CV:</label>
+                                                {/* <label className="form-label-emp pb-3" for="cv">CV:</label>
                                                 <input
                                                     // required
                                                     id="cv"
                                                     type="file"
-                                                    className="form-control-file"
+                                                    className="form-control-file fliepond"
                                                     onChange={(e) => {
                                                         setCV(e.target.value);
                                                     }}
-                                                />
+                                                /> */}
+                                                {/* <FilePond
+                                                    files={cv}
+                                                    onupdatefiles={setCV}
+                                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                                                /> */}
                                             </div>
                                         </div>
                                     </div>
