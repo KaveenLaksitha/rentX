@@ -11,6 +11,10 @@ function VehicleList() {
     const [vehicles, setVehicles] = useState([]);
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+
+    const [modalDataDelete, setModalDataDelete] = useState([]);
+    const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
     
    
     useEffect(() => {
@@ -43,6 +47,12 @@ function VehicleList() {
         console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
+
+    const openModalDelete = (data) => {
+        setModalDataDelete(data);
+        setModalDeleteConfirm(true);
+    }
+
 
 
 
@@ -125,18 +135,19 @@ function VehicleList() {
                                <td>{vehicles.VehicleType}</td>
                                <td>{vehicles.RatePDay}</td>
                                <td>
-
-                                        <Link class="btn btn-danger btn-sm" 
-                                        
-                                                // to={`/updateRental/${rentals.id}`}
-                                        
-                                        role="button"> Update</Link>
-                                        <Link class="btn btn-light btn-sm"
-                                        
-                                                // onClick={() => deleteRental(rentals.id)} 
-                                                
-                                                
-                                                role="button"> Remove</Link>
+                               <button
+                                            class="btn btn-light btn-sm"
+                                        // onClick={() => this.handleUpdateOnClick(employee.userId)}
+                                        >
+                                            update
+                                        </button>
+                                        <button
+                                            id="btnDelete"
+                                            class="btn btn-danger btn-sm"
+                                            onClick={() => openModalDelete(vehicles)}
+                                        >
+                                            delete
+                                </button>
 
                                </td>
 
@@ -151,6 +162,32 @@ function VehicleList() {
                 </tbody>
             </table>
         </div>
+
+                    {/* modal for delete employee record*/}
+                    <Modal show={modalDeleteConfirm} size="md"
+                            aria-labelledby="contained-modal-title-vcenter"
+                            centered>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Confirm Deletion</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <p>Are you want to delete this item ?</p>
+
+                            </Modal.Body>
+                            <Modal.Footer>
+
+                                <div className="col py-3 text-center">
+                                    <button type="submit" className="btn btn-delete" onClick={() => { setModalDelete(true); setModalDeleteConfirm(false); }}>
+                                        Confirm
+                                    </button>
+                                </div>
+                                <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
+                                    <button type="reset" className="btn btn-reset">
+                                        cancel
+                                    </button>
+                                </div>
+                            </Modal.Footer>
+                    </Modal>
     </div>
     )
 }
