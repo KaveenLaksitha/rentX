@@ -224,8 +224,12 @@ function Reservation() {
         document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
-        //var dis = Number(document.getElementById('discount').value) / 100;       
-        var finalresult = document.getElementById('totalreservation').value = result + (1 * getDateDiff());
+        //var dis = Number(document.getElementById('discount').value) / 100;
+        if(getDateDiff() == 0){
+            var finalresult = document.getElementById('totalreservation').value = result ;
+        }else{
+            var finalresult = document.getElementById('totalreservation').value = result * getDateDiff();
+        }        
         return finalresult;
     }
 

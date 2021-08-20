@@ -20,6 +20,8 @@ function Viewreservation() {
     const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
 
+    const [modalLoading, setModalLoading] = useState(false);
+
     useEffect(() => {
 
         if (document.getElementById('submit').clicked) {//this get executed if we are specifically searching
@@ -30,7 +32,8 @@ function Viewreservation() {
         axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
             setviewreservation(res.data.reverse());
         }).catch((error) => {
-          alert(error.message);
+          //alert(error.message);
+          setModalLoading(true);
         })
     }
     getReservation();
@@ -101,24 +104,7 @@ function Viewreservation() {
         }
     }
 
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }       
-        }
-      }
+    
 
     
 
@@ -135,7 +121,7 @@ const deleteReservation = async (data) => {
             }
 
         }).catch((err) => {
-            alert("enne na")
+            alert(err.response.data.error)
 
             //alert(err.response.data.errorCode)
 
@@ -185,7 +171,7 @@ const deleteReservation = async (data) => {
                             <div class="searchbar">
                                 <form onSubmit={searchReservation} >
                                 <input class="search_input" type="text" name="search" placeholder="Search..."
-                                value={search} onChange={(event) => { setSearch(event.target.value) }} require  id="myInput" onClick={myFunction}/>
+                                value={search} onChange={(event) => { setSearch(event.target.value) }} require  />
                                 <button class="btn search_icon" id="submit" name="submit" type="submit" ><i class="fa fa-search" ></i></button>
                                 </form>
                             </div>
@@ -245,8 +231,8 @@ const deleteReservation = async (data) => {
 
                 </Modal.Body>
                 <Modal.Footer>
-
-                    <div className="col py-3 text-center">
+                <div className="row">
+                    <div className="col -6">
                         <button type="submit" className="btn btn-delete" onClick={() => { deleteReservation(modalDataDelete); }}>
                             Confirm
                         </button>
@@ -256,8 +242,35 @@ const deleteReservation = async (data) => {
                             cancel
                         </button>
                     </div>
+                    </div>
                 </Modal.Footer>
-            </Modal>       
+            </Modal> 
+            {/* modal for display while loading or on error */}
+            <Modal show={modalLoading} size="sm"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
+                <Modal.Body>
+                    <div class="d-flex justify-content-center mt-2">
+                        <div class="spinner-grow text-danger" role="status">
+                        </div>
+                        <div class="spinner-grow text-danger" role="status">
+                        </div><div class="spinner-grow text-danger" role="status">
+                        </div>
+
+                        <span class="sr-only">something went wrong...</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4 h5"> something went wrong</div>
+
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <div className="col py-3 text-center">
+                        <button type="submit" className="btn btn-delete" onClick={() => { window.location.reload() }}>
+                            Try again
+                        </button>
+                    </div>
+                </Modal.Footer>
+            </Modal>      
 
 
         </div>
