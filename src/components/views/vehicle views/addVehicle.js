@@ -84,6 +84,7 @@ function AddVehicle() {
 
         .then(() => {
             alert("Vehicle added Successfully !!")
+            window.location.replace("/vehicleList");
 
         }).catch((err) => {
             alert(err)
@@ -205,7 +206,7 @@ function AddVehicle() {
     const [isNICValid, setNICIsValid] = useState(false);
     const [NICmessage, setNICMessage] = useState('');
 
-    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
     const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
 
     const validateNIC = (event) => {
@@ -272,8 +273,7 @@ function AddVehicle() {
                     
                 
                 <div class="tab-content tab-content-V  col-12" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
                             <div class="container border-top">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -316,7 +316,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="subject">Telephone No</label>
-                                                <input  type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input  type="Number" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setTeleNo(e.target.value); // assign value
@@ -428,7 +428,7 @@ function AddVehicle() {
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form"   role="form"  onSubmit={sendData} >
+                                    <form id="contact-form" class="form"   role="form"  action = "POST" onSubmit={sendData} >
                                     <div className="row">
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="name">Vehicle Brand</label>
@@ -464,7 +464,7 @@ function AddVehicle() {
                                                     <option value="car">Car</option>
                                                     <option value="van">Van</option>
                                                     <option value="bus">Bus</option>
-                                                </select>
+                                            </select>
                                         </div>
                                     </div>
 

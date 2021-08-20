@@ -163,6 +163,65 @@ function AddEmployee() {
     };
 
 
+    const [isNICValid, setNICIsValid] = useState(false);
+    const [NICmessage, setNICMessage] = useState('');
+
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateNIC = (event) => {
+        const NIC = event.target.value;
+        if (NICRegex1.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        }else if(NICRegex2.test(NIC)){
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!'); 
+        } else {
+            setNICIsValid(false);
+            setNICMessage('Please enter a valid NIC Number!');
+        }
+    };
+
+
+    const [isMobileNoValid, setMobileNoValid] = useState(false);
+    const [MobileNoMessage, setMobileMessage] = useState('');
+
+    const MobileRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateMobile = (event) => {
+        const MobileNo = event.target.value;
+        if (MobileRegex.test(MobileNo)) {
+            setMobileNoValid(true);
+            setMobileMessage('Your Mobile Number looks good!');
+        } else {
+            setMobileNoValid(false);
+            setMobileMessage('Please enter a valid Mobile Number!');
+        }
+    };
+
+    const [isEmgNoNoValid, setEmgNoValid] = useState(false);
+    const [EmgNoMessage, setEmgMessage] = useState('');
+
+    const EmgRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateEmgMobile = (event) => {
+        const MobileNo = event.target.value;
+        if (EmgRegex.test(MobileNo)) {
+            setEmgNoValid(true);
+            setEmgMessage('Your Emergency Contact Number looks good!');
+        } else {
+            setEmgNoValid(false);
+            setEmgMessage('Please enter a valid Emergency Contact Number!');
+        }
+    };
+
+
+
+
+
+
+
     return (
         <div className="page-component-body">
             <div className="container input-main-form-emp">
@@ -284,12 +343,15 @@ function AddEmployee() {
                                                 placeholder="NIC"
                                                 onChange={(e) => {
                                                     setNIC(e.target.value);
+                                                    validateNIC(e);
                                                 }}
                                             />
-
+                                                <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                    {NICmessage}
+                                                </div>
 
                                             {Object.keys(NICErr).map((key) => {
-                                                return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                                // return <div style={{ color: "red" }}>{NICErr[key]}</div>
                                             })}
 
 
@@ -351,10 +413,15 @@ function AddEmployee() {
                                                 placeholder="Mobile number"
                                                 onChange={(e) => {
                                                     setMobileNo(e.target.value);
+                                                    validateMobile(e);
                                                 }}
                                             />
+
+                                                <div className={`message ${isMobileNoValid ? 'success' : 'error'}`}>
+                                                            {MobileNoMessage}
+                                                </div>
                                             {Object.keys(TeleErr).map((key) => {
-                                                return <div style={{ color: "red" }}>{TeleErr[key]}</div>
+                                                // return <div style={{ color: "red" }}>{TeleErr[key]}</div>
                                             })}
 
                                         </div>
@@ -368,10 +435,15 @@ function AddEmployee() {
                                                 placeholder="Emergency contact number"
                                                 onChange={(e) => {
                                                     setEmgContact(e.target.value);
+                                                    validateEmgMobile(e);
                                                 }}
                                             />
+
+                                                <div className={`message ${isEmgNoNoValid ? 'success' : 'error'}`}>
+                                                            {EmgNoMessage}
+                                                </div>
                                             {Object.keys(EmgTeleErr).map((key) => {
-                                                return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
+                                                // return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
                                             })}
 
 

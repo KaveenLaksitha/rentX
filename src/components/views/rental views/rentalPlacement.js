@@ -269,6 +269,44 @@ function RentalPlacement() {
 
     }
 
+    const [isMobileValid, setMobileIsValid] = useState(false);
+    const [Mobilemessage, setMobileMessage] = useState('');
+
+    const MobileRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateMobileNo = (event) => {
+        const mobileNo = event.target.value;
+        if (MobileRegex.test(mobileNo)) {
+            setMobileIsValid(true);
+            setMobileMessage('Your Mobile Number looks good!');
+        } else {
+            setMobileIsValid(false);
+            setMobileMessage('Please enter a valid Mobile Number!');
+        }
+    };
+
+
+    const [isNICValid, setNICIsValid] = useState(false);
+    const [NICmessage, setNICMessage] = useState('');
+
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateNICNo = (event) => {
+        const NIC = event.target.value;
+        if (NICRegex1.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        }else if(NICRegex2.test(NIC)){
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!'); 
+        } else {
+            setNICIsValid(false);
+            setNICMessage('Please enter a valid NIC Number!');
+        }
+    };
+
+
 
 
 
@@ -545,11 +583,16 @@ function RentalPlacement() {
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
                                                         
-                                                        onChange={(event) => { setContactNo(event.target.value); }}
+                                                        onChange={(event) => { setContactNo(event.target.value);
+                                                            validateMobileNo( event) }}
                                                         required />
 
-                                                    {Object.keys(MobileErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{MobileErr[key]}</div>
+                                                    <div className={`message ${isMobileValid ? 'success' : 'error'}`}>
+                                                                {Mobilemessage}
+                                                    </div>   
+
+                                                    {  Object.keys(MobileErr).map((key)=>{
+                                                        // return<div style={{color :"red"}}>{MobileErr[key]}</div>
                                                     })}
 
 
@@ -562,13 +605,18 @@ function RentalPlacement() {
                                                         id="cNIC"
                                                         name="cNIC"
                                                         placeholder="National ID(978412351V)"
-                                                        onChange={(event) => { setCustomerNIC(event.target.value); }}
+                                                        onChange={(event) => { setCustomerNIC(event.target.value);
+                                                            validateNICNo(event) }}
                                                         
                                                         required />
 
 
+                                                            <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                                     {NICmessage}
+                                                            </div>
+
                                                     {Object.keys(NICErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{NICErr[key]}</div>
+                                                        // return<div style={{color :"red"}}>{NICErr[key]}</div>
                                                     })}
                                                 </div>
                                             </div>

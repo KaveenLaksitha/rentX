@@ -183,7 +183,7 @@ function RentalList() {
                                     <td >{rental.vehicleType}</td>
                                     <td >{rental.customerNIC}</td>
                                     <td >{rental.customerName}</td>
-                                    <td >{rental.finalPrice}</td>
+                                    <td >{rental.finalPrice.toFixed(2)}</td>
                                     <td >{rental.status}</td>
                                     <td>
 
