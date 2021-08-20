@@ -13,8 +13,8 @@ function RentalPlacement() {
     const [VanList, setVanList] = useState([]);
 
 
-    const[MobileErr, setMobileNoErr] = useState("");
-    const[NICErr, setNICErr] = useState("");
+    const [MobileErr, setMobileNoErr] = useState("");
+    const [NICErr, setNICErr] = useState("");
 
     useEffect(() => {
 
@@ -136,7 +136,7 @@ function RentalPlacement() {
     const [rentals, setRentals] = useState([]);
     const [perDayCharge, setPerDayCharge] = useState("");
 
-    const [PayErr, setPayErr] = useState("");
+
 
     function getDateDiff() {
         var admission = moment(from, 'DD-MM-YYYY');
@@ -154,9 +154,9 @@ function RentalPlacement() {
         if ((status == "" || payment == "" || vehicleType == "" || model == "" || advPayment == "")) {
             alert("Please fill the form details ")
         } else {
-            alert(vehicleType, model)
+            //alert(vehicleType, model)
             getRentChargePerDay();
-            alert(perDayCharge);
+            //alert(perDayCharge);
             document.getElementById('rentalStatus').value = status;
             document.getElementById('rentalDuration').value = getDateDiff();
             var val3 = document.getElementById('perDayCharge').value = perDayCharge;
@@ -165,7 +165,9 @@ function RentalPlacement() {
             document.getElementById('subRent').value = (((getDateDiff() * val3) + Number(addPrice) + Number(document.getElementById('tax').value)));
             document.getElementById('advancePay').value = advPayment;
             document.getElementById('finalPrice').value = ((Number(document.getElementById('subRent').value) - Number(advPayment)));
-            document.getElementById('totalRent').value = document.getElementById('subRent').value
+            document.getElementById('totalRent').value = document.getElementById('subRent').value;
+            document.getElementById('totalRent').innerHTML = document.getElementById('subRent').value;
+
         }
 
 
@@ -173,13 +175,42 @@ function RentalPlacement() {
     }
 
     function getFinalPrice() {
-        return document.getElementById('finalPrice').value = ((Number(document.getElementById('subRent').value) - Number(advPayment)));
+        //return document.getElementById('finalPrice').value = ((Number(document.getElementById('subRent').value) - Number(advPayment)));
+
+        setFinalPrice((((getDateDiff() * perDayCharge) + Number(addPrice) + 1500)))
+
+    }
+
+    //dynamically value setting
+    function summaryStatus(value) {
+        document.getElementById('rentalStatus').value = value
+        document.getElementById('rentalStatus').innerHTML = value
+    }
+
+    function summaryCustomer(value) {
+        document.getElementById('customer').value = value
+        document.getElementById('customer').innerHTML = value
+    }
+
+    function summaryAdv(value) {
+        document.getElementById('advancePay').value = value
+        document.getElementById('advancePay').innerHTML = value
+    }
+
+    function summaryDuration() {
+        document.getElementById('rentalDuration').value = getDateDiff();
+        document.getElementById('rentalDuration').innerHTML = getDateDiff();
+    }
+
+    function summaryModel(value) {
+        document.getElementById('vehicle').value = vehicleType + " " + value;
+        document.getElementById('vehicle').innerHTML = value;
     }
 
 
     function sendData(e) {
         e.preventDefault();//to prevent the default submission by submit button
-
+        alert(finalPrice);
 
 
         checkForPendingCustomer();
@@ -194,30 +225,26 @@ function RentalPlacement() {
             const MobileValid = MobileValidation();
             const NICValid = NICValidation();
 
-            if(MobileValid && NICValid){
-            const answer = window.confirm("Are you sure you want to confirm submission?");
-            if (answer) {
+            if (MobileValid && NICValid) {
+                const answer = window.confirm("Are you sure you want to confirm submission?");
+                if (answer) {
 
-                
+                    const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
+                    axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
+                        alert("Rental Record added successfully")
+                        /*function refreshPage() {
+                            window.location.reload();
+                        }
+                        refreshPage();*/
+                        history.push("/rentalList");
 
+                    }).catch((err) => {
+                        alert(err.response.data.error)
 
-                const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
+                        //alert(err.response.data.errorCode)
 
-                axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
-                    alert("Rental Record added successfully")
-                    /*function refreshPage() {
-                        window.location.reload();
-                    }
-                    refreshPage();*/
-                    history.push("/rentalList");
-
-                }).catch((err) => {
-                    alert(err.response.data.error)
-
-                    //alert(err.response.data.errorCode)
-
-                })
+                    })
 
                 }
             }
@@ -225,44 +252,50 @@ function RentalPlacement() {
 
     }
 
-    const MobileValidation =() =>{//validate function
+    const MobileValidation = () => {//validate function
 
-        const MobileErr ={}; //State
+        const MobileErr = {}; //State
         let MobileValid = true; //setting flag
 
 
-        if( contactNo.trim().length > 10 ){
+        if (contactNo.trim().length > 10) {
 
-            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+            MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
             MobileValid = false;
-        }else if(contactNo.trim().length < 10){
-            MobileErr.InValidMobileNo =" *Invalid Telephone Number"; // error msg
+        } else if (contactNo.trim().length < 10) {
+            MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
             MobileValid = false;
         }
-        
-        
+
+
         setMobileNoErr(MobileErr);//update error objects
         return MobileValid;
 
 
     }
 
-    const NICValidation =() =>{//validate function
+    const NICValidation = () => {//validate function
 
-        const NICErr ={}; //State
+        const NICErr = {}; //State
         let NICValid = true; //setting flag
 
 
-        if(customerNIC.trim().length > 12 ){
+        if (customerNIC.trim().length > 12) {
 
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+            NICErr.InValidNIC = " *Invalid NIC Number characters cannot exceed 12"; // error msg
             NICValid = false;
-        }else if(customerNIC.trim().length < 10){
-            NICErr.InValidNIC =" *Invalid NIC Number"; // error msg
+        } else if (customerNIC.trim().length == 10 && customerNIC.charAt(9) !== "V") {
+            NICErr.InValidNIC = " *Invalid NIC Number last Letter is not V"; // error msg
+            NICValid = false;
+        } else if (customerNIC.trim().length == 9) {
+            NICErr.InValidNIC = " *Invalid NIC Number ending V is missing"; // error msg
+            NICValid = false;
+        } else if (customerNIC.trim().length < 10) {
+            NICErr.InValidNIC = " *Invalid NIC Number characters are lesser"; // error msg
             NICValid = false;
         }
-        
-        
+
+
         setNICErr(NICErr);//update error objects
         return NICValid;
 
@@ -270,10 +303,9 @@ function RentalPlacement() {
     }
 
 
-
-
-
-
+    function refreshPage() {
+        //window.location.;
+    }
 
     function checks() {
         checkForPendingCustomer();
@@ -346,7 +378,7 @@ function RentalPlacement() {
                                                 <label for="rto" class="form-label-emp">To</label>
                                                 <DatePicker required id="rto"
                                                     name="rto"
-                                                    onChange={(event) => { setTo(event); }}
+                                                    onChange={(event) => { setTo(event); summaryDuration() }}
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
                                                 />
@@ -357,7 +389,7 @@ function RentalPlacement() {
                                                     name="rStatus"
                                                     id="rStatus"
                                                     required
-                                                    onChange={(event) => { setStatus(event.target.value); }}>
+                                                    onChange={(event) => { setStatus(event.target.value); summaryStatus(event.target.value); }}>
                                                     <option id="pending" >choose...</option>
                                                     <option id="pending" >Pending</option>
                                                     <option id="completed">Completed</option>
@@ -393,7 +425,7 @@ function RentalPlacement() {
                                                     <select class="form-select" class="form-control"
                                                         name="vehicleType"
                                                         id="vehicleType"
-                                                        onChange={e => { setVehicleType(e.target.value); populate() }}
+                                                        onChange={e => { setVehicleType(e.target.value); populate(); }}
                                                         required
                                                     >
                                                         <option  >choose</option>
@@ -411,7 +443,7 @@ function RentalPlacement() {
                                                         name="vehicleModel"
                                                         id="vehicleModel"
                                                         required
-                                                        onChange={(event) => { setModel(event.target.value); }}>
+                                                        onChange={(event) => { setModel(event.target.value); summaryModel(event.target.value); }}>
 
                                                     </select>
                                                 </div>
@@ -452,7 +484,7 @@ function RentalPlacement() {
                                                     placeholder="Additional Price(Rs: 5000.00)"
                                                     tabindex="3"
                                                     onChange={(event) => { setAddPrice(event.target.value); }}
-                                                    max="10000"
+                                                    max="100000000"
                                                     min="0" />
                                             </div>
                                             <div class="col-6" >
@@ -463,8 +495,9 @@ function RentalPlacement() {
                                                     name="advPayment"
                                                     placeholder="Advanced Payment(Rs: 3000.00)"
                                                     tabindex="3"
+                                                    max="100000000"
                                                     min="0"
-                                                    onChange={(event) => { setAdvPayment(event.target.value); }}
+                                                    onChange={(event) => { setAdvPayment(event.target.value); getFinalPrice(); summaryAdv(event.target.value); }}
                                                     onFocus={getRentChargePerDay} />
                                             </div>
 
@@ -477,14 +510,14 @@ function RentalPlacement() {
                                                 <br></br>
                                                 <label class="form-label-emp" for="totalRent">Rental Charge</label>
 
-                                                <input type="number" class="form-control formInput"
+                                                <input type="number" class="form-control-plaintext"
                                                     id="totalRent"
                                                     name="totalRent"
                                                     placeholder="TotalRent(Rs: 5000.00)"
                                                     tabindex="3"
-                                                    onClickCapture={(event) => { setFinalPrice(event.target.value); }}
+                                                    //onKeyPress={(event) => {  }}
                                                     max="10000000"
-                                                    min="0" />
+                                                    min="0" readOnly />
                                             </div>
                                         </div>
                                     </div>
@@ -498,7 +531,7 @@ function RentalPlacement() {
 
                                 </div>
                                 <div className="col py-3 text-center">
-                                    <button type="reset" className="btn btn-reset" >RESET</button>
+                                    <button type="reset" className="btn btn-reset" onClick={refreshPage()}>RESET</button>
                                 </div>
                             </div>
                         </form>
@@ -522,7 +555,7 @@ function RentalPlacement() {
                                                 tabindex="1"
                                                 required
                                                 maxLength="100"
-                                                onChange={(event) => { setCustomerName(event.target.value); }} />
+                                                onChange={(event) => { setCustomerName(event.target.value); summaryCustomer(event.target.value); }} />
 
                                         </div>
                                         <div class="form-group">
@@ -544,12 +577,12 @@ function RentalPlacement() {
                                                         id="cNumber"
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
-                                                        
+
                                                         onChange={(event) => { setContactNo(event.target.value); }}
                                                         required />
 
-                                                    {Object.keys(MobileErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{MobileErr[key]}</div>
+                                                    {Object.keys(MobileErr).map((key) => {
+                                                        return <div style={{ color: "red" }}>{MobileErr[key]}</div>
                                                     })}
 
 
@@ -563,12 +596,12 @@ function RentalPlacement() {
                                                         name="cNIC"
                                                         placeholder="National ID(978412351V)"
                                                         onChange={(event) => { setCustomerNIC(event.target.value); }}
-                                                        
+
                                                         required />
 
 
-                                                    {Object.keys(NICErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{NICErr[key]}</div>
+                                                    {Object.keys(NICErr).map((key) => {
+                                                        return <div style={{ color: "red" }}>{NICErr[key]}</div>
                                                     })}
                                                 </div>
                                             </div>
@@ -596,7 +629,7 @@ function RentalPlacement() {
                                                 <button type="submit" id="btnSub" className="btn btn-ok">SAVE</button>
                                             </div>
                                             <div className="col py-3 text-center">
-                                                <button type="reset" className="btn btn-reset">RESET</button>
+                                                <button type="reset" className="btn btn-reset" onClick={refreshPage()}>RESET</button>
                                             </div>
                                         </div>
                                     </form>
@@ -613,79 +646,93 @@ function RentalPlacement() {
                     <br></br>
                     <center>
                         <h2>Rental Summary</h2></center>
-                    <div class="form-row ">
-                        <div class="col-6">
+                    <div class="form-row">
+                        <div class="col-6 form-row-change">
                             <label class="form-label-h" for="rentalStatus">Rental Status : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="rentalStatus" readOnly />
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="rentalStatus" readOnly />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row ">
+                        <div class="col-6 form-row-change">
+                            <label class="form-label-h" for="customer">Customer Name: </label>
+                        </div>
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="customer" readOnly />
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-6 form-row-change">
+                            <label class="form-label-h" for="vehicle">Vehicle: </label>
+                        </div>
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="vehicle" readOnly />
+                        </div>
+                    </div>
+                    <div class="form-row form-row-change">
                         <div class="col-6">
                             <label class="form-label-h" for="rentalDuration" >Rental Duration : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="rentalDuration" readOnly />
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="rentalDuration" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-6 form-row-change">
                             <label class="form-label-h" for="perDayCharge">Rental Per Day : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control"
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext"
                                 id="perDayCharge"
                                 name="perDayCharge"
                                 readOnly />
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-6 form-row-change">
                             <label class="form-label-h" for="additionalPrice">Additional Price : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="addPrice"
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="addPrice"
                                 readOnly />
                         </div>
                         <hr></hr>
                     </div>
 
-
-
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-6 form-row-change">
                             <label class="form-label-h" for="tax">Tax : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="tax" readOnly />
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="tax" readOnly />
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-6 form-row-change">
                             <label class="form-label-h" for="subRent">Sub Rental Price : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="subRent" readOnly />
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="subRent" readOnly />
                         </div>
                         <hr></hr>
                     </div>
 
 
                     <div class="form-row">
-                        <div class="col-6">
-                            <label class="form-label-h" for="advancePay">Advanced Payment : </label>
+                        <div class="col-6 form-row-change">
+                            <label class="form-label-h" for="advancePay">Advance Deposit :  </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="advancePay" readOnly />
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="advancePay" readOnly />
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row form-row-change">
                         <div class="col-6">
                             <label class="form-label-h" for="finalPay">Final Rental Price : </label>
                         </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" id="finalPrice" readOnly
+                        <div class="col-4 form-row-change1">
+                            <input type="text" class="form-control-plaintext" id="finalPrice" readOnly
                             />
                         </div>
                     </div>
