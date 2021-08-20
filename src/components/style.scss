@@ -5,7 +5,7 @@
 }
 
 .page-component-body {
-  height: 900px;
+  min-height: 900px;
 }
 /*side nav bar and header*/
 .navbar {
@@ -159,7 +159,7 @@ li.nav-item {
   background-color: #3b3b3b;
   width: 1520px;
   bottom: 0;
-  top: 8rem;
+  top: 2rem;
   height: 8rem;
 }
 

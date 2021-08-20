@@ -206,7 +206,7 @@ function AddEmployee() {
                                     </div>
                                     <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp " for="gender">Gender:</label>
+                                            <label className="form-label-emp mb-3" for="gender">Gender:</label>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
@@ -404,11 +404,11 @@ function AddEmployee() {
                                                         setCV(e.target.value);
                                                     }}
                                                 /> */}
-                                                <FilePond
+                                                {/* <FilePond
                                                     files={cv}
                                                     onupdatefiles={setCV}
                                                     labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                                                />
+                                                /> */}
                                             </div>
                                         </div>
                                     </div>
