@@ -71,7 +71,7 @@ function AddEmployee() {
                     ? "Employee insertion successful"
                     : response.err;
                 alert(message);
-                //window.location.replace("/empList");
+                if (response.ok) { window.location.reload(); }
             });
         }
 
@@ -164,6 +164,7 @@ function AddEmployee() {
 
 
     return (
+
         <div className="page-component-body">
             <div className="container input-main-form-emp">
                 <div className="tab-content-emp" id="myTabContent">
@@ -213,14 +214,14 @@ function AddEmployee() {
                                                         onChange={(e) => {
                                                             setGender(e.target.value);
                                                         }}
-                                                        value="male" />Male</label>
+                                                        value="Male" />Male</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="gender" name="gender"
                                                         onChange={(e) => {
                                                             setGender(e.target.value);
-                                                        }} value="female" />Female</label>
+                                                        }} value="Female" />Female</label>
                                             </div>
 
                                         </div>
@@ -262,14 +263,14 @@ function AddEmployee() {
                                                         onChange={(e) => {
                                                             setMaritalStatus(e.target.value);
                                                         }}
-                                                        value="married" />Married</label>
+                                                        value="Married" />Married</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="unmarried" name="maritalStat"
                                                         onChange={(e) => {
                                                             setMaritalStatus(e.target.value);
-                                                        }} value="unmarried" />Unmarried</label>
+                                                        }} value="Unmarried" />Unmarried</label>
                                             </div>
                                         </div>
                                     </div>
@@ -394,7 +395,7 @@ function AddEmployee() {
                                         </div>
                                         <div className="form-group col-md-6">
                                             <div className="form-group">
-                                                {/* <label className="form-label-emp pb-3" for="cv">CV:</label>
+                                                <label className="form-label-emp pb-3" for="cv">CV:</label>
                                                 <input
                                                     // required
                                                     id="cv"
@@ -403,7 +404,7 @@ function AddEmployee() {
                                                     onChange={(e) => {
                                                         setCV(e.target.value);
                                                     }}
-                                                /> */}
+                                                />
                                                 {/* <FilePond
                                                     files={cv}
                                                     onupdatefiles={setCV}

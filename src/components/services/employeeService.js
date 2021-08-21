@@ -17,33 +17,20 @@ export const addEmployeeService = async (employeePayload) => {
   }
 };
 
-// export const getEmployeeService = async (employeeId) => {
-//   try {
-//     const { data } = await axios.get(`${HOST}/api/employee/${employeeId}`);
-//     return {
-//       ok: true,
-//       data: data.data.data,
-//     };
-//   } catch (error) {
-//     return {
-//       ok: false,
-//     };
-//   }
-// };
 
-// export const updateEmployeeService = async (userId, employeePayload) => {
-//   console.log(employeePayload, "<<<<<<<<<<<<<<<<<<<<<<<<");
-//   try {
-//     await axios.put(`${HOST}/api/employee/${userId}`, employeePayload);
-//     return {
-//       ok: true,
-//     };
-//   } catch (error) {
-//     return {
-//       ok: false,
-//     };
-//   }
-// };
+export const updateEmployeeService = async (userId, employeePayload) => {
+  console.log(employeePayload, "<<<<<<<<<<<<<<<<<<<<<<<<");
+  // try {
+  //   await axios.put(`${HOST}/api/employee/${userId}`, employeePayload);
+  //   return {
+  //     ok: true,
+  //   };
+  // } catch (error) {
+  //   return {
+  //     ok: false,
+  //   };
+  // }
+};
 
 export const getAllEmployeesService = async () => {
   console.log("done;");
