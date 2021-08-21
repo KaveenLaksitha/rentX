@@ -20,7 +20,7 @@ function Header(props) {
           id="mainNav"
         >
           <div className="container-fluid">
-            <a className="navbar-brand js-scroll-trigger" href="/login">
+            <a className="navbar-brand js-scroll-trigger" href="/">
               <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
 
             </a>
@@ -43,7 +43,7 @@ function Header(props) {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="text-light" href="contact.html">
+                  <a class="text-light" href="/">
                     Logout
                   </a>
                 </li>
@@ -219,6 +219,9 @@ function Header(props) {
         <br />
         <br />
         <br />
+      </div>
+      <div>
+        {props.children}
       </div>
     </div >
   );
