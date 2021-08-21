@@ -94,9 +94,11 @@ function RemovedRentalList() {
                             <th>Return Date</th>
                             <th>Vehicle Type</th>
                             <th>NIC</th>
-                            <th>Penalty</th>
+                            <th></th>
+                            {/*<th>Penalty</th>*/}
                             <th>Total</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,7 +114,7 @@ function RemovedRentalList() {
                                     <td >{rental.vehicleType + " " + rental.model}</td>
                                     <td >{rental.customerNIC}</td>
                                     <td >{rental.penalty}</td>
-                                    <td >{rental.finalPrice}</td>
+                                    <td >{rental.finalPrice.toFixed(2)}</td>
                                     <td >{rental.status}</td>
 
                                 </tr>
