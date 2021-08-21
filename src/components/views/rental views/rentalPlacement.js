@@ -373,6 +373,7 @@ function RentalPlacement() {
         if (Advance <= 10000) {
             setAdvanceValid(true);
             // setRegMessage('Vehicle Registation Number looks good!');
+            setAdvMessage('Advance paymnet amount is ok');
         } else {
             setAdvanceValid(false);
             setAdvMessage('Advance paymnet should be less than Rs 10,000/=');
