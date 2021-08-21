@@ -19,7 +19,8 @@ export const addEmployeeService = async (employeePayload) => {
 
 
 export const updateEmployeeService = async (userId, employeePayload) => {
-  console.log(employeePayload, "<<<<<<<<<<<<<<<<<<<<<<<<");
+  console.log(userId, "updateeee<<<<<<<<<<<<<<<<<<<<<<<<");
+
   // try {
   //   await axios.put(`${HOST}/api/employee/${userId}`, employeePayload);
   //   return {

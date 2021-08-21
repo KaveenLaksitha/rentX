@@ -24,6 +24,7 @@ function UpdateEmployee(emp) {
 
     useEffect(() => {
         try {
+            setEmpId(emp.data.empId);
             setfName(emp.data.fName);
             setlName(emp.data.lName);
             setGender(emp.data.gender);
@@ -42,6 +43,7 @@ function UpdateEmployee(emp) {
         }
     }, [emp.data]);
 
+    const [empId, setEmpId] = useState("");
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
     const [gender, setGender] = useState("");
@@ -84,7 +86,6 @@ function UpdateEmployee(emp) {
 
     function sendData(e) {
         e.preventDefault();
-        console.log("outcome", e)
 
         const teleValid = TeleValidation();
         const EmgteleValid = EmgTeleValidation();
@@ -109,11 +110,11 @@ function UpdateEmployee(emp) {
                 cv,
             };
 
-            updateEmployeeService(newEmployee).then((response) => {
-                const message = response.ok
-                    ? "Employee insertion successful"
-                    : response.err;
-                alert(message);
+            updateEmployeeService(empId, newEmployee).then((response) => {
+                // const message = response.ok
+                //     ? "Employee insertion successful"
+                //     : response.err;
+                // alert(message);
                 //window.location.replace("/empList");
             });
         }
@@ -206,6 +207,59 @@ function UpdateEmployee(emp) {
     };
 
 
+    const [isNICValid, setNICIsValid] = useState(false);
+    const [NICmessage, setNICMessage] = useState('');
+
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateNIC = (event) => {
+        const NIC = event.target.value;
+        if (NICRegex1.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        } else if (NICRegex2.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        } else {
+            setNICIsValid(false);
+            setNICMessage('Please enter a valid NIC Number!');
+        }
+    };
+
+
+    const [isMobileNoValid, setMobileNoValid] = useState(false);
+    const [MobileNoMessage, setMobileMessage] = useState('');
+
+    const MobileRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateMobile = (event) => {
+        const MobileNo = event.target.value;
+        if (MobileRegex.test(MobileNo)) {
+            setMobileNoValid(true);
+            setMobileMessage('Your Mobile Number looks good!');
+        } else {
+            setMobileNoValid(false);
+            setMobileMessage('Please enter a valid Mobile Number!');
+        }
+    };
+
+    const [isEmgNoNoValid, setEmgNoValid] = useState(false);
+    const [EmgNoMessage, setEmgMessage] = useState('');
+
+    const EmgRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateEmgMobile = (event) => {
+        const MobileNo = event.target.value;
+        if (EmgRegex.test(MobileNo)) {
+            setEmgNoValid(true);
+            setEmgMessage('Your Emergency Contact Number looks good!');
+        } else {
+            setEmgNoValid(false);
+            setEmgMessage('Please enter a valid Emergency Contact Number!');
+        }
+    };
+
     return (
 
         <div>
@@ -279,13 +333,13 @@ function UpdateEmployee(emp) {
                                 <div className="form-group col-md-6">
                                     <label className="form-label" for="email">e-mail:</label>
                                     <input
+                                        value={email}
                                         required
                                         id="email"
                                         type="email"
                                         className="form-control "
                                         placeholder="email"
                                         onChange={(e) => { { setEmail(e.target.value); validateEmail(e); } }}
-                                        value={email}
                                     />
                                     <div className={`message ${isValid ? 'success' : 'error'}`}>
                                         {message}
@@ -319,10 +373,12 @@ function UpdateEmployee(emp) {
                                         }}
                                         value={nic}
                                     />
-
+                                    <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                        {NICmessage}
+                                    </div>
 
                                     {Object.keys(NICErr).map((key) => {
-                                        return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                        // return <div style={{ color: "red" }}>{NICErr[key]}</div>
                                     })}
 
 
@@ -388,10 +444,15 @@ function UpdateEmployee(emp) {
                                         value={mobileNo}
                                         onChange={(e) => {
                                             setMobileNo(e.target.value);
+                                            validateMobile(e);
                                         }}
                                     />
+
+                                    <div className={`message ${isMobileNoValid ? 'success' : 'error'}`}>
+                                        {MobileNoMessage}
+                                    </div>
                                     {Object.keys(TeleErr).map((key) => {
-                                        return <div style={{ color: "red" }}>{TeleErr[key]}</div>
+                                        // return <div style={{ color: "red" }}>{TeleErr[key]}</div>
                                     })}
 
                                 </div>
@@ -406,12 +467,16 @@ function UpdateEmployee(emp) {
                                         value={emgContact}
                                         onChange={(e) => {
                                             setEmgContact(e.target.value);
+                                            validateEmgMobile(e);
                                         }}
                                     />
-                                    {Object.keys(EmgTeleErr).map((key) => {
-                                        return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
-                                    })}
 
+                                    <div className={`message ${isEmgNoNoValid ? 'success' : 'error'}`}>
+                                        {EmgNoMessage}
+                                    </div>
+                                    {Object.keys(EmgTeleErr).map((key) => {
+                                        // return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
+                                    })}
 
                                 </div>
                             </div>

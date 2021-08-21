@@ -43,7 +43,7 @@ function Header(props) {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="text-light" href="contact.html">
+                  <a class="text-light" href="/">
                     Logout
                   </a>
                 </li>
