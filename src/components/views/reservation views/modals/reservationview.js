@@ -87,7 +87,7 @@ function Reservationview(reservations) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={reservations.onHide}>Close</Button>
+                <button className="btn btn-close" onClick={reservations.onHide}>Close</button>
             </Modal.Footer>
         </div>
     )

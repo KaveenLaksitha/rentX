@@ -72,7 +72,6 @@ function AddVehicle() {
             AirC,
             NoOfSeats,
             RatePDay,
-            RatePDay,
             YearsRent,
             vehPic,
             vehDoc
@@ -239,6 +238,9 @@ function AddVehicle() {
             setRegMessage('Please enter a valid Vehicle Registation Number Number!');
         }
     };
+
+
+
 
     
 

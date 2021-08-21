@@ -135,6 +135,9 @@ function Reservation() {
     const [perDayCharge1, setPerDayCharge1] = useState("");
 
 
+
+
+
     function sendData(e) {
         e.preventDefault();
 
@@ -143,6 +146,12 @@ function Reservation() {
         alert("Your ramaining balance is " + `${finalpay}`);
 
         const answer = window.confirm("Are you sure you want to confirm submission?");
+
+        const NICValid  = NICValidation();
+        const CntValid  = MobileValidation();
+
+        if(NICValid && CntValid){
+
         if (answer) {
             const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
 
@@ -156,8 +165,8 @@ function Reservation() {
 
             })
         }
-
     }
+}
 
     function searchModel() {
         if (document.getElementById('vehicleType').value == 'Car') {
@@ -224,8 +233,12 @@ function Reservation() {
         document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
-        //var dis = Number(document.getElementById('discount').value) / 100;       
-        var finalresult = document.getElementById('totalreservation').value = result + (1 * getDateDiff());
+        //var dis = Number(document.getElementById('discount').value) / 100;
+        if(getDateDiff() == 0){
+            var finalresult = document.getElementById('totalreservation').value = result ;
+        }else{
+            var finalresult = document.getElementById('totalreservation').value = result * getDateDiff();
+        }        
         return finalresult;
     }
 
@@ -278,6 +291,102 @@ function Reservation() {
 
         }
     }
+
+
+    //validation
+
+    //validate function
+
+    const [NICErr, setNICErr] = useState("");
+    const[MobErr, setMobileErr] = useState("");
+
+
+    const NICValidation = () => {
+
+        const NICErr = {}; //State
+        let NICValid = true; //setting flag
+
+
+        if (nic.trim().length > 12) {
+
+            NICErr.InValidNIC = " Invalid NIC Number"; // error msg
+            alert("**Invalid NIC Number");
+            NICValid = false;
+        } else if (nic.trim().length < 10) {
+            NICErr.InValidNIC = "Invalid NIC Number"; // error msg
+            alert("**Invalid NIC Number");
+            NICValid = false;
+        }
+
+
+        setNICErr(NICErr);//update error objects
+        return NICValid;
+
+
+}
+
+const MobileValidation =() =>{//validate function
+
+    const MobErr ={}; //State
+    let mobileValid = true; //setting flag
+
+
+    if( contactnumber.trim().length > 10 ){
+
+        MobErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+        alert("**Invalid Telephone Number");
+        mobileValid = false;
+    }else if(contactnumber.trim().length < 10){
+        MobErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+        alert("**Invalid Telephone Number");
+        mobileValid = false;
+    }
+    
+    
+    setMobileErr(MobErr);//update error objects
+    
+    return mobileValid;
+
+
+}
+
+    const [isCntValid, setMobileIsValid] = useState(false);
+    const [Mobilemessage, setMobileMessage] = useState('');
+
+    const CntNoRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateCntNo = (event) => {
+        const CntNo = event.target.value;
+        if (CntNoRegex.test(CntNo)) {
+            setMobileIsValid(true);
+            setMobileMessage('Your Contact Number looks good!');
+        } else {
+            setMobileIsValid(false);
+            setMobileMessage('Please enter a Contact Number!');
+        }
+    };
+
+    const [isNICValid, setNICIsValid] = useState(false);
+    const [NICmessage, setNICMessage] = useState('');
+
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateNICNo = (event) => {
+        const NIC = event.target.value;
+        if (NICRegex1.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        }else if(NICRegex2.test(NIC)){
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!'); 
+        } else {
+            setNICIsValid(false);
+            setNICMessage('Please enter a valid NIC Number!');
+        }
+    };
+
+
 
 
 
@@ -601,8 +710,16 @@ function Reservation() {
                                                     //pattern="V[0-9]{10}"
                                                     onChange={(event) => {
                                                         setcustomernic(event.target.value);
+                                                        validateNICNo(event);
                                                     }
                                                     } />
+                                                    <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                        {NICmessage}
+                                                    </div>
+
+                                                    {Object.keys(NICErr).map((key) => {
+                                                        // return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                                    })}
 
 
                                             </div>
@@ -621,11 +738,16 @@ function Reservation() {
                                                     //pattern="[0-9]{10}"
                                                     onChange={(event) => {
                                                         setcontactnumber(event.target.value);
+                                                        validateCntNo(event);
                                                     }
                                                     } />
-                                                {/*{Object.keys(ResNoErr).map((key) => {
-                                                        return<div style={{color :"red"}}>{ResNoErr[key]}</div>
-                                                    })}*/}
+                                                    <div className={`message ${isCntValid ? 'success' : 'error'}`}>
+                                                        {Mobilemessage}
+                                                    </div>
+
+                                                    {Object.keys(MobErr).map((key)=>{
+                                                        // return<div className ={message}>{TeleErr[key]}</div>
+                                                    })}
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="nic">NIC</label>
@@ -639,8 +761,12 @@ function Reservation() {
                                                     //required
                                                     onChange={(event) => {
                                                         setnic(event.target.value);
+                                                        
                                                     }
                                                     } />
+
+
+
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -20,6 +20,7 @@ import EmployeeReport from "./views/employee views/EmployeeReport";
 import RentalReport from "./views/rental views/RentalReport";
 import VehicleReport from "./views/vehicle views/VehicleReport";
 import Footer from "./Footer";
+import RemovedRentalList from "./views/rental views/removedRentals";
 
 function Home() {
     return (
@@ -44,6 +45,7 @@ function Home() {
                 <Route path="/employee/report" exact component={EmployeeReport} />
                 <Route path="/rental/report" exact component={RentalReport} />
                 <Route path="/vehicle/report" exact component={VehicleReport} />
+                <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
                 <Footer />
             </div>
         </Router>

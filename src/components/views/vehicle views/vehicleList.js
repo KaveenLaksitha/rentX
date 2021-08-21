@@ -140,12 +140,13 @@ function VehicleList() {
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Vehicle Reg No</th>
-                            <th>Brand</th>
-                            <th>Modal</th>
-                            <th>Type</th>
-                            <th>Rate</th>
-                            <th>Action</th>
+                            <th class="text-center">Vehicle Reg No</th>
+                            <th class="text-center">Brand</th>
+                            <th class="text-center">Modal</th>
+                            <th class="text-center">Type</th>
+                            <th class="text-center ml-3">Rate</th>
+                            <th class="text-center">Years Of Rent </th>
+                            <th class="text-center">Action</th>
                         </tr>
 
                     </thead>
@@ -158,11 +159,12 @@ function VehicleList() {
                                         {vehicles.VehicleRegNo}
                                     </td>
 
-                                    <td>{vehicles.VehicleBrand}</td>
-                                    <td>{vehicles.VehicleModel}</td>
-                                    <td>{vehicles.VehicleType}</td>
-                                    <td>{vehicles.RatePDay.toFixed(2)}</td>
-                                    <td>
+                                    <td class="text-center">{vehicles.VehicleBrand}</td>
+                                    <td class="text-center">{vehicles.VehicleModel}</td>
+                                    <td class="text-center">{vehicles.VehicleType}</td>
+                                    <td class="text-right">{vehicles.RatePDay.toFixed(2)}</td>
+                                    <td class="text-center">{vehicles.YearsRent}</td>
+                                    <td class="text-center">
                                         <button
                                             class="btn btn-light btn-sm"
                                         // onClick={() => this.handleUpdateOnClick(employee.userId)}

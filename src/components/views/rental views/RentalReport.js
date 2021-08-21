@@ -6,126 +6,126 @@ import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
 
- function ReservationReport() {
+function ReservationReport() {
 
     return (
-            <div className="page-component-body">
-                <div class="container input-main-form-emp">
-                    <div class="tab-content-emp" id="myTabContent">
-                        
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                       <form>
-                                        <center>
+        <div className="page-component-body">
+            <div class="container input-main-form-emp">
+                <div class="tab-content-emp" id="myTabContent">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                <form>
+                                    <center>
                                         <h3 className=" mt-3 mb-4">Generate Report on Rental Records </h3>
-                                        </center>
-                                        <hr></hr>
-                                        </form>
-                                    </div>
-                                </div>
-                                <br></br>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form" >
+                                    </center>
+                                    <hr></hr>
+                                </form>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <form id="contact-form" class="form" >
                                     <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker  
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    required 
-                                                   
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    required 
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    timeFormat={false}
-                                                    
-                                                    
-                                                    />
-                                            </div> 
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="from">From</label>
+                                            <DatePicker
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="from"
+                                                name="from"
+                                                placeholder=""
+                                                tabindex="5"
+                                                required
 
-                                            <br></br>
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="to">To</label>
+                                            <DatePicker
+                                                required
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="to"
+                                                name="to"
+                                                placeholder=""
+                                                tabindex="6"
+                                                timeFormat={false}
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Type</label>
-                                                <select 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="customeraddress" 
-                                                    name="customeraddress" 
-                                                    placeholder="Customer Address" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    />
-                                            </div>
 
-                                            <br></br>
+                                            />
+                                        </div>
+                                    </div>
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Customer Name</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="customeraddress" 
-                                                    name="customeraddress" 
-                                                    placeholder="" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    />
-                                            </div>
-                                        <br></br>
-                                        <div className="row">
+                                    <br></br>
+
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="Vehicletype">Type</label>
+                                        <select
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="Vehicletype"
+                                            name="Vehicletype"
+                                            placeholder="Vehicle Type "
+                                            tabindex="4"
+                                        //required
+                                        />
+                                    </div>
+
+                                    <br></br>
+
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="customername">Customer Name</label>
+                                        <input
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="customername"
+                                            name="customername"
+                                            placeholder=""
+                                            tabindex="4"
+                                        //required
+                                        />
+                                    </div>
+                                    <br></br>
+                                    <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp " for="gender">Status:</label>
+                                            <label className="form-label-emp " for="status">Status:</label>
                                             <br></br>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
-                                                    <input className="form-check-input" type="radio" id="gender" name="gender"
-                                                        />Pending</label>
+                                                    <input className="form-check-input" type="radio" id="status" name="status"
+                                                    />Pending</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
-                                                    <input className="form-check-input" type="radio" id="gender" name="gender"
-                                                         />Completed</label>
+                                                    <input className="form-check-input" type="radio" id="status" name="status"
+                                                    />Completed</label>
                                             </div>
 
                                         </div>
-                                        
+
                                     </div>
 
                                     <div className="row">
-                                                <div className="col py-3 text-center">
-                                                    <button type="submit" className="btn btn-ok" >
-                                                        Generate
-                                                    </button>
-                                                </div>
-                                                
-                                            </div>
-                                            <br></br>
-                                            </form>
+                                        <div className="col py-3 text-center">
+                                            <button type="submit" className="btn btn-ok" >
+                                                Generate
+                                            </button>
+                                        </div>
+
                                     </div>
-                                   
-                                </div>
+                                    <br></br>
+                                </form>
                             </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 export default ReservationReport;
