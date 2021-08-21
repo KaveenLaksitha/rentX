@@ -80,7 +80,7 @@ function RentalList() {
         function getPendingRentals() {
             axios.get("http://localhost:4000/rental/searchPendingRentalRecords/").then((res) => {
                 //setRentals(res.data.reverse());
-                setRentalList(res.data.reverse());
+                setRentalList(res.data);
             }).catch((error) => {
                 //alert(error.message);
                 setModalLoading(true);
@@ -95,7 +95,7 @@ function RentalList() {
         if (search.substring(0, 4) === "2021") {
             axios.get(`http://localhost:4000/rental/searchByFromDate/${search}`).then((res) => {
                 //setRentals(res.data);
-                setRentalList(res.data);
+                setRentalList(res.data.reverse());
             }).catch((error) => {
                 //alert(error.message);
                 setModalLoading(true);
@@ -104,7 +104,7 @@ function RentalList() {
         else if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
             axios.get(`http://localhost:4000/rental/searchRentalRecs/${search}`).then((res) => {
                 //setRentals(res.data);
-                setRentalList(res.data);
+                setRentalList(res.data.reverse());
             }).catch((error) => {
                 //alert(error.message);
                 setModalLoading(true);
@@ -113,7 +113,7 @@ function RentalList() {
 
             axios.get(`http://localhost:4000/rental/searchRentalRecordsX/${search}`).then((res) => {
                 //setRentals(res.data);
-                setRentalList(res.data);
+                setRentalList(res.data.reverse());
             }).catch((error) => {
                 //alert(error.message);
                 setModalLoading(true);

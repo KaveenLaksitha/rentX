@@ -14,12 +14,12 @@ function DeleteRental(rental) {
     const deleteRental = async (data) => {
 
         await axios.post("http://localhost:4000/deletedRentals/addRemovedRentalRec", { data }).then(() => {
-            alert("Rental Record added successfully")
+            alert("Completed Rental Record successfully removed of customer " + rental.data.customerNIC)
 
             const value = axios.post("http://localhost:4000/rental/deleteRental", modalData);
             //console.log(value);
             if (value) {
-                alert("Permenantly deleted the customer");
+                alert("Permenantly deleted the record " + rental.data.id);
                 window.location.replace("/rentalList");
             }
 
