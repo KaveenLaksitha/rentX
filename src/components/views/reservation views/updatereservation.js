@@ -8,19 +8,6 @@ import 'react-datetime/css/react-datetime.css';
 
  function Updatereservation() {
 
-   {/* //disable past dates
-    const yesterday = moment().subtract(1, 'day');
-    const disablePastDt = current => {
-        return current.isAfter(yesterday)
-    }
-
-     //disable future dates
-    const today = moment().add(1, 'days');;
-    const disableFutureDt = current => {
-        return current.isBefore(today)
-    }
-
-*/}
     let history = useHistory();
     const { RID } = useParams();
 
@@ -41,7 +28,7 @@ import 'react-datetime/css/react-datetime.css';
     const[advancedpayment,setadvancedpayment] = useState("");
     const[totalreservation,settotalreservation] = useState("");
     const[status,setstatus] = useState("");
-    const[returnDay, setreturnDay] = useState("");
+    const[returnDay, setreturnDay] = useState(moment());
     const[penaltyDay, setpenaltyDay] = useState("");
     const[penaltyCharge, setpenaltyCharge] = useState("");
     const[remaining, setremaining] = useState("");
@@ -55,39 +42,46 @@ import 'react-datetime/css/react-datetime.css';
 
     // calculate the penalty Day
     function getDateDiff() {
-        var TO = moment(to).format('DD/MM/YYYY');
-        var Ret = moment(returnDay).format('DD/MM/YYYY');
-        var admission = moment(TO, 'DD-MM-YYYY');
-        var discharge = moment(Ret, 'DD-MM-YYYY');
+        var TO = moment(to).format('YYYY-MMMM-DD');
+        var Ret = moment(returnDay).format('YYYY-MMMM-DD');
+        var admission = moment(TO, 'YYYY-MMMM-DD');
+        var discharge = moment(Ret, 'YYYY-MMMM-DD');
         const diffDuration = discharge.diff(admission, 'days');
         return (diffDuration);
     }
 
     // calculate the penalty Cost
     function calculatePenaltyCost() {
-        const Price = (totalreservation * (5 / 100)) * getDateDiff()
+        const Price = (totalreservation * (5 / 100)) * getDateDiff();
         return Price;
     }
 
     function calculateRemainingPayment() {
-        return ((totalreservation - advancedpayment) + calculatePenaltyCost())
+        return ((totalreservation - advancedpayment) + calculatePenaltyCost());
     }
 
-    function calculateCharges() {
+
+    function updateTotal(){
         document.getElementById('penaltyDay').value = getDateDiff();
-        document.getElementById('penaltyCharge').value = calculatePenaltyCost();
-        document.getElementById('remaining').value = calculateRemainingPayment();
+        var num = calculatePenaltyCost();
+        document.getElementById('penaltyCharge').value = num.toFixed(2);
+        var num1 = totalreservation + calculatePenaltyCost();
+        document.getElementById('totalreservation').value = num1.toFixed(2);
+        var num2 = calculateRemainingPayment();
+        if(calculatePenaltyCost() != "") {
+            document.getElementById('remaining').value = num2.toFixed(2);
+        } else{
+            document.getElementById('remaining').value = totalreservation - advancedpayment ;
+        }
+        
     }
-
-    //const Days = getDateDiff();
-    //const penaltyCharge = calculatePenaltyCost();
-    //const remaining = calculateRemainingPayment();
-
     const onSubmit = async e => {
         e.preventDefault();
-        const finalpay = document.getElementById('remaining').value = (totalreservation - advancedpayment);
 
-        alert("Your ramaining balance is " + `${finalpay}`);
+        //var num2 = calculateRemainingPayment();  
+        
+        //var finalremain = document.getElementById('remaining').value = num2.toFixed(2);
+        //alert(`Your Remaining Balance is ${finalremain}`);
     
     const answer = window.confirm("Are you sure you want to update the Reservation details?");
     
@@ -240,7 +234,7 @@ import 'react-datetime/css/react-datetime.css';
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="from">From</label>
                                                 <input 
-                                                    //type="date" 
+                                                    
                                                     class="form-control formInput" 
                                                     id="from" 
                                                     name="from" 
@@ -248,10 +242,10 @@ import 'react-datetime/css/react-datetime.css';
                                                     tabindex="5" 
                                                     required
                                                     disabled 
-                                                    value={moment(from).format("DD-MMMM-YYYY")}
-                                                    //value={from}
+                                                    value={moment(from).format("YYYY-MMMM-DD")}
+                                                   
                                                     timeFormat={false}
-                                                    //isValidDate={disablePastDt}
+                                                   
                                                     onChange={(event) => { setfrom(event) }}
                                                     readonly="readonly"/>
                                             </div>
@@ -265,7 +259,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     placeholder="" 
                                                     tabindex="6" 
                                                     disabled
-                                                    value={moment(to).format("DD-MMMM-YYYY")}
+                                                    value={moment(to).format("YYYY-MMMM-DD")}
                                                     //value={to}
                                                     timeFormat={false}
                                                     //isValidDate={disableFutureDt}
@@ -298,11 +292,11 @@ import 'react-datetime/css/react-datetime.css';
                                                     name="returnDay" 
                                                     placeholder="" 
                                                     tabindex="7" 
-                                                    value={moment(returnDay).format('MM/DD/YYYY')}
+                                                    value={moment(returnDay).format('YYYY-MMMM-DD')}
                                                     timeFormat={false}
-                                                    onChange={(event) => { setreturnDay(event.target.value) }}
+                                                    onChange={(event) => { setreturnDay(event) }}
                                                     isValidDate={disablePastDt}
-                                                    onClose={calculateCharges}
+                                                    
                                                     />
                                             </div>
                                             </div>
@@ -377,11 +371,18 @@ import 'react-datetime/css/react-datetime.css';
                                                     class="form-control formInput" 
                                                     id="remaining" 
                                                     name="remaining" 
-                                                    value={Number(remaining)}
+                                                    value={remaining}
                                                     placeholder="Remaining Reservation Payment" 
                                                     tabindex="11" />
                                             </div>
+                                            <div class="form-group col-md-6">
+                                           
+                                                <input type="button" class="btn btn-info" id="entry" value=" Charge " onClick={updateTotal} />
+                                            
+
                                             </div>
+                                            </div>
+                                            
                                             <div className="row">
                                                 <div className="col py-3 text-center">
                                                     <button type="submit" className="btn btn-ok">

@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-import moment from 'moment';
-
 
 function DeleteRental(rental) {
 
 
     const [modalData, setData] = useState(rental);
-    const [resReason, setResReason] = useState("");
-    //const [comment, setComment] = useState("");
     const [rentalData, setRentalData] = useState({});
 
     console.log("model openingggg deleteee", rental.data)

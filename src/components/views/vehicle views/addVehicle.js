@@ -28,6 +28,7 @@ function AddVehicle() {
 
     const[RegNoErr, setRegNoErr] = useState("");
     const[TeleErr, setTeleNoErr] = useState("");
+    const [NICErr, setNICErr] = useState("");
 
     // const[File, setFile] = useState('');
     // const [fileName, setfileName] = useState('');
@@ -44,8 +45,10 @@ function AddVehicle() {
 
         const isValid = formValidation();
         const teleValid = TeleValidation();
+        const NICValid  = NICValidation();
 
-        if(isValid && teleValid){
+
+        if(isValid && teleValid && NICValid){
 
             
 
@@ -69,7 +72,6 @@ function AddVehicle() {
             AirC,
             NoOfSeats,
             RatePDay,
-            RatePDay,
             YearsRent,
             vehPic,
             vehDoc
@@ -81,6 +83,7 @@ function AddVehicle() {
 
         .then(() => {
             alert("Vehicle added Successfully !!")
+            window.location.replace("/vehicleList");
 
         }).catch((err) => {
             alert(err)
@@ -98,8 +101,9 @@ function AddVehicle() {
         if(VehicleRegNo.trim().length > 8){
 
             RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
+            alert("**Invalid Vehicle Registration Number");
             isValid = false;
-        }else if(VehicleRegNo.trim().length < 8){
+        }else if(VehicleRegNo.trim().length < 7){
             RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
             isValid = false;
         }
@@ -121,18 +125,128 @@ function AddVehicle() {
         if( TeleNo.trim().length > 10 ){
 
             TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+            alert("**Invalid Telephone Number");
             teleValid = false;
         }else if(TeleNo.trim().length < 10){
             TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+            alert("**Invalid Telephone Number");
             teleValid = false;
         }
         
-        alert("**Invalid Telephone Number");
+        
         setTeleNoErr(TeleErr);//update error objects
+        
         return teleValid;
 
 
     }
+
+        //validate function
+     const NICValidation = () => {
+
+            const NICErr = {}; //State
+            let NICValid = true; //setting flag
+    
+    
+            if (OwnerNIC.trim().length > 12) {
+    
+                NICErr.InValidNIC = " Invalid NIC Number"; // error msg
+                alert("**Invalid NIC Number");
+                NICValid = false;
+            } else if (OwnerNIC.trim().length < 10) {
+                NICErr.InValidNIC = " Invalid NIC Number"; // error msg
+                alert("**Invalid NIC Number");
+                NICValid = false;
+            }
+    
+    
+            setNICErr(NICErr);//update error objects
+            return NICValid;
+    
+    
+    }
+
+
+    
+    const [isValid, setIsValid] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+
+    const validateEmail = (event) => {
+        const email = event.target.value;
+        if (emailRegex.test(email)) {
+            setIsValid(true);
+            setMessage('Your email looks good!');
+        } else {
+            setIsValid(false);
+            setMessage('Please enter a valid email!');
+        }
+    };
+
+    
+    const [isMobileValid, setMobileIsValid] = useState(false);
+    const [Mobilemessage, setMobileMessage] = useState('');
+
+    const MobileRegex = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateMobile = (event) => {
+        const mobile = event.target.value;
+        if (MobileRegex.test(mobile)) {
+            setMobileIsValid(true);
+            setMobileMessage('Your Mobile Number looks good!');
+        } else {
+            setMobileIsValid(false);
+            setMobileMessage('Please enter a valid Mobile Number!');
+        }
+    };
+
+
+    const [isNICValid, setNICIsValid] = useState(false);
+    const [NICmessage, setNICMessage] = useState('');
+
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateNIC = (event) => {
+        const NIC = event.target.value;
+        if (NICRegex1.test(NIC)) {
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!');
+        }else if(NICRegex2.test(NIC)){
+            setNICIsValid(true);
+            setNICMessage('Your NIC looks good!'); 
+        } else {
+            setNICIsValid(false);
+            setNICMessage('Please enter a valid NIC Number!');
+        }
+    };
+
+    const [isRegValid, setRegIsValid] = useState(false);
+    const [Regmessage, setRegMessage] = useState('');
+
+    const VehRegex1 = /^[A-Z0-9]+-[0-9][0-9][0-9][0-9]$/;
+    // const VehRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+
+    const validateRegNo = (event) => {
+        const RegNo = event.target.value;
+        if (VehRegex1.test(RegNo)) {
+            setRegIsValid(true);
+            setRegMessage('Vehicle Registation Number looks good!');
+        }else {
+            setRegIsValid(false);
+            setRegMessage('Please enter a valid Vehicle Registation Number Number!');
+        }
+    };
+
+
+
+
+    
+
+
+
+
 
     
 
@@ -161,8 +275,7 @@ function AddVehicle() {
                     
                 
                 <div class="tab-content tab-content-V  col-12" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
                             <div class="container border-top">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -181,6 +294,7 @@ function AddVehicle() {
                                                 
                     
                                                 />
+                                            
                                             </div>
 
                                             <div className="row">
@@ -190,22 +304,34 @@ function AddVehicle() {
                                                 
                                                         onChange={(e) => {
                                                             setOwnerNIC(e.target.value); // assign value
+                                                            validateNIC(e);
                                                             }}
                                                         
                                                 />
+                                                 <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                {NICmessage}
+                                                </div>
+                                            {Object.keys(NICErr).map((key) => {
+                                                // return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                            })}
+
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="subject">Telephone No</label>
-                                                <input  type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input  type="Number" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
                                                 
                                                 onChange={(e) => {
                                                     setTeleNo(e.target.value); // assign value
+                                                    validateMobile(e);
                                                      }}
 
                                                 />
+                                                <div className={`message ${isMobileValid ? 'success' : 'error'}`}>
+                                                {Mobilemessage}
+                                                </div>
 
                                                     {Object.keys(TeleErr).map((key)=>{
-                                                        return<div style={{color :"red"}}>{TeleErr[key]}</div>
+                                                        // return<div className ={message}>{TeleErr[key]}</div>
                                                     })}
                                             </div>
                                             </div>
@@ -226,10 +352,15 @@ function AddVehicle() {
                                                 <input type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
                                                 
                                                 onChange={(e) => {
-                                                    setEmail(e.target.value); // assign value
+                                                    setEmail(e.target.value);
+                                                    validateEmail(e);
+                                                     // assign value
                                                      }}
                                                 
                                                 />
+                                            <div className={`message ${isValid ? 'success' : 'error'}`}>
+                                                {message}
+                                            </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="date">Date</label>
@@ -299,7 +430,7 @@ function AddVehicle() {
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form"   role="form"  onSubmit={sendData} >
+                                    <form id="contact-form" class="form"   role="form"  action = "POST" onSubmit={sendData} >
                                     <div className="row">
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="name">Vehicle Brand</label>
@@ -335,7 +466,7 @@ function AddVehicle() {
                                                     <option value="car">Car</option>
                                                     <option value="van">Van</option>
                                                     <option value="bus">Bus</option>
-                                                </select>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -348,20 +479,26 @@ function AddVehicle() {
                                                 
                                                     onChange={(e) => {
                                                         setRegNo(e.target.value); // assign value
+                                                        validateRegNo(e);
+
                                                      }}
+                                                     />
+                                                     <div className={`message ${isRegValid ? 'success' : 'error'}`}>
+                                                     {Regmessage}
+                                                    </div>
                                                          
                                                 
-                                                />
+                                                
                                             
                                             {Object.keys(RegNoErr).map((key)=>{
-                                                return<div style={{color :"red"}}>{RegNoErr[key]}</div>
+                                                // return<div style={{color :"red"}}>{RegNoErr[key]}</div>
                                             })}
                                             </div>
 
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Current Mileage (Km) </label>
-                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
+                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Mileage" tabindex="3"
 
                                                             onChange={(e) => {
                                                                 setMileage(e.target.value); // assign value
