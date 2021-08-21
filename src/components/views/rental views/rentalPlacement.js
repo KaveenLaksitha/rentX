@@ -211,7 +211,7 @@ function RentalPlacement() {
 
     function sendData(e) {
         e.preventDefault();//to prevent the default submission by submit button
-        alert(finalPrice);
+        //alert(finalPrice);
 
 
         checkForPendingCustomer();
@@ -283,11 +283,11 @@ function RentalPlacement() {
         let AdValid = true; //setting flag
 
 
-        if (advPayment <= 10000) {
+        if (advPayment >= 10000) {
 
             AdErr.InValidAdvance = " *Advance Payment should be less than Rs . 10,000/="; // error msg
             AdValid = false;
-        } 
+        }
 
 
         setAdErr(AdErr);//update error objects
@@ -352,15 +352,15 @@ function RentalPlacement() {
         if (NICRegex1.test(NIC)) {
             setNICIsValid(true);
             setNICMessage('Your NIC looks good!');
-        }else if(NICRegex2.test(NIC)){
+        } else if (NICRegex2.test(NIC)) {
             setNICIsValid(true);
-            setNICMessage('Your NIC looks good!'); 
+            setNICMessage('Your NIC looks good!');
         } else {
             setNICIsValid(false);
             setNICMessage('Please enter a valid NIC Number!');
         }
     };
-    
+
 
     const [advanceValid, setAdvanceValid] = useState(false);
     const [advanceMessage, setAdvMessage] = useState('');
@@ -373,19 +373,22 @@ function RentalPlacement() {
         if (Advance <= 10000) {
             setAdvanceValid(true);
             // setRegMessage('Vehicle Registation Number looks good!');
-        }else {
+        } else {
             setAdvanceValid(false);
             setAdvMessage('Advance paymnet should be less than Rs 10,000/=');
         }
     };
- 
+
 
 
 
 
     function refreshPage() {
-        //window.location.;
+        window.location.reload();
     }
+    //refreshPage();
+
+
 
     function checks() {
         checkForPendingCustomer();
@@ -577,17 +580,19 @@ function RentalPlacement() {
                                                     tabindex="3"
                                                     max="100000000"
                                                     min="0"
-                                                    onChange={(event) => { setAdvPayment(event.target.value); getFinalPrice(); summaryAdv(event.target.value);
-                                                                            validateAdvance(event) }}
+                                                    onChange={(event) => {
+                                                        setAdvPayment(event.target.value); getFinalPrice(); summaryAdv(event.target.value);
+                                                        validateAdvance(event)
+                                                    }}
                                                     onFocus={getRentChargePerDay} />
-        
-                                                            <div className={`message ${advanceValid ? 'success' : 'error'}`}>
-                                                                     {advanceMessage}
-                                                            </div>
 
-                                                    {Object.keys(AdErr).map((key)=>{
-                                                        // return<div style={{color :"red"}}>{NICErr[key]}</div>
-                                                    })}
+                                                <div className={`message ${advanceValid ? 'success' : 'error'}`}>
+                                                    {advanceMessage}
+                                                </div>
+
+                                                {Object.keys(AdErr).map((key) => {
+                                                    // return<div style={{color :"red"}}>{NICErr[key]}</div>
+                                                })}
                                             </div>
 
                                         </div>
@@ -620,7 +625,7 @@ function RentalPlacement() {
 
                                 </div>
                                 <div className="col py-3 text-center">
-                                    <button type="reset" className="btn btn-reset" onClick={refreshPage()}>RESET</button>
+                                    <button type="reset" className="btn btn-reset" id="ReSet" onClick={refreshPage} >RESET</button>
                                 </div>
                             </div>
                         </form>
@@ -666,20 +671,22 @@ function RentalPlacement() {
                                                         id="cNumber"
                                                         name="cNumber"
                                                         placeholder="Contact Number (0784123695)"
-                                                        
-                                                        onChange={(event) => { setContactNo(event.target.value);
-                                                            validateMobileNo( event) }}
+
+                                                        onChange={(event) => {
+                                                            setContactNo(event.target.value);
+                                                            validateMobileNo(event)
+                                                        }}
                                                         required />
 
                                                     <div className={`message ${isMobileValid ? 'success' : 'error'}`}>
-                                                                {Mobilemessage}
-                                                    </div>   
+                                                        {Mobilemessage}
+                                                    </div>
 
-                                                    {  Object.keys(MobileErr).map((key)=>{
+                                                    {Object.keys(MobileErr).map((key) => {
                                                         // return<div style={{color :"red"}}>{MobileErr[key]}</div>
 
-                                                       
-                                                   })}
+
+                                                    })}
 
 
                                                 </div>
@@ -691,17 +698,19 @@ function RentalPlacement() {
                                                         id="cNIC"
                                                         name="cNIC"
                                                         placeholder="National ID(978412351V)"
-                                                        onChange={(event) => { setCustomerNIC(event.target.value);
-                                                            validateNICNo(event) }}
-                                                        
+                                                        onChange={(event) => {
+                                                            setCustomerNIC(event.target.value);
+                                                            validateNICNo(event)
+                                                        }}
+
                                                         required />
 
 
-                                                            <div className={`message ${isNICValid ? 'success' : 'error'}`}>
-                                                                     {NICmessage}
-                                                            </div>
+                                                    <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                        {NICmessage}
+                                                    </div>
 
-                                                    {Object.keys(NICErr).map((key)=>{
+                                                    {Object.keys(NICErr).map((key) => {
                                                         // return<div style={{color :"red"}}>{NICErr[key]}</div>
                                                     })}
                                                 </div>
@@ -730,7 +739,7 @@ function RentalPlacement() {
                                                 <button type="submit" id="btnSub" className="btn btn-ok">SAVE</button>
                                             </div>
                                             <div className="col py-3 text-center">
-                                                <button type="reset" className="btn btn-reset" onClick={refreshPage()}>RESET</button>
+                                                <button type="reset" className="btn btn-reset" id="Reset" >RESET</button>
                                             </div>
                                         </div>
                                     </form>
