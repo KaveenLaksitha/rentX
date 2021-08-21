@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 
+import Swal from 'sweetalert2';
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
@@ -112,10 +113,32 @@ function UpdateEmployee(emp) {
 
             updateEmployeeService(empId, newEmployee).then((response) => {
                 // const message = response.ok
-                //     ? "Employee insertion successful"
+                //     ? "Employee Update successful"
                 //     : response.err;
-                // alert(message);
-                //window.location.replace("/empList");
+
+                // if (response.ok) {
+                //     Swal.fire({
+                //         title: 'Success!',
+                //         text: `${message}`,
+                //         icon: 'success',
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     }
+                //     ).then(() => {
+                //         window.location.reload();
+                //     })
+
+                // }
+                // else {
+                //     Swal.fire({
+                //         title: 'Oops!',
+                //         text: `${message}`,
+                //         icon: 'error',
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     }
+                //     )
+                // }
             });
         }
 

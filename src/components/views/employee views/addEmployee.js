@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 
+import Swal from 'sweetalert2';
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
@@ -70,8 +71,30 @@ function AddEmployee() {
                 const message = response.ok
                     ? "Employee insertion successful"
                     : response.err;
-                alert(message);
-                if (response.ok) { window.location.reload(); }
+
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: `${message}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ).then(() => {
+                        window.location.reload();
+                    })
+
+                }
+                else {
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${message}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                }
             });
         }
 
@@ -174,9 +197,9 @@ function AddEmployee() {
         if (NICRegex1.test(NIC)) {
             setNICIsValid(true);
             setNICMessage('Your NIC looks good!');
-        }else if(NICRegex2.test(NIC)){
+        } else if (NICRegex2.test(NIC)) {
             setNICIsValid(true);
-            setNICMessage('Your NIC looks good!'); 
+            setNICMessage('Your NIC looks good!');
         } else {
             setNICIsValid(false);
             setNICMessage('Please enter a valid NIC Number!');
@@ -347,9 +370,9 @@ function AddEmployee() {
                                                     validateNIC(e);
                                                 }}
                                             />
-                                                <div className={`message ${isNICValid ? 'success' : 'error'}`}>
-                                                    {NICmessage}
-                                                </div>
+                                            <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                {NICmessage}
+                                            </div>
 
                                             {Object.keys(NICErr).map((key) => {
                                                 // return <div style={{ color: "red" }}>{NICErr[key]}</div>
@@ -418,9 +441,9 @@ function AddEmployee() {
                                                 }}
                                             />
 
-                                                <div className={`message ${isMobileNoValid ? 'success' : 'error'}`}>
-                                                            {MobileNoMessage}
-                                                </div>
+                                            <div className={`message ${isMobileNoValid ? 'success' : 'error'}`}>
+                                                {MobileNoMessage}
+                                            </div>
                                             {Object.keys(TeleErr).map((key) => {
                                                 // return <div style={{ color: "red" }}>{TeleErr[key]}</div>
                                             })}
@@ -440,9 +463,9 @@ function AddEmployee() {
                                                 }}
                                             />
 
-                                                <div className={`message ${isEmgNoNoValid ? 'success' : 'error'}`}>
-                                                            {EmgNoMessage}
-                                                </div>
+                                            <div className={`message ${isEmgNoNoValid ? 'success' : 'error'}`}>
+                                                {EmgNoMessage}
+                                            </div>
                                             {Object.keys(EmgTeleErr).map((key) => {
                                                 // return <div style={{ color: "red" }}>{EmgTeleErr[key]}</div>
                                             })}

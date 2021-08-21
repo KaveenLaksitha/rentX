@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-
+import Swal from "sweetalert2";
 import { addInquiry } from "../../services/employeeService";
 
 function MakeInquiry() {
@@ -21,10 +21,32 @@ function MakeInquiry() {
 
         addInquiry(newInquiry).then((response) => {
             const message = response.ok
-                ? "Your inquiry successfully submitted!"
+                ? "Employee insertion successful"
                 : response.err;
-            alert(message);
-            window.location.replace("/empList");
+
+            if (response.ok) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: `${message}`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                }
+                ).then(() => {
+                    window.location.replace("/empList");;
+                })
+
+            }
+            else {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: `${message}`,
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }
+                )
+            }
         });
     }
 

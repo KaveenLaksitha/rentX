@@ -1,4 +1,10 @@
 /*page-body*/
+// body {
+//   font-family: "Titillium Web", sans-serif;
+//   src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
+//     url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
+//       format("woff");
+// }
 .page-body {
   max-height: 8rem;
   margin-bottom: 2rem;
@@ -6,10 +12,20 @@
 
 .page-component-body {
   min-height: 900px;
+  font-family: "Titillium Web", sans-serif;
+  src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
+    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
+      format("woff");
+  font-weight: 600;
 }
 /*side nav bar and header*/
 .navbar {
   background-color: #3f3f3f;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .fa {
@@ -120,9 +136,11 @@ nav li {
 nav.main-menu li.active > a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
+  border-left: 6px solid #1fc191 !important;
   color: #fff;
   background-color: #207159;
 }
+
 .area {
   float: left;
   background: #e2e2e2;
@@ -373,11 +391,11 @@ textarea {
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
-.form-row-change{
+.form-row-change {
   height: 45px;
 }
 
-.form-row-change1{
+.form-row-change1 {
   margin-top: 11px;
   height: 35px;
 }
@@ -385,7 +403,7 @@ textarea {
 .form-label-h {
   font-size: 14px;
   margin: 20px;
-  padding-left:42px;
+  padding-left: 42px;
   display: block;
 }
 
