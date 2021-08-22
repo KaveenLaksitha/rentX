@@ -31,7 +31,7 @@ function ViewVehicle(vehicle) {
                                     <th class="text-left" scope="row">
                                         Telephone Number
                                     </th>
-                                    <td class="text-left">{vehicle.data.TeleNo}</td>
+                                    <td class="text-left">0{vehicle.data.TeleNo}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">

@@ -118,7 +118,7 @@ function DeleteVehicles() {
                                     </td>
                                     {/* <td class="text-center">{vehicles.VehicleRegNo}</td> */}
                                     <td class="text-center">{vehicles.OwnerName}</td>
-                                    <td class="text-center">{vehicles.TeleNo}</td>
+                                    <td class="text-center">0{vehicles.TeleNo}</td>
                                     <td class="text-center">{vehicles.VehicleBrand}</td>
                                     <td class="text-center">{vehicles.VehicleModel}</td>
                                     <td class="text-center">{vehicles.VehicleType}</td>

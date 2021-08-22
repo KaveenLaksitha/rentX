@@ -30,6 +30,7 @@ function AddVehicle() {
     const[RegNoErr, setRegNoErr] = useState("");
     const[TeleErr, setTeleNoErr] = useState("");
     const [NICErr, setNICErr] = useState("");
+    const [YearsErr, setYearsErr] = useState("");
 
     // const[File, setFile] = useState('');
     // const [fileName, setfileName] = useState('');
@@ -47,9 +48,10 @@ function AddVehicle() {
         const isValid = formValidation();
         const teleValid = TeleValidation();
         const NICValid  = NICValidation();
+        const YearsValid = YearsValidation();
 
 
-        if(isValid && teleValid && NICValid){
+        if(isValid && teleValid && NICValid && YearsValid){
 
             
 
@@ -101,11 +103,11 @@ function AddVehicle() {
 
         }).catch((err) => {
             // alert(err)
-
+            const msgerr = err.response.data.status
             Swal.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: `${msgerr}`,
                 confirmButtonColor: '#207159',
                 
               })
@@ -228,12 +230,46 @@ function AddVehicle() {
     
     }
 
+    const YearsValidation = () => {//validate function
+
+        const YearsErr = {}; //State
+        let YearsValid = true; //setting flag
+
+
+        if (YearsRent == 0) {
+            YearsErr.InValidYears = " Number of years should be More than 0"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid ',
+                text: ' Number of years should be more than 0!!',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
+        }
+        else if(YearsRent > 10){
+            YearsErr.InValidYears = " Number of years should be less than 10 !"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid',
+                text: 'Number of years should be less than 10!!',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
+        }
+
+
+        setYearsErr(YearsErr);//update error objects
+        return YearsValid;
+
+
+    }
+
 
     
     const [isValid, setIsValid] = useState(false);
     const [message, setMessage] = useState('');
 
-    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     const validateEmail = (event) => {
         const email = event.target.value;
@@ -308,23 +344,17 @@ function AddVehicle() {
 
     const [isYearsValid, setYearsValid] = useState(false);
     const [Yearmessage, setYearMessage] = useState('');
-
-    //  const YearsRegex = /^[0-9][0-9]-[0-9][0-9][0-9][0-9]$/;
      
 
     const validateYears = (event) => {
         const YearsRent = event.target.value;
-        if (YearsRent < 11) {
-            setYearsValid(true);
-            setYearMessage('Years of Rent looks good!');
-        }else if (YearsRent > 0){
-            setYearsValid(true);
-            setYearMessage('Years of Rent looks good!');
-        
-        }
-        else if(YearsRent == 0) {
+        if (YearsRent == 0) {
             setYearsValid(false);
             setYearMessage('Number of years should be more than 0 !');
+        }
+        else if(YearsRent < 11) {
+            setYearsValid(true);
+            setYearMessage('Years of rent loking good ');
         }else{
             setYearsValid(false);
             setYearMessage('Number of years should be less than 10 !');
@@ -728,6 +758,9 @@ function AddVehicle() {
                                                 <div className={`message ${isYearsValid ? 'success' : 'error'}`}>
                                                     {Yearmessage}
                                                 </div>
+                                                {Object.keys(YearsErr).map((key)=>{
+                                                // return<div style={{color :"red"}}>{RegNoErr[key]}</div>
+                                                })}
                                             </div>
                                     </div>
 
