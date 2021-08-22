@@ -5,7 +5,8 @@ import moment from 'moment';
 import { getAllEmployeesService } from "../../services/employeeService";
 
 import ViewEmpModal from "./modals/viewEmployee";
-import DeleteModal from "./modals/deleteEmployee"
+import DeleteEmployeeModal from "./modals/deleteEmployee"
+import UpdateEmployeeModal from "./modals/updateEmployee";
 
 export default function EmpList() {
     const [empList, setEmp] = useState([]);
@@ -15,6 +16,9 @@ export default function EmpList() {
 
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+
+    const [modalDataUpdate, setModalDataUpdate] = useState([]);
+    const [modalUpdate, setModalUpdate] = useState(false);
 
     const [modalDataDelete, setModalDataDelete] = useState([]);
     const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
@@ -67,6 +71,14 @@ export default function EmpList() {
 
         setModalDataDelete(data);
         setModalDeleteConfirm(true);
+
+    }
+
+    const openModalUpdate = (data) => {
+
+        console.log("request came for modal updateeeeeee", data);
+        setModalDataUpdate(data);
+        setModalUpdate(true);
 
     }
 
@@ -123,11 +135,11 @@ export default function EmpList() {
                                     <td>{employee.nic}</td>
                                     <td>{employee.email}</td>
                                     <td>{moment(employee.DOB).format('YYYY-MMMM-D')}</td>
-                                    <td>{employee.mobileNo}</td>
+                                    <td>0{employee.mobileNo}</td>
                                     <td>
                                         <button
                                             class="btn btn-light btn-sm"
-                                        // onClick={() => this.handleUpdateOnClick(employee.userId)}
+                                            onClick={() => openModalUpdate(employee)}
                                         >
                                             update
                                         </button>
@@ -136,7 +148,7 @@ export default function EmpList() {
                                             class="btn btn-danger btn-sm"
                                             onClick={() => openModalDelete(employee)}
                                         >
-                                            delete
+                                            remove
                                         </button>
                                     </td>
                                 </tr>
@@ -195,7 +207,7 @@ export default function EmpList() {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <DeleteModal
+                <DeleteEmployeeModal
                     data={modalDataDelete}
                     onHide={() => setModalDelete(false)}
                 />
@@ -228,6 +240,19 @@ export default function EmpList() {
                 </Modal.Footer>
             </Modal>
 
+            {/* modal for update the data of employee */}
+            <Modal
+                show={modalUpdate}
+                onHide={() => setModalUpdate(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <UpdateEmployeeModal
+                    data={modalDataUpdate}
+                    onHide={() => setModalUpdate(false)}
+                />
+            </Modal>
         </div >
     );
 }

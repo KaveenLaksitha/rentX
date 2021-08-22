@@ -1,4 +1,4 @@
-{/*import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
@@ -422,4 +422,3 @@ import { Modal } from "react-bootstrap";
     }
 
 export default Updatereservation;
-*/}

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import Swal from 'sweetalert2';
 import { Modal } from "react-bootstrap";
 
 import { deleteEmployeeService } from "../../../services/employeeService";
@@ -15,14 +17,50 @@ function DeleteEmployee(emp) {
     function onDelete() {
         // console.log("on deleteeeeeeeeeee", modalDataDelete)
 
-        deleteEmployeeService(modalData.data, resReason).then((res) => {
+        //console.log("reasonnn", !resReason);
+        if (resReason) {
 
-            const message = res.ok
-                ? "Data has been deleted"
-                : res.err;
-            alert(message);
-            window.location.replace("/empList");
-        });
+            deleteEmployeeService(modalData.data, resReason).then((response) => {
+
+                const message = response.ok
+                    ? "Employee deletion successful!"
+                    : response.err;
+
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: `${message}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ).then(() => {
+                        window.location.replace("empList");
+                    })
+
+                }
+                else {
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${message}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                }
+            });
+
+        } else {
+
+            Swal.fire({
+                title: 'Error!',
+                text: `Please enter a reason for resignation`,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        }
     }
 
     return (
@@ -34,7 +72,7 @@ function DeleteEmployee(emp) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <form id="addInquiryform" action="post" className="form"
-                        // onSubmit={sendData}
+                        // onSubmit={onDelete()}
                         >
                             <div className="row">
                                 <div className="form-group col-md-6">

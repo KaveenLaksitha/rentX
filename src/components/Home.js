@@ -28,7 +28,7 @@ function Home() {
         <Router>
             <div>
                 <Header />
-                <Route path="/login" exact component={Login} />
+                <Route path="/" exact component={Login} />
                 <Route path="/addRental" exact component={addRental} />
                 <Route path="/rentalList" exact component={rentalList} />
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />

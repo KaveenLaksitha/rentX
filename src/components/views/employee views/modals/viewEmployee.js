@@ -53,6 +53,12 @@ function ViewEmployee(emp) {
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
+                                        Designation
+                                    </th>
+                                    <td class="text-left">{emp.data.designation}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-left" scope="row">
                                         Current Address
                                     </th>
                                     <td class="text-left">{emp.data.currAdd}</td>

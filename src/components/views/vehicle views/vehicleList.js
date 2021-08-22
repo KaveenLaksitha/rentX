@@ -144,7 +144,7 @@ function VehicleList() {
                             <th class="text-center">Brand</th>
                             <th class="text-center">Modal</th>
                             <th class="text-center">Type</th>
-                            <th class="text-center ml-3">Rate</th>
+                            <th class="text-right">Rate</th>
                             <th class="text-center">Years Of Rent </th>
                             <th class="text-center">Action</th>
                         </tr>

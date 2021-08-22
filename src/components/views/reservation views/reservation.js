@@ -135,8 +135,13 @@ function Reservation() {
     const [perDayCharge, setPerDayCharge] = useState("");
     const [perDayCharge1, setPerDayCharge1] = useState("");
 
+
     const [no1, setno1] = useState("");
     const [no2, setno2] = useState("");
+
+    const [NICErr, setNICErr] = useState("");
+    const[MobErr, setMobileErr] = useState("");
+
 
 
 
@@ -149,12 +154,13 @@ function Reservation() {
 
         alert("Your ramaining balance is " + `${finalpay}`);
 
-        const answer = window.confirm("Are you sure you want to confirm submission?");
+        
 
         const NICValid  = NICValidation();
         const CntValid  = MobileValidation();
 
         if(NICValid && CntValid){
+            const answer = window.confirm("Are you sure you want to confirm submission?");
 
         if (answer) {
             const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
@@ -328,8 +334,7 @@ function Reservation() {
 
     //validate function
 
-    const [NICErr, setNICErr] = useState("");
-    const[MobErr, setMobileErr] = useState("");
+
 
 
     const NICValidation = () => {

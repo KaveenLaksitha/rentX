@@ -16,7 +16,6 @@ export default function PastEmpList() {
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
-    const [modalDataDelete, setModalDataDelete] = useState([]);
 
     useEffect(() => {
         getAllPastEmployeesService().then((data) => {
@@ -32,11 +31,6 @@ export default function PastEmpList() {
         )
     }, []);
 
-    useEffect(() => {
-
-        console.log("component did update", modalDataDelete)
-
-    }, [modalDataDelete]);
 
 
 

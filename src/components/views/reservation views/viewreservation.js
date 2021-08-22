@@ -7,6 +7,7 @@ import { useParams} from "react-router";
 import Swal from 'sweetalert2'
 
 import TestModal from "./modals/reservationview";
+import UpdateReservationModal from "./modals/updatereservation"
 
 function Viewreservation() {
 
@@ -14,6 +15,7 @@ function Viewreservation() {
     //const [reservations, setReservations] = useState([]);
     const [viewreservation, setviewreservation] = useState([]);
     const [search, setSearch] = useState("");
+    
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
@@ -22,6 +24,9 @@ function Viewreservation() {
     const [modalDelete, setModalDelete] = useState(false);
 
     const [modalLoading, setModalLoading] = useState(false);
+
+    const [modalDataUpdate, setModalDataUpdate] = useState([]);
+    const [modalUpdate, setModalUpdate] = useState(false);
 
     useEffect(() => {
 
@@ -69,6 +74,14 @@ function Viewreservation() {
         setModalDeleteConfirm(true)
         //deleteReservation(data);
         //setModalDeleteConfirm(true);
+    }
+
+       const openModalUpdate = (data) => {
+
+        console.log("request came for modal updateeeeeee", data);
+        setModalDataUpdate(data);
+        setModalUpdate(true);
+
     }
 
     function pendingRecords() {
@@ -240,8 +253,8 @@ const deleteReservation = async (data) => {
                                     <td class="text-center">{reservations.status}</td>
                                     <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                {/*<button type="button" class="btn btn-light btn-sm">Update</button>*/}
-                                    <Link class="btn btn-light btn-sm" to={`/updateReservation/${reservations.reservationid}`} role="button">Update</Link>
+                                
+                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  role="button">Update</Link>
 
                                     <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> Remove</Link>
 
@@ -304,7 +317,21 @@ const deleteReservation = async (data) => {
                         </button>
                     </div>
                 </Modal.Footer>
-            </Modal>      
+            </Modal>  
+
+            {/* modal for update the data of employee */}
+            <Modal
+                show={modalUpdate}
+                onHide={() => setModalUpdate(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <UpdateReservationModal
+                    data={modalDataUpdate}
+                    onHide={() => setModalUpdate(false)}
+                />
+            </Modal>    
 
 
         </div>
@@ -354,3 +381,5 @@ export default Viewreservation
     /*function refreshPage() {
         window.location.reload();
     }*/
+
+    {/*to={`/updateReservation/${reservations.reservationid}`}*/}

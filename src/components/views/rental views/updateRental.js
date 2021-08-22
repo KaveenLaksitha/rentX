@@ -86,8 +86,8 @@ function UpdateRental() {
     const onSubmit = async e => {
         e.preventDefault();//to prevent the default submission by submit button
 
-        alert(penDay);
-        alert(rem);
+        //alert(penDay);
+        //alert(rem);
 
         const answer = window.confirm("Are you sure you want to update details?");
         if (answer) {
