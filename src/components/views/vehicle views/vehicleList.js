@@ -2,9 +2,11 @@ import axios from 'axios'
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 
 import TestModal from "./viewVehicle";
+import UpdateVehicleModal from "./modal/updateVehicleModal";
 
 function VehicleList() {
 
@@ -17,6 +19,10 @@ function VehicleList() {
     // const [modalDelete, setModalDelete] = useState(false);
 
 
+    const [modalDataUpdate, setModalDataUpdate] = useState([]);
+    const [modalUpdate, setModalUpdate] = useState(false);
+
+
     useEffect(() => {
 
         function getVehicles() {
@@ -25,8 +31,37 @@ function VehicleList() {
 
                 setVehicles(res.data.reverse());
                 console.log("Data recieved");
+                let timerInterval
+                    Swal.fire({
+                    title: 'Loading...',
+                    html: ' <b></b> milliseconds.',
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                    }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log('I was closed by the timer')
+                    }
+                    })
             }).catch((error) => {
-                alert(error.message);
+                // alert(error.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    confirmButtonColor: '#207159',
+                    
+                  })
             })
 
         }
@@ -38,25 +73,56 @@ function VehicleList() {
 
     const deleteVehicle = async (data) => {
 
-        await axios.post("http://localhost:4000/vehicleRemove/addRemoveVehicle", { data }).then(() => {
-            alert("**Vehicle Record added successfully")
-
+         await axios.post("http://localhost:4000/vehicleRemove/addRemoveVehicle", { data }).then(() => {
+            // alert("**Vehicle Record added successfully")
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Permenantly deleted the Vehicle Record',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            
             const value = axios.post("http://localhost:4000/vehicle/deleteV", modalDataDelete);
             console.log("deletedddd",value);
             if (value) {
-                alert("**Permenantly deleted the Vehicle Record");
+                // alert("**Permenantly deleted the Vehicle Record");
                 // window.location.replace("/viewReservation");
-                window.location.reload()
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Permenantly deleted the Vehicle Record &  added successfully !!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+                ).then(() => {
+                    window.location.reload();
+                })
+                
+
+                
             }
 
         }).catch((err) => {
-            alert("enne na")
+            // alert("enne na")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#207159',
+                
+              }).then(() => {
+                window.location.reload();
+            })
 
             //alert(err.response.data.errorCode)
 
         })
 
     }
+
+    
 
 
 
@@ -78,6 +144,14 @@ function VehicleList() {
     const openModalDelete = (data) => {
         setModalDataDelete(data);
         setModalDeleteConfirm(true);
+    }
+
+    const openModalUpdate = (data) => {
+
+        console.log("request came for modal updateeeeeee", data);
+        setModalDataUpdate(data);
+        setModalUpdate(true);
+
     }
 
 
@@ -108,16 +182,16 @@ function VehicleList() {
 
 
             <div className="table-emp">
-                <div class="row table-head">
+                <div class="row table-head mt-3">
                     <div class="col">
-                        <h3 className="float-left">List of vehicle</h3>
+                        <h3 className="float-left ">List of vehicle</h3>
                     </div>
                     <a href="/addVehicle" class="float-right">
                         <button class="btn btn-ok white">
                             Add Vehicle
                         </button>
                     </a>
-                    <a href="#" class="float-right ml-4">
+                    <a href="/deleteVehicles" class="float-right ml-4">
                         <button class="btn btn-ok white">
                             Deleted Vehicle
                         </button>
@@ -144,8 +218,8 @@ function VehicleList() {
                             <th class="text-center">Brand</th>
                             <th class="text-center">Modal</th>
                             <th class="text-center">Type</th>
-                            <th class="text-right">Rate</th>
-                            <th class="text-center">Years Of Rent </th>
+                            <th class="text-right">Rate (Rs.)</th>
+                            <th class="text-right">Years Of Rent </th>
                             <th class="text-center">Action</th>
                         </tr>
 
@@ -163,11 +237,11 @@ function VehicleList() {
                                     <td class="text-center">{vehicles.VehicleModel}</td>
                                     <td class="text-center">{vehicles.VehicleType}</td>
                                     <td class="text-right">{vehicles.RatePDay.toFixed(2)}</td>
-                                    <td class="text-center">{vehicles.YearsRent}</td>
+                                    <td class="text-right">{vehicles.YearsRent}</td>
                                     <td class="text-center">
                                         <button
                                             class="btn btn-light btn-sm"
-                                        // onClick={() => this.handleUpdateOnClick(employee.userId)}
+                                            onClick={() => openModalUpdate(vehicles)}
                                         >
                                             update
                                         </button>
@@ -220,6 +294,21 @@ function VehicleList() {
                 </div>
                 </Modal.Footer>
             </Modal>
+            
+            {/* modal for update the data of vehicle */}
+            <Modal
+                show={modalUpdate}
+                onHide={() => setModalUpdate(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <UpdateVehicleModal
+                    data={modalDataUpdate}
+                    onHide={() => setModalUpdate(false)}
+                />
+            </Modal>
+
         </div>
     )
 }
