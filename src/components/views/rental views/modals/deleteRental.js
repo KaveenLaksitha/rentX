@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function DeleteRental(rental) {
 
@@ -14,19 +15,42 @@ function DeleteRental(rental) {
     const deleteRental = async (data) => {
 
         await axios.post("http://localhost:4000/deletedRentals/addRemovedRentalRec", { data }).then(() => {
-            alert("Completed Rental Record successfully removed of customer " + rental.data.customerNIC)
+            //alert("Completed Rental Record successfully removed of customer " + rental.data.customerNIC)
+            Swal.fire({
+                title: "Completed Rental Record successfully removed! ",
+                text: `${rental.data.customerNIC}` + "associated record is removed",
+                icon: 'success',
+                confirmButtonColor: "#207159",
 
-            const value = axios.post("http://localhost:4000/rental/deleteRental", modalData);
+            })
+            //const value = axios.post("http://localhost:4000/rental/deleteRental", modalData);
             //console.log(value);
+            const value = axios.post("http://localhost:4000/rental/deleteRental", { data });
             if (value) {
-                alert("Permenantly deleted the record " + rental.data.id);
-                window.location.replace("/rentalList");
+                //alert("Permenantly deleted the record " + rental.data.id);
+                Swal.fire({
+                    title: "Permenantly deleted the record! ",
+                    text: `${rental.data.id}` + " record deleted",
+                    icon: 'error',
+                    confirmButtonColor: "#207159",
+                }).then((res) => {
+                    if (res.isConfirmed) {
+                        window.location.replace('/rentalList');
+                    }
+                })
+
             }
 
         }).catch((err) => {
-            alert(err.response.data.error)
-
+            //alert(err.response.data.error)
             //alert(err.response.data.errorCode)
+            Swal.fire({
+                title: "Internal Server Error ",
+                text: `${err.response.data.error}`,
+                icon: 'error',
+                confirmButtonColor: "#207159",
+
+            })
 
         })
 

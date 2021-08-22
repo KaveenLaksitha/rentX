@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
-
+import Swal from "sweetalert2";
 
 function RentalPlacement() {
 
@@ -153,7 +153,12 @@ function RentalPlacement() {
 
         //from and to is not validated since it is originally set to current date
         if ((status == "" || payment == "" || vehicleType == "" || model == "" || advPayment == "")) {
-            alert("Please fill the form details ")
+            //alert("Please fill the form details ")
+            Swal.fire({
+                icon: 'error',
+                title: "Please fill the form details ! ",
+                confirmButtonColor: "#1fc191",
+            })
         } else {
             //alert(vehicleType, model)
             getRentChargePerDay();
@@ -218,7 +223,12 @@ function RentalPlacement() {
         //alert(rentals.length);
 
         if (rentals.length !== 0) {
-            alert('Customer already has unsettled rentals')
+            //alert('Customer already has unsettled rentals')
+            Swal.fire({
+                icon: 'error',
+                title: "Customer already has unsettled rentals ! ",
+                confirmButtonColor: "#1fc191",
+            })
             history.push("/rentalList")
 
         } else if (rentals.length === 0) {
@@ -228,27 +238,58 @@ function RentalPlacement() {
             const AdvanceValid = AdvanceValidation();
 
             if (MobileValid && NICValid && AdvanceValid) {
-                const answer = window.confirm("Are you sure you want to confirm submission?");
-                if (answer) {
+                Swal.fire({
+                    title: "Are you sure you want to confirm submission? ",
+                    showConfirmButton: true,
+                    showDenyButton: true,
+                    confirmButtonText: "Proceed",
+                    denyButtonText: "Cancel",
+                    confirmButtonColor: "#1fc191",
 
-                    const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
+                }).then((result) => {
 
-                    axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
-                        alert("Rental Record added successfully")
-                        /*function refreshPage() {
-                            window.location.reload();
-                        }
-                        refreshPage();*/
-                        history.push("/rentalList");
+                    if (result.isConfirmed) {
 
-                    }).catch((err) => {
-                        alert(err.response.data.error)
+                        const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-                        //alert(err.response.data.errorCode)
+                        axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
+                            Swal.fire({
+                                title: "Rental Record added successfully! ",
+                                icon: 'success',
 
-                    })
+                                confirmButtonColor: "#1fc191",
 
-                }
+                            }).then((res) => {
+                                if (res.isConfirmed) {
+                                    window.location.replace('/rentalList');
+                                }
+                            })
+
+                        }).catch((err) => {
+                            var error = err.response.data.error
+
+                            //alert(err.response.data.errorCode)
+                            Swal.fire({
+                                title: "Internal Server Error! ",
+                                text: error,
+                                icon: 'error',
+                                confirmButtonColor: "#1fc191",
+
+                            })
+
+                        })
+
+                    } else if (result.isDenied) {
+                        refreshPage();
+                    }
+
+                })
+                //const answer = window.confirm("Are you sure you want to confirm submission?");
+
+
+
+
+
             }
         }
 
@@ -333,7 +374,7 @@ function RentalPlacement() {
         const mobileNo = event.target.value;
         if (MobileRegex.test(mobileNo)) {
             setMobileIsValid(true);
-            setMobileMessage('Your Mobile Number looks good!');
+            setMobileMessage('Your Mobile Number is valid!');
         } else {
             setMobileIsValid(false);
             setMobileMessage('Please enter a valid Mobile Number!');
@@ -373,7 +414,7 @@ function RentalPlacement() {
         if (Advance <= 10000) {
             setAdvanceValid(true);
             // setRegMessage('Vehicle Registation Number looks good!');
-            setAdvMessage('Advance paymnet amount is ok');
+            setAdvMessage('Advance paymnet amount is valid');
         } else {
             setAdvanceValid(false);
             setAdvMessage('Advance paymnet should be less than Rs 10,000/=');
@@ -403,7 +444,14 @@ function RentalPlacement() {
                 setRentals(res.data)
                 return rentals.length
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                Swal.fire({
+                    title: "Error Occured !",
+                    text: `${error.message}`,
+                    icon: 'error',
+                    confirmButtonColor: "#1fc191",
+
+                })
             })
         }
         checkUserExistance();
@@ -415,7 +463,14 @@ function RentalPlacement() {
                 setPerDayCharge(res.data)
                 console.log(res.data);
             }).catch((error) => {
-                alert(error.message);
+                //alert(error.message);
+                Swal.fire({
+                    title: "Error Occured !",
+                    text: `${error.message}`,
+                    icon: 'error',
+                    confirmButtonColor: "#1fc191",
+
+                })
             })
         }
         getRent();
@@ -440,7 +495,7 @@ function RentalPlacement() {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-content-emp"></div>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form onSubmit={temporarilysendData}>
+                        <form onSubmit={temporarilysendData} action="post">
                             <div class="container">
                                 <br></br>
                                 <h6 className="customersize2">Rental Dates</h6>
