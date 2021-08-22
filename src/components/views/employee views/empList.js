@@ -135,7 +135,7 @@ export default function EmpList() {
                                     <td>{employee.nic}</td>
                                     <td>{employee.email}</td>
                                     <td>{moment(employee.DOB).format('YYYY-MMMM-D')}</td>
-                                    <td>{employee.mobileNo}</td>
+                                    <td>0{employee.mobileNo}</td>
                                     <td>
                                         <button
                                             class="btn btn-light btn-sm"
