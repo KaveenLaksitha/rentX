@@ -69,7 +69,7 @@ function AddEmployee() {
 
             addEmployeeService(newEmployee).then((response) => {
                 const message = response.ok
-                    ? "Employee insertion successful"
+                    ? "Employee insertion successful!"
                     : response.err;
 
                 if (response.ok) {
