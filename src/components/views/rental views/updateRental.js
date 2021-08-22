@@ -4,6 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import Swal from "sweetalert2";
 
 function UpdateRental() {
     let history = useHistory();
@@ -89,24 +90,54 @@ function UpdateRental() {
         //alert(penDay);
         //alert(rem);
 
-        const answer = window.confirm("Are you sure you want to update details?");
-        if (answer) {
+        //const answer = window.confirm("Are you sure you want to update details?");
+        Swal.fire({
+            title: "Are you sure you want to confirm submission? ",
+            showConfirmButton: true,
+            showDenyButton: true,
+            confirmButtonText: "Proceed",
+            denyButtonText: "Cancel",
+            confirmButtonColor: "#1fc191",
 
-            const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penDay, penaltyCharges, returnDate, rem }
+        }).then((result) => {
 
-            await axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
-                alert("Rental Record successfully Updated");
+            if (result.isConfirmed) {
 
-            }).catch((err) => {
-                alert(err.response.data.error);
-            })
-            history.push(
-                '/rentalList',
-            )
+                const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penDay, penaltyCharges, returnDate, rem }
 
-        } else {
+                axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
+                    //alert("Rental Record successfully Updated");
+                    Swal.fire({
+                        title: "Rental Record successfully Updated! ",
+                        icon: 'success',
+                        confirmButtonColor: "#207159",
 
-        }
+
+                    }).then((res) => {
+                        if (res.isConfirmed) {
+                            window.location.replace('/rentalList');
+                        }
+                    })
+
+
+                }).catch((err) => {
+                    //alert(err.response.data.error);
+                    Swal.fire({
+                        title: "Error occured ! ",
+                        text: `${err.response.data.error}`,
+                        icon: 'error',
+                        confirmButtonColor: "#207159",
+
+                    })
+
+                })
+
+            } else if (result.isDenied) {
+                refreshPage();
+            }
+
+            //window.location.replace("/rentalList");
+        })
     }
 
     const loadRental = async () => {
@@ -132,7 +163,14 @@ function UpdateRental() {
             setPenalty(res.data.rental.penaltyCharges);
             setLastPaid(res.data.rental.lastPaid);
         }).catch((err) => {
-            alert(err.response.data.error);
+            //alert(err.response.data.error);
+            Swal.fire({
+                title: "Error occured !",
+                text: `${err.response.data.error}`,
+                icon: 'error',
+                confirmButtonColor: "#207159",
+
+            })
         })
 
     }

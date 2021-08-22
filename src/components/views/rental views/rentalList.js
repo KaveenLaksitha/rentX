@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 
 import TestModal from "./modals/viewRental";
 import DeleteModal from "./modals/deleteRental"
-
+import RentalUpdateModal from "./modals/RentalUpdate";
 
 function RentalList() {
 
@@ -15,6 +15,9 @@ function RentalList() {
     const [rentalList, setRentalList] = useState([]);
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+
+    const [modalDataUpdate, setModalDataUpdate] = useState([]);
+    const [modalUpdate, setModalUpdate] = useState(false);
 
     const [modalDataDelete, setModalDataDelete] = useState([]);
     const [modalDeleteConfirm, setModalDeleteConfirm] = useState(false);
@@ -70,6 +73,14 @@ function RentalList() {
     const openModalDelete = (data) => {
         setModalDataDelete(data);
         setModalDeleteConfirm(true);
+    }
+
+    const openModalUpdate = (data) => {
+
+        console.log("request came for modal updateeeeeee", data);
+        setModalDataUpdate(data);
+        setModalUpdate(true);
+
     }
 
 
@@ -146,8 +157,8 @@ function RentalList() {
                     onHide={() => setModalShow(false)}
                 />
             </Modal>
-            <div className="table-emp mt-3">
-                <div class="row table-head">
+            <div className="table-emp ">
+                <div class="row table-head mt-3">
                     <div class="col">
                         <h3 className="float-left" onClick={refreshPage}>List of Rentals</h3>
                     </div>
@@ -211,7 +222,13 @@ function RentalList() {
                                     <td >{rental.status}</td>
                                     <td>
 
-                                        <Link class="btn btn-light btn-sm" to={`/updateRental/${rental.id}`} role="button"> Update</Link>
+                                        {/*<Link class="btn btn-light btn-sm" to={`/updateRental/${rental.id}`} role="button"> Update</Link>*/}
+                                        <button
+                                            class="btn btn-light btn-sm"
+                                            onClick={() => openModalUpdate(rental, `${rental.id}`)}
+                                        >
+                                            update
+                                        </button>
                                         <Link class="btn btn-danger btn-sm" onClick={() => openModalDelete(rental)} role="button"> Remove</Link>
 
                                     </td>
@@ -286,6 +303,20 @@ function RentalList() {
                         </button>
                     </div>
                 </Modal.Footer>
+            </Modal>
+
+            {/*Update modal for rental*/}
+            <Modal
+                show={modalUpdate}
+                onHide={() => setModalUpdate(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <RentalUpdateModal
+                    data={modalDataUpdate}
+                    onHide={() => setModalUpdate(false)}
+                />
             </Modal>
 
 
