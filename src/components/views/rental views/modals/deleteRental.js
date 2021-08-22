@@ -23,8 +23,9 @@ function DeleteRental(rental) {
                 confirmButtonColor: "#207159",
 
             })
-            const value = axios.post("http://localhost:4000/rental/deleteRental", modalData);
+            //const value = axios.post("http://localhost:4000/rental/deleteRental", modalData);
             //console.log(value);
+            const value = axios.post("http://localhost:4000/rental/deleteRental", { data });
             if (value) {
                 //alert("Permenantly deleted the record " + rental.data.id);
                 Swal.fire({

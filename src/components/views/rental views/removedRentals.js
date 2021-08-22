@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
-import TestModal from "./modals/viewRental";
+//import TestModal from "./modals/viewRental";
+import ViewRemovedRental from "./modals/viewRemovedRental";
 
 
 
 function RemovedRentalList() {
 
-    const [search, setSearch] = useState("");
     const [rentalList, setRentalList] = useState([]);
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
@@ -23,7 +23,7 @@ function RemovedRentalList() {
 
         /*if (document.getElementById('submit').clicked) {//this get executed if we are specifically searching
             //searchRentals();
-
+ 
         } else*/
         function getRentals() {
             axios.get("http://localhost:4000/deletedRentals/displayRemovedRentals").then((res) => { //normally the fetched rental record details are displayed through this
@@ -69,7 +69,7 @@ function RemovedRentalList() {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <TestModal
+                <ViewRemovedRental
                     data={modalData}
                     onHide={() => setModalShow(false)}
                 />

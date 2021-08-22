@@ -495,7 +495,7 @@ function RentalPlacement() {
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-content-emp"></div>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form onSubmit={temporarilysendData}>
+                        <form onSubmit={temporarilysendData} action="post">
                             <div class="container">
                                 <br></br>
                                 <h6 className="customersize2">Rental Dates</h6>
