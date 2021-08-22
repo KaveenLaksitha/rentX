@@ -157,8 +157,8 @@ function RentalList() {
                     onHide={() => setModalShow(false)}
                 />
             </Modal>
-            <div className="table-emp mt-3">
-                <div class="row table-head">
+            <div className="table-emp ">
+                <div class="row table-head mt-3">
                     <div class="col">
                         <h3 className="float-left" onClick={refreshPage}>List of Rentals</h3>
                     </div>
