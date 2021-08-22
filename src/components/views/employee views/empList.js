@@ -34,7 +34,7 @@ export default function EmpList() {
 
                 setIsFetching(true);
                 setModalLoading(false);
-                setEmp(data.data);
+                setEmp(data.data.reverse());
 
             } else {
                 setModalLoading(true);
