@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
-import TestModal from "./modals/reservationview";
+import TestModal from "./modals/deleteview";
 
 
 
@@ -88,7 +88,7 @@ function DeleteRecord() {
                             <th>From</th>
                             <th>To</th>
                             <th>Return Date</th>
-                           <th>Penalty</th>
+                            {/*<th>Penalty</th>*/}
                             <th>Total</th>
                             <th>Status</th>
                         </tr>
@@ -96,16 +96,14 @@ function DeleteRecord() {
                     <tbody>
                         {viewreservation.map((reservations) => {
                             return (
-
                                 <tr >
-
                                     <td onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view details">{reservations.customernic}</td>
                                     <td >{reservations.packagename}</td>
                                     <td >{reservations.eventtype}</td>
                                     <td >{reservations.from}</td>
                                     <td >{reservations.to}</td>
                                     <td >{moment(reservations.returnDay).format('YYYY-MMMM-DD')}</td>                   
-                                    <td >{reservations.penaltyCharge}</td>
+                                    {/*<td >{reservations.penaltyCharge}</td>*/}
                                     <td >{reservations.totalreservation}</td>
                                     <td >{reservations.status}</td>
 

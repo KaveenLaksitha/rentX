@@ -200,24 +200,21 @@ function Reservation() {
         if (document.getElementById('vehicleType').value == 'Car') {
             document.getElementById('model1').value = "Axio";
             document.getElementById('model1').innerHTML = "Axio";
-            document.getElementById('model2').value = "Bxio";
-            document.getElementById('model2').innerHTML = "Bxio";
-            document.getElementById('model3').value = "Cxio";
-            document.getElementById('model3').innerHTML = "Cxio";
+            document.getElementById('model2').value = "Leaf";
+            document.getElementById('model2').innerHTML = "Leaf";
+            document.getElementById('model3').value = "Alto";
+            document.getElementById('model3').innerHTML = "Alto";
         } else if (document.getElementById('vehicleType').value == 'Van') {
-            document.getElementById('model1').value = "DF";
-            document.getElementById('model1').innerHTML = "DF";
-            document.getElementById('model2').value = "Bvan";
-            document.getElementById('model2').innerHTML = "Bvan";
-            document.getElementById('model3').value = "Cvan";
-            document.getElementById('model3').innerHTML = "Cvan";
+            document.getElementById('model1').value = "Caravan";
+            document.getElementById('model1').innerHTML = "Caravan";
+            document.getElementById('model2').value = "KDH";
+            document.getElementById('model2').innerHTML = "KDH";
         } else if (document.getElementById('vehicleType').value == 'Bus') {
-            document.getElementById('model1').value = "Abus";
-            document.getElementById('model1').innerHTML = "Abus";
-            document.getElementById('model2').value = "Bbus";
-            document.getElementById('model2').innerHTML = "Bbus";
-            document.getElementById('model3').value = "Cbus";
-            document.getElementById('model3').innerHTML = "Cbus";
+            document.getElementById('model1').value = "Coater";
+            document.getElementById('model1').innerHTML = "Coater";
+            document.getElementById('model2').value = "Rosa";
+            document.getElementById('model2').innerHTML = "Rosa";
+           
         }
     }
 
@@ -225,24 +222,22 @@ function Reservation() {
         if (document.getElementById('vehicleType1').value == 'Car') {
             document.getElementById('model11').value = "Axio";
             document.getElementById('model11').innerHTML = "Axio";
-            document.getElementById('model22').value = "Bxio";
-            document.getElementById('model22').innerHTML = "Bxio";
-            document.getElementById('model33').value = "Cxio";
-            document.getElementById('model33').innerHTML = "Cxio";
+            document.getElementById('model22').value = "Leaf";
+            document.getElementById('model22').innerHTML = "Leaf";
+            document.getElementById('model33').value = "Alto";
+            document.getElementById('model33').innerHTML = "Alto";
         } else if (document.getElementById('vehicleType1').value == 'Van') {
-            document.getElementById('model11').value = "DF";
-            document.getElementById('model11').innerHTML = "DF";
-            document.getElementById('model22').value = "Bvan";
-            document.getElementById('model22').innerHTML = "Bvan";
-            document.getElementById('model33').value = "Cvan";
-            document.getElementById('model33').innerHTML = "Cvan";
+            document.getElementById('model11').value = "Caravan";
+            document.getElementById('model11').innerHTML = "Caravan";
+            document.getElementById('model22').value = "KDH";
+            document.getElementById('model22').innerHTML = "KDH";
+         
         } else if (document.getElementById('vehicleType1').value == 'Bus') {
-            document.getElementById('model11').value = "Abus";
-            document.getElementById('model11').innerHTML = "Abus";
-            document.getElementById('model22').value = "Bbus";
-            document.getElementById('model22').innerHTML = "Bbus";
-            document.getElementById('model33').value = "Cbus";
-            document.getElementById('model33').innerHTML = "Cbus";
+            document.getElementById('model11').value = "Coater";
+            document.getElementById('model11').innerHTML = "Coater";
+            document.getElementById('model22').value = "Rosa";
+            document.getElementById('model22').innerHTML = "Rosa";
+        
         }
     }
     function getDateDiff() {
@@ -432,7 +427,7 @@ const MobileValidation =() =>{//validate function
 
             <div class="container input-main-form-emp">
                 <br></br>
-                <h2> Event Reservation</h2>
+                <h3> Event Reservation</h3>
                 <br></br>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -457,7 +452,7 @@ const MobileValidation =() =>{//validate function
                                                 class="form-control formInput"
                                                 id="packageName"
                                                 name="packageName"
-                                                placeholder="Package Name"
+                                                placeholder="Package 1"
                                                 //tabindex="1"
                                                 required
                                                 onChange={(event) => {
@@ -652,7 +647,7 @@ const MobileValidation =() =>{//validate function
                                                 <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <input type="button" class="btn btn-info" id="entry" value=" Get Date Range " onClick={showDateRange} />
+                                                <input type="button" class="btn btn-info" id="entry" value=" Date Range And Total " onClick={showDateRange} />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -673,7 +668,7 @@ const MobileValidation =() =>{//validate function
                                                     } />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="totalreservation">Total Price</label>
+                                                <label class="form-label-emp" for="totalreservation">Total Price</label>
                                                 <input
                                                     type="text"
                                                     class="form-control formInput"
@@ -839,9 +834,10 @@ const MobileValidation =() =>{//validate function
                                                 class="form-control formInput"
                                                 id="packagename"
                                                 name="packagename"
-                                                placeholder="Event Type (Wedding)"
+                                                placeholder=""
                                                 //tabindex="7"
                                                 required
+                                                disable
                                             />
 
                                         </div>

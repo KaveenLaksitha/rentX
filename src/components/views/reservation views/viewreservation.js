@@ -254,7 +254,7 @@ const deleteReservation = async (data) => {
                                     <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                 
-                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  role="button">Update</Link>
+                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >Update</Link>
 
                                     <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> Remove</Link>
 
