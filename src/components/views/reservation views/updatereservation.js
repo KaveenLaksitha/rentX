@@ -4,6 +4,8 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import Swal from 'sweetalert2'
+
 
 
  function Updatereservation() {
@@ -78,10 +80,7 @@ import 'react-datetime/css/react-datetime.css';
     const onSubmit = async e => {
         e.preventDefault();
 
-        //var num2 = calculateRemainingPayment();  
-        
-        //var finalremain = document.getElementById('remaining').value = num2.toFixed(2);
-        //alert(`Your Remaining Balance is ${finalremain}`);
+
     
     const answer = window.confirm("Are you sure you want to update the Reservation details?");
     
@@ -105,14 +104,23 @@ import 'react-datetime/css/react-datetime.css';
                                 penaltyCharge,
                                 remaining
                             }
+                            console.log("data", newReservation);
       await axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
-        alert("Reservation details successfully Updated");
-
+        alert("Reservation Payment is ready");
+         Swal.fire({
+                        title: 'Success!',
+                        text: `${"Reservation Updated Successfully"}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ).then(() => {
+                        //window.location.reload();
+                    })
 
       }).catch((err) => {
         alert(err.response.data.error);
       })
-
     } 
     } 
     const loadReservation = async () => {
@@ -313,7 +321,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     tabindex="8" 
                                                     //required 
                                                     value={penaltyDay}
-                                                    onChange={(event) => { setpenaltyDay(event.target.value) }}
+                                                    onClickCapture={(event) => { setpenaltyDay(event.target.value); getDateDiff()  }}
 
                                                     />
                                             </div>
@@ -328,8 +336,8 @@ import 'react-datetime/css/react-datetime.css';
                                                     tabindex="9" 
                                                     //required 
                                                     value={penaltyCharge}
-                                                    onChange={(e) => {
-                                                        setpenaltyCharge(e.target.value);
+                                                    onClickCapture={(e) => {
+                                                        setpenaltyCharge(e.target.value); calculatePenaltyCost()
                                                 }}/>
                                             </div>
                                             </div>
@@ -360,7 +368,7 @@ import 'react-datetime/css/react-datetime.css';
                                                     value={totalreservation}
                                                     required 
                                                     disabled
-                                                    />
+                                                    onChange={(event) => { settotalreservation(event.target.value) }}/>
                                             </div>
                                             </div>
                                             <div class="row">
@@ -373,11 +381,12 @@ import 'react-datetime/css/react-datetime.css';
                                                     name="remaining" 
                                                     value={remaining}
                                                     placeholder="Remaining Reservation Payment" 
-                                                    tabindex="11" />
+                                                    tabindex="11" 
+                                                    onChange={(event) => { setremaining(event.target.value) }}/>
                                             </div>
                                             <div class="form-group col-md-6">
                                            
-                                                <input type="button" class="btn btn-info" id="entry" value=" Charge " onClick={updateTotal} />
+                                                <input type="button" class="btn btn-info" id="entry" value="Charge" onClick={updateTotal} />
                                             
 
                                             </div>

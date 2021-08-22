@@ -69,6 +69,7 @@ function Reservationview(reservations) {
                                     </th>
                                     <td class="text-left">{reservations.data.advancedpayment}</td>
                                 </tr>
+                                
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Total Reservation : 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import { Modal, Button } from "react-bootstrap";
 import { useParams} from "react-router";
+import Swal from 'sweetalert2'
 
 import TestModal from "./modals/reservationview";
 
@@ -100,11 +101,11 @@ function Viewreservation() {
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
+                 
             })
         }
     }
 
-    
 
     
 
@@ -112,22 +113,49 @@ const deleteReservation = async (data) => {
 
         await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
             alert("Reservation Record added successfully")
+            
 
             const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
             //console.log(value);
             if (value) {
-                alert("Permenantly deleted the Reservation Record");
-                window.location.replace("/viewReservation");
+                //alert("Permenantly deleted the Reservation Record");
+                
+                 Swal.fire({
+                        title: 'Success!',
+                        text: `${"Reservation Deleted Successfully"}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                    ).then(() => {
+                        window.location.reload();
+                    })
+
+                   //window.location.replace("/viewReservation");
             }
 
         }).catch((err) => {
-            alert(err.response.data.error)
+            //alert(err.response.data.error)
 
             //alert(err.response.data.errorCode)
+             Swal.fire({
+                        title: 'Oops!',
+                        text: `${"Reservation not Completed"}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ) 
 
         })
 
     }
+
+    
+    function refreshPage() {
+        window.location.reload();
+    }
+
  
 
 
@@ -151,8 +179,9 @@ const deleteReservation = async (data) => {
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Reservation</h3>
+                        <h3 className="float-left" onClick={refreshPage}>List of Reservation</h3>
                     </div>
+                   
                     <a href="/addReservation" class="float-right">
                         <button class="btn btn-ok white">
                             +Add Reservation
@@ -163,6 +192,11 @@ const deleteReservation = async (data) => {
                             Completed Reservation
                         </button>
                     </p>
+                     <a href="/diplay/RemoveReservationlist" class="float-right ml-4">
+                        <button class="btn btn-ok white">
+                            Past Records
+                        </button>
+                    </a>
                 </div>
                 <div class="row table-head-search">
                     <div className="col-md-8"></div>
@@ -237,7 +271,7 @@ const deleteReservation = async (data) => {
                             Confirm
                         </button>
                     </div>
-                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
+                    <div className="col-6   text-right" onClick={() => setModalDeleteConfirm(false)}>
                         <button type="reset" className="btn btn-reset">
                             cancel
                         </button>
