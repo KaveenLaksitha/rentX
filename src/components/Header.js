@@ -37,7 +37,7 @@ function Header(props) {
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="text-light" href="index.html">
                     Home <span class="sr-only">(current)</span>
                   </a>
