@@ -255,7 +255,7 @@ import { Modal } from "react-bootstrap";
                                                     tabindex="5" 
                                                     required
                                                     disabled 
-                                                    value={moment(from).format("YYYY-MMMM-DD")}
+                                                    value={moment(from).format("YYYY-MM-DD")}
                                                    
                                                     timeFormat={false}
                                                    
@@ -272,7 +272,7 @@ import { Modal } from "react-bootstrap";
                                                     placeholder="" 
                                                     tabindex="6" 
                                                     disabled
-                                                    value={moment(to).format("YYYY-MMMM-DD")}
+                                                    value={moment(to).format("YYYY-MM-DD")}
                                                     //value={to}
                                                     timeFormat={false}
                                                     //isValidDate={disableFutureDt}
@@ -305,7 +305,7 @@ import { Modal } from "react-bootstrap";
                                                     name="returnDay" 
                                                     placeholder="" 
                                                     tabindex="7" 
-                                                    value={moment(returnDay).format('YYYY-MMMM-DD')}
+                                                    value={moment(returnDay).format('YYYY-MM-DD')}
                                                     timeFormat={false}
                                                     onChange={(event) => { setreturnDay(event) }}
                                                     isValidDate={disablePastDt}
