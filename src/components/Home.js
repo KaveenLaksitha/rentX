@@ -21,6 +21,7 @@ import RentalReport from "./views/rental views/RentalReport";
 import VehicleReport from "./views/vehicle views/VehicleReport";
 import Footer from "./Footer";
 import RemovedRentalList from "./views/rental views/removedRentals";
+import DeleteReservation from "./views/reservation views/DeleteRecord";
 
 function Home() {
     return (
@@ -34,6 +35,7 @@ function Home() {
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
                 <Route path="/updateReservation/:RID" exact component={updateReservation} />
+                <Route path="/diplay/RemoveReservationlist" exact component={DeleteReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
                 <Route path="/addVehicle" exact component={addVehicle} />
                 <Route path="/empList" exact component={empList} />

@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import Swal from 'sweetalert2'
 
 function Reservation() {
 
@@ -134,8 +135,13 @@ function Reservation() {
     const [perDayCharge, setPerDayCharge] = useState("");
     const [perDayCharge1, setPerDayCharge1] = useState("");
 
+
+    const [no1, setno1] = useState("");
+    const [no2, setno2] = useState("");
+
     const [NICErr, setNICErr] = useState("");
     const[MobErr, setMobileErr] = useState("");
+
 
 
 
@@ -163,9 +169,27 @@ function Reservation() {
                 alert("Reservation added successfully")
 
                 history.push("/viewReservation");
+                Swal.fire({
+                        title: 'Success!',
+                        text: `${"Reservation Added Successfully"}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ).then(() => {
+                        window.location.reload();
+                    })
 
             }).catch((err) => {
                 alert(err.response.data.error)
+                Swal.fire({
+                        title: 'Oops!',
+                        text: `${"Error with Reservation"}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )               
 
             })
         }
@@ -176,24 +200,21 @@ function Reservation() {
         if (document.getElementById('vehicleType').value == 'Car') {
             document.getElementById('model1').value = "Axio";
             document.getElementById('model1').innerHTML = "Axio";
-            document.getElementById('model2').value = "Bxio";
-            document.getElementById('model2').innerHTML = "Bxio";
-            document.getElementById('model3').value = "Cxio";
-            document.getElementById('model3').innerHTML = "Cxio";
+            document.getElementById('model2').value = "Leaf";
+            document.getElementById('model2').innerHTML = "Leaf";
+            document.getElementById('model3').value = "Alto";
+            document.getElementById('model3').innerHTML = "Alto";
         } else if (document.getElementById('vehicleType').value == 'Van') {
-            document.getElementById('model1').value = "DF";
-            document.getElementById('model1').innerHTML = "DF";
-            document.getElementById('model2').value = "Bvan";
-            document.getElementById('model2').innerHTML = "Bvan";
-            document.getElementById('model3').value = "Cvan";
-            document.getElementById('model3').innerHTML = "Cvan";
+            document.getElementById('model1').value = "Caravan";
+            document.getElementById('model1').innerHTML = "Caravan";
+            document.getElementById('model2').value = "KDH";
+            document.getElementById('model2').innerHTML = "KDH";
         } else if (document.getElementById('vehicleType').value == 'Bus') {
-            document.getElementById('model1').value = "Abus";
-            document.getElementById('model1').innerHTML = "Abus";
-            document.getElementById('model2').value = "Bbus";
-            document.getElementById('model2').innerHTML = "Bbus";
-            document.getElementById('model3').value = "Cbus";
-            document.getElementById('model3').innerHTML = "Cbus";
+            document.getElementById('model1').value = "Coater";
+            document.getElementById('model1').innerHTML = "Coater";
+            document.getElementById('model2').value = "Rosa";
+            document.getElementById('model2').innerHTML = "Rosa";
+           
         }
     }
 
@@ -201,24 +222,22 @@ function Reservation() {
         if (document.getElementById('vehicleType1').value == 'Car') {
             document.getElementById('model11').value = "Axio";
             document.getElementById('model11').innerHTML = "Axio";
-            document.getElementById('model22').value = "Bxio";
-            document.getElementById('model22').innerHTML = "Bxio";
-            document.getElementById('model33').value = "Cxio";
-            document.getElementById('model33').innerHTML = "Cxio";
+            document.getElementById('model22').value = "Leaf";
+            document.getElementById('model22').innerHTML = "Leaf";
+            document.getElementById('model33').value = "Alto";
+            document.getElementById('model33').innerHTML = "Alto";
         } else if (document.getElementById('vehicleType1').value == 'Van') {
-            document.getElementById('model11').value = "DF";
-            document.getElementById('model11').innerHTML = "DF";
-            document.getElementById('model22').value = "Bvan";
-            document.getElementById('model22').innerHTML = "Bvan";
-            document.getElementById('model33').value = "Cvan";
-            document.getElementById('model33').innerHTML = "Cvan";
+            document.getElementById('model11').value = "Caravan";
+            document.getElementById('model11').innerHTML = "Caravan";
+            document.getElementById('model22').value = "KDH";
+            document.getElementById('model22').innerHTML = "KDH";
+         
         } else if (document.getElementById('vehicleType1').value == 'Bus') {
-            document.getElementById('model11').value = "Abus";
-            document.getElementById('model11').innerHTML = "Abus";
-            document.getElementById('model22').value = "Bbus";
-            document.getElementById('model22').innerHTML = "Bbus";
-            document.getElementById('model33').value = "Cbus";
-            document.getElementById('model33').innerHTML = "Cbus";
+            document.getElementById('model11').value = "Coater";
+            document.getElementById('model11').innerHTML = "Coater";
+            document.getElementById('model22').value = "Rosa";
+            document.getElementById('model22').innerHTML = "Rosa";
+        
         }
     }
     function getDateDiff() {
@@ -231,13 +250,8 @@ function Reservation() {
 
 
     function showDateRange() {
-        getRentChargePerDay();
-        getRentChargePerDay1()
         document.getElementById('dateRange').value = getDateDiff();
-        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
-        document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
-        //var dis = Number(document.getElementById('discount').value) / 100;
         if(getDateDiff() == 0){
             var finalresult = document.getElementById('totalreservation').value = result ;
         }else{
@@ -246,12 +260,26 @@ function Reservation() {
         return finalresult;
     }
 
+    function calcprice1(){
+        getRentChargePerDay();
+        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
+        document.getElementById('perDayCharge').innerHTML = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
+
+    }
+
+    function calcprice2(){
+        getRentChargePerDay1()
+        document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
+        document.getElementById('perDayCharge1').innerHTML = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
+
+    }
+
+
     function addtemporaryilyData(e) {
         e.preventDefault();
 
         getRentChargePerDay();
         getRentChargePerDay1()
-        // var result =  Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value) ;
         var dis = Number(document.getElementById('discount').value) / 100;
         var final = document.getElementById('totalreservation').value = showDateRange() - (showDateRange() * dis);
         document.getElementById('total').value = final;
@@ -336,11 +364,11 @@ const MobileValidation =() =>{//validate function
 
     if( contactnumber.trim().length > 10 ){
 
-        MobErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+        MobErr.InValidTeleNo =" *Invalid Phone Number"; // error msg
         alert("**Invalid Telephone Number");
         mobileValid = false;
     }else if(contactnumber.trim().length < 10){
-        MobErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
+        MobErr.InValidTeleNo =" *Invalid Phone Number"; // error msg
         alert("**Invalid Telephone Number");
         mobileValid = false;
     }
@@ -399,7 +427,7 @@ const MobileValidation =() =>{//validate function
 
             <div class="container input-main-form-emp">
                 <br></br>
-                <h2> Event Reservation</h2>
+                <h3> Event Reservation</h3>
                 <br></br>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -424,8 +452,8 @@ const MobileValidation =() =>{//validate function
                                                 class="form-control formInput"
                                                 id="packageName"
                                                 name="packageName"
-                                                placeholder="Package Name"
-                                                tabindex="1"
+                                                placeholder="Package 1"
+                                                //tabindex="1"
                                                 required
                                                 onChange={(event) => {
                                                     setpackagename(event.target.value);
@@ -442,7 +470,7 @@ const MobileValidation =() =>{//validate function
                                                     id="from"
                                                     name="from"
                                                     placeholder=""
-                                                    tabindex="5"
+                                                    //tabindex="5"
                                                     required
                                                     onChange={(event) => {
                                                         setfrom(event);
@@ -461,7 +489,7 @@ const MobileValidation =() =>{//validate function
                                                     id="to"
                                                     name="to"
                                                     placeholder=""
-                                                    tabindex="6"
+                                                    //tabindex="6"
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
                                                     //isValidDate={disableFutureDt}
@@ -480,7 +508,8 @@ const MobileValidation =() =>{//validate function
                                                     id="dateRange"
                                                     name="dateRange"
                                                     placeholder="Date Range"
-                                                    tabindex="2"
+                                                    //tabindex="2"
+                                                    disabled
                                                 //pattern="[0-9]"
                                                 />
                                             </div>
@@ -493,7 +522,7 @@ const MobileValidation =() =>{//validate function
                                                 <select
                                                     id="vehicleType"
                                                     className="form-control "
-                                                    tabindex="3"
+                                                    //tabindex="3"
                                                     onChange={e => { setVehicleType(e.target.value); searchModel() }}
                                                     required
                                                 >
@@ -509,8 +538,8 @@ const MobileValidation =() =>{//validate function
                                                     id="vehicleModel"
                                                     className="form-control "
                                                     tabindex="4"
-                                                    required
-                                                    onChange={(event) => { setModel(event.target.value); }}
+                                                    //required
+                                                    onChange={(event) => { setModel(event.target.value);}}
                                                 >
                                                     <option  >choose</option>
                                                     <option id="model1" ></option>
@@ -529,8 +558,10 @@ const MobileValidation =() =>{//validate function
                                                     name="noVehiclehide1"
                                                     placeholder="Count"
                                                     min="1"
-                                                    tabindex="5"
+                                                    //tabindex="5"
                                                     pattern="[0-9]"
+                                                    required
+                                                    onChange={(event) => { setno1(event.target.value); calcprice1() }}
                                                 />
                                             </div>
                                             <div class="form-group col-md-2" id="hide4" >
@@ -541,8 +572,9 @@ const MobileValidation =() =>{//validate function
                                                     id="perDayCharge"
                                                     name="perDayCharge"
                                                     placeholder="Price"
-                                                    tabindex="5"
+                                                    //tabindex="5"
                                                     required
+                                                    disabled
                                                 //pattern="[0-9]"
                                                 />
                                             </div>
@@ -554,7 +586,7 @@ const MobileValidation =() =>{//validate function
                                                 <select
                                                     id="vehicleType1"
                                                     className="form-control "
-                                                    tabindex="3"
+                                                    //tabindex="3"
                                                     onChange={e => { setVehicleType1(e.target.value); searchModel1() }}
                                                     required
                                                 >
@@ -569,7 +601,7 @@ const MobileValidation =() =>{//validate function
                                                 <select
                                                     id="vehicleModelnew"
                                                     className="form-control "
-                                                    tabindex="4"
+                                                    //tabindex="4"
                                                     onChange={(event) => { setModel1(event.target.value); }}
                                                 >
                                                     <option  >choose</option>
@@ -588,9 +620,10 @@ const MobileValidation =() =>{//validate function
                                                     name="noVehiclehide2"
                                                     placeholder="Count"
                                                     min="1"
-                                                    tabindex="5"
+                                                    //tabindex="5"
                                                     pattern="[0-9]"
                                                     required
+                                                    onChange={(event) => { setno2(event.target.value); calcprice2() }}
                                                 />
                                             </div>
                                             <div class="form-group col-md-2" style={{ display: "none" }} id="hide44" >
@@ -602,7 +635,8 @@ const MobileValidation =() =>{//validate function
                                                     name="perDayCharge1"
                                                     placeholder="Price"
                                                     min="1"
-                                                    tabindex="5"
+                                                    //tabindex="5"
+                                                    disabled
                                                 //pattern="[0-9]"
                                                 />
                                             </div>
@@ -613,7 +647,7 @@ const MobileValidation =() =>{//validate function
                                                 <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <input type="button" class="btn btn-info" id="entry" value=" Get Range And Price" onClick={showDateRange} />
+                                                <input type="button" class="btn btn-info" id="entry" value=" Date Range And Total " onClick={showDateRange} />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -625,7 +659,7 @@ const MobileValidation =() =>{//validate function
                                                     id="discount"
                                                     name="discount"
                                                     placeholder="Discount (5)"
-                                                    tabindex="6"
+                                                    //tabindex="6"
                                                     //pattern="[0-9]"
                                                     //required 
                                                     onChange={(event) => {
@@ -634,14 +668,14 @@ const MobileValidation =() =>{//validate function
                                                     } />
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="totalreservation">Total Price</label>
+                                                <label class="form-label-emp" for="totalreservation">Total Price</label>
                                                 <input
                                                     type="text"
                                                     class="form-control formInput"
                                                     id="totalreservation"
                                                     name="totalreservation"
                                                     placeholder="Total Price (25000.00)"
-                                                    tabindex="7"
+                                                    //tabindex="7"
                                                     //required 
 
                                                     onClickCapture={(event) => {
@@ -735,8 +769,8 @@ const MobileValidation =() =>{//validate function
                                                     class="form-control formInput"
                                                     id="contactnumber"
                                                     name="contactnumber"
-                                                    placeholder="Contact Number(0703814914)" t
-                                                    abindex="2"
+                                                    placeholder="Contact Number(0703814914)" 
+                                                    //abindex="2"
                                                     required
                                                     //pattern="[0-9]{10}"
                                                     onChange={(event) => {
@@ -760,7 +794,7 @@ const MobileValidation =() =>{//validate function
                                                     id="nic"
                                                     name="nic"
                                                     placeholder="NIC (965169472v)"
-                                                    tabindex="3"
+                                                    //tabindex="3"
                                                     //required
                                                     onChange={(event) => {
                                                         setnic(event.target.value);
@@ -780,7 +814,7 @@ const MobileValidation =() =>{//validate function
                                                 id="customeraddress"
                                                 name="customeraddress"
                                                 placeholder="Customer Address"
-                                                tabindex="4"
+                                                //tabindex="4"
                                                 //required
                                                 onChange={(event) => {
                                                     setcustomeraddress(event.target.value);
@@ -800,9 +834,10 @@ const MobileValidation =() =>{//validate function
                                                 class="form-control formInput"
                                                 id="packagename"
                                                 name="packagename"
-                                                placeholder="Event Type (Wedding)"
-                                                tabindex="7"
+                                                placeholder=""
+                                                //tabindex="7"
                                                 required
+                                                disable
                                             />
 
                                         </div>
@@ -815,7 +850,7 @@ const MobileValidation =() =>{//validate function
                                                     id="eventtype"
                                                     name="eventtype"
                                                     placeholder="Event Type (Wedding)"
-                                                    tabindex="7"
+                                                    //tabindex="7"
                                                     //required 
                                                     onChange={(event) => {
                                                         seteventtype(event.target.value);
@@ -848,7 +883,7 @@ const MobileValidation =() =>{//validate function
                                                     id="advancedpayment"
                                                     name="advancedpayment"
                                                     placeholder="Advanced Payment (10000.00)"
-                                                    tabindex="9"
+                                                    //tabindex="9"
                                                     onChange={(event) => {
                                                         setadvancedpayment(event.target.value);
                                                     }
@@ -863,7 +898,8 @@ const MobileValidation =() =>{//validate function
                                                     id="total"
                                                     name="total"
                                                     placeholder="Total Reservation Price (25000.00)"
-                                                    tabindex="10"
+                                                    //tabindex="10"
+                                                    disabled
 
                                                 />
                                             </div>
@@ -877,7 +913,8 @@ const MobileValidation =() =>{//validate function
                                                     id="FinalreservationPrice"
                                                     name="FinalreservationPrice"
                                                     placeholder="Final Reservation Price (15000.00)"
-                                                    tabindex="11"
+                                                    //tabindex="11"
+                                                    disabled
                                                     /*onChange={(event) => 
                                                         {
                                                             setcustomername(event.target.value);
