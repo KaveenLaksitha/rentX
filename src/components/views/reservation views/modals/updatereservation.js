@@ -1,4 +1,4 @@
-{/*import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
@@ -11,12 +11,18 @@ import { Modal } from "react-bootstrap";
 
  function Updatereservation(reservations) {
 
+      console.log("update modal dataaaaaa", reservations);
+
     let history = useHistory();
-    const { RID } = useParams();
+    //const { RID } = useParams();
+
+    const RID = reservations.data.reservationid;
 
     useEffect(() => {
         loadReservation();
     }, []);
+
+    console.log("came dataaaaa", reservations)
 
     const[customername,setcustomername] = useState("");
     const[contactnumber,setcontactnumber] = useState("");
@@ -115,8 +121,10 @@ import { Modal } from "react-bootstrap";
                         showConfirmButton: false,
                         timer: 1500
                     }
-                    ).then(() => {
-                        //window.location.reload();
+                    ).then((res) => {
+                        if (res.isConfirmed) {
+                            window.location.replace('/viewReservation');
+                        }
                     })
 
       }).catch((err) => {
@@ -151,21 +159,13 @@ import { Modal } from "react-bootstrap";
 
     };
     return (
-            <div className="page-component-body">
-                <div class="container input-main-form-emp">
-                    <div class="tab-content-emp" id="myTabContent">
                         
-                            <div class="container">
+                            <div >
                             <Modal.Header closeButton>
-                                <Modal.Title>Update Reservation : {reservations.customername}</Modal.Title>
+                                <Modal.Title>Update Reservation : {reservations.data.customername}</Modal.Title>
                                 </Modal.Header>
                             <Modal.Body className="px-4">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                        <h3 className="text-left mt-3 mb-4">Return of Reservation</h3>
-                                        <hr></hr>
-                                    </div>
-                                </div>
+                                
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <form id="contact-form" class="form" onSubmit={onSubmit} >
@@ -415,11 +415,8 @@ import { Modal } from "react-bootstrap";
                             </Modal.Body >
 
                             </div>
-                    </div>
-                </div>
-            </div>
+                
         )
     }
 
 export default Updatereservation;
-*/}

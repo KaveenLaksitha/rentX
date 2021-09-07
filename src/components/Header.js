@@ -95,6 +95,13 @@ function Header(props) {
                 <a href="javascript:void(0)" >  <i className="fa fa-calendar fa-2x"></i> <span className="nav-text">Reservations</span> <i className="fa fa-angle-right fa-animate fa-2x"></i></a>
               </li>
               <ul className="sub-menu collapse" id="new2">
+              <li className="has-subnav">
+                  <a href="/viewReservation">
+                    <i className="fa  fa-2x"></i>
+                    <span className="nav-text"> Reservations List</span>
+                    <i className="fa fa-angle-right fa-2x"></i>
+                  </a>
+                </li>
                 <li className="has-subnav ">
                   <a href="/addReservation">
                     <i className="fa"></i>
@@ -102,13 +109,7 @@ function Header(props) {
                     <i className="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
-                <li className="has-subnav">
-                  <a href="/viewReservation">
-                    <i className="fa  fa-2x"></i>
-                    <span className="nav-text"> Reservations List</span>
-                    <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
-                </li>
+                
               </ul>
               <li>
               </li>

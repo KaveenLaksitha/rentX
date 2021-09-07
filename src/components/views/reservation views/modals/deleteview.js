@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 
-function Reservationview(reservations) {
+function DeleteView(reservations) {
 
     console.log("model openingggg", reservations)
 
@@ -22,17 +22,7 @@ function Reservationview(reservations) {
                                     </th>
                                     <td class="text-left">{reservations.data.customername}</td>
                                 </tr>
-                                <tr>
-                                    <th class="text-left" scope="row">
-                                        Customer Contact No :
-                                    </th>
-                                    <td class="text-left">{reservations.data.contactnumber}</td>
-                                </tr><tr>
-                                    <th class="text-left" scope="row">
-                                        Customer Address :
-                                    </th>
-                                    <td class="text-left">{reservations.data.customeraddress}</td>
-                                </tr>
+                                
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Customer NIC :
@@ -63,12 +53,25 @@ function Reservationview(reservations) {
                                     </th>
                                     <td class="text-left">{reservations.data.to}</td>
                                 </tr>
+                                 {/*<tr>
+                                    <th class="text-left" scope="row">
+                                        Return Date :
+                                    </th>
+                                    <td class="text-left">{reservations.data.returnDay}</td>
+                                </tr>*/}
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Advanced Payment :
                                     </th>
                                     <td class="text-left">{reservations.data.advancedpayment}</td>
                                 </tr>
+                               
+                                {/*<tr>
+                                    <th class="text-left" scope="row">
+                                        Penalty Charge :
+                                    </th>
+                                    <td class="text-left">{reservations.data.penaltyCharge}</td>
+                                </tr>*/}
                                 
                                 <tr>
                                     <th class="text-left" scope="row">
@@ -94,4 +97,4 @@ function Reservationview(reservations) {
     )
 }
 
-export default Reservationview
+export default DeleteView
