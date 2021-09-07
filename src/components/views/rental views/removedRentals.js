@@ -94,9 +94,9 @@ function RemovedRentalList() {
                             <th>Return Date</th>
                             <th>Vehicle Type</th>
                             <th>NIC</th>
-                            <th>Penalty </th>
-                            <th>Total</th>
-                            <th>Last Payment</th>
+                            <th>Penalty (Rs.)</th>
+                            <th>Total (Rs.)</th>
+                            <th>Last Payment (Rs.)</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
