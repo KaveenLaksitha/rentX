@@ -22,7 +22,7 @@ export default function PastEmpList() {
             if (data.ok && !isFetching) {
 
                 setIsFetching(true);
-                setEmp(data.data);
+                setEmp(data.data.reverse());
                 console.log(data.data, "component did mount on new list")
             } else {
                 setModalLoading(true);

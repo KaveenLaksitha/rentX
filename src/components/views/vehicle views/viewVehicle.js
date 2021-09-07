@@ -126,7 +126,7 @@ function ViewVehicle(vehicle) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={vehicle.onHide}>Close</Button>
+                <button className="btn btn-close" onClick={vehicle.onHide}>Close</button>
             </Modal.Footer>
         </div>
     )

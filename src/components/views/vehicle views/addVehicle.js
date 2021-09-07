@@ -108,7 +108,7 @@ function AddVehicle() {
                 icon: 'warning',
                 title: 'Oops...',
                 text: `${msgerr}`,
-                confirmButtonColor: '#207159',
+                confirmButtonColor: '#1fc191',
                 
               })
         })
@@ -131,7 +131,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Invalid Vehicle Registration Number',
                 text: 'You enterd invalid Vehicle Registration Number , Try Again !!',
-                confirmButtonColor: '#207159',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
             isValid = false;
@@ -142,7 +142,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Invalid Vehicle Registration Number',
                 text: 'You enterd invalid Vehicle Registration Number , Try Again !!',
-                confirmButtonColor: '#207159',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
             isValid = false;
@@ -170,6 +170,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Invalid Telephone Number',
                 text: 'You enterd Invalid Telephone Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
             teleValid = false;
@@ -180,6 +181,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Invalid Telephone Number',
                 text: 'You enterd Invalid Telephone Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
             teleValid = false;
@@ -208,6 +210,7 @@ function AddVehicle() {
                     icon: 'error',
                     title: 'Oops...Invalid NIC Number',
                     text: 'You enterd invalid NIC , Try Again !!',
+                    confirmButtonColor: '#1fc191',
                     // footer: '<a href=""#home">Why do I have this issue?</a>'
                   })
                 NICValid = false;
@@ -218,6 +221,7 @@ function AddVehicle() {
                     icon: 'error',
                     title: 'Oops... Invalid NIC Number',
                     text: 'You enterd invalid NIC , Try Again !!',
+                    confirmButtonColor: '#1fc191',
                     // footer: '<a href=""#home">Why do I have this issue?</a>'
                   })
                 NICValid = false;
@@ -243,6 +247,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Numbers Years Invalid ',
                 text: ' Number of years should be more than 0!!',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
         }
@@ -253,6 +258,7 @@ function AddVehicle() {
                 icon: 'error',
                 title: 'Oops...Numbers Years Invalid',
                 text: 'Number of years should be less than 10!!',
+                confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
               })
         }
@@ -390,7 +396,7 @@ function AddVehicle() {
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Owner Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle Paymnet Details</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle & Paymnet Details</a>
                     </li>
                     
                    <hr></hr>
@@ -568,7 +574,7 @@ function AddVehicle() {
                                             
                                         </div>
                                         <div class="form-group col-sm">
-                                            <label class="form-label-emp" for="email">Vehicle Modal</label>
+                                            <label class="form-label-emp" for="email">Vehicle Model</label>
                                             <input type="text" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" 
                                             required
                                             onChange={(e) => {

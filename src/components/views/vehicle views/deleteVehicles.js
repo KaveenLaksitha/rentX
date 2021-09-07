@@ -100,7 +100,7 @@ function DeleteVehicles() {
                             <th class="text-center">Owner Name</th>
                             <th class="text-center">Telephone No</th>
                             <th class="text-center">Brand</th>
-                            <th class="text-center">Modal</th>
+                            <th class="text-center">Model</th>
                             <th class="text-center">Type</th>
                             <th class="text-right">Rate</th>
                             <th class="text-center">Years Of Rent </th>

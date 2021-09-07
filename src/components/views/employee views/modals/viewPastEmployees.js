@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-
+import moment from 'moment';
 
 function ViewPastEmployee(emp) {
 
@@ -31,7 +31,7 @@ function ViewPastEmployee(emp) {
                                     <th class="text-left" scope="row">
                                         Date of Birth
                                     </th>
-                                    <td class="text-left">{emp.data.DOB}</td>
+                                    <td class="text-left">{moment(emp.data.DOB).format('YYYY-MMMM-D')}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">

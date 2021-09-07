@@ -349,7 +349,7 @@ function UpdateVehicleModal(vehicle) {
                                     
 
 
-                                    <div className="row">
+                                    {/* <div className="row">
                                         <div class="form-group col-md-6">
                                             <label for="exampleFormControlFile1">Photos of Vehicle</label>
                                             <input type="file" class="form-control-file pt-3" id="Photos" 
@@ -371,7 +371,7 @@ function UpdateVehicleModal(vehicle) {
                                             
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="row mt-3 mb-4">
                                         <div className="col py-3 text-center">
                                             <button type="submit" className="btn btn-ok">

@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import moment from 'moment';
 import { Modal, Button } from "react-bootstrap";
 import { useParams} from "react-router";
+import Swal from 'sweetalert2'
 
 import TestModal from "./modals/reservationview";
+import UpdateReservationModal from "./modals/updatereservation"
 
 function Viewreservation() {
 
@@ -13,6 +15,7 @@ function Viewreservation() {
     //const [reservations, setReservations] = useState([]);
     const [viewreservation, setviewreservation] = useState([]);
     const [search, setSearch] = useState("");
+    
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
@@ -21,6 +24,9 @@ function Viewreservation() {
     const [modalDelete, setModalDelete] = useState(false);
 
     const [modalLoading, setModalLoading] = useState(false);
+
+    const [modalDataUpdate, setModalDataUpdate] = useState([]);
+    const [modalUpdate, setModalUpdate] = useState(false);
 
     useEffect(() => {
 
@@ -70,6 +76,14 @@ function Viewreservation() {
         //setModalDeleteConfirm(true);
     }
 
+       const openModalUpdate = (data) => {
+
+        console.log("request came for modal updateeeeeee", data);
+        setModalDataUpdate(data);
+        setModalUpdate(true);
+
+    }
+
     function pendingRecords() {
         function getPendingReservation() {
             axios.get("http://localhost:4000/reservations/searchPendingReservationRecords/").then((res) => {
@@ -100,11 +114,11 @@ function Viewreservation() {
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
+                 
             })
         }
     }
 
-    
 
     
 
@@ -112,22 +126,49 @@ const deleteReservation = async (data) => {
 
         await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
             alert("Reservation Record added successfully")
+            
 
             const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
             //console.log(value);
             if (value) {
-                alert("Permenantly deleted the Reservation Record");
-                window.location.replace("/viewReservation");
+                //alert("Permenantly deleted the Reservation Record");
+                
+                 Swal.fire({
+                        title: 'Success!',
+                        text: `${"Reservation Deleted Successfully"}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                    ).then(() => {
+                        window.location.reload();
+                    })
+
+                   //window.location.replace("/viewReservation");
             }
 
         }).catch((err) => {
-            alert(err.response.data.error)
+            //alert(err.response.data.error)
 
             //alert(err.response.data.errorCode)
+             Swal.fire({
+                        title: 'Oops!',
+                        text: `${"Reservation not Completed"}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ) 
 
         })
 
     }
+
+    
+    function refreshPage() {
+        window.location.reload();
+    }
+
  
 
 
@@ -151,8 +192,9 @@ const deleteReservation = async (data) => {
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
-                        <h3 className="float-left">List of Reservation</h3>
+                        <h3 className="float-left" onClick={refreshPage}>List of Reservation</h3>
                     </div>
+                   
                     <a href="/addReservation" class="float-right">
                         <button class="btn btn-ok white">
                             +Add Reservation
@@ -163,6 +205,11 @@ const deleteReservation = async (data) => {
                             Completed Reservation
                         </button>
                     </p>
+                     <a href="/diplay/RemoveReservationlist" class="float-right ml-4">
+                        <button class="btn btn-ok white">
+                            Past Records
+                        </button>
+                    </a>
                 </div>
                 <div class="row table-head-search">
                     <div className="col-md-8"></div>
@@ -206,8 +253,8 @@ const deleteReservation = async (data) => {
                                     <td class="text-center">{reservations.status}</td>
                                     <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                {/*<button type="button" class="btn btn-light btn-sm">Update</button>*/}
-                                    <Link class="btn btn-light btn-sm" to={`/updateReservation/${reservations.reservationid}`} role="button">Update</Link>
+                                
+                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >Update</Link>
 
                                     <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> Remove</Link>
 
@@ -237,7 +284,7 @@ const deleteReservation = async (data) => {
                             Confirm
                         </button>
                     </div>
-                    <div className="col py-3 text-center" onClick={() => setModalDeleteConfirm(false)}>
+                    <div className="col-6   text-right" onClick={() => setModalDeleteConfirm(false)}>
                         <button type="reset" className="btn btn-reset">
                             cancel
                         </button>
@@ -270,7 +317,21 @@ const deleteReservation = async (data) => {
                         </button>
                     </div>
                 </Modal.Footer>
-            </Modal>      
+            </Modal>  
+
+            {/* modal for update the data of employee */}
+            <Modal
+                show={modalUpdate}
+                onHide={() => setModalUpdate(false)}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <UpdateReservationModal
+                    data={modalDataUpdate}
+                    onHide={() => setModalUpdate(false)}
+                />
+            </Modal>    
 
 
         </div>
@@ -320,3 +381,5 @@ export default Viewreservation
     /*function refreshPage() {
         window.location.reload();
     }*/
+
+    {/*to={`/updateReservation/${reservations.reservationid}`}*/}

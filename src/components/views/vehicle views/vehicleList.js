@@ -34,7 +34,7 @@ function VehicleList() {
                 let timerInterval
                     Swal.fire({
                     title: 'Loading...',
-                    html: ' <b></b> milliseconds.',
+                    html: ' <b></b> loading details..',
                     timer: 1000,
                     timerProgressBar: true,
                     didOpen: () => {
@@ -193,7 +193,7 @@ function VehicleList() {
                     </a>
                     <a href="/deleteVehicles" class="float-right ml-4">
                         <button class="btn btn-ok white">
-                            Deleted Vehicle
+                            Removed Vehicle
                         </button>
                     </a>
                 </div>
@@ -216,7 +216,7 @@ function VehicleList() {
                         <tr>
                             <th class="text-center">Vehicle Reg No</th>
                             <th class="text-center">Brand</th>
-                            <th class="text-center">Modal</th>
+                            <th class="text-center">Model</th>
                             <th class="text-center">Type</th>
                             <th class="text-right">Rate (Rs.)</th>
                             <th class="text-right">Years Of Rent </th>
@@ -250,7 +250,7 @@ function VehicleList() {
                                             class="btn btn-danger btn-sm"
                                             onClick={() => openModalDelete(vehicles)}
                                         >
-                                            delete
+                                            remove
                                         </button>
 
                                     </td>
