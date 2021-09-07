@@ -33,7 +33,7 @@ function AddEmployee() {
     const [mobileNo, setMobileNo] = useState("");
     const [emgContact, setEmgContact] = useState("");
     const [empPic, setEmpPic] = useState("");
-    const [cv, setCV] = useState([]);
+    const [cv, setCV] = useState("");
 
 
     const [TeleErr, setTeleNoErr] = useState("");

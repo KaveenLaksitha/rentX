@@ -58,7 +58,7 @@ function UpdateEmployee(emp) {
     const [mobileNo, setMobileNo] = useState("");
     const [emgContact, setEmgContact] = useState("");
     const [empPic, setEmpPic] = useState("");
-    const [cv, setCV] = useState([]);
+    const [cv, setCV] = useState("");
 
     const employee = {
         fName,
@@ -112,33 +112,33 @@ function UpdateEmployee(emp) {
             };
 
             updateEmployeeService(empId, newEmployee).then((response) => {
-                // const message = response.ok
-                //     ? "Employee Update successful"
-                //     : response.err;
+                const message = response.ok
+                    ? "Employee Update successful"
+                    : response.err;
 
-                // if (response.ok) {
-                //     Swal.fire({
-                //         title: 'Success!',
-                //         text: `${message}`,
-                //         icon: 'success',
-                //         showConfirmButton: false,
-                //         timer: 1500
-                //     }
-                //     ).then(() => {
-                //         window.location.reload();
-                //     })
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: `${message}`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    ).then(() => {
+                        window.location.reload();
+                    })
 
-                // }
-                // else {
-                //     Swal.fire({
-                //         title: 'Oops!',
-                //         text: `${message}`,
-                //         icon: 'error',
-                //         showConfirmButton: false,
-                //         timer: 1500
-                //     }
-                //     )
-                // }
+                }
+                else {
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${message}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                }
             });
         }
 
@@ -520,16 +520,16 @@ function UpdateEmployee(emp) {
                                 </div>
                                 <div className="form-group col-md-6">
                                     <div className="form-group">
-                                        {/* <label className="form-label-emp pb-3" for="cv">CV:</label>
-                                                <input
-                                                    // required
-                                                    id="cv"
-                                                    type="file"
-                                                    className="form-control-file fliepond"
-                                                    onChange={(e) => {
-                                                        setCV(e.target.value);
-                                                    }}
-                                                /> */}
+                                        <label className="form-label-emp pb-3" for="cv">CV:</label>
+                                        <input
+                                            // required
+                                            id="cv"
+                                            type="file"
+                                            className="form-control-file fliepond"
+                                            onChange={(e) => {
+                                                setCV(e.target.value);
+                                            }}
+                                        />
                                         {/* <FilePond
                                                     files={cv}
                                                     onupdatefiles={setCV}
