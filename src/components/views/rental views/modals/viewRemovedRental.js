@@ -63,12 +63,12 @@ function ViewRemovedRental(rental) {
                                     </th>
                                     <td class="text-left">{rental.data.contactNo}</td>
                                 </tr>
-                                {/*<tr>
+                                <tr>
                                     <th class="text-left" scope="row">
                                         Penalty Charges
                                     </th>
                                     <td class="text-left">{rental.data.penaltyCharges}</td>
-                                </tr>*/}
+                                </tr>
 
                             </tbody>
                         </table>
