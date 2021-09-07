@@ -31,7 +31,7 @@ function ViewVehicle(vehicle) {
                                     <th class="text-left" scope="row">
                                         Telephone Number
                                     </th>
-                                    <td class="text-left">{vehicle.data.TeleNo}</td>
+                                    <td class="text-left">0{vehicle.data.TeleNo}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
@@ -126,7 +126,7 @@ function ViewVehicle(vehicle) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={vehicle.onHide}>Close</Button>
+                <button className="btn btn-close" onClick={vehicle.onHide}>Close</button>
             </Modal.Footer>
         </div>
     )

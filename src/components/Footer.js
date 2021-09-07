@@ -11,6 +11,7 @@ function Footer() {
                     <div className="col">
                         <ul class="list-unstyled desc">
                             <li>Web application developed</li>
+
                             <li>for educational purposes only</li>
                         </ul>
                     </div>
