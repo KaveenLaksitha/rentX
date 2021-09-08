@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Header from "./Header";
+import Header from "./Header"
 import Login from "./login"
+import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
 import rentalList from "./views/rental views/rentalList"
 import updateRental from "./views/rental views/updateRental"
@@ -29,6 +30,7 @@ function Home() {
             <div>
                 <Header />
                 <Route path="/" exact component={Login} />
+                <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
                 <Route path="/rentalList" exact component={rentalList} />
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />
