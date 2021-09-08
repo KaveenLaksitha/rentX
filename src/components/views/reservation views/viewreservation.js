@@ -125,8 +125,14 @@ function Viewreservation() {
 const deleteReservation = async (data) => {
 
         await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
-            alert("Reservation Record added successfully")
-            
+            //alert("Reservation Record added successfully")
+            Swal.fire({
+                title: "Completed Reservation removed! ",
+                text: "Reservation removed",
+                icon: 'success',
+                confirmButtonColor: "#207159",
+
+            })
 
             const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
             //console.log(value);
@@ -254,9 +260,9 @@ const deleteReservation = async (data) => {
                                     <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                 
-                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >Update</Link>
+                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >update</Link>
 
-                                    <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> Remove</Link>
+                                    <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> remove</Link>
 
                     </div></td>
 
