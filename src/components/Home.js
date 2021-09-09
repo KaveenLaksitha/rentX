@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Header from "./Header";
+import Header from "./Header"
 import Login from "./login"
+import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
 import rentalList from "./views/rental views/rentalList"
 import updateRental from "./views/rental views/updateRental"
@@ -21,6 +22,7 @@ import RentalReport from "./views/rental views/RentalReport";
 import VehicleReport from "./views/vehicle views/VehicleReport";
 import Footer from "./Footer";
 import RemovedRentalList from "./views/rental views/removedRentals";
+import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
 
 function Home() {
@@ -29,6 +31,7 @@ function Home() {
             <div>
                 <Header />
                 <Route path="/" exact component={Login} />
+                <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
                 <Route path="/rentalList" exact component={rentalList} />
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />
@@ -48,6 +51,7 @@ function Home() {
                 <Route path="/rental/report" exact component={RentalReport} />
                 <Route path="/vehicle/report" exact component={VehicleReport} />
                 <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
+                <Route path="/deleteVehicles" exact component={DeleteVehicles} />
                 <Footer />
             </div>
         </Router>

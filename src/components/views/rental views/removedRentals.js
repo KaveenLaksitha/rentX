@@ -94,9 +94,9 @@ function RemovedRentalList() {
                             <th>Return Date</th>
                             <th>Vehicle Type</th>
                             <th>NIC</th>
-                            <th></th>
-                            {/*<th>Penalty</th>*/}
-                            <th>Total</th>
+                            <th>Penalty (Rs.)</th>
+                            <th>Total (Rs.)</th>
+                            <th>Last Payment (Rs.)</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -113,8 +113,9 @@ function RemovedRentalList() {
                                     <td >{moment(rental.returnDate).format('YYYY-MMMM-DD')}</td>
                                     <td >{rental.vehicleType + " " + rental.model}</td>
                                     <td >{rental.customerNIC}</td>
-                                    <td >{rental.penalty}</td>
+                                    <td >{rental.penaltyCharges.toFixed(2)}</td>
                                     <td >{rental.finalPrice.toFixed(2)}</td>
+                                    <th>{rental.lastPaid.toFixed(2)}</th>
                                     <td >{rental.status}</td>
 
                                 </tr>

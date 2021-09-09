@@ -59,7 +59,7 @@ function Header(props) {
           <ul>
             <hr></hr>
             <li>
-              <a href="/">
+              <a href="/dashboard">
                 <i className="fa fa-th fa-2x"></i>
                 <span className="nav-text">Dashboard</span>
                 <i className="fa fa-angle-right fa-2x"></i>
@@ -95,7 +95,7 @@ function Header(props) {
                 <a href="javascript:void(0)" >  <i className="fa fa-calendar fa-2x"></i> <span className="nav-text">Reservations</span> <i className="fa fa-angle-right fa-animate fa-2x"></i></a>
               </li>
               <ul className="sub-menu collapse" id="new2">
-              <li className="has-subnav">
+                <li className="has-subnav">
                   <a href="/viewReservation">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text"> Reservations List</span>
@@ -109,7 +109,7 @@ function Header(props) {
                     <i className="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
-                
+
               </ul>
               <li>
               </li>
@@ -121,16 +121,17 @@ function Header(props) {
               </li>
               <ul class="sub-menu collapse" id="new3">
                 <li class="has-subnav ">
-                  <a href="/addVehicle">
+                  <a href="/vehicleList ">
                     <i class="fa"></i>
-                    <span class="nav-text">Add Vehicle</span>
+                    <span className="nav-text">Vehicle List</span>
+
                     <i class="fa fa-angle-right fa-3x"></i>
                   </a>
                 </li>
                 <li className="has-subnav">
-                  <a href="/vehicleList">
+                  <a href="/addVehicle">
                     <i className="fa  fa-2x"></i>
-                    <span className="nav-text">Vehicle List</span>
+                    <span class="nav-text">Add Vehicle</span>
                     <i className="fa fa-angle-right fa-2x"></i>
                   </a>
                 </li>

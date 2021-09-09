@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import Swal from 'sweetalert2'
 
 
 function AddVehicle() {
@@ -29,6 +30,7 @@ function AddVehicle() {
     const[RegNoErr, setRegNoErr] = useState("");
     const[TeleErr, setTeleNoErr] = useState("");
     const [NICErr, setNICErr] = useState("");
+    const [YearsErr, setYearsErr] = useState("");
 
     // const[File, setFile] = useState('');
     // const [fileName, setfileName] = useState('');
@@ -46,9 +48,10 @@ function AddVehicle() {
         const isValid = formValidation();
         const teleValid = TeleValidation();
         const NICValid  = NICValidation();
+        const YearsValid = YearsValidation();
 
 
-        if(isValid && teleValid && NICValid){
+        if(isValid && teleValid && NICValid && YearsValid){
 
             
 
@@ -82,11 +85,32 @@ function AddVehicle() {
         axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
 
         .then(() => {
-            alert("Vehicle added Successfully !!")
-            window.location.replace("/vehicleList");
+            // alert("Vehicle added Successfully !!")
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Vehicle Details Added Succesfully',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+            }
+            ).then(() => {
+                window.location.replace("/vehicleList");
+                
+            })
+
+        
 
         }).catch((err) => {
-            alert(err)
+            // alert(err)
+            const msgerr = err.response.data.status
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: `${msgerr}`,
+                confirmButtonColor: '#1fc191',
+                
+              })
         })
 
     }
@@ -101,10 +125,26 @@ function AddVehicle() {
         if(VehicleRegNo.trim().length > 8){
 
             RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
-            alert("**Invalid Vehicle Registration Number");
+            // alert("**Invalid Vehicle Registration Number");
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Vehicle Registration Number',
+                text: 'You enterd invalid Vehicle Registration Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
             isValid = false;
         }else if(VehicleRegNo.trim().length < 7){
             RegNoErr.InValidRegNo =" *Invalid Vehicle Registraton Number"; // error msg
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Vehicle Registration Number',
+                text: 'You enterd invalid Vehicle Registration Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
             isValid = false;
         }
         
@@ -125,11 +165,25 @@ function AddVehicle() {
         if( TeleNo.trim().length > 10 ){
 
             TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
-            alert("**Invalid Telephone Number");
+            // alert("**Invalid Telephone Number");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Telephone Number',
+                text: 'You enterd Invalid Telephone Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
             teleValid = false;
         }else if(TeleNo.trim().length < 10){
             TeleErr.InValidTeleNo =" *Invalid Telephone Number"; // error msg
-            alert("**Invalid Telephone Number");
+            // alert("**Invalid Telephone Number");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Telephone Number',
+                text: 'You enterd Invalid Telephone Number , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
             teleValid = false;
         }
         
@@ -151,11 +205,25 @@ function AddVehicle() {
             if (OwnerNIC.trim().length > 12) {
     
                 NICErr.InValidNIC = " Invalid NIC Number"; // error msg
-                alert("**Invalid NIC Number");
+                // alert("**Invalid NIC Number");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...Invalid NIC Number',
+                    text: 'You enterd invalid NIC , Try Again !!',
+                    confirmButtonColor: '#1fc191',
+                    // footer: '<a href=""#home">Why do I have this issue?</a>'
+                  })
                 NICValid = false;
             } else if (OwnerNIC.trim().length < 10) {
                 NICErr.InValidNIC = " Invalid NIC Number"; // error msg
-                alert("**Invalid NIC Number");
+                // alert("**Invalid NIC Number");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops... Invalid NIC Number',
+                    text: 'You enterd invalid NIC , Try Again !!',
+                    confirmButtonColor: '#1fc191',
+                    // footer: '<a href=""#home">Why do I have this issue?</a>'
+                  })
                 NICValid = false;
             }
     
@@ -166,12 +234,48 @@ function AddVehicle() {
     
     }
 
+    const YearsValidation = () => {//validate function
+
+        const YearsErr = {}; //State
+        let YearsValid = true; //setting flag
+
+
+        if (YearsRent == 0) {
+            YearsErr.InValidYears = " Number of years should be More than 0"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid ',
+                text: ' Number of years should be more than 0!!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
+        }
+        else if(YearsRent > 10){
+            YearsErr.InValidYears = " Number of years should be less than 10 !"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid',
+                text: 'Number of years should be less than 10!!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+              })
+        }
+
+
+        setYearsErr(YearsErr);//update error objects
+        return YearsValid;
+
+
+    }
+
 
     
     const [isValid, setIsValid] = useState(false);
     const [message, setMessage] = useState('');
 
-    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     const validateEmail = (event) => {
         const email = event.target.value;
@@ -225,19 +329,44 @@ function AddVehicle() {
     const [isRegValid, setRegIsValid] = useState(false);
     const [Regmessage, setRegMessage] = useState('');
 
-    const VehRegex1 = /^[A-Z0-9]+-[0-9][0-9][0-9][0-9]$/;
-    // const VehRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+     const VehRegex1 = /^[A-Z0-9][A-Z0-9]-[0-9][0-9][0-9][0-9]$/;
+     const VehRegex2 = /^[A-Z0-9][A-Z0-9][A-Z0-9]-[0-9][0-9][0-9][0-9]$/;
 
     const validateRegNo = (event) => {
         const RegNo = event.target.value;
         if (VehRegex1.test(RegNo)) {
             setRegIsValid(true);
             setRegMessage('Vehicle Registation Number looks good!');
-        }else {
+        }else if (VehRegex2.test(RegNo)){
+            setRegIsValid(true);
+            setRegMessage('Vehicle Registation Number looks good!');
+        
+        }
+        else {
             setRegIsValid(false);
-            setRegMessage('Please enter a valid Vehicle Registation Number Number!');
+            setRegMessage('Please enter a valid Vehicle Registation Number !');
         }
     };
+
+    const [isYearsValid, setYearsValid] = useState(false);
+    const [Yearmessage, setYearMessage] = useState('');
+     
+
+    const validateYears = (event) => {
+        const YearsRent = event.target.value;
+        if (YearsRent == 0) {
+            setYearsValid(false);
+            setYearMessage('Number of years should be more than 0 !');
+        }
+        else if(YearsRent < 11) {
+            setYearsValid(true);
+            setYearMessage('Years of rent loking good ');
+        }else{
+            setYearsValid(false);
+            setYearMessage('Number of years should be less than 10 !');
+        }
+    };
+
 
 
 
@@ -267,7 +396,7 @@ function AddVehicle() {
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Owner Details</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle Paymnet Details</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vehicle & Paymnet Details</a>
                     </li>
                     
                    <hr></hr>
@@ -287,10 +416,11 @@ function AddVehicle() {
                                         <form id="contact-form" class="form" role="form" >
                                             <div class="form-group">
                                                 <label class="form-label" for="name">Owner Name </label>
-                                                <input  type="text" class="form-control formInput" id="name" name="name" placeholder="Customer Name" tabindex="1"
+                                                <input  type="text" class="form-control formInput" id="name" name="name" placeholder="Customer Name" tabindex="1" required
                                                     onChange={(e) => {
                                                         setOwnerName(e.target.value); // assign value
                                                          }}
+                                                         
                                                 
                     
                                                 />
@@ -301,7 +431,7 @@ function AddVehicle() {
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="email">Owner NIC </label>
                                                 <input  type="text" class="form-control formInput" id="NIC" name="Owner NIC" placeholder="Owner NIC" tabindex="2"  
-                                                
+                                                required
                                                         onChange={(e) => {
                                                             setOwnerNIC(e.target.value); // assign value
                                                             validateNIC(e);
@@ -319,7 +449,7 @@ function AddVehicle() {
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="subject">Telephone No</label>
                                                 <input  type="Number" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Telephone No" tabindex="3"
-                                                
+                                                required
                                                 onChange={(e) => {
                                                     setTeleNo(e.target.value); // assign value
                                                     validateMobile(e);
@@ -338,7 +468,7 @@ function AddVehicle() {
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">Address</label>
                                                 <input  type="text" class="form-control formInput" id="Addr" name="Addr" placeholder="Address" tabindex="3" 
-                                                
+                                                required
                                                 
                                                 onChange={(e) => {
                                                     setAddress(e.target.value); // assign value
@@ -350,7 +480,7 @@ function AddVehicle() {
                                             <div class="form-group ">
                                                 <label class="form-label" for="subject">E-mail</label>
                                                 <input type="email" class="form-control formInput" id="Email" name="Email" placeholder="E-mail" tabindex="3" 
-                                                
+                                                required
                                                 onChange={(e) => {
                                                     setEmail(e.target.value);
                                                     validateEmail(e);
@@ -364,7 +494,7 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="date">Date</label>
-                                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"                                                
+                                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3"  required                                               
                                                 onChange={(e) => {
                                                     setDate(e.target.value); // assign value
                                                      }}
@@ -435,7 +565,7 @@ function AddVehicle() {
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="name">Vehicle Brand</label>
                                             <input type="text" class="form-control formInput" id="VehicleBrand" name="VehicleBrand" placeholder="eg : Toyota , Nissan" tabindex="1" 
-
+                                            required
                                                                 onChange={(e) => {
                                                                     setVehicleVBrand(e.target.value); // assign value
                                                                     }}  
@@ -444,9 +574,9 @@ function AddVehicle() {
                                             
                                         </div>
                                         <div class="form-group col-sm">
-                                            <label class="form-label-emp" for="email">Vehicle Modal</label>
+                                            <label class="form-label-emp" for="email">Vehicle Model</label>
                                             <input type="text" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" 
-                                            
+                                            required
                                             onChange={(e) => {
                                                 setVehicleModel(e.target.value); // assign value
                                                  }}
@@ -458,6 +588,7 @@ function AddVehicle() {
                                             <select
                                                     id="vehType"
                                                     className="form-control "
+                                                    required
                                                     onChange={(e) => {
                                                         setVehicleType(e.target.value); // assign value
                                                          }}
@@ -476,7 +607,7 @@ function AddVehicle() {
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="RegNo">Vehicle Registration Number  </label>
                                                 <input  type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="ABC-XXXX" tabindex="2"  
-                                                
+                                                required
                                                     onChange={(e) => {
                                                         setRegNo(e.target.value); // assign value
                                                         validateRegNo(e);
@@ -498,8 +629,8 @@ function AddVehicle() {
 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Current Mileage (Km) </label>
-                                                <input   type="text" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Mileage" tabindex="3"
-
+                                                <input   type="Number" class="form-control formInput" id="TelNo" name="TelNo" placeholder="Mileage" tabindex="3"
+                                                required
                                                             onChange={(e) => {
                                                                 setMileage(e.target.value); // assign value
                                                             }}
@@ -516,6 +647,7 @@ function AddVehicle() {
                                                 <select
                                                     id="Ins"
                                                     className="form-control "
+                                                    required
                                                 onChange={(e) => {
                                                     setInstType(e.target.value);
                                                 }}
@@ -530,7 +662,7 @@ function AddVehicle() {
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Insurance Company Name </label>
                                                 <input  type="text" class="form-control formInput" id="InsCom" name="InsCom" placeholder="Insurance Company Name" tabindex="2" 
-
+                                                    required
                                                             onChange={(e) => {
                                                                 setComName(e.target.value);
                                                             }}
@@ -546,6 +678,7 @@ function AddVehicle() {
                                             <select
                                                     id="Trans"
                                                     className="form-control "
+                                                    required
                                                 onChange={(e) => {
                                                     setTransmission(e.target.value);
                                                 }}
@@ -564,6 +697,7 @@ function AddVehicle() {
                                             <select
                                                     id="AirC"
                                                     className="form-control "
+                                                    required
                                                 onChange={(e) => {
                                                     setAirC(e.target.value);
                                                 }}
@@ -575,8 +709,8 @@ function AddVehicle() {
                                         </div>
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="subject">Number of seats </label>
-                                            <input type="text" class="form-control formInput" id="seat" name="seat"  placeholder=" Number of seats" tabindex="2"  
-                                            
+                                            <input type="Number" class="form-control formInput" id="seat" name="seat"  placeholder=" Number of seats" tabindex="2"  
+                                            required
                                             onChange={(e) => {
                                                 setNoOfSeats(e.target.value);
                                             }}
@@ -603,12 +737,14 @@ function AddVehicle() {
                                                 </div>
                                                 <div class="col-10">
                                                     <input  type="text" class="form-control formInput" id="regNo" name="Owner NIC" placeholder="0.00" tabindex="2" 
-                                                        
+                                                      required  
                                                         onChange={(e) => {
                                                             setRatePDay(e.target.value);
+                                                            
                                                         }}
 
                                                     />
+
                                                 </div>
                                                 </div>
                                                 
@@ -616,14 +752,21 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="subject">Years of Rental </label>
-                                                <input   type="text" class="form-control formInput" id="NoYears" name="NoYears" placeholder="Years of Rental" tabindex="3"
-                                                
+                                                <input   type="Number" class="form-control formInput" id="NoYears" name="NoYears" placeholder="Years of Rental" tabindex="3"
+                                                required
                                                 onChange={(e) => {
                                                     setYearsRent(e.target.value);
+                                                    validateYears(e);
                                                 }}
 
                                                 
                                                 />
+                                                <div className={`message ${isYearsValid ? 'success' : 'error'}`}>
+                                                    {Yearmessage}
+                                                </div>
+                                                {Object.keys(YearsErr).map((key)=>{
+                                                // return<div style={{color :"red"}}>{RegNoErr[key]}</div>
+                                                })}
                                             </div>
                                     </div>
 

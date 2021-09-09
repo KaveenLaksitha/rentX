@@ -201,7 +201,7 @@ function RentalList() {
                             <th>Vehicle</th>
                             <th>NIC</th>
                             <th>Customer Name</th>
-                            <th>Total</th>
+                            <th>Total (Rs.)</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -229,7 +229,7 @@ function RentalList() {
                                         >
                                             update
                                         </button>
-                                        <Link class="btn btn-danger btn-sm" onClick={() => openModalDelete(rental)} role="button"> Remove</Link>
+                                        <Link class="btn btn-danger btn-sm" onClick={() => openModalDelete(rental)} role="button"> remove</Link>
 
                                     </td>
                                 </tr>
