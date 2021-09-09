@@ -677,6 +677,7 @@ a.nav-link:link {
 .error {
   color: #980000;
 }
+
 .package {
   position: absolute;
   top: 5rem;
@@ -704,10 +705,19 @@ a.nav-link:link {
 .links {
   margin-left: 12rem;
 }
+
 .qlink {
   margin-right: 1rem;
   margin-left: 1rem;
   font-size: 1rem;
 }
 
-
+.btn-info-total {
+  background-color: #1fc191;
+  color: white;
+  width: 200px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}

@@ -271,8 +271,10 @@ function refreshPage() {
         var dis = Number(document.getElementById('discount').value) / 100;
         if(getDateDiff() == 0){
             var finalresult = document.getElementById('totalreservation').value = result - (result * dis );
+            document.getElementById('totalreservation').innerHTML = result - (result * dis );
         }else{
             var finalresult = document.getElementById('totalreservation').value = result * getDateDiff() - (result * getDateDiff() * dis);
+            document.getElementById('totalreservation').innerHTML = result * getDateDiff() - (result * getDateDiff() * dis);
         }    
           
         return finalresult;
