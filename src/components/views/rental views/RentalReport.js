@@ -8,6 +8,62 @@ import 'react-datetime/css/react-datetime.css';
 
 function ReservationReport() {
 
+    const [from, setFrom] = useState(moment().format('YYYY-MMMM-DD'));
+    const [to, setTo] = useState(moment().format('YYYY-MMMM-DD'));
+    const [status, setStatus] = useState("");
+    const [vehicleType, setVehicleType] = useState("");
+    const [customerName, setCustomerName] = useState("");
+    const [rentalList, setRentalList] = useState([]);
+    const [vType, setVType] = useState(" ");
+
+    function sendData(e) {
+        e.preventDefault();
+        alert(customerName)
+        if (status == "Pending") {
+
+            if ((customerName == "") && (vehicleType == "")) {
+                const cust = "null"
+                const vehi = "null"
+                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            }
+            else if (customerName == "") {
+                const cus = "null"
+                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            } else if (vehicleType == "") {
+                const veh = "null"
+                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+
+            } else {
+
+                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            }
+        }
+
+
+
+
+    }
+
     return (
         <div className="page-component-body">
             <div class="container input-main-form-emp">
@@ -16,7 +72,7 @@ function ReservationReport() {
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                <form>
+                                <form >
                                     <center>
                                         <h3 className=" mt-3 mb-4">Generate Report on Rental Records </h3>
                                     </center>
@@ -27,7 +83,7 @@ function ReservationReport() {
                         <br></br>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <form id="contact-form" class="form" >
+                                <form id="contact-form" class="form" onSubmit={sendData}>
                                     <div class="row">
                                         <div class="form-group col-md-6">
                                             <label class="form-label-emp" for="from">From</label>
@@ -39,7 +95,8 @@ function ReservationReport() {
                                                 placeholder=""
                                                 tabindex="5"
                                                 required
-
+                                                timeFormat={false}
+                                                onChange={(event) => { setFrom(event); }}
                                             />
                                         </div>
                                         <div class="form-group col-md-6">
@@ -53,7 +110,7 @@ function ReservationReport() {
                                                 placeholder=""
                                                 tabindex="6"
                                                 timeFormat={false}
-
+                                                onChange={(event) => { setTo(event); }}
 
                                             />
                                         </div>
@@ -70,8 +127,14 @@ function ReservationReport() {
                                             name="Vehicletype"
                                             placeholder="Vehicle Type "
                                             tabindex="4"
+                                            onChange={(event) => { setVehicleType(event.target.value); }}
                                         //required
-                                        />
+                                        >
+                                            <option  >choose</option>
+                                            <option value="Car" >Car</option>
+                                            <option value="Van">Van</option>
+                                            <option value="Bus">Bus</option>
+                                        </select>
                                     </div>
 
                                     <br></br>
@@ -85,6 +148,7 @@ function ReservationReport() {
                                             name="customername"
                                             placeholder=""
                                             tabindex="4"
+                                            onChange={(event) => { setCustomerName(event.target.value); }}
                                         //required
                                         />
                                     </div>
@@ -95,12 +159,14 @@ function ReservationReport() {
                                             <br></br>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
-                                                    <input className="form-check-input" type="radio" id="status" name="status"
+                                                    <input className="form-check-input" type="radio" id="status1" name="status" value="Pending"
+                                                        onChange={(event) => { setStatus(event.target.value); }}
                                                     />Pending</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
-                                                    <input className="form-check-input" type="radio" id="status" name="status"
+                                                    <input className="form-check-input" type="radio" id="status2" name="status" value="Completed"
+                                                        onChange={(event) => { setStatus(event.target.value); }}
                                                     />Completed</label>
                                             </div>
 
