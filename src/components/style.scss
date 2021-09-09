@@ -421,6 +421,32 @@ textarea {
   display: block;
 }
 
+.newRentals{
+  position: absolute;
+  left: 20rem;
+  top:16rem;
+}
+.newReservations{
+  position: absolute;
+  left: 35rem;
+  top:16rem;
+}
+.returnsToday{
+  position: absolute;
+  left: 50rem;
+  top:16rem;
+}
+.availableVehicles{
+  position: absolute;
+  left: 65rem;
+  top:16rem;
+}
+.viewAll{
+  position: absolute;
+  left: 26rem;
+  bottom:14.5rem;
+}
+
 a.nav-link:visited,
 a.nav-link:hover,
 a.nav-link:focus,
