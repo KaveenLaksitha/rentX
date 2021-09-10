@@ -50,40 +50,40 @@ import { Modal } from "react-bootstrap";
     };
 
     // calculate the penalty Day
-    function getDateDiff() {
-        var TO = moment(to).format('YYYY-MMMM-DD');
-        var Ret = moment(returnDay).format('YYYY-MMMM-DD');
-        var admission = moment(TO, 'YYYY-MMMM-DD');
-        var discharge = moment(Ret, 'YYYY-MMMM-DD');
-        const diffDuration = discharge.diff(admission, 'days');
-        return (diffDuration);
-    }
+    // function getDateDiff() {
+    //     var TO = moment(to).format('YYYY-MMMM-DD');
+    //     var Ret = moment(returnDay).format('YYYY-MMMM-DD');
+    //     var admission = moment(TO, 'YYYY-MMMM-DD');
+    //     var discharge = moment(Ret, 'YYYY-MMMM-DD');
+    //     const diffDuration = discharge.diff(admission, 'days');
+    //     return (diffDuration);
+    // }
 
     // calculate the penalty Cost
-    function calculatePenaltyCost() {
-        const Price = (totalreservation * (5 / 100)) * getDateDiff();
-        return Price;
-    }
+    // function calculatePenaltyCost() {
+    //     const Price = (totalreservation * (5 / 100)) * getDateDiff();
+    //     return Price;
+    // }
 
-    function calculateRemainingPayment() {
-        return ((totalreservation - advancedpayment) + calculatePenaltyCost());
-    }
+    // function calculateRemainingPayment() {
+    //     return ((totalreservation - advancedpayment) + calculatePenaltyCost());
+    // }
 
 
-    function updateTotal(){
-        document.getElementById('penaltyDay').value = getDateDiff();
-        var num = calculatePenaltyCost();
-        document.getElementById('penaltyCharge').value = num.toFixed(2);
-        var num1 = totalreservation + calculatePenaltyCost();
-        document.getElementById('totalreservation').value = num1.toFixed(2);
-        var num2 = calculateRemainingPayment();
-        if(calculatePenaltyCost() != "") {
-            document.getElementById('remaining').value = num2.toFixed(2);
-        } else{
-            document.getElementById('remaining').value = totalreservation - advancedpayment ;
-        }
+    // function updateTotal(){
+    //     document.getElementById('penaltyDay').value = getDateDiff();
+    //     var num = calculatePenaltyCost();
+    //     document.getElementById('penaltyCharge').value = num.toFixed(2);
+    //     var num1 = totalreservation + calculatePenaltyCost();
+    //     document.getElementById('totalreservation').value = num1.toFixed(2);
+    //     var num2 = calculateRemainingPayment();
+    //     if(calculatePenaltyCost() != "") {
+    //         document.getElementById('remaining').value = num2.toFixed(2);
+    //     } else{
+    //         document.getElementById('remaining').value = totalreservation - advancedpayment ;
+    //     }
         
-    }
+    // }
     const onSubmit = async e => {
         e.preventDefault();
 
@@ -109,7 +109,7 @@ import { Modal } from "react-bootstrap";
                                 returnDay,
                                 penaltyDay,
                                 penaltyCharge,
-                                remaining
+                                //remaining
                             }
                             console.log("data", newReservation);
       await axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
@@ -151,7 +151,7 @@ import { Modal } from "react-bootstrap";
             setreturnDay(res.data.reservation.returnDay);
             setpenaltyDay(res.data.reservation.penaltyDay);
             setpenaltyCharge(res.data.reservation.penaltyCharge);
-            setremaining(res.data.reservation.remaining);
+            //setremaining(res.data.reservation.remaining);
 
         }).catch((err) => {
             alert(err.response.data.error);
@@ -189,6 +189,7 @@ import { Modal } from "react-bootstrap";
                                                     disabled
                                                     value={customername}
                                                     onChange={(event) => { setcustomername(event.target.value) }}/>
+                                                    
                                             </div>
                                             <div class="form-group col-md-6">
                                             <label class="form-label-emp" for="contactnumber">Contact Number</label>
@@ -304,7 +305,6 @@ import { Modal } from "react-bootstrap";
                                                     id="returnDay" 
                                                     name="returnDay" 
                                                     placeholder="" 
-                                                    tabindex="7" 
                                                     value={moment(returnDay).format('YYYY-MM-DD')}
                                                     timeFormat={false}
                                                     onChange={(event) => { setreturnDay(event) }}
@@ -326,7 +326,7 @@ import { Modal } from "react-bootstrap";
                                                     tabindex="8" 
                                                     //required 
                                                     value={penaltyDay}
-                                                    onClickCapture={(event) => { setpenaltyDay(event.target.value); getDateDiff()  }}
+                                                    onChange={(event) => { setpenaltyDay(event.target.value); {/*getDateDiff()*/ } }}
 
                                                     />
                                             </div>
@@ -341,8 +341,9 @@ import { Modal } from "react-bootstrap";
                                                     tabindex="9" 
                                                     //required 
                                                     value={penaltyCharge}
-                                                    onClickCapture={(e) => {
-                                                        setpenaltyCharge(e.target.value); calculatePenaltyCost()
+                                                    onChange={(e) => {
+                                                        setpenaltyCharge(e.target.value); 
+                                                        //calculatePenaltyCost()
                                                 }}/>
                                             </div>
                                             </div>
@@ -391,8 +392,8 @@ import { Modal } from "react-bootstrap";
                                             </div>
                                             <div class="form-group col-md-6">
                                            
-                                                <input type="button" class="btn btn-info" id="entry" value="Charge" onClick={updateTotal} />
-                                            
+                                                <input type="button" class="btn btn-info" id="entry" value="Charge"  />
+                                                {/* onClick={updateTotal} */}
 
                                             </div>
                                             </div>
