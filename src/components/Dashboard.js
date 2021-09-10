@@ -7,7 +7,7 @@ function Dashboard() {
     const [returnedRentals, setReturnedRentals] = useState("");
     const [rentalList, setRentalList] = useState([]);
 
-    
+
     const [newReservation, setNewReservation] = useState("");
     const [returnedReservation, setReturnedReservation] = useState("");
     const [reservationList, setReservationList] = useState([]);
@@ -38,20 +38,20 @@ function Dashboard() {
         readRentals();
 
         axios.get("http://localhost:4000/reservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals placed on current date
-        setNewReservation(res.data);
+            setNewReservation(res.data);
         }).catch((error) => {
             alert(error)
         })
 
         axios.get("http://localhost:4000/deletedReservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals returned on current date
-        setReturnedReservation(res.data);
+            setReturnedReservation(res.data);
         }).catch((error) => {
             alert(error)
         })
 
         function readReservation() {
             axios.get("http://localhost:4000/reservations/getLatestReservationOnly").then((res) => { //fetching the latestly placed three rentals
-            setReservationList(res.data);
+                setReservationList(res.data);
             }).catch((error) => {
                 alert(error)
             })
@@ -59,7 +59,7 @@ function Dashboard() {
         readReservation();
 
         axios.get("http://localhost:4000/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
-        setNewVehicle(res.data);
+            setNewVehicle(res.data);
         }).catch((error) => {
             alert(error)
         })
@@ -69,35 +69,46 @@ function Dashboard() {
     return (
         <div className="page-component-body">
             <div className=" container comp-one">
-                <h2>Today</h2>
-
-                <div class="newRentals">
-                    <center><p>{newRentals}</p></center>
-                    <p>new rentals today</p>
+                <div className="row mb-3 mt-3">
+                    <div class="col ml-3">
+                        <h3 className="float-left">Today</h3>
+                    </div>
                 </div>
-                <div class="newReservations">
-                    <center><p>{newReservation}</p></center>
-                    <p>new reservations today</p>
-                </div>
-                <div class="returnsToday">
-                    <center><p>{returnedRentals + returnedReservation}</p></center>
-                    <p>returns today</p>
-                </div>
-                <div class="availableVehicles">
-                    <center><p>{newVehicle}</p></center>
-                    <p>available vehicles</p>
+                <hr className="dashboard-hr"></hr>
+                <div className="row">
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>new rentals today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>new reservations today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{returnedRentals}</p></center>
+                        <center><p>returns today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>available vehicles</p></center>
+                    </div>
                 </div>
             </div>
 
             <div class="container mt-3">
 
                 <div class="row">
-                    <div class="col-sm comp-one mx-3 my-3">
-                        <div class="viewAll">
-                            <Link to="/rentalList"><button className="btn btn-close" > ViewAll</button></Link>
+                    <div className="col comp-one mx-3 my-3">
+                        <div class="row table-head  mt-3">
+                            <div class="col">
+                                <h3 className="float-left">Latest Rentals</h3>
+                            </div>
+                            <Link to="/rentalList" class="float-right">
+                                <button className="btn btn-close" > View all</button>
+                            </Link>
                         </div>
                         <table class="table table-hover">
-                            <thead>
+                            <thead className="thead-dark">
                                 <tr>
                                     <th>From</th>
                                     <th>To</th>
@@ -119,14 +130,16 @@ function Dashboard() {
                                 })}
                             </tbody>
                         </table>
-
                     </div>
                     <div class="col-sm comp-one mx-3 my-3">
-                         <div class="viewAll">
-                            <Link to="/viewReservation"><button className="btn btn-close" > ViewAll</button></Link>
+                        <div class="row table-head  mt-3">
+                            <div class="col">
+                                <h3 className="float-left">Latest Reservations</h3>
+                            </div>
+                            <Link to="/viewReservation" class="float-right"><button className="btn btn-close" > ViewAll</button></Link>
                         </div>
                         <table class="table table-hover">
-                            <thead>
+                            <thead className="thead-dark">
                                 <tr>
                                     <th>To</th>
                                     <th>Type Name</th>
@@ -152,14 +165,14 @@ function Dashboard() {
                 </div>
             </div>
 
-            <div className="links">
-                <h3>Quick Links</h3>
-                <a className="qlink" href="/rentalList">Car availability</a><span>|</span>
-                <a className="qlink" href="/addVehicle">Add new vehicle</a><span>|</span>
-                <a className="qlink" href="/addEmployee">Add new employee</a>
+            <div className="container pl-5 mt-3">
+                <h3 className="ml-2">Quick Links</h3>
+                <a className="ml-2" href="/rentalList">Car availability</a><span className="qlink">|</span>
+                <a className="ml-2" href="/addVehicle">Add new vehicle</a><span className="qlink">|</span>
+                <a className="ml-2" href="/addEmployee">Add new employee</a>
             </div>
 
-        </div>
+        </div >
     )
 }
 

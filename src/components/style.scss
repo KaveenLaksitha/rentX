@@ -3,7 +3,8 @@
   min-height: 900px;
   font-family: "Titillium Web", sans-serif;
   src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff");
+    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
+      format("woff");
   font-weight: 600;
 }
 
@@ -56,7 +57,7 @@ nav.main-menu.expanded {
   z-index: 1000;
 }
 
-.main-menu>ul {
+.main-menu > ul {
   margin: 7px 0;
 }
 
@@ -66,7 +67,7 @@ nav.main-menu.expanded {
   width: 250px;
 }
 
-.main-menu li>a {
+.main-menu li > a {
   position: relative;
   display: table;
   border-collapse: collapse;
@@ -127,8 +128,8 @@ nav li {
   padding: 0;
 }
 
-.main-menu li:hover>a,
-nav.main-menu li.active>a,
+.main-menu li:hover > a,
+nav.main-menu li.active > a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
   border-left: 6px solid #1fc191 !important;
@@ -148,7 +149,8 @@ nav.main-menu li.active>a,
   font-style: normal;
   font-weight: 300;
   src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff");
+    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
+      format("woff");
 }
 
 /*header css part*/
@@ -421,32 +423,6 @@ textarea {
   display: block;
 }
 
-.newRentals{
-  position: absolute;
-  left: 20rem;
-  top:16rem;
-}
-.newReservations{
-  position: absolute;
-  left: 35rem;
-  top:16rem;
-}
-.returnsToday{
-  position: absolute;
-  left: 50rem;
-  top:16rem;
-}
-.availableVehicles{
-  position: absolute;
-  left: 65rem;
-  top:16rem;
-}
-.viewAll{
-  position: absolute;
-  left: 26rem;
-  bottom:14.5rem;
-}
-
 a.nav-link:visited,
 a.nav-link:hover,
 a.nav-link:focus,
@@ -575,7 +551,7 @@ a.nav-link:link {
   padding-left: 1rem;
 }
 
-.searchbar:hover>.search_icon {
+.searchbar:hover > .search_icon {
   color: #000000;
 }
 
@@ -717,12 +693,11 @@ a.nav-link:link {
 
 //dashboard
 .comp-one {
-  display: flex;
   background-color: rgb(255, 255, 255);
-  max-width: 1125px;
+  max-width: 1110px;
   min-height: 200px;
   justify-content: center;
-  padding: 3rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   border-radius: 30px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
@@ -735,9 +710,12 @@ a.nav-link:link {
 .qlink {
   margin-right: 1rem;
   margin-left: 1rem;
-  font-size: 1rem;
 }
 
+.dashboard-hr {
+  border-color: #b1b1b1;
+  border-width: 0.1rem;
+}
 .btn-info-total {
   background-color: #1fc191;
   color: white;
