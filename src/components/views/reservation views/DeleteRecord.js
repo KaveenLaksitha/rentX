@@ -77,6 +77,12 @@ function DeleteRecord() {
                     </div>
                     
                 </div>
+                <p class="float-right mr-3">
+                        <Link class="link" to={`/viewReservation`}><button class="btn btn-ok white" id="pending" >
+                           Pending List
+                        </button> </Link>
+                    </p>
+
 
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -113,12 +119,7 @@ function DeleteRecord() {
                 </table>
             </div>
             <br></br>
-            <p class="float-right mr-3">
-                        <Link class="link" to={`/viewReservation`}><button class="btn btn-ok white" id="pending" >
-                           Pending List
-                        </button> </Link>
-                    </p>
-
+           
             <Modal show={modalLoading} size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>

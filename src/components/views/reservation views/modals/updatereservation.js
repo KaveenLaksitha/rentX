@@ -14,7 +14,6 @@ import { Modal } from "react-bootstrap";
     console.log("update modal dataaaaaa", reservations);
 
     let history = useHistory();
-    //const { RID } = useParams();
 
     const RID = reservations.data.reservationid;
 
