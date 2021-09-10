@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
-import { getAllEmployeesService } from "../../services/employeeService";
+import { getAllEmployeesService, searchEmployeesService } from "../../services/employeeService";
 
 import ViewEmpModal from "./modals/viewEmployee";
 import DeleteEmployeeModal from "./modals/deleteEmployee"
@@ -10,6 +10,7 @@ import UpdateEmployeeModal from "./modals/updateEmployee";
 
 export default function EmpList() {
     const [empList, setEmp] = useState([]);
+    const [search, setSearch] = useState("");
 
     const [isFetching, setIsFetching] = useState(false);
     const [modalLoading, setModalLoading] = useState(false);
@@ -25,6 +26,11 @@ export default function EmpList() {
     const [modalDelete, setModalDelete] = useState(false);
 
     useEffect(() => {
+
+
+        if (document.getElementById('submit').clicked) {
+            searchEmployees();
+        }
 
         getAllEmployeesService().then((data) => {
 
@@ -42,6 +48,7 @@ export default function EmpList() {
 
         }
         )
+
     }, []);
 
     useEffect(() => {
@@ -49,6 +56,28 @@ export default function EmpList() {
         console.log("component did update", modalDataDelete)
 
     }, [modalDataDelete]);
+
+    //for search employees
+    const searchEmployees = (e) => {
+
+        e.preventDefault();
+
+        searchEmployeesService(search).then((data) => {
+            console.log("data in emp list page", data);
+            if (data.ok) {
+
+                // setIsFetching(true);
+                // setModalLoading(false);
+                setEmp(data.data.reverse());
+
+            } else {
+                setModalLoading(true);
+            }
+
+        })
+
+
+    }
 
 
 
@@ -107,8 +136,10 @@ export default function EmpList() {
                     <div className="col">
                         <div class="input-group input-group-search">
                             <div class="searchbar">
-                                <input class="search_input" type="text" name="" placeholder="Search..." />
-                                <button class="btn search_icon" type="button"><i class="fa fa-search"></i></button>
+                                <form onSubmit={searchEmployees}>
+                                    <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} require />
+                                    <button class="btn search_icon" type="submit" id="submit" name="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
