@@ -33,9 +33,6 @@ function Dashboard() {
     }, [])
 
 
-
-
-
     return (
         <div className="page-component-body">
             <div className=" container comp-one">

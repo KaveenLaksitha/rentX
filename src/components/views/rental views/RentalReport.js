@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import Pdf from "react-to-pdf";
+const ref = React.createRef();
 
 
 function ReservationReport() {
@@ -14,10 +16,11 @@ function ReservationReport() {
     const [vehicleType, setVehicleType] = useState("");
     const [customerName, setCustomerName] = useState("");
     const [rentalList, setRentalList] = useState([]);
-    const [vType, setVType] = useState(" ");
+
 
     function sendData(e) {
         e.preventDefault();
+        changeBoxes();
         alert(customerName)
         if (status == "Pending") {
 
@@ -59,8 +62,12 @@ function ReservationReport() {
             }
         }
 
+    }
 
 
+    function changeBoxes() {
+        document.getElementById('myTabContent').style.display = "none";
+        document.getElementById('myTabContent2').style.display = "block";
 
     }
 
@@ -155,7 +162,7 @@ function ReservationReport() {
                                     <br></br>
                                     <div className="row">
                                         <div className="form-group col-md-6">
-                                            <label className="form-label-emp " for="status">Status:</label>
+                                            <label className="form-label-emp " for="status">Status: </label>
                                             <br></br>
                                             <div className="form-check form-check-inline ml-2 mr-5">
                                                 <label className="form-check-label" for="inlineCheckbox1">
@@ -189,8 +196,54 @@ function ReservationReport() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+                <div id="myTabContent2" style={{ display: "none" }}>
+                    <Pdf targetRef={ref} filename="code-example.pdf">
+                        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                    </Pdf>
+                    <div ref={ref}>
+
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Vehicle</th>
+                                    <th>NIC</th>
+                                    <th>Customer Name</th>
+                                    <th>Total (Rs.)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rentalList.map((rental) => {
+                                    return (
+
+                                        <tr >
+
+                                            <td > {rental.from}</td>
+                                            <td >{rental.to}</td>
+                                            <td >{rental.vehicleType}</td>
+                                            <td >{rental.customerNIC}</td>
+                                            <td >{rental.customerName}</td>
+                                            <td >{rental.finalPrice.toFixed(2)}</td>
+                                            <td >{rental.status}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div >
+
+
+
+
+
+        </div >
     )
 }
 
