@@ -141,27 +141,30 @@ function Reservation() {
     const [NICErr, setNICErr] = useState("");
     const[MobErr, setMobileErr] = useState("");
 
-
-
-
-
-
     function sendData(e) {
         e.preventDefault();
 
         const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
 
-        alert("Your ramaining balance is " + `${finalpay}`);
-
-        
+        //alert("Your ramaining balance is " + `${finalpay}`);
 
         const NICValid  = NICValidation();
         const CntValid  = MobileValidation();
 
         if(NICValid && CntValid){
-            const answer = window.confirm("Are you sure you want to confirm submission?");
+            Swal.fire({
+                title: "Are you sure you want to confirm Reservation? ",
+                text : `${"Your Remaining balance is " + finalpay}`,
+                showConfirmButton: true,
+                showDenyButton: true,
+                confirmButtonText: "Proceed",
+                denyButtonText: "Cancel",
+                confirmButtonColor: "#1fc191",
 
-        if (answer) {
+            }).then((result) => {
+            //const answer = window.confirm("Are you sure you want to confirm submission?");
+
+        if (result.isConfirmed) {
             const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
 
             axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
@@ -170,29 +173,38 @@ function Reservation() {
                 //history.push("/viewReservation");
                 Swal.fire({
                         title: 'Reservation Completed!',
-                        text: `${"Reservation Added Successfully"}`,
+                        //text: `${"Reservation Added Successfully"}`,
                         icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1500
+                        confirmButtonColor: "#1fc191",
                     }
-                    ).then(() => {
-                        window.location.replace('/viewReservation');
+                    ).then((res) => {
+                        if (res.isConfirmed) {
+                            window.location.replace('/viewReservation');
+                        }
+                       
                     })
 
             }).catch((err) => {
                 //alert(err.response.data.error)
+                var error = err.response.data.error
                 Swal.fire({
                         title: 'Oops!',
-                        text: `${"User already get Reservation"}`,
+                        text: error,
                         icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )               
+                        confirmButtonColor: "#1fc191",
+                    })               
 
             })
         }
+        else if (result.isDenied) {
+            refreshPage();
+        }
+    })
     }
+}
+
+function refreshPage() {
+    window.location.reload();
 }
 
     function searchModel() {
@@ -256,22 +268,26 @@ function Reservation() {
        
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
+        var dis = Number(document.getElementById('discount').value) / 100;
         if(getDateDiff() == 0){
-            var finalresult = document.getElementById('totalreservation').value = result ;
+            var finalresult = document.getElementById('totalreservation').value = result - (result * dis );
+            document.getElementById('totalreservation').innerHTML = result - (result * dis );
         }else{
-            var finalresult = document.getElementById('totalreservation').value = result * getDateDiff();
-        }        
+            var finalresult = document.getElementById('totalreservation').value = result * getDateDiff() - (result * getDateDiff() * dis);
+            document.getElementById('totalreservation').innerHTML = result * getDateDiff() - (result * getDateDiff() * dis);
+        }    
+          
         return finalresult;
     }
 
-   {/* function calcprice1(){
-        getRentChargePerDay();
-        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
-        document.getElementById('perDayCharge').innerHTML = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
+    function calcprice1(){
+        //getRentChargePerDay();
+        document.getElementById('FinalreservationPrice').value = document.getElementById('totalreservation').value - Number(advancedpayment);
+        document.getElementById('FinalreservationPrice').innerHTML = document.getElementById('totalreservation').value - Number(advancedpayment);
 
     }
 
-    function calcprice2(){
+    {/*function calcprice2(){
         getRentChargePerDay1()
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
         document.getElementById('perDayCharge1').innerHTML = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
@@ -284,10 +300,9 @@ function Reservation() {
 
         getRentChargePerDay();
         getRentChargePerDay1()
-        if(packagename == "Package 1" && vehicleType=="Car" && vehicleType1 == "Van"){
-            var dis = Number(document.getElementById('discount').value) / 100;
-            var final = document.getElementById('totalreservation').value = showDateRange() - (showDateRange() * dis);
-            document.getElementById('total').value = final;
+        if(packagename == "Package 1" && ((vehicleType=="Car" && vehicleType1 == "Van") || (vehicleType=="Van" && vehicleType1 == "Car"))){
+           
+            document.getElementById('total').value = showDateRange();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -295,10 +310,9 @@ function Reservation() {
                 title: "Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
-        }else if(packagename == "Package 2" && vehicleType=="Van" && vehicleType1 == "Bus") {
-            var dis = Number(document.getElementById('discount').value) / 100;
-            var final = document.getElementById('totalreservation').value = showDateRange() - (showDateRange() * dis);
-            document.getElementById('total').value = final;
+        }else if(packagename == "Package 2" && ((vehicleType=="Van" && vehicleType1 == "Bus") || (vehicleType=="Bus" && vehicleType1 == "Van") )) {
+           
+            document.getElementById('total').value = showDateRange();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -306,10 +320,9 @@ function Reservation() {
                 title: "Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
-        }else if(packagename == "Package 3" && vehicleType=="Bus" && vehicleType1 == "Car"){
-            var dis = Number(document.getElementById('discount').value) / 100;
-            var final = document.getElementById('totalreservation').value = showDateRange() - (showDateRange() * dis);
-            document.getElementById('total').value = final;
+        }else if(packagename == "Package 3" && ((vehicleType=="Bus" && vehicleType1 == "Car") || (vehicleType=="Car" && vehicleType1 == "Bus"))){
+            
+            document.getElementById('total').value = showDateRange();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -326,12 +339,7 @@ function Reservation() {
         }
         
 
-        //alert("Package Created");
-        //Swal.fire({
-         //   icon: 'success',
-         //   title: "Package created ! ",
-          //  confirmButtonColor: "#1fc191",
-        //})
+      
     }
 
     function getRentChargePerDay() {
@@ -373,9 +381,6 @@ function Reservation() {
     //validation
 
     //validate function
-
-
-
 
     const NICValidation = () => {
 
@@ -691,9 +696,7 @@ const MobileValidation =() =>{//validate function
                                             <div class="form-group col-md-2">
                                                 <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
                                             </div>
-                                            <div class="form-group col-md-2">
-                                                <input type="button" class="btn btn-info" id="entry" value=" Date Range And Total " onClick={showDateRange} />
-                                            </div>
+                                           
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">
@@ -722,7 +725,7 @@ const MobileValidation =() =>{//validate function
                                                     placeholder="0.00"
                                                     //tabindex="7"
                                                     //required 
-
+                                                
                                                     onClickCapture={(event) => {
                                                         settotalreservation(event.target.value);
                                                     }
@@ -731,6 +734,9 @@ const MobileValidation =() =>{//validate function
                                             </div>
                                         </div>
                                         <div className="row">
+                                        <div class="col py-3 text-center">
+                                                <input type="button" class="btn btn-info-total" id="entry" value=" Payment " onClick={showDateRange} />
+                                            </div>
                                             <div className="col py-3 text-center">
                                                 <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
                                                     Create
@@ -741,6 +747,7 @@ const MobileValidation =() =>{//validate function
                                                     Cancel
                                                 </button>
                                             </div>
+                                            
                                         </div>
                                     </form>
 
@@ -940,7 +947,7 @@ const MobileValidation =() =>{//validate function
                                                     id="status"
                                                     className="form-control "
                                                     onChange={(event) => {
-                                                        setstatus(event.target.value);
+                                                        setstatus(event.target.value); calcprice1()
                                                     }
                                                     }
 
@@ -962,7 +969,7 @@ const MobileValidation =() =>{//validate function
                                                     placeholder="Advanced Payment (10000.00)"
                                                     //tabindex="9"
                                                     onChange={(event) => {
-                                                        setadvancedpayment(event.target.value);
+                                                        setadvancedpayment(event.target.value); 
                                                     }
                                                     }
                                                     onFocus={getRentChargePerDay} />
@@ -983,7 +990,7 @@ const MobileValidation =() =>{//validate function
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="form-label" for="FinalreservationPrice">Final Remaining Price</label>
+                                                <label class="form-label-emp" for="FinalreservationPrice">Final Remaining Price</label>
                                                 <input
                                                     type="text"
                                                     class="form-control formInput"
