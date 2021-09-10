@@ -16,8 +16,9 @@ function Dashboard() {
 
     useEffect(() => {
 
+
         axios.get("http://localhost:4000/rental/VehiclesRentedToday").then((res) => { //fetching the count of rentals placed on current date
-            setNewRentals(res.data);
+            setNewRentals(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
@@ -38,13 +39,13 @@ function Dashboard() {
         readRentals();
 
         axios.get("http://localhost:4000/reservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals placed on current date
-            setNewReservation(res.data);
+            setNewReservation(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
         axios.get("http://localhost:4000/deletedReservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals returned on current date
-            setReturnedReservation(res.data);
+            setReturnedReservation(("0" + res.data).slice(-1));
         }).catch((error) => {
             alert(error)
         })
@@ -59,7 +60,7 @@ function Dashboard() {
         readReservation();
 
         axios.get("http://localhost:4000/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
-            setNewVehicle(res.data);
+            setNewVehicle(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
