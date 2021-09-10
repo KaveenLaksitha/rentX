@@ -11,7 +11,7 @@ import { Modal } from "react-bootstrap";
 
  function Updatereservation(reservations) {
 
-      console.log("update modal dataaaaaa", reservations);
+    console.log("update modal dataaaaaa", reservations);
 
     let history = useHistory();
     //const { RID } = useParams();
@@ -39,7 +39,8 @@ import { Modal } from "react-bootstrap";
     const[status,setstatus] = useState("");
     const[returnDay, setreturnDay] = useState(moment());
     const[penaltyDay, setpenaltyDay] = useState("");
-    const[penaltyCharge, setpenaltyCharge] = useState("");
+    const[penalty, setpenalty] = useState("");
+
     const[remaining, setremaining] = useState("");
 
     //disable past dates
@@ -49,49 +50,89 @@ import { Modal } from "react-bootstrap";
 
     };
 
-    // calculate the penalty Day
-    // function getDateDiff() {
-    //     var TO = moment(to).format('YYYY-MMMM-DD');
-    //     var Ret = moment(returnDay).format('YYYY-MMMM-DD');
-    //     var admission = moment(TO, 'YYYY-MMMM-DD');
-    //     var discharge = moment(Ret, 'YYYY-MMMM-DD');
-    //     const diffDuration = discharge.diff(admission, 'days');
-    //     return (diffDuration);
-    // }
+    //calculate the penalty Day
+    function getDateDiff() {
+        var TO = moment(to).format('YYYY-MMMM-DD');
+        var Ret = moment(returnDay).format('YYYY-MMMM-DD');
+        var admission = moment(TO, 'YYYY-MMMM-DD');
+        var discharge = moment(Ret, 'YYYY-MMMM-DD');
+        const diffDuration = discharge.diff(admission, 'days');
+        return (diffDuration);
+    }
 
-    // calculate the penalty Cost
-    // function calculatePenaltyCost() {
-    //     const Price = (totalreservation * (5 / 100)) * getDateDiff();
-    //     return Price;
-    // }
+    //calculate the penalty Cost
+    function calculatePenaltyCost() {
+        const Price = (totalreservation * (5 / 100)) * getDateDiff();
+        return Price;
+    }
 
-    // function calculateRemainingPayment() {
-    //     return ((totalreservation - advancedpayment) + calculatePenaltyCost());
-    // }
+    function calculateRemainingPayment() {
+        return ((totalreservation - advancedpayment) + calculatePenaltyCost());
+    }
 
 
-    // function updateTotal(){
-    //     document.getElementById('penaltyDay').value = getDateDiff();
-    //     var num = calculatePenaltyCost();
-    //     document.getElementById('penaltyCharge').value = num.toFixed(2);
-    //     var num1 = totalreservation + calculatePenaltyCost();
-    //     document.getElementById('totalreservation').value = num1.toFixed(2);
-    //     var num2 = calculateRemainingPayment();
-    //     if(calculatePenaltyCost() != "") {
-    //         document.getElementById('remaining').value = num2.toFixed(2);
-    //     } else{
-    //         document.getElementById('remaining').value = totalreservation - advancedpayment ;
-    //     }
+    function updateTotal(){
+      
+        document.getElementById('penaltyCharge').value = calculatePenaltyCost();
+        document.getElementById('remaining').value = calculateRemainingPayment();
         
-    // }
+    }
+
+    function calculateCharges() {
+        document.getElementById('penaltyDay').value = getDateDiff();
+   
+    }
+
+    const Days = getDateDiff();
+    const penaltyCharge = calculatePenaltyCost();
+    const remainder = calculateRemainingPayment();
+
+    function UpdatedPenaltyDays() {
+        var value = getDateDiff();
+        setpenaltyDay(value);
+    }
+
+  
+    const loadReservation = async () => {
+       await axios.get(`http://localhost:4000/reservations/getReservation/${RID}`).then((res) => {
+            console.log(res.data)
+            setcustomername(res.data.reservation.customername);
+            setcontactnumber(res.data.reservation.contactnumber);
+            setnic(res.data.reservation.nic);
+            setcustomernic(res.data.reservation.customernic);
+            setcustomeraddress(res.data.reservation.customeraddress);
+            setpackagename(res.data.reservation.packagename);
+            seteventtype(res.data.reservation.eventtype);
+            setfrom(res.data.reservation.from);
+            setto(res.data.reservation.to);
+            setdiscount(res.data.reservation.discount);
+            setadvancedpayment(res.data.reservation.advancedpayment);
+            settotalreservation(res.data.reservation.totalreservation);
+            setstatus(res.data.reservation.status);
+            setreturnDay(res.data.reservation.returnDay);
+            setpenaltyDay(res.data.reservation.penaltyDay);
+            setpenalty(res.data.reservation.penaltyCharge);
+            //setremaining(res.data.reservation.remaining);
+
+        }).catch((err) => {
+            alert(err.response.data.error);
+        })
+
+    };
+
     const onSubmit = async e => {
         e.preventDefault();
+   
+    Swal.fire({
+        title: "Are you sure you want to close the Reservation ? ",
+        showConfirmButton: true,
+        showDenyButton: true,
+        confirmButtonText: "Proceed",
+        denyButtonText: "Cancel",
+        confirmButtonColor: "#1fc191",
 
-
-    
-    const answer = window.confirm("Are you sure you want to update the Reservation details?");
-    
-    if (answer) {
+    }).then((result) => {
+    if (result.isConfirmed) {
 
       const newReservation = {customername, 
                                 contactnumber,
@@ -111,15 +152,14 @@ import { Modal } from "react-bootstrap";
                                 penaltyCharge,
                                 //remaining
                             }
-                            console.log("data", newReservation);
-      await axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
-        alert("Reservation Payment is ready");
+                           // console.log("data", newReservation);
+      axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
+        //alert("Reservation Payment is ready");
          Swal.fire({
-                        title: 'Success!',
-                        text: `${"Reservation Updated Successfully"}`,
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1500
+            title: "Reservation Record successfully Completed! ",
+            icon: 'success',
+            confirmButtonColor: "#207159",
+
                     }
                     ).then((res) => {
                         if (res.isConfirmed) {
@@ -128,36 +168,25 @@ import { Modal } from "react-bootstrap";
                     })
 
       }).catch((err) => {
-        alert(err.response.data.error);
-      })
-    } 
-    } 
-    const loadReservation = async () => {
-       await axios.get(`http://localhost:4000/reservations/getReservation/${RID}`).then((res) => {
-            console.log(res.data)
-            setcustomername(res.data.reservation.customername);
-            setcontactnumber(res.data.reservation.contactnumber);
-            setnic(res.data.reservation.nic);
-            setcustomernic(res.data.reservation.customernic);
-            setcustomeraddress(res.data.reservation.customeraddress);
-            setpackagename(res.data.reservation.packagename);
-            seteventtype(res.data.reservation.eventtype);
-            setfrom(res.data.reservation.from);
-            setto(res.data.reservation.to);
-            setdiscount(res.data.reservation.discount);
-            setadvancedpayment(res.data.reservation.advancedpayment);
-            settotalreservation(res.data.reservation.totalreservation);
-            setstatus(res.data.reservation.status);
-            setreturnDay(res.data.reservation.returnDay);
-            setpenaltyDay(res.data.reservation.penaltyDay);
-            setpenaltyCharge(res.data.reservation.penaltyCharge);
-            //setremaining(res.data.reservation.remaining);
+        Swal.fire({
+            title: "Error with reservation occured ! ",
+            text: `${err.response.data.error}`,
+            icon: 'error',
+            confirmButtonColor: "#207159",
 
-        }).catch((err) => {
-            alert(err.response.data.error);
         })
+      })
+    } else if (result.isDenied) {
+        refreshPage();
+    }
 
-    };
+})
+}
+
+function refreshPage() {
+    window.location.reload();
+}
+
     return (
                         
                             <div >
@@ -184,8 +213,8 @@ import { Modal } from "react-bootstrap";
                                                     id="customername" 
                                                     name="customername" 
                                                     placeholder="Customer Name" t
-                                                    tabindex="1" 
-                                                    required 
+                                                    
+                                                    
                                                     disabled
                                                     value={customername}
                                                     onChange={(event) => { setcustomername(event.target.value) }}/>
@@ -199,8 +228,8 @@ import { Modal } from "react-bootstrap";
                                                     id="contactnumber" 
                                                     name="contactnumber" 
                                                     placeholder="Contact Number" 
-                                                    tabindex="2" 
-                                                    required
+                                                   
+                                                   
                                                     disabled
                                                     value={contactnumber}
                                                     onChange={(event) => { setcontactnumber(event.target.value) }}/>
@@ -216,7 +245,7 @@ import { Modal } from "react-bootstrap";
                                                     name="customernic" 
                                                     placeholder="Customer Address" 
                                                     tabindex="3" 
-                                                    required 
+                                                    
                                                     disabled
                                                     value={customernic}
                                                     onChange={(event) => { setcustomernic(event.target.value) }}/>
@@ -230,7 +259,7 @@ import { Modal } from "react-bootstrap";
                                                     name="customeraddress" 
                                                     placeholder="Customer Address" 
                                                     tabindex="3" 
-                                                    required 
+                                                   
                                                     disabled
                                                     value={customeraddress}
                                                     onChange={(event) => { setcustomeraddress(event.target.value) }}/>
@@ -248,12 +277,11 @@ import { Modal } from "react-bootstrap";
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="from">From</label>
                                                 <input 
-                                                    
+                                            
                                                     class="form-control formInput" 
                                                     id="from" 
                                                     name="from" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
+                                                    
                                                     required
                                                     disabled 
                                                     value={moment(from).format("YYYY-MM-DD")}
@@ -266,18 +294,16 @@ import { Modal } from "react-bootstrap";
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="to">To</label>
                                                 <input 
-                                                    //type="date" 
+                                                    required 
                                                     class="form-control formInput" 
                                                     id="to" 
                                                     name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
+                                                    
                                                     disabled
                                                     value={moment(to).format("YYYY-MM-DD")}
-                                                    //value={to}
+                                                    
                                                     timeFormat={false}
-                                                    //isValidDate={disableFutureDt}
-                                                    //isValidDate={disablePastDt}
+                                                    
                                                     onChange={(event) => { setto(event) }}
                                                     readonly="readonly"/>
                                             </div>
@@ -288,7 +314,10 @@ import { Modal } from "react-bootstrap";
                                                         className="form-control "
                                                         tabindex="4" 
                                                         value={status}
-                                                    onChange={(event) => { setstatus(event.target.value) }}
+                                                    onChange={(event) => { setstatus(event.target.value);
+                                                        UpdatedPenaltyDays();
+                                                        ///UpdatedRemainder();
+                                                     }}
                                                     >
                                                         
                                                         <option id="pending">Pending</option>
@@ -300,8 +329,7 @@ import { Modal } from "react-bootstrap";
                                             <div class="form-group col-md-4">
                                                 <label class="form-label-emp" for="returnDay">Return Date</label>
                                                 <DatePicker
-                                                    //type="date" 
-                                                    //class="form-control formInput" 
+                                                    required
                                                     id="returnDay" 
                                                     name="returnDay" 
                                                     placeholder="" 
@@ -309,7 +337,7 @@ import { Modal } from "react-bootstrap";
                                                     timeFormat={false}
                                                     onChange={(event) => { setreturnDay(event) }}
                                                     isValidDate={disablePastDt}
-                                                    
+                                                    onClose={calculateCharges}
                                                     />
                                             </div>
                                             </div>
@@ -322,8 +350,8 @@ import { Modal } from "react-bootstrap";
                                                     class="form-control formInput" 
                                                     id="penaltyDay" 
                                                     name="penaltyDay" 
-                                                    placeholder="Penalty Days" t
-                                                    tabindex="8" 
+                                                    placeholder="0" 
+                                                    
                                                     //required 
                                                     value={penaltyDay}
                                                     onChange={(event) => { setpenaltyDay(event.target.value); {/*getDateDiff()*/ } }}
@@ -337,12 +365,11 @@ import { Modal } from "react-bootstrap";
                                                     class="form-control formInput" 
                                                     id="penaltyCharge" 
                                                     name="penaltyCharge" 
-                                                    placeholder="Penalty Charge" 
-                                                    tabindex="9" 
-                                                    //required 
-                                                    value={penaltyCharge}
+                                                    placeholder="0" 
+                                                   
+                                                    value={penalty}
                                                     onChange={(e) => {
-                                                        setpenaltyCharge(e.target.value); 
+                                                        setpenalty(e.target.value); 
                                                         //calculatePenaltyCost()
                                                 }}/>
                                             </div>
@@ -357,8 +384,8 @@ import { Modal } from "react-bootstrap";
                                                     name="advancedpayment" 
                                                     placeholder="Advanced Payment" 
                                                     disabled
-                                                    tabindex="10" 
-                                                    required
+                                                    
+                                                    
                                                     value={advancedpayment}
                                                     onChange={(event) => { setadvancedpayment(event.target.value) }}/>
                                             </div>
@@ -374,7 +401,8 @@ import { Modal } from "react-bootstrap";
                                                     value={totalreservation}
                                                     required 
                                                     disabled
-                                                    onChange={(event) => { settotalreservation(event.target.value) }}/>
+                                                   // onChange={(event) => { settotalreservation(event.target.value) }}
+                                                   />
                                             </div>
                                             </div>
                                             <div class="row">
@@ -387,18 +415,17 @@ import { Modal } from "react-bootstrap";
                                                     name="remaining" 
                                                     value={remaining}
                                                     placeholder="Remaining Reservation Payment" 
-                                                    tabindex="11" 
+                                                    
                                                     onChange={(event) => { setremaining(event.target.value) }}/>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                           
-                                                <input type="button" class="btn btn-info" id="entry" value="Charge"  />
-                                                {/* onClick={updateTotal} */}
-
-                                            </div>
+                                            
                                             </div>
                                             
                                             <div className="row">
+                                            <div className="col py-3 text-center">         
+                                                <input type="button" class="btn btn-info-total" id="entry" value="Payment" onClick={updateTotal} />
+                                                
+                                                </div>
                                                 <div className="col py-3 text-center">
                                                     <button type="submit" className="btn btn-ok">
                                                         Update
