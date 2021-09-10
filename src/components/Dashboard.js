@@ -81,15 +81,15 @@ function Dashboard() {
                         <center><p>new rentals today</p></center>
                     </div>
                     <div class="col">
-                        <center><p>{newRentals}</p></center>
+                        <center><p>{newReservation}</p></center>
                         <center><p>new reservations today</p></center>
                     </div>
                     <div class="col">
-                        <center><p>{returnedRentals}</p></center>
+                        <center><p>{returnedRentals + returnedReservation}</p></center>
                         <center><p>returns today</p></center>
                     </div>
                     <div class="col">
-                        <center><p>{newRentals}</p></center>
+                        <center><p>{newVehicle}</p></center>
                         <center><p>available vehicles</p></center>
                     </div>
                 </div>
