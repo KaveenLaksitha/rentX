@@ -39,57 +39,69 @@ function Dashboard() {
     return (
         <div className="page-component-body">
             <div className=" container comp-one">
-                <h2>Today</h2>
-
-                <div class="newRentals">
-                    <center><p>{newRentals}</p></center>
-                    <p>new rentals today</p>
+                <div className="row mb-3 mt-3">
+                    <div class="col ml-3">
+                        <h3 className="float-left ml-5">Today</h3>
+                    </div>
                 </div>
-                <div class="newReservations">
-                    <center><p>{newRentals}</p></center>
-                    <p>new reservations today</p>
-                </div>
-                <div class="returnsToday">
-                    <center><p>{returnedRentals}</p></center>
-                    <p>returns today</p>
-                </div>
-                <div class="availableVehicles">
-                    <center><p>{newRentals}</p></center>
-                    <p>available vehicles</p>
+                <hr className="dashboard-hr"></hr>
+                <div className="row">
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>new rentals today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>new reservations today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{returnedRentals}</p></center>
+                        <center><p>returns today</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{newRentals}</p></center>
+                        <center><p>available vehicles</p></center>
+                    </div>
                 </div>
             </div>
 
             <div class="container mt-3">
 
                 <div class="row">
-                    <div class="col-sm comp-one mx-3 my-3">
-                        <div class="viewAll">
-                            <Link to="/rentalList"><button className="btn btn-close" > ViewAll</button></Link>
+                    <div className="col comp-one mx-3 my-3">
+                        <div class="row table-head  mt-3">
+                            <div class="col">
+                                <h3 className="float-left">Latest Rentals</h3>
+                            </div>
+                            <Link to="/rentalList" class="float-right">
+                                <button className="btn btn-close" > View all</button>
+                            </Link>
                         </div>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>From</th>
-                                    <th>To</th>
-                                    <th>Vehicle</th>
-                                    <th>Total (Rs.)</th>
+                        <div className="row px-2">
+                            <table class="table table-hover">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Vehicle</th>
+                                        <th>Total (Rs.)</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rentalList.map((rental) => {
-                                    return (
-                                        <tr >
-                                            <td> {rental.from}</td>
-                                            <td >{rental.to}</td>
-                                            <td >{rental.vehicleType}</td>
-                                            <td >{rental.finalPrice.toFixed(2)}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rentalList.map((rental) => {
+                                        return (
+                                            <tr >
+                                                <td> {rental.from}</td>
+                                                <td >{rental.to}</td>
+                                                <td >{rental.vehicleType}</td>
+                                                <td >{rental.finalPrice.toFixed(2)}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-sm comp-one mx-3 my-3">
 
@@ -97,14 +109,14 @@ function Dashboard() {
                 </div>
             </div>
 
-            <div className="links">
-                <h3>Quick Links</h3>
-                <a className="qlink" href="/rentalList">Car availability</a><span>|</span>
-                <a className="qlink" href="/addVehicle">Add new vehicle</a><span>|</span>
-                <a className="qlink" href="/addEmployee">Add new employee</a>
+            <div className="container pl-5">
+                <h3 className="ml-2">Quick Links</h3>
+                <a className="ml-2" href="/rentalList">Car availability</a><span className="qlink">|</span>
+                <a className="ml-2" href="/addVehicle">Add new vehicle</a><span className="qlink">|</span>
+                <a className="ml-2" href="/addEmployee">Add new employee</a>
             </div>
 
-        </div>
+        </div >
     )
 }
 

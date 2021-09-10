@@ -120,7 +120,7 @@ export default function EmpList() {
                     <div class="col">
                         <h3 className="float-left">List of Employees</h3>
                     </div>
-                    <a href="/addEmployee" class="float-right">
+                    <a href="/addEmployee" className="float-right">
                         <button class="btn btn-ok white">
                             Add Employee
                         </button>
