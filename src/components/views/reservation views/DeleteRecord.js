@@ -10,7 +10,6 @@ import TestModal from "./modals/deleteview";
 
 function DeleteRecord() {
 
-    const [search, setSearch] = useState("");
     const [viewreservation, setviewreservation] = useState([]);
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
@@ -88,7 +87,7 @@ function DeleteRecord() {
                             <th>From</th>
                             <th>To</th>
                             <th>Return Date</th>
-                            {/*<th>Penalty</th>*/}
+                            <th>Penalty</th>
                             <th>Total</th>
                             <th>Status</th>
                         </tr>
@@ -103,7 +102,7 @@ function DeleteRecord() {
                                     <td >{reservations.from}</td>
                                     <td >{reservations.to}</td>
                                     <td >{moment(reservations.returnDay).format('YYYY-MMMM-DD')}</td>                   
-                                    {/*<td >{reservations.penaltyCharge}</td>*/}
+                                    <td >{reservations.penaltyCharge}</td>
                                     <td >{reservations.totalreservation}</td>
                                     <td >{reservations.status}</td>
 
