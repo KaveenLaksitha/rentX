@@ -61,9 +61,47 @@ function ReservationReport() {
                 })
             }
         }
+        else if (status == "Completed") {
+            if ((customerName == "") && (vehicleType == "")) {
+                const cust = "null"
+                const vehi = "null"
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            }
+            else if (customerName == "") {
+                const cus = "null"
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            } else if (vehicleType == "") {
+                const veh = "null"
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+
+            } else {
+
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                    console.log(res.data);
+                    setRentalList(res.data);
+                }).catch((error) => {
+                    alert(error)
+                })
+            }
+
+        }
 
     }
-
 
     function changeBoxes() {
         document.getElementById('myTabContent').style.display = "none";
@@ -195,11 +233,12 @@ function ReservationReport() {
 
                         </div>
                     </div>
-                </div>
 
+
+                </div>
                 <div id="myTabContent2" style={{ display: "none" }}>
-                    <Pdf targetRef={ref} filename="code-example.pdf">
-                        {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                    <Pdf targetRef={ref} filename="RentalReport.pdf">
+                        {({ toPdf }) => <button class="btn btn-ok white" onClick={toPdf}>Generate Pdf</button>}
                     </Pdf>
                     <div ref={ref}>
 
@@ -237,12 +276,8 @@ function ReservationReport() {
                     </div>
                 </div>
 
+
             </div >
-
-
-
-
-
         </div >
     )
 }
