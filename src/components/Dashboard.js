@@ -12,6 +12,8 @@ function Dashboard() {
     const [returnedReservation, setReturnedReservation] = useState("");
     const [reservationList, setReservationList] = useState([]);
 
+    const [newVehicle, setNewVehicle] = useState("");
+
     useEffect(() => {
 
         axios.get("http://localhost:4000/rental/VehiclesRentedToday").then((res) => { //fetching the count of rentals placed on current date
@@ -56,6 +58,12 @@ function Dashboard() {
         }
         readReservation();
 
+        axios.get("http://localhost:4000/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
+        setNewVehicle(res.data);
+        }).catch((error) => {
+            alert(error)
+        })
+
     }, [])
 
     return (
@@ -72,11 +80,11 @@ function Dashboard() {
                     <p>new reservations today</p>
                 </div>
                 <div class="returnsToday">
-                    <center><p>{returnedRentals, returnedReservation}</p></center>
+                    <center><p>{returnedRentals + returnedReservation}</p></center>
                     <p>returns today</p>
                 </div>
                 <div class="availableVehicles">
-                    <center><p>{newRentals}</p></center>
+                    <center><p>{newVehicle}</p></center>
                     <p>available vehicles</p>
                 </div>
             </div>
