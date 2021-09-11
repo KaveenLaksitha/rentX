@@ -35,7 +35,7 @@ function DeleteVehicles() {
         handleViewOnClick();
     }
 
-    
+
     const handleViewOnClick = () => {
         console.log("req came for modal");
         console.log(modalData, "data came for modalllllll");
@@ -62,7 +62,7 @@ function DeleteVehicles() {
                 />
             </Modal>
 
-            
+
             <div className="table-emp">
                 <div class="row table-head">
                     <div class="col">
@@ -113,7 +113,7 @@ function DeleteVehicles() {
 
                             return (
                                 <tr>
-                                    <td onClick={() => openModal(vehicles)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    <td onClick={() => openModal(vehicles)} data-toggle="tooltip" data-placement="right" title="Click to view details" className="view-td">
                                         {vehicles.VehicleRegNo}
                                     </td>
                                     {/* <td class="text-center">{vehicles.VehicleRegNo}</td> */}
@@ -152,7 +152,7 @@ function DeleteVehicles() {
                     </tbody>
                 </table>
             </div>
-            
+
         </div>
     )
 }

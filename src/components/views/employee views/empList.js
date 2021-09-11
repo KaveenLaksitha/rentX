@@ -137,7 +137,7 @@ export default function EmpList() {
                         <div class="input-group input-group-search">
                             <div class="searchbar">
                                 <form onSubmit={searchEmployees}>
-                                    <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} require />
+                                    <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} required />
                                     <button class="btn search_icon" type="submit" id="submit" name="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
@@ -160,7 +160,7 @@ export default function EmpList() {
                             return (
 
                                 <tr>
-                                    <td onClick={() => openModalView(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    <td onClick={() => openModalView(employee)} data-toggle="tooltip" data-placement="right" title="Click to view details" className="view-td">
                                         {employee.fName + " " + employee.lName}
                                     </td>
                                     <td>{employee.nic}</td>

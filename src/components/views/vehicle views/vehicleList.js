@@ -35,7 +35,7 @@ function VehicleList() {
                 setVehicles(res.data.reverse());
                 console.log("Data recieved");
                 let timerInterval
-                    Swal.fire({
+                Swal.fire({
                     title: 'Loading...',
                     html: ' <b></b> loading details..',
                     timer: 1000,
@@ -44,18 +44,18 @@ function VehicleList() {
                         Swal.showLoading()
                         const b = Swal.getHtmlContainer().querySelector('b')
                         timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
+                            b.textContent = Swal.getTimerLeft()
                         }, 100)
                     },
                     willClose: () => {
                         clearInterval(timerInterval)
                     }
-                    }).then((result) => {
+                }).then((result) => {
                     /* Read more about handling dismissals below */
                     if (result.dismiss === Swal.DismissReason.timer) {
                         console.log('I was closed by the timer')
                     }
-                    })
+                })
             }).catch((error) => {
                 // alert(error.message);
                 Swal.fire({
@@ -63,8 +63,8 @@ function VehicleList() {
                     title: 'Oops...',
                     text: 'Something went wrong!',
                     confirmButtonColor: '#207159',
-                    
-                  })
+
+                })
             })
 
         }
@@ -76,9 +76,9 @@ function VehicleList() {
 
     const deleteVehicle = async (data) => {
 
-         await axios.post("http://localhost:4000/vehicleRemove/addRemoveVehicle", { data }).then(() => {
+        await axios.post("http://localhost:4000/vehicleRemove/addRemoveVehicle", { data }).then(() => {
             // alert("**Vehicle Record added successfully")
-            
+
             Swal.fire({
                 title: 'Success!',
                 text: 'Permenantly deleted the Vehicle Record',
@@ -86,9 +86,9 @@ function VehicleList() {
                 showConfirmButton: false,
                 timer: 1500
             })
-            
+
             const value = axios.post("http://localhost:4000/vehicle/deleteV", modalDataDelete);
-            console.log("deletedddd",value);
+            console.log("deletedddd", value);
             if (value) {
                 // alert("**Permenantly deleted the Vehicle Record");
                 // window.location.replace("/viewReservation");
@@ -102,9 +102,9 @@ function VehicleList() {
                 ).then(() => {
                     window.location.reload();
                 })
-                
 
-                
+
+
             }
 
         }).catch((err) => {
@@ -114,8 +114,8 @@ function VehicleList() {
                 title: 'Oops...',
                 text: 'Something went wrong!',
                 confirmButtonColor: '#207159',
-                
-              }).then(() => {
+
+            }).then(() => {
                 window.location.reload();
             })
 
@@ -125,7 +125,7 @@ function VehicleList() {
 
     }
 
-    
+
 
 
 
@@ -249,7 +249,7 @@ function VehicleList() {
 
                             return (
                                 <tr>
-                                    <td onClick={() => openModal(vehicles)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    <td onClick={() => openModal(vehicles)} data-toggle="tooltip" data-placement="right" title="Click to view details" className="view-td">
                                         {vehicles.VehicleRegNo}
                                     </td>
 
@@ -300,21 +300,21 @@ function VehicleList() {
                 </Modal.Body>
                 <Modal.Footer>
 
-                <div className="row">
+                    <div className="row">
                         <div className="col -6">
-                        <button type="submit" className="btn btn-delete" onClick={() => { deleteVehicle(modalDataDelete); }}>
-                            Confirm
-                        </button>
+                            <button type="submit" className="btn btn-delete" onClick={() => { deleteVehicle(modalDataDelete); }}>
+                                Confirm
+                            </button>
+                        </div>
+                        <div className="col-6 text-right" onClick={() => setModalDeleteConfirm(false)}>
+                            <button type="reset" className="btn btn-reset">
+                                cancel
+                            </button>
+                        </div>
                     </div>
-                    <div className="col-6 text-right" onClick={() => setModalDeleteConfirm(false)}>
-                        <button type="reset" className="btn btn-reset">
-                            cancel
-                        </button>
-                    </div>
-                </div>
                 </Modal.Footer>
             </Modal>
-            
+
             {/* modal for update the data of vehicle */}
             <Modal
                 show={modalUpdate}
