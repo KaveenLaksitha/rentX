@@ -212,7 +212,7 @@ function RentalList() {
 
                                 <tr >
 
-                                    <td onClick={() => openModal(rental)} data-toggle="tooltip" data-placement="right" title="Click to view details">
+                                    <td onClick={() => openModal(rental)} data-toggle="tooltip" data-placement="right" title="Click to view details" className="view-td">
                                         {/*<Link class="link" to={`/rental/getRentalByID/${rentals.id}`}>*/}{rental.from}{/*</Link>*/}</td>
                                     <td >{rental.to}</td>
                                     <td >{rental.vehicleType}</td>

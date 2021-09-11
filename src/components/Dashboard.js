@@ -16,7 +16,7 @@ function Dashboard() {
 
     const [newVehicle, setNewVehicle] = useState("");
 
-    const [availableEmployee,setavailableEmployee] = useState("");
+    const [availableEmployee, setavailableEmployee] = useState("");
 
     useEffect(() => {
 
@@ -70,7 +70,7 @@ function Dashboard() {
         })
 
         axios.get("http://localhost:4000/api/EmployeeAvailable").then((res) => { //fetching the count of rentals placed on current date
-        setavailableEmployee(res.data);
+            setavailableEmployee(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
