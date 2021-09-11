@@ -13,10 +13,10 @@ import { Modal } from "react-bootstrap";
 
 function RentalUpdate(rental) {
 
-    console.log("update modal dataaaaaa", rental);
+    console.log("update modal dataaaaaa", rental);//getting the modal data to consol
 
     useEffect(() => {
-        loadRental();
+        loadRental();//loading the data
     }, []);
 
 
@@ -72,6 +72,7 @@ function RentalUpdate(rental) {
         return ((finalPrice - advPayment) + calculatePenaltyCost())
     }
 
+    //setting the values for the charges conducted
     function calculateCharges() {
         document.getElementById('penaltyDays').value = getDateDiff();
         document.getElementById('penaltyCharges').value = calculatePenaltyCost();
@@ -82,11 +83,13 @@ function RentalUpdate(rental) {
     const penaltyCharges = calculatePenaltyCost();
     const remainder = calculateRemainingPayment();
 
+    //setting the penalty days
     function UpdatedPenaltyDays() {
         var value = getDateDiff();
         SetPenDays(value);
     }
 
+    //calculating the remaining payment to be settled
     function UpdatedRemainder() {
         SetRem(calculateRemainingPayment());
     }
