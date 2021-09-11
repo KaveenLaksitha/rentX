@@ -223,7 +223,7 @@ function RentalUpdate(rental) {
                                                     required
                                                     id="cName"
                                                     type="text"
-                                                    className="form-control "
+                                                    className="form-control-plaintext"
                                                     value={customerName}
                                                     disabled
                                                     onChange={(e) => {
@@ -237,7 +237,7 @@ function RentalUpdate(rental) {
                                                     required
                                                     id="contactNo"
                                                     type="text"
-                                                    className="form-control "
+                                                    className="form-control-plaintext "
                                                     value={contactNo}
                                                     disabled
                                                     onChange={(e) => {
@@ -257,7 +257,7 @@ function RentalUpdate(rental) {
                                                             required
                                                             id="cAddress"
                                                             type="text"
-                                                            className="form-control "
+                                                            className="form-control-plaintext "
                                                             value={customerAdd}
                                                             disabled
                                                             onChange={(e) => {
@@ -272,7 +272,7 @@ function RentalUpdate(rental) {
                                                             required
                                                             id="cNIC"
                                                             type="text"
-                                                            className="form-control "
+                                                            className="form-control-plaintext"
                                                             value={customerNIC}
                                                             disabled
                                                             onChange={(e) => {
@@ -317,6 +317,7 @@ function RentalUpdate(rental) {
                                                 <label for="rFrom" class="form-label-emp">From</label>
                                                 <DatePicker required id="rfo"
                                                     name="rfo"
+                                                    class="form-control-plaintext"
                                                     value={moment(from).format('MM/DD/YYYY')}
                                                     onChange={(e) => { setTo(e); }}
                                                     timeFormat={false}
@@ -329,6 +330,7 @@ function RentalUpdate(rental) {
 
                                                 <DatePicker required id="rto"
                                                     name="rto"
+                                                    class="form-control-plaintext"
                                                     value={moment(to).format('MM/DD/YYYY')}
                                                     onChange={(e) => { setTo(e); }}
                                                     timeFormat={false}
@@ -359,7 +361,7 @@ function RentalUpdate(rental) {
 
                                             <div class="col-4 mr-2"  >
                                                 <label for="vehicle" class="form-label-emp">Vehicle Model</label>
-                                                <input type="text" class="form-control" id="vehicleModel"
+                                                <input type="text" class="form-control-plaintext" id="vehicleModel"
                                                     name="vehicleModel" required disabled
                                                     value={vehicleType + " " + model}
                                                 />
@@ -367,7 +369,7 @@ function RentalUpdate(rental) {
 
                                             <div class="col-4 mr-2"  >
                                                 <label for="lastTot" class="form-label-emp">Last Total</label>
-                                                <input type="text" class="form-control" id="lastTot"
+                                                <input type="text" class="form-control-plaintext" id="lastTot"
                                                     name="lastTot" required disabled
                                                     value={finalPrice}
                                                 />

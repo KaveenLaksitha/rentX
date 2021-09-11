@@ -4,6 +4,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
+import Swal from 'sweetalert2';
 const ref = React.createRef();
 
 
@@ -30,7 +31,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             }
             else if (customerName == "") {
@@ -39,7 +48,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
@@ -47,7 +64,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
 
             } else {
@@ -56,7 +81,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             }
         }
@@ -68,7 +101,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             }
             else if (customerName == "") {
@@ -77,7 +118,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
@@ -85,7 +134,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
 
             } else {
@@ -94,7 +151,15 @@ function ReservationReport() {
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
-                    alert(error)
+                    Swal.fire({
+                        title: 'Oops!',
+                        text: `${error}`,
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }
+                    )
+                    //alert(error)
                 })
             }
 
