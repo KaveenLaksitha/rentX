@@ -286,10 +286,6 @@ function RentalPlacement() {
                 })
                 //const answer = window.confirm("Are you sure you want to confirm submission?");
 
-
-
-
-
             }
         }
 
@@ -912,3 +908,5 @@ function RentalPlacement() {
 }
 
 export default RentalPlacement
+
+

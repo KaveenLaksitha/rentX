@@ -138,3 +138,21 @@ export const searchPastEmployeesService = async (input) => {
     };
   }
 };
+
+
+//for retrive the all employee records
+export const getAllEmployeesServiceCount = async () => {
+  console.log("done;");
+  try {
+    const response = await axios.get(`${HOST}/api/EmployeeAvailable`);
+    console.log("response came", response);
+    return {
+      ok: true,
+      data: response.data.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};

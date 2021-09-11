@@ -7,8 +7,6 @@ import moment from 'moment';
 //import TestModal from "./modals/viewRental";
 import ViewRemovedRental from "./modals/viewRemovedRental";
 
-
-
 function RemovedRentalList() {
 
     const [rentalList, setRentalList] = useState([]);

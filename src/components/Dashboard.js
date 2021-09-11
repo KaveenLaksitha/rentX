@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
+
 function Dashboard() {
 
     const [newRentals, setNewRentals] = useState("");
@@ -13,6 +15,8 @@ function Dashboard() {
     const [reservationList, setReservationList] = useState([]);
 
     const [newVehicle, setNewVehicle] = useState("");
+
+    const [availableEmployee,setavailableEmployee] = useState("");
 
     useEffect(() => {
 
@@ -64,6 +68,12 @@ function Dashboard() {
             alert(error)
         })
 
+        axios.get("http://localhost:4000/api/EmployeeAvailable").then((res) => { //fetching the count of rentals placed on current date
+        setavailableEmployee(res.data);
+        }).catch((error) => {
+            alert(error)
+        })
+
     }, [])
 
     return (
@@ -91,6 +101,10 @@ function Dashboard() {
                     <div class="col">
                         <center><p>{newVehicle}</p></center>
                         <center><p>available vehicles</p></center>
+                    </div>
+                    <div class="col">
+                        <center><p>{availableEmployee}</p></center>
+                        <center><p>current employees</p></center>
                     </div>
                 </div>
             </div>
