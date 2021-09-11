@@ -2,7 +2,7 @@ import axios from "axios";
 
 const HOST = "http://localhost:4000";
 
-//for add employee
+//for add an employee
 export const addEmployeeService = async (employeePayload) => {
   console.log(employeePayload, "<<<<<<<<<<<<<<<<<<<<<<<<");
   try {
@@ -17,7 +17,7 @@ export const addEmployeeService = async (employeePayload) => {
   }
 };
 
-
+//for add an employee
 export const updateEmployeeService = async (empId, employeePayload) => {
   console.log(empId, "updateeee<<<<<<<<<<<<<<<<<<<<<<<<");
   console.log("update payloaddddddddd", employeePayload);
@@ -34,6 +34,7 @@ export const updateEmployeeService = async (empId, employeePayload) => {
   }
 };
 
+//for retrive the all employee records
 export const getAllEmployeesService = async () => {
   console.log("done;");
   try {
@@ -72,7 +73,7 @@ export const deleteEmployeeService = async (data, reason) => {
 
 };
 
-//for make inquiry
+//for make an inquiry
 export const addInquiry = async (data) => {
   console.log(data, "<<<<<<<<<<<<<<<<<<<<<<<<");
   try {
@@ -87,27 +88,63 @@ export const addInquiry = async (data) => {
   }
 };
 
-
-//for make inquiry
-// export const addInquiry = async (data) => {
-//   console.log(data, "<<<<<<<<<<<<<<<<<<<<<<<<");
-//   try {
-//     await axios.post(`${HOST}/api/inquiry`, data);
-//     return {
-//       ok: true,
-//     };
-//   } catch (error) {
-//     return {
-//       ok: false, err: error.response.data.status
-//     };
-//   }
-// };
-
 //for get all the past employee records
 export const getAllPastEmployeesService = async () => {
   console.log("done;");
   try {
     const response = await axios.get(`${HOST}/api/pastEmployees`);
+    console.log("response came", response);
+    return {
+      ok: true,
+      data: response.data.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const searchEmployeesService = async (input) => {
+
+  console.log("data for searchhh>>>>>>>", input)
+  try {
+    const response = await axios.get(`${HOST}/api/searchEmployees/${input}`);
+    console.log("response came for search", response);
+    return {
+      ok: true,
+      data: response.data.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+export const searchPastEmployeesService = async (input) => {
+
+  console.log("data for searchhh>>>>>>>", input)
+  try {
+    const response = await axios.get(`${HOST}/api/searchEmployees/${input}`, { params: { type: "pastEmp" } });
+    console.log("response came for search", response);
+    return {
+      ok: true,
+      data: response.data.data,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
+};
+
+
+//for retrive the all employee records
+export const getAllEmployeesServiceCount = async () => {
+  console.log("done;");
+  try {
+    const response = await axios.get(`${HOST}/api/EmployeeAvailable`);
     console.log("response came", response);
     return {
       ok: true,

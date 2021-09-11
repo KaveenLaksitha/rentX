@@ -168,16 +168,12 @@ function Reservation() {
             const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
 
             axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
-                //alert("Reservation added successfully")
-
-                //history.push("/viewReservation");
+    
                 Swal.fire({
                         title: 'Reservation Completed!',
-                        //text: `${"Reservation Added Successfully"}`,
                         icon: 'success',
                         confirmButtonColor: "#1fc191",
-                    }
-                    ).then((res) => {
+                    }).then((res) => {
                         if (res.isConfirmed) {
                             window.location.replace('/viewReservation');
                         }
@@ -186,10 +182,10 @@ function Reservation() {
 
             }).catch((err) => {
                 //alert(err.response.data.error)
-                var error = err.response.data.error
+                //var error = err.response.data.error
                 Swal.fire({
                         title: 'Oops!',
-                        text: error,
+                        text : `${"Customer already has reservation"}`,
                         icon: 'error',
                         confirmButtonColor: "#1fc191",
                     })               
@@ -202,6 +198,10 @@ function Reservation() {
     })
     }
 }
+
+
+
+
 
 function refreshPage() {
     window.location.reload();
@@ -271,11 +271,18 @@ function refreshPage() {
         var dis = Number(document.getElementById('discount').value) / 100;
         if(getDateDiff() == 0){
             var finalresult = document.getElementById('totalreservation').value = result - (result * dis );
+            document.getElementById('totalreservation').innerHTML = result - (result * dis );
         }else{
             var finalresult = document.getElementById('totalreservation').value = result * getDateDiff() - (result * getDateDiff() * dis);
+            document.getElementById('totalreservation').innerHTML = result * getDateDiff() - (result * getDateDiff() * dis);
         }    
           
         return finalresult;
+    }
+
+    function UpdatedPenaltyDays() {
+        var value = showDateRange();
+        settotalreservation(value);
     }
 
     function calcprice1(){
@@ -724,7 +731,7 @@ const MobileValidation =() =>{//validate function
                                                     //tabindex="7"
                                                     //required 
                                                 
-                                                    onClickCapture={(event) => {
+                                                    onChange={(event) => {
                                                         settotalreservation(event.target.value);
                                                     }
                                                     }
@@ -733,7 +740,7 @@ const MobileValidation =() =>{//validate function
                                         </div>
                                         <div className="row">
                                         <div class="col py-3 text-center">
-                                                <input type="button" class="btn btn-info-total" id="entry" value=" Payment " onClick={showDateRange} />
+                                                <input type="button" class="btn btn-info-total" id="entry" value=" Payment " onClick={showDateRange,UpdatedPenaltyDays } />
                                             </div>
                                             <div className="col py-3 text-center">
                                                 <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
@@ -824,9 +831,9 @@ const MobileValidation =() =>{//validate function
                                                     id="customernic"
                                                     name="customernic"
                                                     placeholder="Customer NIC - 985732984V"
-                                                    tabindex="1"
+                                                    
                                                     required
-                                                    //pattern="V[0-9]{10}"
+                                                    
                                                     onChange={(event) => {
                                                         setcustomernic(event.target.value);
                                                         validateNICNo(event);
@@ -851,10 +858,8 @@ const MobileValidation =() =>{//validate function
                                                     class="form-control formInput"
                                                     id="contactnumber"
                                                     name="contactnumber"
-                                                    placeholder="Contact Number(0703814914)" 
-                                                    //abindex="2"
+                                                    placeholder="Contact Number(0703814914)"                                                   
                                                     required
-                                                    //pattern="[0-9]{10}"
                                                     onChange={(event) => {
                                                         setcontactnumber(event.target.value);
                                                         validateCntNo(event);

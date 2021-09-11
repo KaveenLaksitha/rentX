@@ -25,6 +25,7 @@ import RemovedRentalList from "./views/rental views/removedRentals";
 import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
 
+
 function Home() {
     return (
         <Router>
