@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
+import axios from "axios";
 
 
 
@@ -13,6 +14,16 @@ function UpdateVehicleModal(vehicle) {
 
     useEffect(() => {
         try {
+                
+            setOwnerName(vehicle.data.OwnerName);
+            setOwnerNIC(vehicle.data.OwnerNIC);
+            setTeleNo(vehicle.data.TeleNo);
+            setAddress(vehicle.data.Address);
+            setEmail(vehicle.data.Email);
+            setDate(vehicle.data.Date);
+            setMileage(vehicle.data.Mileage);
+
+
             setVehicleID(vehicle.data.VehicleID);
             setVehicleRegNo(vehicle.data.VehicleRegNo);
             setVehicleModel(vehicle.data.VehicleModel);
@@ -34,11 +45,21 @@ function UpdateVehicleModal(vehicle) {
         }
     }, [vehicle.data]);
 
+    const[OwnerName, setOwnerName] = useState("");
+    const[OwnerNIC, setOwnerNIC]  = useState("");
+    const[TeleNo, setTeleNo ] = useState("");
+    const[Address, setAddress] = useState("");
+    const[Email, setEmail] = useState("");
+    const[Date, setDate] = useState("");
+
     const [VehicleID, setVehicleID] = useState("");
     const [VehicleRegNo, setVehicleRegNo] = useState("");
     const [VehicleModel, setVehicleModel] = useState("");
     const [VehicleType, setVehicleType] = useState("");
     const [VehicleBrand, setVehicleBrand] = useState("");
+
+    const[Mileage, setMileage] = useState("");
+
     const [InsType, setInsType] = useState("");
     const[InsComName, setInsComName] = useState("");
     const[Transmission, setTransmission] = useState("");
@@ -53,19 +74,27 @@ function UpdateVehicleModal(vehicle) {
     const uptVehicle = {
             
         
-        VehicleRegNo,
-        VehicleModel,
-        VehicleType,
-        VehicleBrand,
-        InsType,
-        InsComName,
-        Transmission,
-        AirC,
-        NoOfSeats,
-        RatePDay,
-        YearsRent,
-        vehPic,
-        vehDoc
+            VehicleID,
+            OwnerName,
+            OwnerNIC,
+            TeleNo,
+            Address,
+            Email,
+            Date,
+            VehicleRegNo,
+            VehicleModel,
+            VehicleType,
+            VehicleBrand,
+            Mileage,
+            InsType,
+            InsComName,
+            Transmission,
+            AirC,
+            NoOfSeats,
+            RatePDay,
+            YearsRent,
+            vehPic,
+            vehDoc
 
 
     }
@@ -89,11 +118,18 @@ function UpdateVehicleModal(vehicle) {
         
         const newVehicle = {
             
-            
+            VehicleID,
+            OwnerName,
+            OwnerNIC,
+            TeleNo,
+            Address,
+            Email,
+            Date,
             VehicleRegNo,
             VehicleModel,
             VehicleType,
             VehicleBrand,
+            Mileage,
             InsType,
             InsComName,
             Transmission,
@@ -103,6 +139,7 @@ function UpdateVehicleModal(vehicle) {
             YearsRent,
             vehPic,
             vehDoc
+      
 
 
         }
@@ -115,15 +152,15 @@ function UpdateVehicleModal(vehicle) {
         //     //window.location.replace("/empList");
         // });
 
-        // axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
+        axios.put(`http://localhost:4000/vehicle/updateV/${VehicleID}`, newVehicle)
 
-        // .then(() => {
-        //     alert("Vehicle added Successfully !!")
-        //     window.location.replace("/vehicleList");
+        .then(() => {
+            alert("Vehicle updated Successfully !!")
+            window.location.replace("/vehicleList");
 
-        // }).catch((err) => {
-        //     alert(err)
-        // })
+        }).catch((err) => {
+            alert(err)
+        })
 
     // }
 }
@@ -146,7 +183,7 @@ function UpdateVehicleModal(vehicle) {
 
             <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <form id="contact-form" class="form" action="#" method="POST" role="form">
+                                <form id="contact-form" class="form" action="#" method="POST" role="form" onSubmit={sendData}>
                                 <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                                     <h3 className="topic-V text-left mt-1 mb-4">Vehicle Details</h3>
@@ -195,7 +232,7 @@ function UpdateVehicleModal(vehicle) {
                                         </div>
                                         <div class="form-group col-sm">
                                             <label class="form-label-emp" for="email">Vehicle Model</label>
-                                            <input type="email" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" required 
+                                            <input type="text" class="form-control formInput" id="vehModal" name="vehModal"  placeholder=" eg : KDH, Axio " tabindex="2" required 
                                             
                                                 value={VehicleModel}
                                                 onChange={(e) => {
