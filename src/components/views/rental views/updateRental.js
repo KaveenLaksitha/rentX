@@ -4,6 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import SideBar from "../../SideBar";
 import Swal from "sweetalert2";
 
 function UpdateRental() {
@@ -181,6 +182,7 @@ function UpdateRental() {
 
     return (
         <div className="page-component-body">
+            <SideBar></SideBar>
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
                     <form onSubmit={onSubmit}>
