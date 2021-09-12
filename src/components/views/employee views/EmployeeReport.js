@@ -42,9 +42,10 @@ function ReservationReport() {
                     showConfirmButton: false,
                     timer: 1500
                 }
-                ).then(() => {
-                    window.location.reload();
-                })
+                )
+                    .then(() => {
+                        window.location.reload();
+                    })
             }
 
         })
@@ -174,7 +175,7 @@ function ReservationReport() {
                 </div>
 
                 <div id="myTabContent2" style={{ display: "none" }}>
-                    <Pdf targetRef={ref} filename="RentalReport.pdf">
+                    <Pdf targetRef={ref} filename="EmployeeReport.pdf">
                         {({ toPdf }) => <button class="btn btn-download white" onClick={toPdf}><i class="fa fa-download" aria-hidden="true"></i></button>}
                     </Pdf>
                     <div ref={ref} className="pl-4">
