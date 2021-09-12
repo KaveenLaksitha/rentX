@@ -5,6 +5,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
+import Header from "../../Header";
 const ref = React.createRef();
 
 
@@ -49,16 +50,18 @@ const ref = React.createRef();
 
 
 
+
     return (
-            <div className="page-component-body">
-                <div class="container input-main-form-emp">
-                    <div class="tab-content-emp" id="myTabContent">
-                        
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                       <form>
-                                        <center>
+        <div className="page-component-body">
+            <Header></Header>
+            <div class="container input-main-form-emp">
+                <div class="tab-content-emp" id="myTabContent">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                <form>
+                                    <center>
                                         <h3 className=" mt-3 mb-4">Generate Report on Vehicle Records </h3>
                                         </center>
                                         <hr></hr>
@@ -169,23 +172,22 @@ const ref = React.createRef();
                                                     />
 
                                         </div>
-                                        
+
                                     </div>
 
                                     <div className="row">
-                                                <div className="col py-3 text-center">
-                                                    <button type="submit" className="btn btn-ok" >
-                                                        Generate
-                                                    </button>
-                                                </div>
-                                                
-                                            </div>
-                                            <br></br>
-                                            </form>
+                                        <div className="col py-3 text-center">
+                                            <button type="submit" className="btn btn-ok" >
+                                                Generate
+                                            </button>
+                                        </div>
+
                                     </div>
-                                   
-                                </div>
+                                    <br></br>
+                                </form>
                             </div>
+
+                        </div>
                     </div>
 
                     <div id="myTabContent2" style={{ display: "none" }}>
@@ -231,7 +233,8 @@ const ref = React.createRef();
                     
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 export default VehicleReport;

@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import Swal from "sweetalert2";
 import { addInquiry } from "../../services/employeeService";
 
+import Header from "../../Header";
+
 function MakeInquiry() {
 
     const [name, setName] = useState("");
@@ -52,6 +54,7 @@ function MakeInquiry() {
 
     return (
         <div className="page-component-body">
+            <Header></Header>
             <div class="container input-main-form-emp py-3">
                 <div class="tab-content-emp" id="myTabContent">
                     <div class="container">

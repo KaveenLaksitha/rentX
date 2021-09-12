@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import Header from "../components/Header"
+
 
 function Dashboard() {
 
@@ -79,6 +81,7 @@ function Dashboard() {
 
     return (
         <div className="page-component-body">
+            <Header></Header>
             <div className=" container comp-one">
                 <div className="row mb-3 mt-3">
                     <div class="col ml-3">

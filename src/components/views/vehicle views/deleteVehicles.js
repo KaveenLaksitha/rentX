@@ -3,7 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
 
+import Header from "../../Header";
+
 import TestModal from "./viewVehicle";
+
 
 function DeleteVehicles() {
 
@@ -48,6 +51,7 @@ function DeleteVehicles() {
 
     return (
         <div className="page-component-body">
+            <Header></Header>
 
             <Modal
                 show={modalShow}
