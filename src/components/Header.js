@@ -20,7 +20,7 @@ function Header(props) {
           id="mainNav"
         >
           <div className="container-fluid">
-            <a className="navbar-brand js-scroll-trigger" href="/">
+            <a className="navbar-brand js-scroll-trigger" href="/dashboard">
               <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
 
             </a>

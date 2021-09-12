@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
 import Swal from 'sweetalert2'
 
+import SideBar from "../../SideBar";
 
 import TestModal from "./viewVehicle";
 import UpdateVehicleModal from "./modal/updateVehicleModal";
@@ -166,6 +167,7 @@ function VehicleList() {
     return (
 
         <div className="page-component-body">
+            <SideBar></SideBar>
 
             <Modal
                 show={modalShow}

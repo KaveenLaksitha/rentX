@@ -5,7 +5,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
-import { FilePond } from 'react-filepond';
+import Header from "../../Header";
 
 import { addEmployeeService } from "../../services/employeeService";
 
@@ -17,8 +17,6 @@ function AddEmployee() {
     const disableFutureDt = current => {
         return current.isBefore(day)
     }
-
-
 
     const [fName, setfName] = useState("");
     const [lName, setlName] = useState("");
@@ -240,14 +238,10 @@ function AddEmployee() {
     };
 
 
-
-
-
-
-
     return (
 
         <div className="page-component-body">
+            <Header></Header>
             <div className="container input-main-form-emp">
                 <div className="tab-content-emp" id="myTabContent">
                     <div className="container">

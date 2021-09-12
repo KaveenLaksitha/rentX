@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
+import Header from "../../Header";
+
 import { getAllEmployeesService, searchEmployeesService } from "../../services/employeeService";
 
 import ViewEmpModal from "./modals/viewEmployee";
@@ -114,6 +116,8 @@ export default function EmpList() {
 
     return (
         <div className="page-component-body " >
+
+            <Header></Header>
 
             <div className="table-emp">
                 <div class="row table-head  mt-3">
