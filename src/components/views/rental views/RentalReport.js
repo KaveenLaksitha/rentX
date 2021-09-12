@@ -17,11 +17,14 @@ function ReservationReport() {
     const [customerName, setCustomerName] = useState("");
     const [rentalList, setRentalList] = useState([]);
 
+    useEffect(() => {
+        document.getElementById("dateDisplay").innerHTML = date;
+
+    }, []);
 
     function sendData(e) {
         e.preventDefault();
         changeBoxes();
-        alert(customerName)
         if (status == "Pending") {
 
             if ((customerName == "") && (vehicleType == "")) {
@@ -173,6 +176,10 @@ function ReservationReport() {
 
     }
 
+    const date = new Date();
+
+
+
     return (
         <div className="page-component-body">
             <div class="container input-main-form-emp">
@@ -302,41 +309,44 @@ function ReservationReport() {
                 </div>
                 <div id="myTabContent2" style={{ display: "none" }}>
                     <Pdf targetRef={ref} filename="RentalReport.pdf">
-                        {({ toPdf }) => <button class="btn btn-ok white" onClick={toPdf}>Generate Pdf</button>}
+                        {({ toPdf }) => <button class="btn btn-download white" onClick={toPdf}><i class="fa fa-download" aria-hidden="true"></i></button>}
                     </Pdf>
-                    <div ref={ref}>
+                    <div ref={ref} className="pl-4">
+                        <div className="report">
+                            <img src="https://i.ibb.co/ymzyhHx/rental-Report.jpg" />
 
-                        <table class="table table-hover">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>From</th>
-                                    <th>To</th>
-                                    <th>Vehicle</th>
-                                    <th>NIC</th>
-                                    <th>Customer Name</th>
-                                    <th>Total (Rs.)</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rentalList.map((rental) => {
-                                    return (
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Vehicle</th>
+                                        {/* <th>NIC</th> */}
+                                        <th>Customer Name</th>
+                                        <th>Total (Rs.)</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rentalList.map((rental) => {
+                                        return (
 
-                                        <tr >
+                                            <tr >
 
-                                            <td > {rental.from}</td>
-                                            <td >{rental.to}</td>
-                                            <td >{rental.vehicleType}</td>
-                                            <td >{rental.customerNIC}</td>
-                                            <td >{rental.customerName}</td>
-                                            <td >{rental.finalPrice.toFixed(2)}</td>
-                                            <td >{rental.status}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-
+                                                <td > {rental.from}</td>
+                                                <td >{rental.to}</td>
+                                                <td >{rental.vehicleType}</td>
+                                                {/* <td >{rental.customerNIC}</td> */}
+                                                <td >{rental.customerName}</td>
+                                                <td >{rental.finalPrice.toFixed(2)}</td>
+                                                <td >{rental.status}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h6 className="pb-5">Report generated on : <span id="dateDisplay"></span></h6>
                     </div>
                 </div>
 

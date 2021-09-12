@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import { Modal, Button } from "react-bootstrap";
-import { useParams} from "react-router";
+import { useParams } from "react-router";
 import Swal from 'sweetalert2'
 
 import TestModal from "./modals/reservationview";
@@ -15,7 +15,7 @@ function Viewreservation() {
     //const [reservations, setReservations] = useState([]);
     const [viewreservation, setviewreservation] = useState([]);
     const [search, setSearch] = useState("");
-    
+
     const [modalData, setData] = useState([]);
     const [modalShow, setModalShow] = useState(false);
 
@@ -35,26 +35,26 @@ function Viewreservation() {
 
         } else {
             function getReservation() {
-        axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
-            setviewreservation(res.data.reverse());
-        }).catch((error) => {
-          //alert(error.message);
-          setModalLoading(true);
-        })
-    }
-    getReservation();
+                axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
+                    setviewreservation(res.data.reverse());
+                }).catch((error) => {
+                    //alert(error.message);
+                    setModalLoading(true);
+                })
+            }
+            getReservation();
 
-}
+        }
 
 
-}, [])
+    }, [])
 
-    
-        useEffect(() => {
 
-            console.log("component did update", modalDataDelete)
-    
-        }, [modalDataDelete]); 
+    useEffect(() => {
+
+        console.log("component did update", modalDataDelete)
+
+    }, [modalDataDelete]);
 
 
     const openModal = (reservations) => {
@@ -67,16 +67,16 @@ function Viewreservation() {
         console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
-   
+
 
     const openModalDelete = (data) => {
-        setModalDataDelete(data);        
+        setModalDataDelete(data);
         setModalDeleteConfirm(true)
         //deleteReservation(data);
         //setModalDeleteConfirm(true);
     }
 
-       const openModalUpdate = (data) => {
+    const openModalUpdate = (data) => {
 
         console.log("request came for modal updateeeeeee", data);
         setModalDataUpdate(data);
@@ -114,15 +114,15 @@ function Viewreservation() {
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
-                 
+
             })
         }
     }
 
 
-    
 
-const deleteReservation = async (data) => {
+
+    const deleteReservation = async (data) => {
 
         await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
             //alert("Reservation Record added successfully")
@@ -138,50 +138,50 @@ const deleteReservation = async (data) => {
             //console.log(value);
             if (value) {
                 //alert("Permenantly deleted the Reservation Record");
-                
-                 Swal.fire({
-                        title: 'Success!',
-                        text: `${"Reservation Deleted Successfully"}`,
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }
-                    ).then(() => {
-                        window.location.reload();
-                    })
 
-                   //window.location.replace("/viewReservation");
+                Swal.fire({
+                    title: 'Success!',
+                    text: `${"Reservation Deleted Successfully"}`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+                ).then(() => {
+                    window.location.reload();
+                })
+
+                //window.location.replace("/viewReservation");
             }
 
         }).catch((err) => {
             //alert(err.response.data.error)
 
             //alert(err.response.data.errorCode)
-             Swal.fire({
-                        title: 'Oops!',
-                        text: `${"Reservation not Completed"}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    ) 
+            Swal.fire({
+                title: 'Oops!',
+                text: `${"Reservation not Completed"}`,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            }
+            )
 
         })
 
     }
 
-    
+
     function refreshPage() {
         window.location.reload();
     }
 
- 
+
 
 
     return (
         <div className="page-component-body">
 
-        <Modal
+            <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 size="lg"
@@ -200,7 +200,7 @@ const deleteReservation = async (data) => {
                     <div class="col">
                         <h3 className="float-left" onClick={refreshPage}>List of Reservation</h3>
                     </div>
-                   
+
                     <a href="/addReservation" class="float-right">
                         <button class="btn btn-ok white">
                             +Add Reservation
@@ -211,7 +211,7 @@ const deleteReservation = async (data) => {
                             Completed Reservation
                         </button>
                     </p>
-                     <a href="/diplay/RemoveReservationlist" class="float-right ml-4">
+                    <a href="/diplay/RemoveReservationlist" class="float-right ml-4">
                         <button class="btn btn-ok white">
                             Past Records
                         </button>
@@ -223,33 +223,33 @@ const deleteReservation = async (data) => {
                         <div class="input-group input-group-search">
                             <div class="searchbar">
                                 <form onSubmit={searchReservation} >
-                                <input class="search_input" type="text" name="search" placeholder="Search..."
-                                value={search} onChange={(event) => { setSearch(event.target.value) }} require  />
-                                <button class="btn search_icon" id="submit" name="submit" type="submit" ><i class="fa fa-search" ></i></button>
+                                    <input class="search_input" type="text" name="search" placeholder="Search..."
+                                        value={search} onChange={(event) => { setSearch(event.target.value) }} require />
+                                    <button class="btn search_icon" id="submit" name="submit" type="submit" ><i class="fa fa-search" ></i></button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover" id= "myTable">
+                <table class="table table-hover" id="myTable">
                     <thead class="thead-dark">
-                    <tr>                      
-                        <th class="text-center">Customer</th>
-                        <th class="text-center">NIC</th>
-                        <th class="text-center">Package Name</th>
-                        <th class="text-center">Event Type</th>
-                        <th class="text-center">From</th>
-                        <th class="text-center">To</th>                       
-                        <th class="text-center">Total</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Action</th>
-                    </tr>
+                        <tr>
+                            <th class="text-center">Customer</th>
+                            <th class="text-center">NIC</th>
+                            <th class="text-center">Package Name</th>
+                            <th class="text-center">Event Type</th>
+                            <th class="text-center">From</th>
+                            <th class="text-center">To</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                        </tr>
                     </thead>
-                    <tbody> 
-                    {viewreservation.map((reservations) => {  
-                         return (        
-                             <tr>
-                                    <td class="text-center" onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view reservation">{reservations.customername}</td>
+                    <tbody>
+                        {viewreservation.map((reservations) => {
+                            return (
+                                <tr>
+                                    <td class="text-center" onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view reservation" className="view-td">{reservations.customername}</td>
                                     <td class="text-center">{reservations.customernic}</td>
                                     <td class="text-center">{reservations.packagename}</td>
                                     <td class="text-center">{reservations.eventtype}</td>
@@ -258,18 +258,18 @@ const deleteReservation = async (data) => {
                                     <td class="text-right">{reservations.totalreservation.toFixed(2)}</td>
                                     <td class="text-center">{reservations.status}</td>
                                     <td class="text-center">
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                
-                                    <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >update</Link>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
 
-                                    <Link class="btn btn-danger btn-sm" onClick={() => {openModalDelete(reservations)}} role="button"> remove</Link>
+                                            <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >update</Link>
 
-                    </div></td>
+                                            <Link class="btn btn-danger btn-sm" onClick={() => { openModalDelete(reservations) }} role="button"> remove</Link>
 
-                </tr>
-                         );
-                    })}
-          </tbody>
+                                        </div></td>
+
+                                </tr>
+                            );
+                        })}
+                    </tbody>
                 </table>
             </div>
 
@@ -284,20 +284,20 @@ const deleteReservation = async (data) => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                <div className="row">
-                    <div className="col -6">
-                        <button type="submit" className="btn btn-delete" onClick={() => { deleteReservation(modalDataDelete); }}>
-                            Confirm
-                        </button>
-                    </div>
-                    <div className="col-6   text-right" onClick={() => setModalDeleteConfirm(false)}>
-                        <button type="reset" className="btn btn-reset">
-                            cancel
-                        </button>
-                    </div>
+                    <div className="row">
+                        <div className="col -6">
+                            <button type="submit" className="btn btn-delete" onClick={() => { deleteReservation(modalDataDelete); }}>
+                                Confirm
+                            </button>
+                        </div>
+                        <div className="col-6   text-right" onClick={() => setModalDeleteConfirm(false)}>
+                            <button type="reset" className="btn btn-reset">
+                                cancel
+                            </button>
+                        </div>
                     </div>
                 </Modal.Footer>
-            </Modal> 
+            </Modal>
             {/* modal for display while loading or on error */}
             <Modal show={modalLoading} size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
@@ -323,7 +323,7 @@ const deleteReservation = async (data) => {
                         </button>
                     </div>
                 </Modal.Footer>
-            </Modal>  
+            </Modal>
 
             {/* modal for update the data of employee */}
             <Modal
@@ -337,7 +337,7 @@ const deleteReservation = async (data) => {
                     data={modalDataUpdate}
                     onHide={() => setModalUpdate(false)}
                 />
-            </Modal>    
+            </Modal>
 
 
         </div>
@@ -366,26 +366,26 @@ export default Viewreservation
     }, [])*/
 
 
-    /*function searchOrders(e) {
-        e.preventDefault();
-        if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
-            axios.get(`http://localhost:8060/order/searchOrders/${search}`).then((res) => {
-                setOrders(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        } else {
-            axios.get(`http://localhost:8060/order/searchOrdersByOrderId/${search}`).then((res) => {
-                setOrders(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-    }*/
+/*function searchOrders(e) {
+    e.preventDefault();
+    if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
+        axios.get(`http://localhost:8060/order/searchOrders/${search}`).then((res) => {
+            setOrders(res.data);
+        }).catch((error) => {
+            alert(error.message);
+        })
+    } else {
+        axios.get(`http://localhost:8060/order/searchOrdersByOrderId/${search}`).then((res) => {
+            setOrders(res.data);
+        }).catch((error) => {
+            alert(error.message);
+        })
+    }
+}*/
 
 
-    /*function refreshPage() {
-        window.location.reload();
-    }*/
+/*function refreshPage() {
+    window.location.reload();
+}*/
 
-    {/*to={`/updateReservation/${reservations.reservationid}`}*/}
+{/*to={`/updateReservation/${reservations.reservationid}`}*/ }

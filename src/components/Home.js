@@ -26,11 +26,15 @@ import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
 
 
+
 function Home() {
     return (
         <Router>
             <div>
                 <Header />
+
+
+
                 <Route path="/" exact component={Login} />
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />

@@ -38,6 +38,8 @@ function UpdateEmployee(emp) {
             setPermAdd(emp.data.permAdd);
             setMobileNo(emp.data.mobileNo);
             setEmgContact(emp.data.emgContact);
+            setEmpPic(emp.data.empPic);
+            setCV(emp.data.cv);
 
         } catch {
             window.alert("something went wrong");

@@ -389,6 +389,18 @@ textarea {
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
 }
 
+.btn-download {
+  margin: 1rem 0 1rem 0;
+  float: right;
+  background-color: #1fc191;
+  color: white;
+  width: 80px;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
 /*hasani*/
 .rental-summary-body {
   position: absolute;
@@ -522,6 +534,11 @@ a.nav-link:link {
 .table-head-search {
   margin-bottom: 1rem;
   padding: 0 0rem 0 1rem;
+}
+
+.view-td:hover {
+  cursor: pointer;
+  color: red;
 }
 
 /*css for colors*/
@@ -724,4 +741,11 @@ a.nav-link:link {
   border-radius: 0.5rem;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
     0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+//report
+.report {
+  border-color: #1fc191;
+  border-width: 0.5rem !important;
+  min-height: 1000px;
 }

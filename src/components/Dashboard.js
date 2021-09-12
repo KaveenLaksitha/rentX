@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import SideBar from "../components/SideBar"
+
 
 function Dashboard() {
 
@@ -16,12 +18,13 @@ function Dashboard() {
 
     const [newVehicle, setNewVehicle] = useState("");
 
-    const [availableEmployee,setavailableEmployee] = useState("");
+    const [availableEmployee, setavailableEmployee] = useState("");
 
     useEffect(() => {
 
+
         axios.get("http://localhost:4000/rental/VehiclesRentedToday").then((res) => { //fetching the count of rentals placed on current date
-            setNewRentals(res.data);
+            setNewRentals(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
@@ -42,13 +45,13 @@ function Dashboard() {
         readRentals();
 
         axios.get("http://localhost:4000/reservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals placed on current date
-            setNewReservation(res.data);
+            setNewReservation(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
         axios.get("http://localhost:4000/deletedReservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals returned on current date
-            setReturnedReservation(res.data);
+            setReturnedReservation(("0" + res.data).slice(-1));
         }).catch((error) => {
             alert(error)
         })
@@ -63,13 +66,13 @@ function Dashboard() {
         readReservation();
 
         axios.get("http://localhost:4000/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
-            setNewVehicle(res.data);
+            setNewVehicle(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
         axios.get("http://localhost:4000/api/EmployeeAvailable").then((res) => { //fetching the count of rentals placed on current date
-        setavailableEmployee(res.data);
+            setavailableEmployee(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
@@ -78,6 +81,7 @@ function Dashboard() {
 
     return (
         <div className="page-component-body">
+            <SideBar></SideBar>
             <div className=" container comp-one">
                 <div className="row mb-3 mt-3">
                     <div class="col ml-3">
