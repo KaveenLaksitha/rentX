@@ -5,6 +5,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Swal from 'sweetalert2'
+import Header from '../../Header';
 
 function Reservation() {
 
@@ -473,13 +474,9 @@ const MobileValidation =() =>{//validate function
     };
 
 
-
-
-
-
     return (
         <div className="page-component-body ">
-
+        <Header></Header>
             <div class="container input-main-form-emp">
                 <br></br>
                 <h3> Event Reservation</h3>

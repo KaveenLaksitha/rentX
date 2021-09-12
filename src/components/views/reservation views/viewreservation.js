@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Modal, Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import Swal from 'sweetalert2'
-
+import Header from '../../Header';
 import TestModal from "./modals/reservationview";
 import UpdateReservationModal from "./modals/updatereservation"
 
@@ -180,7 +180,7 @@ function Viewreservation() {
 
     return (
         <div className="page-component-body">
-
+         <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

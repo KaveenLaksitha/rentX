@@ -4,12 +4,13 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
-
+import Header from '../../Header';
 
  function ReservationReport() {
 
     return (
             <div className="page-component-body">
+             <Header></Header>
                 <div class="container input-main-form-emp">
                     <div class="tab-content-emp" id="myTabContent">
                         
@@ -71,7 +72,12 @@ import 'react-datetime/css/react-datetime.css';
                                                     placeholder="Customer Address" 
                                                     tabindex="4" 
                                                     //required
-                                                    />
+                                                    >
+                                                    <option  >choose</option>
+                                                    <option id="model11">Package 1</option>
+                                                    <option id="model22">Package 2</option>
+                                                    <option id="model33">Package 3</option>
+                                                    </select>
                                             </div>
 
                                             <br></br>
