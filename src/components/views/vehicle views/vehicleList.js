@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
 import Swal from 'sweetalert2'
 
@@ -315,4 +315,4 @@ function VehicleList() {
     )
 }
 
-export default VehicleList;
+export default withRouter(VehicleList);
