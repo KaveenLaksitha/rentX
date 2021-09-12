@@ -370,26 +370,9 @@ function AddVehicle() {
     };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <div className="page-component-body ">
+            <SideBar></SideBar>
 
             <div class="container input-main-form-emp pt-3">
                 <h2 class="pb-2 pl-3">Add vehicle details</h2>

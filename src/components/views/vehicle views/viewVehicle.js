@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-
 function ViewVehicle(vehicle) {
 
     console.log("model open", vehicle)
@@ -18,13 +17,13 @@ function ViewVehicle(vehicle) {
                             <tbody>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Vehicle Owner Name 
+                                        Vehicle Owner Name
                                     </th>
                                     <td class="text-left">{vehicle.data.OwnerName}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Owner NIC 
+                                        Owner NIC
                                     </th>
                                     <td class="text-left">{vehicle.data.OwnerNIC}</td>
                                 </tr><tr>
@@ -35,7 +34,7 @@ function ViewVehicle(vehicle) {
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                    Address
+                                        Address
                                     </th>
                                     <td class="text-left">{vehicle.data.Address}</td>
                                 </tr>
@@ -47,7 +46,7 @@ function ViewVehicle(vehicle) {
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                    Date vehicle registerd to company 
+                                        Date vehicle registerd to company
                                     </th>
                                     <td class="text-left">{vehicle.data.Date}</td>
                                 </tr>
@@ -65,61 +64,61 @@ function ViewVehicle(vehicle) {
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Vehicle Type 
+                                        Vehicle Type
                                     </th>
                                     <td class="text-left">{vehicle.data.VehicleType}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Mileage 
+                                        Mileage
                                     </th>
                                     <td class="text-left">{vehicle.data.Mileage}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Insuarence Type  
+                                        Insuarence Type
                                     </th>
                                     <td class="text-left">{vehicle.data.InsType}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Insuarence Company Name   
+                                        Insuarence Company Name
                                     </th>
                                     <td class="text-left">{vehicle.data.InsComName}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Transmission   
+                                        Transmission
                                     </th>
                                     <td class="text-left">{vehicle.data.Transmission}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Air Condition   
+                                        Air Condition
                                     </th>
                                     <td class="text-left">{vehicle.data.AirC}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Number Of Seats   
+                                        Number Of Seats
                                     </th>
                                     <td class="text-left">{vehicle.data.NoOfSeats}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Rate Per Day   
+                                        Rate Per Day
                                     </th>
                                     <td class="text-left">{vehicle.data.RatePDay}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">
-                                        Years of Rental  
+                                        Years of Rental
                                     </th>
                                     <td class="text-left">{vehicle.data.YearsRent}</td>
                                 </tr>
-                               
-                                
-                                
+
+
+
                             </tbody>
                         </table>
                     </div>
