@@ -54,9 +54,6 @@ export const getAllEmployeesService = async () => {
 //for delete an employee and add him/her to past employee collection
 export const deleteEmployeeService = async (data, reason) => {
 
-  console.log(data, "<<<<<<<<<<<<<<<<deleteeeeeeee");
-  console.log(reason, "<<<<<<<<<<<<<<<<deleteeeeeeee reasonnnnnn");
-
   try {
     await axios.post(`${HOST}/api/resignation`, { reason, ...data });
     const response = await axios.post(`${HOST}/api/removeEmployee`, data);
@@ -75,7 +72,6 @@ export const deleteEmployeeService = async (data, reason) => {
 
 //for make an inquiry
 export const addInquiry = async (data) => {
-  console.log(data, "<<<<<<<<<<<<<<<<<<<<<<<<");
   try {
     await axios.post("https://getform.io/f/d5448fa8-dff5-4ce0-a927-7ec55756f5a4", data);
     return {
@@ -105,6 +101,7 @@ export const getAllPastEmployeesService = async () => {
   }
 };
 
+//for search on resigned employees
 export const searchEmployeesService = async (input) => {
 
   console.log("data for searchhh>>>>>>>", input)
@@ -122,6 +119,7 @@ export const searchEmployeesService = async (input) => {
   }
 };
 
+//for search on resigned employees
 export const searchPastEmployeesService = async (input) => {
 
   console.log("data for searchhh>>>>>>>", input)
@@ -140,12 +138,18 @@ export const searchPastEmployeesService = async (input) => {
 };
 
 
-//for retrive the all employee records
-export const getAllEmployeesServiceCount = async () => {
-  console.log("done;");
+
+
+// for generate report on employee
+export const searchForReport = async (payload) => {
   try {
-    const response = await axios.get(`${HOST}/api/EmployeeAvailable`);
+    const response = await axios.get(`${HOST}/api/employeeReport/${payload.designation}/${payload.ageFrom}/${payload.ageTo}/${payload.gender}`);
     console.log("response came", response);
+    if (!response.ok) {
+      return {
+        ok: false,
+      };
+    }
     return {
       ok: true,
       data: response.data.data,
