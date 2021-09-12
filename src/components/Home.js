@@ -31,7 +31,7 @@ function Home() {
     return (
         <Router>
             <div>
-                <Header />
+                {/*<Header />*/}
 
 
 

@@ -53,7 +53,7 @@ function Header(props) {
         </nav>
       </header>
 
-      {/* <div>
+      <div>
         <div className="area"></div>
         <nav className="main-menu fixed-top">
           <ul>
@@ -209,7 +209,7 @@ function Header(props) {
             <hr></hr>
           </ul>
         </nav>
-      </div> */}
+      </div>
       <div>
         <br />
         <br />

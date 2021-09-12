@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./style.scss";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Login() {
 
@@ -17,9 +18,25 @@ function Login() {
             console.log(response.data);
             setLogin(response.data.login);
             if (response.data.login === null) {
-                alert("User not available");
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'User not available',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                }
+                )
+                //alert("User not available");
             } else {
-                alert("User available");
+                Swal.fire({
+                    title: 'Sucess!',
+                    text: 'User available',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                }
+                )
+                //alert("User available");
                 if (response.data.login.username == "admin") {
                     history.push("/dashboard");
                 }

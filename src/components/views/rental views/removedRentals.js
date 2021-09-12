@@ -6,7 +6,7 @@ import moment from 'moment';
 
 //import TestModal from "./modals/viewRental";
 import ViewRemovedRental from "./modals/viewRemovedRental";
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 function RemovedRentalList() {
 
@@ -61,7 +61,7 @@ function RemovedRentalList() {
 
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
