@@ -31,7 +31,8 @@ function Home() {
     return (
         <Router>
             <div>
-                {/* <Header /> */}
+                {/*<Header />*/}
+
                 <Route path="/" exact component={Login} />
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
