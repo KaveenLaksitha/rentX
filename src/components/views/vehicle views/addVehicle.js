@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import Swal from 'sweetalert2'
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 
 function AddVehicle() {
@@ -372,7 +372,7 @@ function AddVehicle() {
 
     return (
         <div className="page-component-body ">
-            <SideBar></SideBar>
+            <Header></Header>
 
             <div class="container input-main-form-emp pt-3">
                 <h2 class="pb-2 pl-3">Add vehicle details</h2>
