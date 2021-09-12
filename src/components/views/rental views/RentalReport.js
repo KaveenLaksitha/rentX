@@ -5,7 +5,7 @@ import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
 import Swal from 'sweetalert2';
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 const ref = React.createRef();
 
 
@@ -183,7 +183,7 @@ function ReservationReport() {
 
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
 
