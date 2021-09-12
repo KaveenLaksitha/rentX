@@ -5,7 +5,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 import { addEmployeeService } from "../../services/employeeService";
 
@@ -241,7 +241,7 @@ function AddEmployee() {
     return (
 
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div className="container input-main-form-emp">
                 <div className="tab-content-emp" id="myTabContent">
                     <div className="container">

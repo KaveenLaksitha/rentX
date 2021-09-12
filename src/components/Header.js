@@ -20,7 +20,7 @@ function Header(props) {
           id="mainNav"
         >
           <div className="container-fluid">
-            <a className="navbar-brand js-scroll-trigger" href="/">
+            <a className="navbar-brand js-scroll-trigger" href="/dashboard">
               <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
 
             </a>
@@ -53,7 +53,7 @@ function Header(props) {
         </nav>
       </header>
 
-      {/* <div>
+      <div>
         <div className="area"></div>
         <nav className="main-menu fixed-top">
           <ul>
@@ -209,7 +209,7 @@ function Header(props) {
             <hr></hr>
           </ul>
         </nav>
-      </div> */}
+      </div>
       <div>
         <br />
         <br />

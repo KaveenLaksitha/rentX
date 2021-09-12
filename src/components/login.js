@@ -19,7 +19,7 @@ function Login() {
             if (response.data.login === null) {
                 alert("User not available");
             } else {
-                alert("User available");
+                alert("Welcome back admin!");
                 if (response.data.login.username == "admin") {
                     history.push("/dashboard");
                 }
@@ -30,44 +30,73 @@ function Login() {
         })
     }
     return (
-        <div className="page-component-body">
-            <div class="row no-gutter">
-                <div class="col-md-6 d-none d-md-flex bg-image"></div>
-                <div class="col-md-6 bg-light">
-                    <div class="login d-flex align-items-center py-5">
+        <>
+            <div className="page-body">
 
-                        <div class="container login-container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <h1>Welcome back!</h1>
-                                    <form onSubmit={checkUser}>
-                                        <div class="form-group mb-3">
-                                            <input id="loginInput" type="input" placeholder="Username" required autofocus="" class="login-form-input px-4"
-                                                onChange={(event) => { setUserName(event.target.value); }} />
-                                        </div>
-                                        <div class="form-group mb-5">
-                                            <input id="loginPassword" type="password" placeholder="Password" required="" class="login-form-input px-4 text-primary"
-                                                onChange={(event) => { setPassword(event.target.value); }} />
-                                        </div>
-                                        <div className="text-right">
-                                            <p><a href="#" className="text-danger">Forget Password? </a></p>
-                                            <br></br><br></br>
-                                        </div>
-                                        <div>
-                                            <center>
-                                                <button type="submit" class="btn btn-block text-uppercase text-light btn-login">Sign in</button>
-                                            </center>
-                                        </div>
-                                    </form>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+                <div class="cube"></div>
+
+                <header>
+                    <nav
+                        className="navbar navbar-expand-lg navbar-light fixed-top"
+                        id="mainNav"
+                    >
+                        <div className="container-fluid">
+                            <a className="navbar-brand js-scroll-trigger" href="/">
+                                <img src="https://i.ibb.co/mDn4bQv/spm.png" width="300px" height="100px" alt="todo" border="0" />
+
+                            </a>
+                        </div>
+                    </nav>
+                </header>
+            </div>
+
+            <div className="page-component-body pt-5 mt-5">
+
+                <div class="row no-gutter">
+                    <div class="col-md-6 d-none d-md-flex bg-image"></div>
+                    <div class="col-md-6 bg-light">
+                        <div class="login d-flex align-items-center py-5">
+
+                            <div class="container login-container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h1>Welcome back!</h1>
+                                        <form onSubmit={checkUser}>
+                                            <div class="form-group mb-3">
+                                                <input id="loginInput" type="input" placeholder="Username" required autofocus="" class="login-form-input px-4"
+                                                    onChange={(event) => { setUserName(event.target.value); }} />
+                                            </div>
+                                            <div class="form-group mb-5">
+                                                <input id="loginPassword" type="password" placeholder="Password" required="" class="login-form-input px-4 text-primary"
+                                                    onChange={(event) => { setPassword(event.target.value); }} />
+                                            </div>
+                                            <div className="text-right">
+                                                <p><a href="#" className="text-danger">Forget Password? </a></p>
+                                                <br></br><br></br>
+                                            </div>
+                                            <div>
+                                                <center>
+                                                    <button type="submit" class="btn btn-block text-uppercase text-light btn-login">Sign in</button>
+                                                </center>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+        </>
 
     )
 }

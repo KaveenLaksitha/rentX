@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import Swal from "sweetalert2";
 import { addInquiry } from "../../services/employeeService";
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 function MakeInquiry() {
 
@@ -54,7 +54,7 @@ function MakeInquiry() {
 
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div class="container input-main-form-emp py-3">
                 <div class="tab-content-emp" id="myTabContent">
                     <div class="container">

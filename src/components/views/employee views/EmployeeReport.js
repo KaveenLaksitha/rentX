@@ -4,7 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import 'react-datetime/css/react-datetime.css';
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 import { searchForReport } from "../../services/employeeService"
 
@@ -58,7 +58,7 @@ function ReservationReport() {
 
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
 
