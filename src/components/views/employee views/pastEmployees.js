@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
+import SideBar from "../../SideBar";
+
 import { getAllPastEmployeesService, searchPastEmployeesService } from "../../services/employeeService";
 
 import ViewEmpModal from "./modals/viewPastEmployees";
@@ -74,7 +76,7 @@ export default function PastEmpList() {
 
     return (
         <div className="page-component-body " >
-
+            <SideBar></SideBar>
             <div className="table-emp ">
                 <div class="row table-head">
                     <div class="col">
