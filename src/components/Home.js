@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from "./Header"
-import Login from "./login"
+import login from "./login"
 import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
 import rentalList from "./views/rental views/rentalList"
@@ -26,12 +26,16 @@ import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
 
 
+
 function Home() {
     return (
         <Router>
             <div>
                 <Header />
-                <Route path="/" exact component={Login} />
+
+
+
+                <Route path="/" exact component={login} />
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
                 <Route path="/rentalList" exact component={rentalList} />
