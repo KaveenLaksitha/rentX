@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from "./Header"
+import SideBar from "./SideBar";
 import Login from "./login"
 import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
