@@ -31,7 +31,7 @@ function DeleteRental(rental) {
                 Swal.fire({
                     title: "Permenantly deleted the record! ",
                     text: `${rental.data.id}` + " record deleted",
-                    icon: 'error',
+                    icon: 'success',
                     confirmButtonColor: "#207159",
                 }).then((res) => {
                     if (res.isConfirmed) {
