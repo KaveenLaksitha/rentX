@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import Swal from 'sweetalert2'
+import moment from 'moment';
+import DatePicker from 'react-datetime';
 
 import Header from "../../Header";
 
@@ -117,6 +119,12 @@ function AddVehicle() {
 
         }
     }
+
+    //disable past dates
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday);
+    };
 
     const formValidation = () => {//validate function
 
@@ -479,12 +487,21 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="date">Date</label>
-                                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3" required
-                                                    onChange={(e) => {
-                                                        setDate(e.target.value); // assign value
-                                                    }}
+                                                {/* <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3" required
+                                                    // onChange={(e) => {
+                                                    //     setDate(e.target.value); // assign value
+                                                    // }}
 
+                                                /> */}
+                                                <p class="font-weight-light h-25" style={{color :"grey"}}>* Pick Your Date </p>
+                                                <DatePicker required id="rfrom"
+                                                    name="rfrom"
+                                                    
+                                                    onChange={(event) => { setDate(event); }}
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
                                                 />
+                                                
                                             </div>
 
 
