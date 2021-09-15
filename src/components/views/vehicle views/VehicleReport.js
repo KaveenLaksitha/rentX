@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useHistory, useParams, Link } from "react-router-dom";
 import DatePicker from 'react-datetime';
-import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
 import Header from "../../Header";
@@ -18,7 +16,8 @@ const ref = React.createRef();
     const[Type,setType] =useState("");
     const[Brand, setBrand] = useState("");
     const[years,setYears] = useState("");
-    const[vehicleLists, setvehicleList] = useState([]);
+    const[vehicles, setVehicles] = useState([]);
+    
 
 
     function sendData(e){
@@ -30,7 +29,8 @@ const ref = React.createRef();
         axios.get(`http://localhost:4000/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res)=>{
             // const message = "No record found!"
             console.log("data in vehicle list page", res.data);
-            setvehicleList(res.data);
+            setVehicles(res.data);
+            console.log("list", vehicles);
 
             if(res.data == 0){
                 alert("no data found!!");
@@ -40,6 +40,12 @@ const ref = React.createRef();
         }).catch((err)=>{
             alert(err)
         })
+
+
+ 
+
+
+
     }
 
     function changeBoxes() {
@@ -82,9 +88,10 @@ const ref = React.createRef();
                                                     name="dateFrom" 
                                                     placeholder="" 
                                                     tabindex="5" 
+                                                    timeFormat={false}
                                                     required 
                                                     onChange={(e)=>{
-                                                        setDateFrom(e.target.value);
+                                                        setDateFrom(e);
                                                     }}
                                                    
                                                     />
@@ -101,7 +108,7 @@ const ref = React.createRef();
                                                     tabindex="6" 
                                                     timeFormat={false}
                                                     onChange={(e=>{
-                                                        setDateTo(e.target.value);
+                                                        setDateTo(e);
                                                     })}
                                                     
                                                     
@@ -189,6 +196,7 @@ const ref = React.createRef();
 
                         </div>
                     </div>
+                    </div>
 
                     <div id="myTabContent2" style={{ display: "none" }}>
                     <Pdf targetRef={ref} filename="VehicleReport.pdf">
@@ -201,24 +209,29 @@ const ref = React.createRef();
                             <table class="table table-hover">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>From</th>
-                                        <th>To</th>
+                                        
+                                        <th>Vehicle RegNo</th>
+                                        <th>Date</th>
                                         <th>Type</th>
                                         <th>Brand</th>
+                                        <th>Model</th>
                                         <th>Years of rental</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {vehicleLists.map((vehicle) => {
+                                    {vehicles.map((vehicle) => {
+                                        console.log("table", vehicle.Date);
                                         return (
+                                            
 
                                             <tr >
 
-                                                <td > {vehicle.dateFrom}</td>
-                                                <td >{vehicle.dateTo}</td>
-                                                <td >{vehicle.Type}</td>
-                                                <td >{vehicle.Brand}</td>
-                                                <td >{vehicle.years}</td>
+                                                <td>{vehicle.VehicleRegNo}</td>
+                                                <td > {vehicle.Date}</td>
+                                                <td >{vehicle.VehicleType}</td>
+                                                <td >{vehicle.VehicleBrand}</td>
+                                                <td >{vehicle.VehicleModel}</td>
+                                                <td >{vehicle.YearsRent}</td>
                                                 
                                             </tr>
                                         );
@@ -233,7 +246,7 @@ const ref = React.createRef();
                     
                 </div>
             </div>
-        </div>
+        
     )
 }
 
