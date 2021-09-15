@@ -4,12 +4,15 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
+
+
 function Login() {
 
     let history = useHistory();
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [login, setLogin] = useState([]);
+
 
     function checkUser(e) {//function checks the availbilty of the admin within the system
         e.preventDefault();
@@ -46,6 +49,9 @@ function Login() {
 
         })
     }
+
+
+
     return (
         <>
             <div className="page-body">

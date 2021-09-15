@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Header from "./Header"
 import Login from "./login"
 import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
@@ -27,12 +26,12 @@ import DeleteReservation from "./views/reservation views/DeleteRecord";
 
 
 
+
+
 function Home() {
     return (
         <Router>
-            <div>
-                {/*<Header />*/}
-
+            <Switch>
                 <Route path="/" exact component={Login} />
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
@@ -56,7 +55,7 @@ function Home() {
                 <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
                 <Route path="/deleteVehicles" exact component={DeleteVehicles} />  
                 <Footer />
-            </div>
+            </Switch>
         </Router>
     );
 }
