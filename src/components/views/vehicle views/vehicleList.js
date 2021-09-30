@@ -35,28 +35,7 @@ function VehicleList() {
 
                 setVehicles(res.data.reverse());
                 console.log("Data recieved");
-                let timerInterval
-                Swal.fire({
-                    title: 'Loading...',
-                    html: ' <b></b> loading details..',
-                    timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        console.log('I was closed by the timer')
-                    }
-                })
+
             }).catch((error) => {
                 // alert(error.message);
                 Swal.fire({
@@ -163,14 +142,14 @@ function VehicleList() {
 
 
         e.preventDefault();
-        console.log("search val",search);
-        axios.get(`http://localhost:4000/vehicle/searchV/${search}`).then((res)=>{
-            
+        console.log("search val", search);
+        axios.get(`http://localhost:4000/vehicle/searchV/${search}`).then((res) => {
+
 
             setVehicles(res.data.data.reverse());
-        }).catch((error) =>{
+        }).catch((error) => {
             alert(error.message);
-        }) 
+        })
     }
 
 
@@ -222,10 +201,10 @@ function VehicleList() {
                     <div className="col">
                         <div class="input-group input-group-search">
                             <div class="searchbar">
-                            <form id="contactform" class="form" onSubmit={searchVehicles}>
-                            <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} required />
-                                <button class="btn search_icon" type="submit" id="submit" name="submit"><i class="fa fa-search"></i></button>
-                            </form>
+                                <form id="contactform" class="form" onSubmit={searchVehicles}>
+                                    <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} required />
+                                    <button class="btn search_icon" type="submit" id="submit" name="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>

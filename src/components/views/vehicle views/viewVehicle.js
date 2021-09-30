@@ -13,8 +13,19 @@ function ViewVehicle(vehicle) {
             <Modal.Body>
                 <div className="row">
                     <div className="col-12">
+                        <div align="center" style={{ marginBottom: "20px" }}>
+
+                            <img width="700px" height="500px" align="center" src={vehicle.data.vehPic} />
+                        </div>
+
+
+
                         <table class="table table-striped table-light ">
+
+
+
                             <tbody>
+
                                 <tr>
                                     <th class="text-left" scope="row">
                                         Vehicle Owner Name
