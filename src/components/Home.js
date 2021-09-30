@@ -23,6 +23,8 @@ import Footer from "./Footer";
 import RemovedRentalList from "./views/rental views/removedRentals";
 import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
+import imageUplaod from "./views/vehicle views/imageUplaod";
+
 
 
 
@@ -53,7 +55,8 @@ function Home() {
                 <Route path="/rental/report" exact component={RentalReport} />
                 <Route path="/vehicle/report" exact component={VehicleReport} />
                 <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
-                <Route path="/deleteVehicles" exact component={DeleteVehicles} />  
+                <Route path="/deleteVehicles" exact component={DeleteVehicles} />
+                <Route path="/imageUpload" exact component={imageUplaod} />
                 <Footer />
             </Switch>
         </Router>
