@@ -9,15 +9,18 @@ import Header from "../../Header";
 
 function RentalPlacement() {
 
+    //variables created to set the backend vehicle lists received
     const [CarList, setCarList] = useState([]);
     const [BusList, setBusList] = useState([]);
     const [VanList, setVanList] = useState([]);
 
 
+    //variables created to set the validation
     const [MobileErr, setMobileNoErr] = useState("");
     const [NICErr, setNICErr] = useState("");
     const [AdErr, setAdErr] = useState("");
 
+    //calling useEffect to connect with the backend upon page loading
     useEffect(() => {
 
         function getCarList() {
