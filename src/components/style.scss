@@ -97,6 +97,7 @@ nav.main-menu.expanded {
   vertical-align: middle;
   width: 190px;
   font-family: "Titillium Web", sans-serif;
+  font-weight: normal;
 }
 
 .no-touch .scrollable.hover {
@@ -699,7 +700,7 @@ a.nav-link:link {
 
 .package {
   position: absolute;
-  top: 5rem;
+  top: 0rem;
   left: 105%;
   width: 300px;
   height: 300px;

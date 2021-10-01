@@ -12,12 +12,8 @@ function DeleteEmployee(emp) {
     const [modalData, setData] = useState(emp);
     const [resReason, setResReason] = useState("");
 
-    console.log("model openingggg deleteee", emp.data)
-
     function onDelete() {
-        // console.log("on deleteeeeeeeeeee", modalDataDelete)
 
-        //console.log("reasonnn", !resReason);
         if (resReason) {
 
             deleteEmployeeService(modalData.data, resReason).then((response) => {
