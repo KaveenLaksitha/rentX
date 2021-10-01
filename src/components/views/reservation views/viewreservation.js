@@ -11,8 +11,6 @@ import UpdateReservationModal from "./modals/updatereservation"
 
 function Viewreservation() {
 
-
-    //const [reservations, setReservations] = useState([]);
     const [viewreservation, setviewreservation] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -38,7 +36,7 @@ function Viewreservation() {
                 axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
                     setviewreservation(res.data.reverse());
                 }).catch((error) => {
-                    //alert(error.message);
+                   
                     setModalLoading(true);
                 })
             }
@@ -52,7 +50,7 @@ function Viewreservation() {
 
     useEffect(() => {
 
-        console.log("component did update", modalDataDelete)
+        //console.log("component did update", modalDataDelete)
 
     }, [modalDataDelete]);
 
@@ -63,31 +61,30 @@ function Viewreservation() {
     }
 
     const handleViewOnClick = () => {
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
+        // console.log("req came for modal");
+        // console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
 
-
+//set delete modal
     const openModalDelete = (data) => {
         setModalDataDelete(data);
         setModalDeleteConfirm(true)
-        //deleteReservation(data);
-        //setModalDeleteConfirm(true);
+      
     }
 
+//set update modal
     const openModalUpdate = (data) => {
-
-        console.log("request came for modal updateeeeeee", data);
+        //console.log("request came for modal updateeeeeee", data);
         setModalDataUpdate(data);
         setModalUpdate(true);
 
     }
 
+//search all completed record after clicking completed button
     function pendingRecords() {
         function getPendingReservation() {
-            axios.get("http://localhost:4000/reservations/searchPendingReservationRecords/").then((res) => {
-                //setRentals(res.data.reverse());
+            axios.get("http://localhost:4000/reservations/searchCompletedReservationRecords/").then((res) => {
                 setviewreservation(res.data.reverse());
             }).catch((error) => {
                 alert(error.message);
@@ -97,12 +94,12 @@ function Viewreservation() {
     }
 
 
-
+//search customer nic and package name after the search
     function searchReservation(e) {
         e.preventDefault();
-        if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
+        if (!isNaN(search.charAt(0))) {
             axios.get(`http://localhost:4000/reservations/searchReservationRecs/${search}`).then((res) => {
-                //setRentals(res.data);
+               
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -110,7 +107,7 @@ function Viewreservation() {
         } else {
 
             axios.get(`http://localhost:4000/reservations/searchReservationRecordsX/${search}`).then((res) => {
-                //setRentals(res.data);
+               
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -120,12 +117,11 @@ function Viewreservation() {
     }
 
 
-
-
+//handle delete from reservation and add to the remove reservation list
     const deleteReservation = async (data) => {
 
         await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
-            //alert("Reservation Record added successfully")
+           
             Swal.fire({
                 title: "Completed Reservation removed! ",
                 text: "Reservation removed",
@@ -135,9 +131,8 @@ function Viewreservation() {
             })
 
             const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
-            //console.log(value);
+            
             if (value) {
-                //alert("Permenantly deleted the Reservation Record");
 
                 Swal.fire({
                     title: 'Success!',
@@ -150,13 +145,10 @@ function Viewreservation() {
                     window.location.reload();
                 })
 
-                //window.location.replace("/viewReservation");
             }
 
         }).catch((err) => {
-            //alert(err.response.data.error)
-
-            //alert(err.response.data.errorCode)
+           
             Swal.fire({
                 title: 'Oops!',
                 text: `${"Reservation not Completed"}`,
@@ -170,12 +162,10 @@ function Viewreservation() {
 
     }
 
-
+//refresh the page
     function refreshPage() {
         window.location.reload();
     }
-
-
 
 
     return (
@@ -234,30 +224,30 @@ function Viewreservation() {
                 <table class="table table-hover" id="myTable">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Customer</th>
-                            <th class="text-center">NIC</th>
-                            <th class="text-center">Package Name</th>
-                            <th class="text-center">Event Type</th>
-                            <th class="text-center">From</th>
-                            <th class="text-center">To</th>
-                            <th class="text-center">Total</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
+                            <th class="text">Customer</th>
+                            <th class="text">NIC</th>
+                            <th class="text">Package Name</th>
+                            <th class="text">Event Type</th>
+                            <th class="text">From</th>
+                            <th class="text">To</th>
+                            <th class="text">Total</th>
+                            <th class="text">Status</th>
+                            <th class="text">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {viewreservation.map((reservations) => {
                             return (
                                 <tr>
-                                    <td class="text-center" onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view reservation" className="view-td">{reservations.customername}</td>
-                                    <td class="text-center">{reservations.customernic}</td>
-                                    <td class="text-center">{reservations.packagename}</td>
-                                    <td class="text-center">{reservations.eventtype}</td>
-                                    <td class="text-center">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
-                                    <td class="text-center">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
+                                    <td class="text" onClick={() => openModal(reservations)} data-toggle="tooltip" data-placement="right" title="Click to view reservation" className="view-td">{reservations.customername}</td>
+                                    <td class="text">{reservations.customernic}</td>
+                                    <td class="text">{reservations.packagename}</td>
+                                    <td class="text">{reservations.eventtype}</td>
+                                    <td class="text">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
+                                    <td class="text">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
                                     <td class="text-right">{reservations.totalreservation.toFixed(2)}</td>
-                                    <td class="text-center">{reservations.status}</td>
-                                    <td class="text-center">
+                                    <td class="text">{reservations.status}</td>
+                                    <td class="text">
                                         <div class="btn-group" role="group" aria-label="Basic example">
 
                                             <Link class="btn btn-light btn-sm" onClick={() => openModalUpdate(reservations)}  >update</Link>
@@ -295,6 +285,7 @@ function Viewreservation() {
                                 cancel
                             </button>
                         </div>
+                        
                     </div>
                 </Modal.Footer>
             </Modal>

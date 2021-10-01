@@ -5,13 +5,13 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 function ReservationReport() {
 
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
 

@@ -11,8 +11,6 @@ import { Modal } from "react-bootstrap";
 
  function Updatereservation(reservations) {
 
-    console.log("update modal dataaaaaa", reservations);
-
     let history = useHistory();
 
     const RID = reservations.data.reservationid;
@@ -21,7 +19,6 @@ import { Modal } from "react-bootstrap";
         loadReservation();
     }, []);
 
-    console.log("came dataaaaa", reservations)
 
     const[customername,setcustomername] = useState("");
     const[contactnumber,setcontactnumber] = useState("");
@@ -60,32 +57,51 @@ import { Modal } from "react-bootstrap";
     }
 
     //calculate the penalty Cost
-    function calculatePenaltyCost() {
+    function calculatePenaltycharge() {
         const Price = (totalreservation * (5 / 100)) * getDateDiff();
         return Price;
     }
 
-    function calculateRemainingPayment() {
-        return ((totalreservation - advancedpayment) + calculatePenaltyCost());
+    //calculate reamaing payment
+    function calculateRemainingCharge() {
+        return ((totalreservation - advancedpayment) + calculatePenaltycharge());
     }
 
-
+//update payment details
     function updateTotal(){
       
-        document.getElementById('penaltyCharge').value = calculatePenaltyCost();
-        document.getElementById('remaining').value = calculateRemainingPayment();
+        document.getElementById('penaltyCharge').value = calculatePenaltycharge();
+        document.getElementById('remaining').value = calculateRemainingCharge();
+
+        if (document.getElementById("entry").click) {
+            document.getElementById('pentry').style.display = "none";
+            document.getElementById("update").style.display = "block";
+            document.getElementById("reset").style.display = "block";
+
+        }
         
     }
 
+    //reset page after clicking cancel button
+    function resetclick(){
+        if (document.getElementById("reset").click) {
+            document.getElementById('pentry').style.display = "block";
+            document.getElementById("update").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+
+        }
+
+    }
+
+    //calculate penalty charge
     function calculateCharges() {
         document.getElementById('penaltyDay').value = getDateDiff();
    
     }
-
-    const Days = getDateDiff();
-    const penaltyCharge = calculatePenaltyCost();
-    const remainder = calculateRemainingPayment();
-
+    
+    const penaltyCharge = calculatePenaltycharge();
+    
+    //set penalty day
     function UpdatedPenaltyDays() {
         var value = getDateDiff();
         setpenaltyDay(value);
@@ -114,11 +130,22 @@ import { Modal } from "react-bootstrap";
             //setremaining(res.data.reservation.remaining);
 
         }).catch((err) => {
-            alert(err.response.data.error);
+            //alert(err.response.data.error);
+            Swal.fire({
+                title: "Are you sure you want to close the Reservation ? ",
+                text: `${err.response.data.error}`,
+                showConfirmButton: true,
+                showDenyButton: true,
+                confirmButtonText: "Proceed",
+                denyButtonText: "Cancel",
+                confirmButtonColor: "#1fc191",
+        
+            })
         })
 
     };
 
+    //update data after submit form
     const onSubmit = async e => {
         e.preventDefault();
    
@@ -151,9 +178,9 @@ import { Modal } from "react-bootstrap";
                                 penaltyCharge,
                                 //remaining
                             }
-                           // console.log("data", newReservation);
+                          
       axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
-        //alert("Reservation Payment is ready");
+       
          Swal.fire({
             title: "Reservation Record successfully Completed! ",
             icon: 'success',
@@ -182,6 +209,7 @@ import { Modal } from "react-bootstrap";
 })
 }
 
+//refresh page 
 function refreshPage() {
     window.location.reload();
 }
@@ -369,7 +397,7 @@ function refreshPage() {
                                                     value={penalty}
                                                     onChange={(e) => {
                                                         setpenalty(e.target.value); 
-                                                        //calculatePenaltyCost()
+                                                        //calculatePenaltycharge()
                                                 }}/>
                                             </div>
                                             </div>
@@ -421,17 +449,17 @@ function refreshPage() {
                                             </div>
                                             
                                             <div className="row">
-                                            <div className="col py-3 text-center">         
+                                            <div className="col py-3 text-center" id="pentry">         
                                                 <input type="button" class="btn btn-info-total" id="entry" value="Payment" onClick={updateTotal} />
                                                 
                                                 </div>
-                                                <div className="col py-3 text-center">
+                                                <div className="col py-3 text-center" id="update"  style={{ display: "none" }}>
                                                     <button type="submit" className="btn btn-ok">
                                                         Update
                                                     </button>
                                                 </div>
-                                                <div className="col py-3 text-center">
-                                                    <button type="reset" className="btn btn-reset">
+                                                <div className="col py-3 text-center" id="reset" style={{ display: "none" }}>
+                                                    <button type="reset" className="btn btn-reset" onClick={resetclick}>
                                                         Cancel
                                                     </button>
                                                 </div>

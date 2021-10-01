@@ -5,6 +5,7 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Swal from "sweetalert2";
+import Header from "../../Header";
 
 function RentalPlacement() {
 
@@ -476,6 +477,7 @@ function RentalPlacement() {
 
 
         <div className="page-component-body">
+            <Header></Header>
             <div class="container input-main-form ">
                 <br></br>
                 <h2>Rental Placement</h2>

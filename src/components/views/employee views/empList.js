@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 import { getAllEmployeesService, searchEmployeesService } from "../../services/employeeService";
 
@@ -117,7 +117,7 @@ export default function EmpList() {
     return (
         <div className="page-component-body " >
 
-            <SideBar></SideBar>
+            <Header></Header>
 
             <div className="table-emp">
                 <div class="row table-head  mt-3">

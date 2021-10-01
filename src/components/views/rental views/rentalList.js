@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import TestModal from "./modals/viewRental";
 import DeleteModal from "./modals/deleteRental"
 import RentalUpdateModal from "./modals/RentalUpdate";
+import Header from "../../Header";
 
 function RentalList() {
 
@@ -145,6 +146,7 @@ function RentalList() {
 
     return (
         <div className="page-component-body">
+            <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

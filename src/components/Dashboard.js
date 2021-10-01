@@ -159,7 +159,7 @@ function Dashboard() {
                         <table class="table table-hover">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th>To</th>
+                                    <th>From</th>
                                     <th>Type Name</th>
                                     <th>Package</th>
                                     <th>Total (Rs.)</th>
@@ -170,7 +170,7 @@ function Dashboard() {
                                 {reservationList.map((reservations) => {
                                     return (
                                         <tr >
-                                            <td> {reservations.to}</td>
+                                            <td> {reservations.from}</td>
                                             <td >{reservations.eventtype}</td>
                                             <td >{reservations.packagename}</td>
                                             <td >{reservations.totalreservation.toFixed(2)}</td>
