@@ -7,7 +7,7 @@ import rentalList from "./views/rental views/rentalList"
 import updateRental from "./views/rental views/updateRental"
 import addReservation from "./views/reservation views/reservation"
 import viewReservation from "./views/reservation views/viewreservation"
-import updateReservation from "./views/reservation views/updatereservation"
+// import updateReservation from "./views/reservation views/updatereservation"
 import addEmployee from "./views/employee views/addEmployee"
 import addVehicle from "./views/vehicle views/addVehicle";
 import empList from "./views/employee views/empList";
@@ -42,7 +42,7 @@ function Home() {
                 <Route path="/updateRental/:rentalId" exact component={updateRental} />
                 <Route path="/addReservation" exact component={addReservation} />
                 <Route path="/viewReservation" exact component={viewReservation} />
-                <Route path="/updateReservation/:RID" exact component={updateReservation} />
+                {/* <Route path="/updateReservation/:RID" exact component={updateReservation} /> */}
                 <Route path="/diplay/RemoveReservationlist" exact component={DeleteReservation} />
                 <Route path="/addEmployee" exact component={addEmployee} />
                 <Route path="/addVehicle" exact component={addVehicle} />

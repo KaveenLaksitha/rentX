@@ -5,97 +5,11 @@ import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Swal from 'sweetalert2'
+import Header from '../../Header';
 
 function Reservation() {
 
-    {/*const [CarList, setCarList] = useState([]);
-    const [BusList, setBusList] = useState([]);
-    const [VanList, setVanList] = useState([]);
-
-    useEffect(() => {
-
-        function getCarList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Car").then((res) => {
-                setCarList(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-
-        function getBusList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Bus").then((res) => {
-                setBusList(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-
-        function getVanList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Van").then((res) => {
-                setVanList(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-
-        getCarList();
-        getBusList();
-        getVanList();
-
-    }, [])
-
-    function populate() {
-        var Stringsplit1 = CarList.split(',')
-        var Stringsplit2 = VanList.split(",")
-        var Stringsplit3 = BusList.split(",")
-
-        var s1 = document.getElementById('vehicleType')
-        var s2 = document.getElementById('vehicleModel')
-
-        var arry1 = [Stringsplit1.length];
-
-        for (var a = 0; a < Stringsplit1.length; a++) {
-            arry1[a] = Stringsplit1[a].toLowerCase() + "|" + Stringsplit1[a];
-        }
-        arry1.unshift("choose|Choose");
-        //alert(arry1)
-
-        var arry2 = [Stringsplit2.length];
-
-        for (var a = 0; a < Stringsplit2.length; a++) {
-            arry2[a] = Stringsplit2[a].toLowerCase() + "|" + Stringsplit2[a];
-        }
-        arry2.unshift("choose|Choose");
-        //alert(arry2)
-
-        var arry3 = [Stringsplit3.length];
-
-        for (var a = 0; a < Stringsplit3.length; a++) {
-            arry3[a] = Stringsplit3[a].toLowerCase() + "|" + Stringsplit3[a];
-        }
-        arry3.unshift("choose|Choose");
-        //alert(arry3)
-
-        s2.innerjs = " ";
-        if (s1.value == "Car") {
-            var optionArray = arry1;
-        } else if (s1.value == "Van") {
-            var optionArray = arry2;
-        } else if (s1.value == "Bus") {
-            var optionArray = arry3;
-        }
-
-        for (var option in optionArray) {
-            var pair = optionArray[option].split('|');
-            var newoption = document.createElement("option")
-            newoption.value = pair[0];
-            newoption.innerHTML = pair[1];
-            s2.options.add(newoption);
-
-
-        }
-
-    }*/}
+   
 
     // disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -141,13 +55,18 @@ function Reservation() {
     const [NICErr, setNICErr] = useState("");
     const[MobErr, setMobileErr] = useState("");
 
+    //set remaining payment
+    useEffect(() => {
+        calcprice1()
+    }, [advancedpayment,totalreservation]);
+
+
+    //send data to data base after submit the form
     function sendData(e) {
         e.preventDefault();
 
         const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
-
-        //alert("Your ramaining balance is " + `${finalpay}`);
-
+     
         const NICValid  = NICValidation();
         const CntValid  = MobileValidation();
 
@@ -162,7 +81,6 @@ function Reservation() {
                 confirmButtonColor: "#1fc191",
 
             }).then((result) => {
-            //const answer = window.confirm("Are you sure you want to confirm submission?");
 
         if (result.isConfirmed) {
             const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
@@ -181,7 +99,6 @@ function Reservation() {
                     })
 
             }).catch((err) => {
-                //alert(err.response.data.error)
                 //var error = err.response.data.error
                 Swal.fire({
                         title: 'Oops!',
@@ -189,7 +106,6 @@ function Reservation() {
                         icon: 'error',
                         confirmButtonColor: "#1fc191",
                     })               
-
             })
         }
         else if (result.isDenied) {
@@ -199,14 +115,7 @@ function Reservation() {
     }
 }
 
-
-
-
-
-function refreshPage() {
-    window.location.reload();
-}
-
+//select vehicle model under category
     function searchModel() {
         if (document.getElementById('vehicleType').value == 'Car') {
             document.getElementById('model1').value = "Axio";
@@ -229,6 +138,7 @@ function refreshPage() {
         }
     }
 
+    //select vehicle model under category
     function searchModel1() {
         if (document.getElementById('vehicleType1').value == 'Car') {
             document.getElementById('model11').value = "Axio";
@@ -251,6 +161,8 @@ function refreshPage() {
         
         }
     }
+
+    //get date different
     function getDateDiff() {
         var admission = moment(from, 'DD-MM-YYYY');
         var discharge = moment(to, 'DD-MM-YYYY');
@@ -258,56 +170,129 @@ function refreshPage() {
         return diffDuration;
     }
 
+//calculate charge per day
+    function calculateRentPerDate() {
+        function getRentFirstVehicle() {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
+                setPerDayCharge(res.data)
+                console.log(res.data);
+            }).catch((error) => {
+                Swal.fire({
+                    title: "Error Occured !",
+                    text: `${error.message}`,
+                    icon: 'error',
+                    confirmButtonColor: "#1fc191",
+                })
+            })
+        }
+        getRentFirstVehicle();
+    }
 
+//calculate charge per day for second vehicle
+    function calculateRentPerDate1() {
+        function getRentFirstVehicle2() {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
+                setPerDayCharge1(res.data)
+                console.log(res.data);
+            }).catch((error) => {
+                Swal.fire({
+                    title: "Error Occured !",
+                    text: `${error.message}`,
+                    icon: 'error',
+                    confirmButtonColor: "#1fc191",
 
-    function showDateRange() {
-        document.getElementById('dateRange').value = getDateDiff();
-        getRentChargePerDay();
-        getRentChargePerDay1()
-        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
+                })
+            })
+        }
+        getRentFirstVehicle2();
+    }
+
+//calculate final payment after clicking payment button
+    function CalcFinalPayment() {
        
+        calculateRentPerDate();
+        calculateRentPerDate1();
+
+        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;     
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
+      
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
+       
         var dis = Number(document.getElementById('discount').value) / 100;
+        
         if(getDateDiff() == 0){
             var finalresult = document.getElementById('totalreservation').value = result - (result * dis );
             document.getElementById('totalreservation').innerHTML = result - (result * dis );
         }else{
             var finalresult = document.getElementById('totalreservation').value = result * getDateDiff() - (result * getDateDiff() * dis);
             document.getElementById('totalreservation').innerHTML = result * getDateDiff() - (result * getDateDiff() * dis);
-        }    
+        }   
+        
+        if (document.getElementById("entry1").click) {
+            document.getElementById('pentry').style.display = "none";
+            document.getElementById("create").style.display = "block";
+            document.getElementById("reset").style.display = "block";
+
+        }
           
         return finalresult;
     }
 
+//hide payment button after clciking payment button
+    function resetclick(){
+        if (document.getElementById("reset").click) {
+            document.getElementById('pentry').style.display = "block";
+            document.getElementById("create").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+
+        }
+
+    }
+    
+//set final reservatin payment
     function UpdatedPenaltyDays() {
-        var value = showDateRange();
+        var value = CalcFinalPayment();
         settotalreservation(value);
     }
 
+//set final reservation second page
     function calcprice1(){
-        //getRentChargePerDay();
-        document.getElementById('FinalreservationPrice').value = document.getElementById('totalreservation').value - Number(advancedpayment);
-        document.getElementById('FinalreservationPrice').innerHTML = document.getElementById('totalreservation').value - Number(advancedpayment);
-
+        //calculateRentPerDate();
+        var finalbill = document.getElementById('totalreservation').value - Number(advancedpayment);
+        document.getElementById('FinalreservationPrice').value = finalbill;
+        //document.getElementById('FinalreservationPrice').innerHTML = document.getElementById('totalreservation').value - Number(advancedpayment);
+        return finalbill;
     }
 
-    {/*function calcprice2(){
-        getRentChargePerDay1()
-        document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
-        document.getElementById('perDayCharge1').innerHTML = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
+//set date different
+    function nodate(){
+        document.getElementById('dateRange').value = getDateDiff();
+        document.getElementById('dateRange').innerHTML = getDateDiff();
+    }
 
-    }*/}
+    //set first vehicle unit price
+    function unitprice(){
+        calculateRentPerDate();
+        // document.getElementById('perDayCharge').value = perDayCharge;
+        // document.getElementById('perDayCharge').innerHTML = perDayCharge;
+    }
 
-
+    //set second vehicle unit price
+    function unitpricesecond() {
+        calculateRentPerDate1();
+        // document.getElementById('perDayCharge1').value =  perDayCharge1;
+        // document.getElementById('perDayCharge1').innerHTML =  perDayCharge1;
+    }
+  
+    //validate and hold package details after clicking create button
     function addtemporaryilyData(e) {
         e.preventDefault();
 
-        getRentChargePerDay();
-        getRentChargePerDay1()
+        calculateRentPerDate();
+        calculateRentPerDate1()
         if(packagename == "Package 1" && ((vehicleType=="Car" && vehicleType1 == "Van") || (vehicleType=="Van" && vehicleType1 == "Car"))){
            
-            document.getElementById('total').value = showDateRange();
+            document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -317,7 +302,7 @@ function refreshPage() {
             })
         }else if(packagename == "Package 2" && ((vehicleType=="Van" && vehicleType1 == "Bus") || (vehicleType=="Bus" && vehicleType1 == "Van") )) {
            
-            document.getElementById('total').value = showDateRange();
+            document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -327,7 +312,7 @@ function refreshPage() {
             })
         }else if(packagename == "Package 3" && ((vehicleType=="Bus" && vehicleType1 == "Car") || (vehicleType=="Car" && vehicleType1 == "Bus"))){
             
-            document.getElementById('total').value = showDateRange();
+            document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
             Swal.fire({
@@ -347,33 +332,12 @@ function refreshPage() {
       
     }
 
-    function getRentChargePerDay() {
-        function getRent() {
-            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
-                setPerDayCharge(res.data)
-                console.log(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-        getRent();
-    }
 
-    function getRentChargePerDay1() {
-        function getRent1() {
-            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
-                setPerDayCharge1(res.data)
-                console.log(res.data);
-            }).catch((error) => {
-                alert(error.message);
-            })
-        }
-        getRent1();
-    }
-
+//unhode second vehicle details
     function showDelivery() {
 
         if (document.getElementById("entry").click) {
+            document.getElementById('btnAdd1').style.display = "none";
             document.getElementById("hide11").style.display = "block";
             document.getElementById("hide22").style.display = "block";
             document.getElementById("hide33").style.display = "block";
@@ -383,10 +347,7 @@ function refreshPage() {
     }
 
 
-    //validation
-
-    //validate function
-
+//validate nic
     const NICValidation = () => {
 
         const NICErr = {}; //State
@@ -411,6 +372,7 @@ function refreshPage() {
 
 }
 
+//validate mobile number
 const MobileValidation =() =>{//validate function
 
     const MobErr ={}; //State
@@ -473,13 +435,15 @@ const MobileValidation =() =>{//validate function
     };
 
 
-
-
+//refreshing page
+    function refreshPage() {
+        window.location.reload();
+    }
 
 
     return (
         <div className="page-component-body ">
-
+        <Header></Header>
             <div class="container input-main-form-emp">
                 <br></br>
                 <h3> Event Reservation</h3>
@@ -578,7 +542,7 @@ const MobileValidation =() =>{//validate function
                                                     id="vehicleType"
                                                     className="form-control "
                                                     //tabindex="3"
-                                                    onChange={e => { setVehicleType(e.target.value); searchModel() }}
+                                                    onChange={e => { setVehicleType(e.target.value); searchModel() ; nodate()}}
                                                     required
                                                 >
                                                     <option  >choose</option>
@@ -616,7 +580,7 @@ const MobileValidation =() =>{//validate function
                                                     //tabindex="5"
                                                     pattern="[0-9]"
                                                     required
-                                                    onChange={(event) => { setno1(event.target.value);  }}
+                                                    onChange={(event) => { setno1(event.target.value); unitprice() }}
                                                 />
                                             </div>
                                             <div class="form-group col-md-2" id="hide4" >
@@ -627,10 +591,9 @@ const MobileValidation =() =>{//validate function
                                                     id="perDayCharge"
                                                     name="perDayCharge"
                                                     placeholder="0.00"
-                                                    //tabindex="5"
-                                                    required
+                                                    //onChange={(event) => { setPerDayCharge(event.target.value); }}           
                                                     disabled
-                                                //pattern="[0-9]"
+                                              
                                                 />
                                             </div>
 
@@ -678,7 +641,7 @@ const MobileValidation =() =>{//validate function
                                                     //tabindex="5"
                                                     pattern="[0-9]"
                                                     required
-                                                    onChange={(event) => { setno2(event.target.value);  }}
+                                                    onChange={(event) => { setno2(event.target.value); unitpricesecond() }}
                                                 />
                                             </div>
                                             <div class="form-group col-md-2" style={{ display: "none" }} id="hide44" >
@@ -688,21 +651,21 @@ const MobileValidation =() =>{//validate function
                                                     class="form-control formInput"
                                                     id="perDayCharge1"
                                                     name="perDayCharge1"
-                                                    placeholder="0.00"
-                                                    min="1"
-                                                    //tabindex="5"
+                                                    placeholder="0.00"          
+                                                    //onChange={(event) => { setPerDayCharge1(event.target.value); }}
                                                     disabled
-                                                //pattern="[0-9]"
+                                                
                                                 />
                                             </div>
 
                                         </div>
-                                        <div class="row" >
+                                        <div class="row" id="btnAdd1">
                                             <div class="form-group col-md-2">
                                                 <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
                                             </div>
                                            
                                         </div>
+                                        <br></br>
                                         <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="discount">Discount</label>
@@ -739,16 +702,16 @@ const MobileValidation =() =>{//validate function
                                             </div>
                                         </div>
                                         <div className="row">
-                                        <div class="col py-3 text-center">
-                                                <input type="button" class="btn btn-info-total" id="entry" value=" Payment " onClick={showDateRange,UpdatedPenaltyDays } />
+                                        <div class="col py-3 text-center" id="pentry">
+                                                <input type="button" class="btn btn-info-total" id="entry1" value=" Payment " onClick={CalcFinalPayment,UpdatedPenaltyDays } />
                                             </div>
-                                            <div className="col py-3 text-center">
+                                            <div className="col py-3 text-center" style={{ display: "none" }} id="create">
                                                 <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
                                                     Create
                                                 </button>
                                             </div>
-                                            <div className="col py-3 text-center">
-                                                <button type="reset" className="btn btn-reset">
+                                            <div className="col py-3 text-center" style={{ display: "none" }} id="reset">
+                                                <button type="reset" className="btn btn-reset" onClick={resetclick}>
                                                     Cancel
                                                 </button>
                                             </div>
@@ -950,7 +913,7 @@ const MobileValidation =() =>{//validate function
                                                     id="status"
                                                     className="form-control "
                                                     onChange={(event) => {
-                                                        setstatus(event.target.value); calcprice1()
+                                                        setstatus(event.target.value); 
                                                     }
                                                     }
 
@@ -975,7 +938,8 @@ const MobileValidation =() =>{//validate function
                                                         setadvancedpayment(event.target.value); 
                                                     }
                                                     }
-                                                    onFocus={getRentChargePerDay} />
+                                                    // onFocus={calculateRentPerDate}
+                                                     />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="total">Total Reservation Price</label>
@@ -1037,3 +1001,95 @@ const MobileValidation =() =>{//validate function
 }
 
 export default Reservation
+
+
+
+ {/*const [CarList, setCarList] = useState([]);
+    const [BusList, setBusList] = useState([]);
+    const [VanList, setVanList] = useState([]);
+
+    useEffect(() => {
+
+        function getCarList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Car").then((res) => {
+                setCarList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        function getBusList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Bus").then((res) => {
+                setBusList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        function getVanList() {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Van").then((res) => {
+                setVanList(res.data);
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+
+        getCarList();
+        getBusList();
+        getVanList();
+
+    }, [])
+
+    function populate() {
+        var Stringsplit1 = CarList.split(',')
+        var Stringsplit2 = VanList.split(",")
+        var Stringsplit3 = BusList.split(",")
+
+        var s1 = document.getElementById('vehicleType')
+        var s2 = document.getElementById('vehicleModel')
+
+        var arry1 = [Stringsplit1.length];
+
+        for (var a = 0; a < Stringsplit1.length; a++) {
+            arry1[a] = Stringsplit1[a].toLowerCase() + "|" + Stringsplit1[a];
+        }
+        arry1.unshift("choose|Choose");
+        //alert(arry1)
+
+        var arry2 = [Stringsplit2.length];
+
+        for (var a = 0; a < Stringsplit2.length; a++) {
+            arry2[a] = Stringsplit2[a].toLowerCase() + "|" + Stringsplit2[a];
+        }
+        arry2.unshift("choose|Choose");
+        //alert(arry2)
+
+        var arry3 = [Stringsplit3.length];
+
+        for (var a = 0; a < Stringsplit3.length; a++) {
+            arry3[a] = Stringsplit3[a].toLowerCase() + "|" + Stringsplit3[a];
+        }
+        arry3.unshift("choose|Choose");
+        //alert(arry3)
+
+        s2.innerjs = " ";
+        if (s1.value == "Car") {
+            var optionArray = arry1;
+        } else if (s1.value == "Van") {
+            var optionArray = arry2;
+        } else if (s1.value == "Bus") {
+            var optionArray = arry3;
+        }
+
+        for (var option in optionArray) {
+            var pair = optionArray[option].split('|');
+            var newoption = document.createElement("option")
+            newoption.value = pair[0];
+            newoption.innerHTML = pair[1];
+            s2.options.add(newoption);
+
+
+        }
+
+    }*/}
+

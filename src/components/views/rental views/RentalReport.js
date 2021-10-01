@@ -9,7 +9,7 @@ import Header from "../../Header";
 const ref = React.createRef();
 
 
-function ReservationReport() {
+function RentalReport() {
 
     const [from, setFrom] = useState(moment().format('YYYY-MMMM-DD'));
     const [to, setTo] = useState(moment().format('YYYY-MMMM-DD'));
@@ -351,11 +351,9 @@ function ReservationReport() {
                         <h6 className="pb-5">Report generated on : <span id="dateDisplay"></span></h6>
                     </div>
                 </div>
-
-
             </div >
         </div >
     )
 }
 
-export default ReservationReport;
+export default RentalReport;
