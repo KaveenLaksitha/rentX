@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Header from "./Header"
 import Login from "./login"
 import Dashboard from "./Dashboard"
 import addRental from "./views/rental views/rentalPlacement"
@@ -24,6 +23,10 @@ import Footer from "./Footer";
 import RemovedRentalList from "./views/rental views/removedRentals";
 import DeleteVehicles from "./views/vehicle views/deleteVehicles";
 import DeleteReservation from "./views/reservation views/DeleteRecord";
+import imageUplaod from "./views/vehicle views/imageUplaod";
+
+
+
 
 
 
@@ -31,9 +34,7 @@ import DeleteReservation from "./views/reservation views/DeleteRecord";
 function Home() {
     return (
         <Router>
-            <div>
-                {/*<Header />*/}
-
+            <Switch>
                 <Route path="/" exact component={Login} />
                 <Route path="/dashboard" exact component={Dashboard} />
                 <Route path="/addRental" exact component={addRental} />
@@ -56,8 +57,9 @@ function Home() {
                 <Route path="/vehicle/report" exact component={VehicleReport} />
                 <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
                 <Route path="/deleteVehicles" exact component={DeleteVehicles} />
+                <Route path="/imageUpload" exact component={imageUplaod} />
                 <Footer />
-            </div>
+            </Switch>
         </Router>
     );
 }

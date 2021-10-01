@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import Swal from 'sweetalert2'
+import moment from 'moment';
+import DatePicker from 'react-datetime';
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
+
 
 
 function AddVehicle() {
+
+    let path;
 
     //state
     const [OwnerName, setOwnerName] = useState("");
@@ -26,18 +31,16 @@ function AddVehicle() {
     const [NoOfSeats, setNoOfSeats] = useState("");
     const [RatePDay, setRatePDay] = useState("");
     const [YearsRent, setYearsRent] = useState("");
-    const [vehPic, setVehiPic] = useState("");
+    const [vehPic, setVehiPic] = useState();
     const [vehDoc, setVehDoc] = useState("");
+
+
+    const [imgPath, setimgPath] = useState("");
 
     const [RegNoErr, setRegNoErr] = useState("");
     const [TeleErr, setTeleNoErr] = useState("");
     const [NICErr, setNICErr] = useState("");
     const [YearsErr, setYearsErr] = useState("");
-
-    // const[File, setFile] = useState('');
-    // const [fileName, setfileName] = useState('');
-    // const [uploadFiles, setUploadFile] = useState[{}];
-
 
 
 
@@ -53,70 +56,108 @@ function AddVehicle() {
         const YearsValid = YearsValidation();
 
 
+
+
         if (isValid && teleValid && NICValid && YearsValid) {
 
+            const formData = new FormData()
+            formData.append('file', vehPic)
+            const file = {
 
-
-
-            const newVehicle = {
-
-                OwnerName,
-                OwnerNIC,
-                TeleNo,
-                Address,
-                Email,
-                Date,
-                VehicleRegNo,
-                VehicleModel,
-                VehicleType,
-                VehicleBrand,
-                Mileage,
-                InsType,
-                InsComName,
-                Transmission,
-                AirC,
-                NoOfSeats,
-                RatePDay,
-                YearsRent,
-                vehPic,
-                vehDoc
-
-
+                vehPic
             }
 
-            axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
+            console.log("image eka", file);
 
-                .then(() => {
-                    // alert("Vehicle added Successfully !!")
+            axios.post("http://localhost:4000/upload/uploadImage", formData)
+                .then((res) => {
+                    console.log("image sent", res.data);
+                    path = res.data.toString();
 
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Vehicle Details Added Succesfully',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
+                    console.log("path eka image eke", path);
+                    setimgPath(res.data.toString());
+                    //console.log("image path ek aoi", imgPath)
+
+
+
+                    const newVehicle = {
+
+                        OwnerName,
+                        OwnerNIC,
+                        TeleNo,
+                        Address,
+                        Email,
+                        Date,
+                        VehicleRegNo,
+                        VehicleModel,
+                        VehicleType,
+                        VehicleBrand,
+                        Mileage,
+                        InsType,
+                        InsComName,
+                        Transmission,
+                        AirC,
+                        NoOfSeats,
+                        RatePDay,
+                        YearsRent,
+                        imgPath: path,
+                        vehDoc
+
+
                     }
-                    ).then(() => {
-                        window.location.replace("/vehicleList");
 
-                    })
+                    axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
 
+
+
+                        .then(() => {
+                            // alert("Vehicle added Successfully !!")
+
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Vehicle Details Added Succesfully',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }
+                            ).then(() => {
+                                window.location.replace("/vehicleList");
+
+                            })
+
+
+
+                        }).catch((err) => {
+                            // alert(err)
+                            const msgerr = err.response.data.status
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: `${msgerr}`,
+                                confirmButtonColor: '#1fc191',
+
+                            })
+                        })
 
 
                 }).catch((err) => {
-                    // alert(err)
-                    const msgerr = err.response.data.status
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: `${msgerr}`,
-                        confirmButtonColor: '#1fc191',
-
-                    })
+                    alert("image not uploaded", err)
                 })
+
+            const txt = path;
+            console.log("path ekaa dooo", imgPath);
+
+
+
 
         }
     }
+
+    //disable past dates
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday);
+    };
 
     const formValidation = () => {//validate function
 
@@ -372,7 +413,7 @@ function AddVehicle() {
 
     return (
         <div className="page-component-body ">
-            <SideBar></SideBar>
+            <Header></Header>
 
             <div class="container input-main-form-emp pt-3">
                 <h2 class="pb-2 pl-3">Add vehicle details</h2>
@@ -479,12 +520,21 @@ function AddVehicle() {
                                             </div>
                                             <div class="form-group ">
                                                 <label class="form-label" for="date">Date</label>
-                                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3" required
-                                                    onChange={(e) => {
-                                                        setDate(e.target.value); // assign value
-                                                    }}
+                                                {/* <input type="date" class="form-control" id="date" name="date" placeholder="Date" tabindex="3" required
+                                                    // onChange={(e) => {
+                                                    //     setDate(e.target.value); // assign value
+                                                    // }}
 
+                                                /> */}
+                                                <p class="font-weight-light h-25" style={{ color: "grey" }}>* Pick Your Date </p>
+                                                <DatePicker required id="rfrom"
+                                                    name="rfrom"
+
+                                                    onChange={(event) => { setDate(event); }}
+                                                    timeFormat={false}
+                                                    isValidDate={disablePastDt}
                                                 />
+
                                             </div>
 
 
@@ -767,7 +817,7 @@ function AddVehicle() {
                                                     <input type="file" class="form-control-file pt-3" id="Photos"
 
                                                         onChange={(e) => {
-                                                            setVehiPic(e.target.value);
+                                                            setVehiPic(e.target.files[0]);
                                                         }}
 
                                                     />

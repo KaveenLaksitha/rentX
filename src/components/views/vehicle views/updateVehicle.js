@@ -1,11 +1,11 @@
 import React from 'react'
 
-import SideBar from "../../SideBar";
+import Header from "../../Header";
 
 function updateVehicle() {
     return (
         <div className="page-component-body">
-            <SideBar></SideBar>
+            <Header></Header>
             <div class="container input-main-form-emp">
                 <div class="tab-content-emp" id="myTabContent">
                     <form>
