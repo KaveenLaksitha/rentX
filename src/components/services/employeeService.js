@@ -137,15 +137,12 @@ export const searchPastEmployeesService = async (input) => {
   }
 };
 
-
-
-
 // for generate report on employee
 export const searchForReport = async (payload) => {
   try {
     const response = await axios.get(`${HOST}/api/employeeReport/${payload.designation}/${payload.ageFrom}/${payload.ageTo}/${payload.gender}`);
     console.log("response came", response);
-    if (!response.ok) {
+    if (!response.data.ok) {
       return {
         ok: false,
       };

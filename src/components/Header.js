@@ -1,8 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+
 import "./style.scss";
 
 
 function Header(props) {
+  let history = useHistory();
   return (
     <div className="page-body ">
 
@@ -38,14 +41,18 @@ function Header(props) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="text-light" href="/dashboard">
+                  <button class="btn text-light" href="/dashboard">
                     Home <span class="sr-only">(current)</span>
-                  </a>
+                  </button>
                 </li>
                 <li class="nav-item">
-                  <a class="text-light" href="/">
+                  <button class="btn text-light"
+                    onClick={() => {
+                      history.push("/")
+                    }}
+                  >
                     Logout
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

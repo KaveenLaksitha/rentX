@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Modal, Button } from "react-bootstrap";
 import Swal from 'sweetalert2'
 
@@ -10,6 +10,9 @@ import TestModal from "./viewVehicle";
 import UpdateVehicleModal from "./modal/updateVehicleModal";
 
 function VehicleList() {
+
+
+    const [search, setSearch] = useState("");
 
     const [vehicles, setVehicles] = useState([]);
     const [modalData, setData] = useState([]);
@@ -32,28 +35,7 @@ function VehicleList() {
 
                 setVehicles(res.data.reverse());
                 console.log("Data recieved");
-                let timerInterval
-                Swal.fire({
-                    title: 'Loading...',
-                    html: ' <b></b> loading details..',
-                    timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        console.log('I was closed by the timer')
-                    }
-                })
+
             }).catch((error) => {
                 // alert(error.message);
                 Swal.fire({
@@ -156,6 +138,21 @@ function VehicleList() {
     }
 
 
+    function searchVehicles(e) {
+
+
+        e.preventDefault();
+        console.log("search val", search);
+        axios.get(`http://localhost:4000/vehicle/searchV/${search}`).then((res) => {
+
+
+            setVehicles(res.data.data.reverse());
+        }).catch((error) => {
+            alert(error.message);
+        })
+    }
+
+
 
 
 
@@ -204,8 +201,10 @@ function VehicleList() {
                     <div className="col">
                         <div class="input-group input-group-search">
                             <div class="searchbar">
-                                <input class="search_input" type="text" name="" placeholder="Search..." />
-                                <button class="btn search_icon" type="button"><i class="fa fa-search"></i></button>
+                                <form id="contactform" class="form" onSubmit={searchVehicles}>
+                                    <input class="search_input" type="text" name="" placeholder="Search..." value={search} onChange={(event) => { setSearch(event.target.value) }} required />
+                                    <button class="btn search_icon" type="submit" id="submit" name="submit"><i class="fa fa-search"></i></button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -315,4 +314,4 @@ function VehicleList() {
     )
 }
 
-export default VehicleList;
+export default withRouter(VehicleList);
