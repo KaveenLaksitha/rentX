@@ -9,7 +9,7 @@ import Header from '../../Header';
 
 function Reservation() {
 
-   
+
 
     // disable past dates
     const yesterday = moment().subtract(1, 'day');
@@ -53,12 +53,12 @@ function Reservation() {
     const [no2, setno2] = useState("");
 
     const [NICErr, setNICErr] = useState("");
-    const[MobErr, setMobileErr] = useState("");
+    const [MobErr, setMobileErr] = useState("");
 
     //set remaining payment
     useEffect(() => {
         calcprice1()
-    }, [advancedpayment,totalreservation]);
+    }, [advancedpayment, totalreservation]);
 
 
     //send data to data base after submit the form
@@ -66,14 +66,14 @@ function Reservation() {
         e.preventDefault();
 
         const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
-     
-        const NICValid  = NICValidation();
-        const CntValid  = MobileValidation();
 
-        if(NICValid && CntValid){
+        const NICValid = NICValidation();
+        const CntValid = MobileValidation();
+
+        if (NICValid && CntValid) {
             Swal.fire({
                 title: "Are you sure you want to confirm Reservation? ",
-                text : `${"Your Remaining balance is " + finalpay}`,
+                text: `${"Your Remaining balance is " + finalpay}`,
                 showConfirmButton: true,
                 showDenyButton: true,
                 confirmButtonText: "Proceed",
@@ -82,40 +82,40 @@ function Reservation() {
 
             }).then((result) => {
 
-        if (result.isConfirmed) {
-            const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
+                if (result.isConfirmed) {
+                    const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
 
-            axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
-    
-                Swal.fire({
-                        title: 'Reservation Completed!',
-                        icon: 'success',
-                        confirmButtonColor: "#1fc191",
-                    }).then((res) => {
-                        if (res.isConfirmed) {
-                            window.location.replace('/viewReservation');
-                        }
-                       
+                    axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
+
+                        Swal.fire({
+                            title: 'Reservation Completed!',
+                            icon: 'success',
+                            confirmButtonColor: "#1fc191",
+                        }).then((res) => {
+                            if (res.isConfirmed) {
+                                window.location.replace('/viewReservation');
+                            }
+
+                        })
+
+                    }).catch((err) => {
+                        //var error = err.response.data.error
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${"Customer already has reservation"}`,
+                            icon: 'error',
+                            confirmButtonColor: "#1fc191",
+                        })
                     })
-
-            }).catch((err) => {
-                //var error = err.response.data.error
-                Swal.fire({
-                        title: 'Oops!',
-                        text : `${"Customer already has reservation"}`,
-                        icon: 'error',
-                        confirmButtonColor: "#1fc191",
-                    })               
+                }
+                else if (result.isDenied) {
+                    refreshPage();
+                }
             })
         }
-        else if (result.isDenied) {
-            refreshPage();
-        }
-    })
     }
-}
 
-//select vehicle model under category
+    //select vehicle model under category
     function searchModel() {
         if (document.getElementById('vehicleType').value == 'Car') {
             document.getElementById('model1').value = "Axio";
@@ -134,7 +134,7 @@ function Reservation() {
             document.getElementById('model1').innerHTML = "Coater";
             document.getElementById('model2').value = "Rosa";
             document.getElementById('model2').innerHTML = "Rosa";
-           
+
         }
     }
 
@@ -152,13 +152,13 @@ function Reservation() {
             document.getElementById('model11').innerHTML = "Caravan";
             document.getElementById('model22').value = "KDH";
             document.getElementById('model22').innerHTML = "KDH";
-         
+
         } else if (document.getElementById('vehicleType1').value == 'Bus') {
             document.getElementById('model11').value = "Coater";
             document.getElementById('model11').innerHTML = "Coater";
             document.getElementById('model22').value = "Rosa";
             document.getElementById('model22').innerHTML = "Rosa";
-        
+
         }
     }
 
@@ -170,7 +170,7 @@ function Reservation() {
         return diffDuration;
     }
 
-//calculate charge per day
+    //calculate charge per day
     function calculateRentPerDate() {
         function getRentFirstVehicle() {
             axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
@@ -188,7 +188,7 @@ function Reservation() {
         getRentFirstVehicle();
     }
 
-//calculate charge per day for second vehicle
+    //calculate charge per day for second vehicle
     function calculateRentPerDate1() {
         function getRentFirstVehicle2() {
             axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
@@ -207,39 +207,39 @@ function Reservation() {
         getRentFirstVehicle2();
     }
 
-//calculate final payment after clicking payment button
+    //calculate final payment after clicking payment button
     function CalcFinalPayment() {
-       
+
         calculateRentPerDate();
         calculateRentPerDate1();
 
-        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;     
+        document.getElementById('perDayCharge').value = (Number(document.getElementById('noVehiclehide1').value)) * perDayCharge;
         document.getElementById('perDayCharge1').value = (Number(document.getElementById('noVehiclehide2').value)) * perDayCharge1;
-      
+
         var result = Number(document.getElementById('perDayCharge').value) + Number(document.getElementById('perDayCharge1').value);
-       
+
         var dis = Number(document.getElementById('discount').value) / 100;
-        
-        if(getDateDiff() == 0){
-            var finalresult = document.getElementById('totalreservation').value = result - (result * dis );
-            document.getElementById('totalreservation').innerHTML = result - (result * dis );
-        }else{
+
+        if (getDateDiff() == 0) {
+            var finalresult = document.getElementById('totalreservation').value = result - (result * dis);
+            document.getElementById('totalreservation').innerHTML = result - (result * dis);
+        } else {
             var finalresult = document.getElementById('totalreservation').value = result * getDateDiff() - (result * getDateDiff() * dis);
             document.getElementById('totalreservation').innerHTML = result * getDateDiff() - (result * getDateDiff() * dis);
-        }   
-        
+        }
+
         if (document.getElementById("entry1").click) {
             document.getElementById('pentry').style.display = "none";
             document.getElementById("create").style.display = "block";
             document.getElementById("reset").style.display = "block";
 
         }
-          
+
         return finalresult;
     }
 
-//hide payment button after clciking payment button
-    function resetclick(){
+    //hide payment button after clciking payment button
+    function resetclick() {
         if (document.getElementById("reset").click) {
             document.getElementById('pentry').style.display = "block";
             document.getElementById("create").style.display = "none";
@@ -248,15 +248,15 @@ function Reservation() {
         }
 
     }
-    
-//set final reservatin payment
+
+    //set final reservatin payment
     function UpdatedPenaltyDays() {
         var value = CalcFinalPayment();
         settotalreservation(value);
     }
 
-//set final reservation second page
-    function calcprice1(){
+    //set final reservation second page
+    function calcprice1() {
         //calculateRentPerDate();
         var finalbill = document.getElementById('totalreservation').value - Number(advancedpayment);
         document.getElementById('FinalreservationPrice').value = finalbill;
@@ -264,14 +264,14 @@ function Reservation() {
         return finalbill;
     }
 
-//set date different
-    function nodate(){
+    //set date different
+    function nodate() {
         document.getElementById('dateRange').value = getDateDiff();
         document.getElementById('dateRange').innerHTML = getDateDiff();
     }
 
     //set first vehicle unit price
-    function unitprice(){
+    function unitprice() {
         calculateRentPerDate();
         // document.getElementById('perDayCharge').value = perDayCharge;
         // document.getElementById('perDayCharge').innerHTML = perDayCharge;
@@ -283,15 +283,15 @@ function Reservation() {
         // document.getElementById('perDayCharge1').value =  perDayCharge1;
         // document.getElementById('perDayCharge1').innerHTML =  perDayCharge1;
     }
-  
+
     //validate and hold package details after clicking create button
     function addtemporaryilyData(e) {
         e.preventDefault();
 
         calculateRentPerDate();
         calculateRentPerDate1()
-        if(packagename == "Package 1" && ((vehicleType=="Car" && vehicleType1 == "Van") || (vehicleType=="Van" && vehicleType1 == "Car"))){
-           
+        if (packagename == "Package 1" && ((vehicleType == "Car" && vehicleType1 == "Van") || (vehicleType == "Van" && vehicleType1 == "Car"))) {
+
             document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
@@ -300,8 +300,8 @@ function Reservation() {
                 title: "Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
-        }else if(packagename == "Package 2" && ((vehicleType=="Van" && vehicleType1 == "Bus") || (vehicleType=="Bus" && vehicleType1 == "Van") )) {
-           
+        } else if (packagename == "Package 2" && ((vehicleType == "Van" && vehicleType1 == "Bus") || (vehicleType == "Bus" && vehicleType1 == "Van"))) {
+
             document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
@@ -310,8 +310,8 @@ function Reservation() {
                 title: "Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
-        }else if(packagename == "Package 3" && ((vehicleType=="Bus" && vehicleType1 == "Car") || (vehicleType=="Car" && vehicleType1 == "Bus"))){
-            
+        } else if (packagename == "Package 3" && ((vehicleType == "Bus" && vehicleType1 == "Car") || (vehicleType == "Car" && vehicleType1 == "Bus"))) {
+
             document.getElementById('total').value = CalcFinalPayment();
             document.getElementById('packagename').value = packagename;
 
@@ -320,20 +320,20 @@ function Reservation() {
                 title: "Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: "Wrong Package created ! ",
                 confirmButtonColor: "#1fc191",
             })
         }
-        
 
-      
+
+
     }
 
 
-//unhode second vehicle details
+    //unhode second vehicle details
     function showDelivery() {
 
         if (document.getElementById("entry").click) {
@@ -347,7 +347,7 @@ function Reservation() {
     }
 
 
-//validate nic
+    //validate nic
     const NICValidation = () => {
 
         const NICErr = {}; //State
@@ -370,33 +370,33 @@ function Reservation() {
         return NICValid;
 
 
-}
-
-//validate mobile number
-const MobileValidation =() =>{//validate function
-
-    const MobErr ={}; //State
-    let mobileValid = true; //setting flag
-
-
-    if( contactnumber.trim().length > 10 ){
-
-        MobErr.InValidTeleNo =" *Invalid Phone Number"; // error msg
-        alert("**Invalid Telephone Number");
-        mobileValid = false;
-    }else if(contactnumber.trim().length < 10){
-        MobErr.InValidTeleNo =" *Invalid Phone Number"; // error msg
-        alert("**Invalid Telephone Number");
-        mobileValid = false;
     }
-    
-    
-    setMobileErr(MobErr);//update error objects
-    
-    return mobileValid;
+
+    //validate mobile number
+    const MobileValidation = () => {//validate function
+
+        const MobErr = {}; //State
+        let mobileValid = true; //setting flag
 
 
-}
+        if (contactnumber.trim().length > 10) {
+
+            MobErr.InValidTeleNo = " *Invalid Phone Number"; // error msg
+            alert("**Invalid Telephone Number");
+            mobileValid = false;
+        } else if (contactnumber.trim().length < 10) {
+            MobErr.InValidTeleNo = " *Invalid Phone Number"; // error msg
+            alert("**Invalid Telephone Number");
+            mobileValid = false;
+        }
+
+
+        setMobileErr(MobErr);//update error objects
+
+        return mobileValid;
+
+
+    }
 
     const [isCntValid, setMobileIsValid] = useState(false);
     const [Mobilemessage, setMobileMessage] = useState('');
@@ -425,9 +425,9 @@ const MobileValidation =() =>{//validate function
         if (NICRegex1.test(NIC)) {
             setNICIsValid(true);
             setNICMessage('Your NIC looks good!');
-        }else if(NICRegex2.test(NIC)){
+        } else if (NICRegex2.test(NIC)) {
             setNICIsValid(true);
-            setNICMessage('Your NIC looks good!'); 
+            setNICMessage('Your NIC looks good!');
         } else {
             setNICIsValid(false);
             setNICMessage('Please enter a valid NIC Number!');
@@ -435,16 +435,16 @@ const MobileValidation =() =>{//validate function
     };
 
 
-//refreshing page
+    //refreshing page
     function refreshPage() {
         window.location.reload();
     }
 
 
     return (
-        <div className="page-component-body ">
-        <Header></Header>
-            <div class="container input-main-form-emp">
+        <div className="page-component-body pl-5">
+            <Header></Header>
+            <div class="container input-main-form pl-5">
                 <br></br>
                 <h3> Event Reservation</h3>
                 <br></br>
@@ -542,7 +542,7 @@ const MobileValidation =() =>{//validate function
                                                     id="vehicleType"
                                                     className="form-control "
                                                     //tabindex="3"
-                                                    onChange={e => { setVehicleType(e.target.value); searchModel() ; nodate()}}
+                                                    onChange={e => { setVehicleType(e.target.value); searchModel(); nodate() }}
                                                     required
                                                 >
                                                     <option  >choose</option>
@@ -558,7 +558,7 @@ const MobileValidation =() =>{//validate function
                                                     className="form-control "
                                                     tabindex="4"
                                                     //required
-                                                    onChange={(event) => { setModel(event.target.value);}}
+                                                    onChange={(event) => { setModel(event.target.value); }}
                                                 >
                                                     <option  >choose</option>
                                                     <option id="model1" ></option>
@@ -593,7 +593,7 @@ const MobileValidation =() =>{//validate function
                                                     placeholder="0.00"
                                                     //onChange={(event) => { setPerDayCharge(event.target.value); }}           
                                                     disabled
-                                              
+
                                                 />
                                             </div>
 
@@ -651,10 +651,10 @@ const MobileValidation =() =>{//validate function
                                                     class="form-control formInput"
                                                     id="perDayCharge1"
                                                     name="perDayCharge1"
-                                                    placeholder="0.00"          
+                                                    placeholder="0.00"
                                                     //onChange={(event) => { setPerDayCharge1(event.target.value); }}
                                                     disabled
-                                                
+
                                                 />
                                             </div>
 
@@ -663,7 +663,7 @@ const MobileValidation =() =>{//validate function
                                             <div class="form-group col-md-2">
                                                 <input type="button" class="btn btn-info" id="entry" value=" Add Vehicles" onClick={showDelivery} />
                                             </div>
-                                           
+
                                         </div>
                                         <br></br>
                                         <div class="row">
@@ -693,7 +693,7 @@ const MobileValidation =() =>{//validate function
                                                     placeholder="0.00"
                                                     //tabindex="7"
                                                     //required 
-                                                
+
                                                     onChange={(event) => {
                                                         settotalreservation(event.target.value);
                                                     }
@@ -702,8 +702,8 @@ const MobileValidation =() =>{//validate function
                                             </div>
                                         </div>
                                         <div className="row">
-                                        <div class="col py-3 text-center" id="pentry">
-                                                <input type="button" class="btn btn-info-total" id="entry1" value=" Payment " onClick={CalcFinalPayment,UpdatedPenaltyDays } />
+                                            <div class="col py-3 text-center" id="pentry">
+                                                <input type="button" class="btn btn-info-total" id="entry1" value=" Payment " onClick={CalcFinalPayment, UpdatedPenaltyDays} />
                                             </div>
                                             <div className="col py-3 text-center" style={{ display: "none" }} id="create">
                                                 <button type="submit" className="btn btn-ok" /*onClick ="sendpackageName();"*/>
@@ -715,7 +715,7 @@ const MobileValidation =() =>{//validate function
                                                     Cancel
                                                 </button>
                                             </div>
-                                            
+
                                         </div>
                                     </form>
 
@@ -723,38 +723,38 @@ const MobileValidation =() =>{//validate function
                                 </div>
                             </div>
                         </div>
-                        <div className=" package">
-                                        <div class="tab-content-emp"></div>
-                                        <form>
-                                        <br></br>
-                                        <center>
-                                            <h2>Packages</h2></center>
-                                            <div class="form-row">
-                                                <div class="col-6 form-row-change">
-                                                    <label class="form-label-h" for="rentalStatus">Package 1:  </label>
-                                                </div>
-                                                <div class="col-4 form-row-change1">
-                                                    <input type="text" class="form-control-plaintext" id="rentalStatus" value="Car AND Van" readOnly />
-                                                </div>
-                                            </div>
-                                        <div class="form-row ">
-                                            <div class="col-6 form-row-change">
-                                                <label class="form-label-h" for="customer">Package 2: </label>
-                                            </div>
-                                            <div class="col-4 form-row-change1">
-                                                <input type="text" class="form-control-plaintext" id="customer" value="Van AND Bus" readOnly />
-                                            </div>
-                                        </div>
-                                        <div class="form-row ">
-                                            <div class="col-6 form-row-change">
-                                                <label class="form-label-h" for="vehicle">Package 3: </label>
-                                            </div>
-                                            <div class="col-4 form-row-change1">
-                                                <input type="text" class="form-control-plaintext" id="vehicle" value="Bus AND Car" readOnly />
-                                            </div>
-                                        </div>             
-                                        </form>
+                        <div className=" package ml-5">
+                            <div class="tab-content-emp"></div>
+                            <form>
+                                <br></br>
+                                <center>
+                                    <h2>Packages</h2></center>
+                                <div class="form-row">
+                                    <div class="col-6 form-row-change">
+                                        <label class="form-label-h" for="rentalStatus">Package 1:  </label>
                                     </div>
+                                    <div class="col-4 form-row-change1">
+                                        <input type="text" class="form-control-plaintext" id="rentalStatus" value="Car & Van" readOnly />
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-6 form-row-change">
+                                        <label class="form-label-h" for="customer">Package 2: </label>
+                                    </div>
+                                    <div class="col-4 form-row-change1">
+                                        <input type="text" class="form-control-plaintext" id="customer" value="Van & Bus" readOnly />
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-6 form-row-change">
+                                        <label class="form-label-h" for="vehicle">Package 3: </label>
+                                    </div>
+                                    <div class="col-4 form-row-change1">
+                                        <input type="text" class="form-control-plaintext" id="vehicle" value="Bus & Car" readOnly />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
                     </div>
 
@@ -794,21 +794,21 @@ const MobileValidation =() =>{//validate function
                                                     id="customernic"
                                                     name="customernic"
                                                     placeholder="Customer NIC - 985732984V"
-                                                    
+
                                                     required
-                                                    
+
                                                     onChange={(event) => {
                                                         setcustomernic(event.target.value);
                                                         validateNICNo(event);
                                                     }
                                                     } />
-                                                    <div className={`message ${isNICValid ? 'success' : 'error'}`}>
-                                                        {NICmessage}
-                                                    </div>
+                                                <div className={`message ${isNICValid ? 'success' : 'error'}`}>
+                                                    {NICmessage}
+                                                </div>
 
-                                                    {Object.keys(NICErr).map((key) => {
-                                                        // return <div style={{ color: "red" }}>{NICErr[key]}</div>
-                                                    })}
+                                                {Object.keys(NICErr).map((key) => {
+                                                    // return <div style={{ color: "red" }}>{NICErr[key]}</div>
+                                                })}
 
 
                                             </div>
@@ -821,20 +821,20 @@ const MobileValidation =() =>{//validate function
                                                     class="form-control formInput"
                                                     id="contactnumber"
                                                     name="contactnumber"
-                                                    placeholder="Contact Number(0703814914)"                                                   
+                                                    placeholder="Contact Number(0703814914)"
                                                     required
                                                     onChange={(event) => {
                                                         setcontactnumber(event.target.value);
                                                         validateCntNo(event);
                                                     }
                                                     } />
-                                                    <div className={`message ${isCntValid ? 'success' : 'error'}`}>
-                                                        {Mobilemessage}
-                                                    </div>
+                                                <div className={`message ${isCntValid ? 'success' : 'error'}`}>
+                                                    {Mobilemessage}
+                                                </div>
 
-                                                    {Object.keys(MobErr).map((key)=>{
-                                                        // return<div className ={message}>{TeleErr[key]}</div>
-                                                    })}
+                                                {Object.keys(MobErr).map((key) => {
+                                                    // return<div className ={message}>{TeleErr[key]}</div>
+                                                })}
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label" for="nic">NIC</label>
@@ -848,7 +848,7 @@ const MobileValidation =() =>{//validate function
                                                     //required
                                                     onChange={(event) => {
                                                         setnic(event.target.value);
-                                                        
+
                                                     }
                                                     } />
 
@@ -913,7 +913,7 @@ const MobileValidation =() =>{//validate function
                                                     id="status"
                                                     className="form-control "
                                                     onChange={(event) => {
-                                                        setstatus(event.target.value); 
+                                                        setstatus(event.target.value);
                                                     }
                                                     }
 
@@ -935,11 +935,11 @@ const MobileValidation =() =>{//validate function
                                                     placeholder="Advanced Payment (10000.00)"
                                                     //tabindex="9"
                                                     onChange={(event) => {
-                                                        setadvancedpayment(event.target.value); 
+                                                        setadvancedpayment(event.target.value);
                                                     }
                                                     }
-                                                    // onFocus={calculateRentPerDate}
-                                                     />
+                                                // onFocus={calculateRentPerDate}
+                                                />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label-emp" for="total">Total Reservation Price</label>
@@ -987,7 +987,7 @@ const MobileValidation =() =>{//validate function
                                         </div>
                                     </form>
                                     <br></br>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -1004,7 +1004,7 @@ export default Reservation
 
 
 
- {/*const [CarList, setCarList] = useState([]);
+{/*const [CarList, setCarList] = useState([]);
     const [BusList, setBusList] = useState([]);
     const [VanList, setVanList] = useState([]);
 

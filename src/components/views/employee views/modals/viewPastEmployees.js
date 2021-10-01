@@ -4,8 +4,6 @@ import moment from 'moment';
 
 function ViewPastEmployee(emp) {
 
-    console.log("model openingggg", emp)
-
     return (
         <div>
             <Modal.Header closeButton>
