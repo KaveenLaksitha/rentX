@@ -227,7 +227,7 @@ function RentalList() {
                                         {/*<Link class="btn btn-light btn-sm" to={`/updateRental/${rental.id}`} role="button"> Update</Link>*/}
                                         <button
                                             class="btn btn-light btn-sm"
-                                            onClick={() => openModalUpdate(rental, `${rental.id}`)}
+                                            onClick={() => openModalUpdate(rental)}
                                         >
                                             update
                                         </button>
