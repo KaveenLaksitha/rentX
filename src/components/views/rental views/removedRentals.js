@@ -89,15 +89,15 @@ function RemovedRentalList() {
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Return Date</th>
-                            <th>Vehicle Type</th>
-                            <th>NIC</th>
-                            <th>Penalty (Rs.)</th>
-                            <th>Total (Rs.)</th>
-                            <th>Last Payment (Rs.)</th>
-                            <th>Status</th>
+                            <th class="text">From</th>
+                            <th class="text">To</th>
+                            <th class="text">Return Date</th>
+                            <th class="text">Vehicle Type</th>
+                            <th class="text-center">NIC</th>
+                            <th class="text-center">Penalty (Rs.)</th>
+                            <th class="text-center">Total (Rs.)</th>
+                            <th class="text-center">Last Paid (Rs.)</th>
+                            <th class="text-center">Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -109,14 +109,14 @@ function RemovedRentalList() {
 
                                     <td onClick={() => openModal(rental)} data-toggle="tooltip" data-placement="right" title="Click to view details" className="view-td">
                                         {/*<Link class="link" to={`/rental/getRentalByID/${rentals.id}`}>*/}{rental.from}{/*</Link>*/}</td>
-                                    <td >{rental.to}</td>
-                                    <td >{moment(rental.returnDate).format('YYYY-MMMM-DD')}</td>
-                                    <td >{rental.vehicleType + " " + rental.model}</td>
-                                    <td >{rental.customerNIC}</td>
-                                    <td >{rental.penaltyCharges.toFixed(2)}</td>
-                                    <td >{rental.finalPrice.toFixed(2)}</td>
-                                    <th>{rental.lastPaid.toFixed(2)}</th>
-                                    <td >{rental.status}</td>
+                                    <td class="text">{rental.to}</td>
+                                    <td class="text">{moment(rental.returnDate).format('YYYY-MMMM-DD')}</td>
+                                    <td class="text">{rental.vehicleType + " " + rental.model}</td>
+                                    <td class="text-center">{rental.customerNIC}</td>
+                                    <td class="text-right">{rental.penaltyCharges.toFixed(2)}</td>
+                                    <td class="text-right">{rental.finalPrice.toFixed(2)}</td>
+                                    <td class="text-right">{rental.lastPaid.toFixed(2)}</td>
+                                    <td class="text-right">{rental.status}</td>
 
                                 </tr>
                             );
