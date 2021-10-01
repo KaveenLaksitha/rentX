@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 
 function DeleteView(reservations) {
 
-    console.log("model openingggg", reservations)
+   // console.log("model openingggg", reservations)
 
     return (
         <div>

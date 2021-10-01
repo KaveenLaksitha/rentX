@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import moment from 'moment';
-
+import Header from '../../Header';
 import TestModal from "./modals/deleteview";
 
 
@@ -58,6 +58,7 @@ function DeleteRecord() {
 
     return (
         <div className="page-component-body">
+         <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
