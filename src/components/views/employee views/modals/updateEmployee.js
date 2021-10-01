@@ -1,14 +1,9 @@
 import { React, useState, useEffect } from "react";
-
 import Swal from 'sweetalert2';
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
-
-
 import { Modal } from "react-bootstrap";
-
-import { FilePond } from 'react-filepond';
 
 import { updateEmployeeService } from "../../../services/employeeService";
 
@@ -20,8 +15,6 @@ function UpdateEmployee(emp) {
     const disableFutureDt = current => {
         return current.isBefore(day) && current.disableFutureDt
     }
-
-    console.log("update modal dataaaaaa", emp);
 
     useEffect(() => {
         try {
@@ -61,27 +54,6 @@ function UpdateEmployee(emp) {
     const [emgContact, setEmgContact] = useState("");
     const [empPic, setEmpPic] = useState("");
     const [cv, setCV] = useState("");
-
-    const employee = {
-        fName,
-        lName,
-        email,
-        nic,
-        designation,
-        DOB,
-        gender,
-        maritalStat,
-        currAdd,
-        permAdd,
-        mobileNo,
-        emgContact,
-        empPic,
-        cv,
-    };
-
-    console.log("came dataaaaa", employee)
-
-
     const [TeleErr, setTeleNoErr] = useState("");
     const [EmgTeleErr, setEmgTeleNoErr] = useState("");
     const [NICErr, setNICErr] = useState("");
