@@ -30,7 +30,6 @@ export default function PastEmpList() {
 
                 setIsFetching(true);
                 setEmp(data.data.reverse());
-                console.log(data.data, "component did mount on new list")
             } else {
                 setModalLoading(true);
             }
@@ -44,11 +43,8 @@ export default function PastEmpList() {
         e.preventDefault();
 
         searchPastEmployeesService(search).then((data) => {
-            console.log("data in emp list page", data);
             if (data.ok) {
 
-                // setIsFetching(true);
-                // setModalLoading(false);
                 setEmp(data.data.reverse());
 
             } else {

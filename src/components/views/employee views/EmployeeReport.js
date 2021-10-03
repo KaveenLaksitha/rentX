@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useHistory, useParams, Link } from "react-router-dom";
+import React, { useState } from "react";
 import Swal from 'sweetalert2';
 import 'react-datetime/css/react-datetime.css';
 
@@ -23,7 +21,6 @@ function ReservationReport() {
     function sendData(e) {
         e.preventDefault();
         changeBoxes();
-        console.log("dataaa", { designation, ageFrom, ageTo, gender })
 
         const payload = { designation, ageFrom, ageTo, gender };
 

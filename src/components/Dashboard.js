@@ -27,15 +27,10 @@ function Dashboard() {
         let timerInterval
         Swal.fire({
             title: 'Loading...',
-            html: ' <b></b> loading details..',
-            timer: 1000,
+            timer: 1500,
             timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading()
-                const b = Swal.getHtmlContainer().querySelector('b')
-                timerInterval = setInterval(() => {
-                    b.textContent = Swal.getTimerLeft()
-                }, 100)
             },
             willClose: () => {
                 clearInterval(timerInterval)

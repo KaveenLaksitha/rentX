@@ -36,8 +36,6 @@ export default function EmpList() {
 
         getAllEmployeesService().then((data) => {
 
-            console.log("data for table", data);
-
             if (data.ok && !isFetching) {
 
                 setIsFetching(true);
@@ -54,8 +52,6 @@ export default function EmpList() {
     }, []);
 
     useEffect(() => {
-
-        console.log("component did update", modalDataDelete)
 
     }, [modalDataDelete]);
 
