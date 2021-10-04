@@ -23,13 +23,13 @@ function Login() {
             if (response.data.login === null) {
                 Swal.fire({
                     title: 'Oops!',
-                    text: 'User not available',
+                    text: 'No such user available!',
                     icon: 'error',
                     showConfirmButton: false,
                     timer: 1500
                 }
                 )
-                //alert("User not available");
+
             } else {
                 Swal.fire({
                     title: 'Sucess!',
@@ -39,7 +39,7 @@ function Login() {
                     timer: 1500
                 }
                 )
-                //alert("User available");
+
                 if (response.data.login.username == "admin") {
                     history.push("/dashboard");
                 }
@@ -101,7 +101,7 @@ function Login() {
                                                     onChange={(event) => { setPassword(event.target.value); }} />
                                             </div>
                                             <div className="text-right">
-                                                <p><a href="#" className="text-danger">Forget Password? </a></p>
+                                                <p><a href="/makeInquiry" className="text-danger">Forget Password? </a></p>
                                                 <br></br><br></br>
                                             </div>
                                             <div>
