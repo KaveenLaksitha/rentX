@@ -30,7 +30,7 @@ function VehicleList() {
     useEffect(() => {
 
         function getVehicles() {
-            axios.get("http://localhost:4000/vehicle/view").then((res) => {
+            axios.get("https://rent-x-api.herokuapp.com/vehicle/view").then((res) => {
 
 
                 setVehicles(res.data.reverse());
@@ -56,7 +56,7 @@ function VehicleList() {
 
     const deleteVehicle = async (data) => {
 
-        await axios.post("http://localhost:4000/vehicleRemove/addRemoveVehicle", { data }).then(() => {
+        await axios.post("https://rent-x-api.herokuapp.com/vehicleRemove/addRemoveVehicle", { data }).then(() => {
             // alert("**Vehicle Record added successfully")
 
             Swal.fire({
@@ -67,7 +67,7 @@ function VehicleList() {
                 timer: 1500
             })
 
-            const value = axios.post("http://localhost:4000/vehicle/deleteV", modalDataDelete);
+            const value = axios.post("https://rent-x-api.herokuapp.com/vehicle/deleteV", modalDataDelete);
             console.log("deletedddd", value);
             if (value) {
                 // alert("**Permenantly deleted the Vehicle Record");
@@ -143,12 +143,18 @@ function VehicleList() {
 
         e.preventDefault();
         console.log("search val", search);
-        axios.get(`http://localhost:4000/vehicle/searchV/${search}`).then((res) => {
+        axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchV/${search}`).then((res) => {
 
 
             setVehicles(res.data.data.reverse());
         }).catch((error) => {
-            alert(error.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No data found!',
+                confirmButtonColor: '#207159',
+
+            })
         })
     }
 

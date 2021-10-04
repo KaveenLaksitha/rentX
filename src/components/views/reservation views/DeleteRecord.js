@@ -22,7 +22,7 @@ function DeleteRecord() {
 
 
         function getReservation() {
-            axios.get("http://localhost:4000/deletedReservations/displayRemovedReservation").then((res) => { //normally the fetched rental record details are displayed through this
+            axios.get("https://rent-x-api.herokuapp.com/deletedReservations/displayRemovedReservation").then((res) => { //normally the fetched rental record details are displayed through this
                 //setRentals(res.data.reverse());
                 setviewreservation(res.data.reverse());
             }).catch((error) => {
@@ -58,7 +58,7 @@ function DeleteRecord() {
 
     return (
         <div className="page-component-body">
-         <Header></Header>
+            <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -94,9 +94,9 @@ function DeleteRecord() {
                             <th>From</th>
                             <th>To</th>
                             <th>Return Date</th>
-                            <th>Penalty</th>
-                            <th>Total</th>
-                            <th>Status</th>
+                            <th class="text-center">Penalty</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,9 +109,9 @@ function DeleteRecord() {
                                     <td >{reservations.from}</td>
                                     <td >{reservations.to}</td>
                                     <td >{moment(reservations.returnDay).format('YYYY-MMMM-DD')}</td>
-                                    <td >{reservations.penaltyCharge}</td>
-                                    <td >{reservations.totalreservation}</td>
-                                    <td >{reservations.status}</td>
+                                    <td class="text-right" >{reservations.penaltyCharge}</td>
+                                    <td class="text-right">{reservations.totalreservation}</td>
+                                    <td class="text-right">{reservations.status}</td>
 
                                 </tr>
                             );

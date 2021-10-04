@@ -33,10 +33,10 @@ function Viewreservation() {
 
         } else {
             function getReservation() {
-                axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
+                axios.get("https://rent-x-api.herokuapp.com/reservations/displayReservation").then((res) => {
                     setviewreservation(res.data.reverse());
                 }).catch((error) => {
-                   
+
                     setModalLoading(true);
                 })
             }
@@ -66,14 +66,14 @@ function Viewreservation() {
         setModalShow(true);
     }
 
-//set delete modal
+    //set delete modal
     const openModalDelete = (data) => {
         setModalDataDelete(data);
         setModalDeleteConfirm(true)
-      
+
     }
 
-//set update modal
+    //set update modal
     const openModalUpdate = (data) => {
         //console.log("request came for modal updateeeeeee", data);
         setModalDataUpdate(data);
@@ -81,10 +81,10 @@ function Viewreservation() {
 
     }
 
-//search all completed record after clicking completed button
+    //search all completed record after clicking completed button
     function pendingRecords() {
         function getPendingReservation() {
-            axios.get("http://localhost:4000/reservations/searchCompletedReservationRecords/").then((res) => {
+            axios.get("https://rent-x-api.herokuapp.com/reservations/searchCompletedReservationRecords/").then((res) => {
                 setviewreservation(res.data.reverse());
             }).catch((error) => {
                 alert(error.message);
@@ -94,20 +94,20 @@ function Viewreservation() {
     }
 
 
-//search customer nic and package name after the search
+    //search customer nic and package name after the search
     function searchReservation(e) {
         e.preventDefault();
         if (!isNaN(search.charAt(0))) {
-            axios.get(`http://localhost:4000/reservations/searchReservationRecs/${search}`).then((res) => {
-               
+            axios.get(`https://rent-x-api.herokuapp.com/reservations/searchReservationRecs/${search}`).then((res) => {
+
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
             })
         } else {
 
-            axios.get(`http://localhost:4000/reservations/searchReservationRecordsX/${search}`).then((res) => {
-               
+            axios.get(`https://rent-x-api.herokuapp.com/reservations/searchReservationRecordsX/${search}`).then((res) => {
+
                 setviewreservation(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -117,11 +117,11 @@ function Viewreservation() {
     }
 
 
-//handle delete from reservation and add to the remove reservation list
+    //handle delete from reservation and add to the remove reservation list
     const deleteReservation = async (data) => {
 
-        await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
-           
+        await axios.post("https://rent-x-api.herokuapp.com/deletedReservations/addRemovedReservation", { data }).then(() => {
+
             Swal.fire({
                 title: "Completed Reservation removed! ",
                 text: "Reservation removed",
@@ -130,8 +130,8 @@ function Viewreservation() {
 
             })
 
-            const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
-            
+            const value = axios.post("https://rent-x-api.herokuapp.com/reservations/deleteReservation", modalDataDelete);
+
             if (value) {
 
                 Swal.fire({
@@ -148,7 +148,7 @@ function Viewreservation() {
             }
 
         }).catch((err) => {
-           
+
             Swal.fire({
                 title: 'Oops!',
                 text: `${"Reservation not Completed"}`,
@@ -162,7 +162,7 @@ function Viewreservation() {
 
     }
 
-//refresh the page
+    //refresh the page
     function refreshPage() {
         window.location.reload();
     }
@@ -170,7 +170,7 @@ function Viewreservation() {
 
     return (
         <div className="page-component-body">
-         <Header></Header>
+            <Header></Header>
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -230,9 +230,9 @@ function Viewreservation() {
                             <th class="text">Event Type</th>
                             <th class="text">From</th>
                             <th class="text">To</th>
-                            <th class="text">Total</th>
-                            <th class="text">Status</th>
-                            <th class="text">Action</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-right">Status</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -246,7 +246,7 @@ function Viewreservation() {
                                     <td class="text">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
                                     <td class="text">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
                                     <td class="text-right">{reservations.totalreservation.toFixed(2)}</td>
-                                    <td class="text">{reservations.status}</td>
+                                    <td class="text-right">{reservations.status}</td>
                                     <td class="text">
                                         <div class="btn-group" role="group" aria-label="Basic example">
 
@@ -285,7 +285,7 @@ function Viewreservation() {
                                 cancel
                             </button>
                         </div>
-                        
+
                     </div>
                 </Modal.Footer>
             </Modal>
