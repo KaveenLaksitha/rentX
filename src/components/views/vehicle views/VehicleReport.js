@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DatePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import Pdf from "react-to-pdf";
 import Header from "../../Header";
+import Swal from "sweetalert2";
+
 const ref = React.createRef();
 
 
@@ -18,6 +20,13 @@ function VehicleReport() {
     const [years, setYears] = useState("");
     const [vehicles, setVehicles] = useState([]);
 
+    const date = new Date();
+
+
+    useEffect(() => {
+        document.getElementById("dateDisplay").innerHTML = date;
+
+    }, []);
 
 
     function sendData(e) {
@@ -33,12 +42,24 @@ function VehicleReport() {
             console.log("list", vehicles);
 
             if (res.data == 0) {
-                alert("no data found!!");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No data found!',
+                    confirmButtonColor: '#207159',
+
+                })
             }
 
 
         }).catch((err) => {
-            alert(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#207159',
+
+            })
         })
 
 
@@ -151,7 +172,7 @@ function VehicleReport() {
                                             class="form-control formInput"
                                             id="Brand"
                                             name="Brand"
-                                            placeholder=""
+                                            placeholder="Eg: Toyota, Nissan, Mitsubishi"
                                             tabindex="4"
                                             //required
 
@@ -170,7 +191,7 @@ function VehicleReport() {
                                                 class="form-control formInput"
                                                 id="years"
                                                 name="years"
-                                                placeholder=""
+                                                placeholder="0 - 10 years"
                                                 tabindex="4"
                                                 //required
                                                 onChange={(e) => {

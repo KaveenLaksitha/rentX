@@ -26,16 +26,14 @@ function RentalReport() {
     function sendData(e) {
         e.preventDefault();
         changeBoxes();
-
-        var fromDate = (moment(from).format('YYYY-MMMM-DD'));
-        var toDate = (moment(from).format('YYYY-MMMM-DD'));
-
+        var fromDate = moment(from).format('YYYY-MMMM-DD');
+        var ToDate = moment(to).format('YYYY-MMMM-DD');
         if (status == "Pending") {
 
             if ((customerName == "") && (vehicleType == "")) {
                 const cust = "null"
                 const vehi = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${toDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
