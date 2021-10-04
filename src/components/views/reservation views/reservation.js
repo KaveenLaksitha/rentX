@@ -357,11 +357,21 @@ function Reservation() {
         if (customernic.trim().length > 12) {
 
             NICErr.InValidNIC = " Invalid NIC Number"; // error msg
-            alert("**Invalid NIC Number");
+            Swal.fire({
+                title: 'Oops!',
+                text: `${"Invalid NIC Number"}`,
+                icon: 'error',
+                confirmButtonColor: "#1fc191",
+            })
             NICValid = false;
         } else if (customernic.trim().length < 10) {
             NICErr.InValidNIC = "Invalid NIC Number"; // error msg
-            alert("**Invalid NIC Number");
+            Swal.fire({
+                title: 'Oops!',
+                text: `${"Invalid NIC Number"}`,
+                icon: 'error',
+                confirmButtonColor: "#1fc191",
+            })
             NICValid = false;
         }
 
@@ -382,11 +392,23 @@ function Reservation() {
         if (contactnumber.trim().length > 10) {
 
             MobErr.InValidTeleNo = " *Invalid Phone Number"; // error msg
-            alert("**Invalid Telephone Number");
+            Swal.fire({
+                title: 'Oops!',
+                text: `${"Invalid Telephone Number"}`,
+                icon: 'error',
+                confirmButtonColor: "#1fc191",
+            })
+            //alert("**Invalid Telephone Number");
             mobileValid = false;
         } else if (contactnumber.trim().length < 10) {
             MobErr.InValidTeleNo = " *Invalid Phone Number"; // error msg
-            alert("**Invalid Telephone Number");
+            Swal.fire({
+                title: 'Oops!',
+                text: `${"Invalid Telephone Number"}`,
+                icon: 'error',
+                confirmButtonColor: "#1fc191",
+            })
+            //alert("**Invalid Telephone Number");
             mobileValid = false;
         }
 
