@@ -731,7 +731,7 @@ function Reservation() {
                                     <h2>Packages</h2></center>
                                 <div class="form-row">
                                     <div class="col-6 form-row-change">
-                                        <label class="form-label-h" for="rentalStatus">Package 1:  </label>
+                                        <label class="form-label-reservation" for="rentalStatus">Package 1:  </label>
                                     </div>
                                     <div class="col-4 form-row-change1">
                                         <input type="text" class="form-control-plaintext" id="rentalStatus" value="Car & Van" readOnly />
@@ -739,7 +739,7 @@ function Reservation() {
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-6 form-row-change">
-                                        <label class="form-label-h" for="customer">Package 2: </label>
+                                        <label class="form-label-reservation" for="customer">Package 2: </label>
                                     </div>
                                     <div class="col-4 form-row-change1">
                                         <input type="text" class="form-control-plaintext" id="customer" value="Van & Bus" readOnly />
@@ -747,7 +747,7 @@ function Reservation() {
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-6 form-row-change">
-                                        <label class="form-label-h" for="vehicle">Package 3: </label>
+                                        <label class="form-label-reservation" for="vehicle">Package 3: </label>
                                     </div>
                                     <div class="col-4 form-row-change1">
                                         <input type="text" class="form-control-plaintext" id="vehicle" value="Bus & Car" readOnly />

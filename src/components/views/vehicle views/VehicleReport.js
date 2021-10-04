@@ -22,12 +22,10 @@ function VehicleReport() {
 
     const date = new Date();
 
-
     useEffect(() => {
         document.getElementById("dateDisplay").innerHTML = date;
 
     }, []);
-
 
     function sendData(e) {
 
