@@ -52,7 +52,7 @@ function RentalReport() {
             }
             else if (customerName == "") {
                 const cus = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -68,7 +68,7 @@ function RentalReport() {
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/rental/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -85,7 +85,7 @@ function RentalReport() {
 
             } else {
 
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -105,7 +105,7 @@ function RentalReport() {
             if ((customerName == "") && (vehicleType == "")) {
                 const cust = "null"
                 const vehi = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -122,7 +122,7 @@ function RentalReport() {
             }
             else if (customerName == "") {
                 const cus = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -138,7 +138,7 @@ function RentalReport() {
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -155,7 +155,7 @@ function RentalReport() {
 
             } else {
 
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
