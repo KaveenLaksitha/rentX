@@ -21,7 +21,7 @@ function RentalPlacement() {
     useEffect(() => {
 
         function getCarList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Car").then((res) => {
+            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Car").then((res) => {
                 setCarList(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -29,7 +29,7 @@ function RentalPlacement() {
         }
 
         function getBusList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Bus").then((res) => {
+            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Bus").then((res) => {
                 setBusList(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -37,7 +37,7 @@ function RentalPlacement() {
         }
 
         function getVanList() {
-            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Van").then((res) => {
+            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Van").then((res) => {
                 setVanList(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -253,7 +253,7 @@ function RentalPlacement() {
 
                         const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy }
 
-                        axios.post("http://localhost:4000/rental/addRentalRec", newRental).then(() => {
+                        axios.post("https://rent-x-api.herokuapp.com/rental/addRentalRec", newRental).then(() => {
                             Swal.fire({
                                 title: "Rental Record added successfully! ",
                                 icon: 'success',
@@ -437,7 +437,7 @@ function RentalPlacement() {
 
     function checkForPendingCustomer() {
         function checkUserExistance() {
-            axios.get(`http://localhost:4000/rental/searchRentalRecs/${customerNIC}`).then((res) => {
+            axios.get(`https://rent-x-api.herokuapp.com/rental/searchRentalRecs/${customerNIC}`).then((res) => {
                 setRentals(res.data)
                 return rentals.length
             }).catch((error) => {
@@ -456,7 +456,7 @@ function RentalPlacement() {
 
     function getRentChargePerDay() {
         function getRent() {
-            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
+            axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
                 setPerDayCharge(res.data)
                 console.log(res.data);
             }).catch((error) => {

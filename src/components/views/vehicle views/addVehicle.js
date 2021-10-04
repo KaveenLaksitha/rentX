@@ -69,14 +69,14 @@ function AddVehicle() {
 
             console.log("image eka", file);
 
-            axios.post("http://localhost:4000/upload/uploadImage", formData)
+            axios.post("https://rent-x-api.herokuapp.com/upload/uploadImage", formData)
                 .then((res) => {
-                    console.log("image sent", res.data);
+
                     path = res.data.toString();
 
-                    console.log("path eka image eke", path);
+
                     setimgPath(res.data.toString());
-                    //console.log("image path ek aoi", imgPath)
+
 
 
 
@@ -106,12 +106,12 @@ function AddVehicle() {
 
                     }
 
-                    axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
+                    axios.post("https://rent-x-api.herokuapp.com/vehicle/addVehicle", newVehicle)
 
 
 
                         .then(() => {
-                            // alert("Vehicle added Successfully !!")
+
 
                             Swal.fire({
                                 title: 'Success!',
@@ -128,7 +128,7 @@ function AddVehicle() {
 
 
                         }).catch((err) => {
-                            // alert(err)
+
                             const msgerr = err.response.data.status
                             Swal.fire({
                                 icon: 'warning',

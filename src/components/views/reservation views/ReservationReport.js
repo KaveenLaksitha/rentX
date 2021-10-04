@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const ref = React.createRef();
 
- function ReservationReport() {
+function ReservationReport() {
 
     const [from, setfrom] = useState(moment().format('YYYY-MMMM-DD'));
     const [to, setto] = useState(moment().format('YYYY-MMMM-DD'));
@@ -19,7 +19,7 @@ const ref = React.createRef();
     const [eventtype, seteventtype] = useState("");
     const [viewreservation, setviewreservation] = useState([]);
 
-     useEffect(() => {
+    useEffect(() => {
         document.getElementById("dateDisplay").innerHTML = date;
 
     }, []);
@@ -32,7 +32,7 @@ const ref = React.createRef();
             if ((eventtype == "") && (packagename == "")) {
                 const pack = "null"
                 const event = "null"
-                axios.get(`http://localhost:4000/reservations/generateReport/${from}/${to}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${from}/${to}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -49,7 +49,7 @@ const ref = React.createRef();
             }
             else if (eventtype == "") {
                 const evet = "null"
-                axios.get(`http://localhost:4000/reservations/generateReport/${from}/${to}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${from}/${to}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -65,7 +65,7 @@ const ref = React.createRef();
                 })
             } else if (packagename == "") {
                 const ptype = "null"
-                axios.get(`http://localhost:4000/reservations/generateReport/${from}/${to}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${from}/${to}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -82,7 +82,7 @@ const ref = React.createRef();
 
             } else {
 
-                axios.get(`http://localhost:4000/reservations/generateReport/${from}/${to}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${from}/${to}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -102,7 +102,7 @@ const ref = React.createRef();
             if ((eventtype == "") && (packagename == "")) {
                 const pack = "null"
                 const event = "null"
-                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${from}/${to}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -118,8 +118,13 @@ const ref = React.createRef();
                 })
             }
             else if (eventtype == "") {
+<<<<<<< HEAD
                 const evet = "null"
                 axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
+=======
+                const eve = "null"
+                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${from}/${to}/${packagename}/${eve}`).then((res) => { //fetching the count of rentals placed on current date
+>>>>>>> a9f58529174f294e2fb8ff8f235b9f2daaa2283b
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -134,8 +139,13 @@ const ref = React.createRef();
                     //alert(error)
                 })
             } else if (packagename == "") {
+<<<<<<< HEAD
                 const ptype = "null"
                 axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+=======
+                const packtype = "null"
+                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${from}/${to}/${packtype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+>>>>>>> a9f58529174f294e2fb8ff8f235b9f2daaa2283b
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -152,7 +162,7 @@ const ref = React.createRef();
 
             } else {
 
-                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${from}/${to}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -181,97 +191,97 @@ const ref = React.createRef();
 
 
     return (
-            <div className="page-component-body">
-             <Header></Header>
-                <div class="container input-main-form-emp">
-                    <div class="tab-content-emp" id="myTabContent">
-                        
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                                       <form>
-                                        <center>
+        <div className="page-component-body">
+            <Header></Header>
+            <div class="container input-main-form-emp">
+                <div class="tab-content-emp" id="myTabContent">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                <form>
+                                    <center>
                                         <h3 className=" mt-3 mb-4">Generate Report on Reservation Records </h3>
-                                        </center>
-                                        <hr></hr>
-                                        </form>
-                                    </div>
-                                </div>
-                                <br></br>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form"  onSubmit={sendData}>
+                                    </center>
+                                    <hr></hr>
+                                </form>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <form id="contact-form" class="form" onSubmit={sendData}>
                                     <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker  
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="from" 
-                                                    name="from" 
-                                                    placeholder="" 
-                                                   
-                                                    required 
-                                                    timeFormat={false}
-                                                    onChange={(event) => { setfrom(event); }}
-                                                   
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    required 
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="to" 
-                                                    name="to" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    timeFormat={false}
-                                                    onChange={(event) => { setto(event); }}
-                                                    
-                                                    />
-                                            </div> 
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="from">From</label>
+                                            <DatePicker
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="from"
+                                                name="from"
+                                                placeholder=""
 
-                                            <br></br>
+                                                required
+                                                timeFormat={false}
+                                                onChange={(event) => { setfrom(event); }}
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="packagename">Package Type</label>
-                                                <select 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="packagename" 
-                                                    name="packagename" 
-                                                    placeholder="Customer Address" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    onChange={(event) => { setpackagename(event.target.value); }}
-                                                    >
-                                                    <option  >choose</option>
-                                                    <option id="model11">Package 1</option>
-                                                    <option id="model22">Package 2</option>
-                                                    <option id="model33">Package 3</option>
-                                                    </select>
-                                            </div>
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="to">To</label>
+                                            <DatePicker
+                                                required
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="to"
+                                                name="to"
+                                                placeholder=""
+                                                tabindex="6"
+                                                timeFormat={false}
+                                                onChange={(event) => { setto(event); }}
 
-                                            <br></br>
+                                            />
+                                        </div>
+                                    </div>
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="eventtype">Event name</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="eventtype" 
-                                                    name="eventtype" 
-                                                    placeholder="" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    onChange={(event) => { seteventtype(event.target.value); }}
-                                                    />
-                                            </div>
-                                        <br></br>
-                                        <div className="row">
+                                    <br></br>
+
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="packagename">Package Type</label>
+                                        <select
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="packagename"
+                                            name="packagename"
+                                            placeholder="Customer Address"
+                                            tabindex="4"
+                                            //required
+                                            onChange={(event) => { setpackagename(event.target.value); }}
+                                        >
+                                            <option  >choose</option>
+                                            <option id="model11">Package 1</option>
+                                            <option id="model22">Package 2</option>
+                                            <option id="model33">Package 3</option>
+                                        </select>
+                                    </div>
+
+                                    <br></br>
+
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="eventtype">Event name</label>
+                                        <input
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="eventtype"
+                                            name="eventtype"
+                                            placeholder=""
+                                            tabindex="4"
+                                            //required
+                                            onChange={(event) => { seteventtype(event.target.value); }}
+                                        />
+                                    </div>
+                                    <br></br>
+                                    <div className="row">
                                         <div className="form-group col-md-6">
                                             <label className="form-label-emp " for="gender">Status:</label>
                                             <br></br>
@@ -279,36 +289,36 @@ const ref = React.createRef();
                                                 <label className="form-check-label" for="inlineCheckbox1">
                                                     <input className="form-check-input" type="radio" id="status" name="status" value="Pending"
                                                         onChange={(event) => { setstatus(event.target.value); }}
-                                                        />Pending</label>
+                                                    />Pending</label>
                                             </div>
                                             <div className="form-check form-check-inline ml-5">
                                                 <label className="form-check-label" for="inlineCheckbox2">
                                                     <input className="form-check-input" type="radio" id="status" name="status" value="Completed"
-                                                          onChange={(event) => { setstatus(event.target.value); }}
-                                                         />Complete</label>
+                                                        onChange={(event) => { setstatus(event.target.value); }}
+                                                    />Complete</label>
                                             </div>
 
                                         </div>
-                                        
+
                                     </div>
 
                                     <div className="row">
-                                                <div className="col py-3 text-center">
-                                                    <button type="submit" className="btn btn-ok" >
-                                                        Generate
-                                                    </button>
-                                                </div>
-                                                
-                                            </div>
-                                            <br></br>
-                                            </form>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                    </div>
+                                        <div className="col py-3 text-center">
+                                            <button type="submit" className="btn btn-ok" >
+                                                Generate
+                                            </button>
+                                        </div>
 
-                     <div id="myTabContent2" style={{ display: "none" }}>
+                                    </div>
+                                    <br></br>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="myTabContent2" style={{ display: "none" }}>
                     <Pdf targetRef={ref} filename="RentalReport.pdf">
                         {({ toPdf }) => <button class="btn btn-download white" onClick={toPdf}><i class="fa fa-download" aria-hidden="true"></i></button>}
                     </Pdf>
@@ -349,9 +359,9 @@ const ref = React.createRef();
                         <h6 className="pb-5">Report generated on : <span id="dateDisplay"></span></h6>
                     </div>
                 </div>
-                </div>
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 export default ReservationReport;
