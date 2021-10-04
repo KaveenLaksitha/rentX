@@ -26,12 +26,16 @@ function RentalReport() {
     function sendData(e) {
         e.preventDefault();
         changeBoxes();
+
+        var fromDate = moment(from).format('YYYY-MMMM-DD');
+        var ToDate = moment(to).format('YYYY-MMMM-DD');
+
         if (status == "Pending") {
 
             if ((customerName == "") && (vehicleType == "")) {
                 const cust = "null"
                 const vehi = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/rental/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
