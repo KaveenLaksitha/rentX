@@ -230,9 +230,9 @@ function Viewreservation() {
                             <th class="text">Event Type</th>
                             <th class="text">From</th>
                             <th class="text">To</th>
-                            <th class="text">Total</th>
-                            <th class="text">Status</th>
-                            <th class="text">Action</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-right">Status</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -246,7 +246,7 @@ function Viewreservation() {
                                     <td class="text">{moment(reservations.from).format('YYYY-MMMM-DD')}</td>
                                     <td class="text">{moment(reservations.to).format('YYYY-MMMM-DD')}</td>
                                     <td class="text-right">{reservations.totalreservation.toFixed(2)}</td>
-                                    <td class="text">{reservations.status}</td>
+                                    <td class="text-right">{reservations.status}</td>
                                     <td class="text">
                                         <div class="btn-group" role="group" aria-label="Basic example">
 
