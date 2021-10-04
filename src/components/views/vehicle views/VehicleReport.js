@@ -8,41 +8,41 @@ const ref = React.createRef();
 
 
 
- function VehicleReport() {
+function VehicleReport() {
 
 
-    const[dateFrom, setDateFrom]=useState("");
-    const[dateTo, setDateTo]=useState("");
-    const[Type,setType] =useState("");
-    const[Brand, setBrand] = useState("");
-    const[years,setYears] = useState("");
-    const[vehicles, setVehicles] = useState([]);
-    
+    const [dateFrom, setDateFrom] = useState("");
+    const [dateTo, setDateTo] = useState("");
+    const [Type, setType] = useState("");
+    const [Brand, setBrand] = useState("");
+    const [years, setYears] = useState("");
+    const [vehicles, setVehicles] = useState([]);
 
 
-    function sendData(e){
+
+    function sendData(e) {
 
         e.preventDefault();
         changeBoxes();
-        
 
-        axios.get(`http://localhost:4000/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res)=>{
+
+        axios.get(`https://rent-x-api.herokuapp.com/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res) => {
             // const message = "No record found!"
             console.log("data in vehicle list page", res.data);
             setVehicles(res.data);
             console.log("list", vehicles);
 
-            if(res.data == 0){
+            if (res.data == 0) {
                 alert("no data found!!");
             }
 
 
-        }).catch((err)=>{
+        }).catch((err) => {
             alert(err)
         })
 
 
- 
+
 
 
 
@@ -69,114 +69,114 @@ const ref = React.createRef();
                                 <form>
                                     <center>
                                         <h3 className=" mt-3 mb-4">Generate Report on Vehicle Records </h3>
-                                        </center>
-                                        <hr></hr>
-                                        </form>
-                                    </div>
-                                </div>
-                                <br></br>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <form id="contact-form" class="form" onSubmit={sendData} >
+                                    </center>
+                                    <hr></hr>
+                                </form>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <form id="contact-form" class="form" onSubmit={sendData} >
                                     <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="from">From</label>
-                                                <DatePicker  
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="dateFrom" 
-                                                    name="dateFrom" 
-                                                    placeholder="" 
-                                                    tabindex="5" 
-                                                    timeFormat={false}
-                                                    required 
-                                                    onChange={(e)=>{
-                                                        setDateFrom(e);
-                                                    }}
-                                                   
-                                                    />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label-emp" for="to">To</label>
-                                                <DatePicker 
-                                                    required 
-                                                    //type="date" 
-                                                    class="form-control formInput" 
-                                                    id="dateTo" 
-                                                    name="dateTo" 
-                                                    placeholder="" 
-                                                    tabindex="6" 
-                                                    timeFormat={false}
-                                                    onChange={(e=>{
-                                                        setDateTo(e);
-                                                    })}
-                                                    
-                                                    
-                                                    />
-                                            </div> 
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="from">From</label>
+                                            <DatePicker
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="dateFrom"
+                                                name="dateFrom"
+                                                placeholder=""
+                                                tabindex="5"
+                                                timeFormat={false}
+                                                required
+                                                onChange={(e) => {
+                                                    setDateFrom(e);
+                                                }}
 
-                                            <br></br>
+                                            />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label-emp" for="to">To</label>
+                                            <DatePicker
+                                                required
+                                                //type="date" 
+                                                class="form-control formInput"
+                                                id="dateTo"
+                                                name="dateTo"
+                                                placeholder=""
+                                                tabindex="6"
+                                                timeFormat={false}
+                                                onChange={(e => {
+                                                    setDateTo(e);
+                                                })}
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Vehicle Type</label>
-                                                <select
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="Type" 
-                                                    name="customeraddress" 
-                                                    placeholder="Customer Address" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    onChange={(e)=>{
-                                                        setType(e.target.value);
-                                                    }
-                                                    }
-                                                    >
 
-                                                    <option id="choose1">Choose</option>
-                                                    <option value="car">Car</option>
-                                                    <option value="van">Van</option>
-                                                    <option value="bus">Bus</option>
-                                                </select>
-                                                    
-                                            </div>
+                                            />
+                                        </div>
+                                    </div>
 
-                                            <br></br>
+                                    <br></br>
 
-                                            <div class="form-group">
-                                                <label class="form-label-emp" for="customeraddress">Brand</label>
-                                                <input 
-                                                    type="text" 
-                                                    class="form-control formInput" 
-                                                    id="Brand" 
-                                                    name="Brand" 
-                                                    placeholder="" 
-                                                    tabindex="4" 
-                                                    //required
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="customeraddress">Vehicle Type</label>
+                                        <select
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="Type"
+                                            name="customeraddress"
+                                            placeholder="Customer Address"
+                                            tabindex="4"
+                                            //required
+                                            onChange={(e) => {
+                                                setType(e.target.value);
+                                            }
+                                            }
+                                        >
 
-                                                    onChange={(e)=>{
-                                                        setBrand(e.target.value);
+                                            <option id="choose1">Choose</option>
+                                            <option value="car">Car</option>
+                                            <option value="van">Van</option>
+                                            <option value="bus">Bus</option>
+                                        </select>
 
-                                                    }}
-                                                    />
-                                            </div>
-                                        <br></br>
-                                        <div className="row">
+                                    </div>
+
+                                    <br></br>
+
+                                    <div class="form-group">
+                                        <label class="form-label-emp" for="customeraddress">Brand</label>
+                                        <input
+                                            type="text"
+                                            class="form-control formInput"
+                                            id="Brand"
+                                            name="Brand"
+                                            placeholder=""
+                                            tabindex="4"
+                                            //required
+
+                                            onChange={(e) => {
+                                                setBrand(e.target.value);
+
+                                            }}
+                                        />
+                                    </div>
+                                    <br></br>
+                                    <div className="row">
                                         <div className="form-group col-md-4">
-                                        <label class="form-label-emp" for="customeraddress">Years of Rental</label>
-                                                <input 
-                                                    type="number" 
-                                                    class="form-control formInput" 
-                                                    id="years" 
-                                                    name="years" 
-                                                    placeholder="" 
-                                                    tabindex="4" 
-                                                    //required
-                                                    onChange={(e)=>{
-                                                        setYears(e.target.value);
-                                                    }}
-                                                    />
+                                            <label class="form-label-emp" for="customeraddress">Years of Rental</label>
+                                            <input
+                                                type="number"
+                                                class="form-control formInput"
+                                                id="years"
+                                                name="years"
+                                                placeholder=""
+                                                tabindex="4"
+                                                //required
+                                                onChange={(e) => {
+                                                    setYears(e.target.value);
+                                                }}
+                                            />
 
                                         </div>
 
@@ -196,9 +196,9 @@ const ref = React.createRef();
 
                         </div>
                     </div>
-                    </div>
+                </div>
 
-                    <div id="myTabContent2" style={{ display: "none" }}>
+                <div id="myTabContent2" style={{ display: "none" }}>
                     <Pdf targetRef={ref} filename="VehicleReport.pdf">
                         {({ toPdf }) => <button class="btn btn-download white" onClick={toPdf}><i class="fa fa-download" aria-hidden="true"></i></button>}
                     </Pdf>
@@ -209,7 +209,7 @@ const ref = React.createRef();
                             <table class="table table-hover">
                                 <thead class="thead-dark">
                                     <tr>
-                                        
+
                                         <th>Vehicle RegNo</th>
                                         <th>Date</th>
                                         <th>Type</th>
@@ -222,7 +222,7 @@ const ref = React.createRef();
                                     {vehicles.map((vehicle) => {
                                         console.log("table", vehicle.Date);
                                         return (
-                                            
+
 
                                             <tr >
 
@@ -232,7 +232,7 @@ const ref = React.createRef();
                                                 <td >{vehicle.VehicleBrand}</td>
                                                 <td >{vehicle.VehicleModel}</td>
                                                 <td >{vehicle.YearsRent}</td>
-                                                
+
                                             </tr>
                                         );
                                     })}
@@ -243,10 +243,10 @@ const ref = React.createRef();
                     </div>
                 </div>
 
-                    
-                </div>
+
             </div>
-        
+        </div>
+
     )
 }
 

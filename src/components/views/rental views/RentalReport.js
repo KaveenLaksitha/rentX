@@ -31,7 +31,7 @@ function RentalReport() {
             if ((customerName == "") && (vehicleType == "")) {
                 const cust = "null"
                 const vehi = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -48,7 +48,7 @@ function RentalReport() {
             }
             else if (customerName == "") {
                 const cus = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -64,7 +64,7 @@ function RentalReport() {
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -81,7 +81,7 @@ function RentalReport() {
 
             } else {
 
-                axios.get(`http://localhost:4000/rental/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -101,7 +101,7 @@ function RentalReport() {
             if ((customerName == "") && (vehicleType == "")) {
                 const cust = "null"
                 const vehi = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${from}/${to}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -118,7 +118,7 @@ function RentalReport() {
             }
             else if (customerName == "") {
                 const cus = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -134,7 +134,7 @@ function RentalReport() {
                 })
             } else if (vehicleType == "") {
                 const veh = "null"
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${from}/${to}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {
@@ -151,7 +151,7 @@ function RentalReport() {
 
             } else {
 
-                axios.get(`http://localhost:4000/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${from}/${to}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setRentalList(res.data);
                 }).catch((error) => {

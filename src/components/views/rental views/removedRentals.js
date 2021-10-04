@@ -25,7 +25,7 @@ function RemovedRentalList() {
  
         } else*/
         function getRentals() {
-            axios.get("http://localhost:4000/deletedRentals/displayRemovedRentals").then((res) => { //normally the fetched rental record details are displayed through this
+            axios.get("https://rent-x-api.herokuapp.com/deletedRentals/displayRemovedRentals").then((res) => { //normally the fetched rental record details are displayed through this
                 //setRentals(res.data.reverse());
                 setRentalList(res.data.reverse());
             }).catch((error) => {

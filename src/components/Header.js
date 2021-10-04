@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import "./style.scss";
 
@@ -66,11 +66,11 @@ function Header(props) {
           <ul>
             <hr></hr>
             <li>
-              <a href="/dashboard">
+              <Link to="/dashboard">
                 <i className="fa fa-th fa-2x"></i>
                 <span className="nav-text">Dashboard</span>
                 <i className="fa fa-angle-right fa-2x"></i>
-              </a>
+              </Link>
             </li>
             <hr></hr>
             <li className="has-subnav">
@@ -79,18 +79,18 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new1">
                 <li className="has-subnav">
-                  <a href="/rentalList">
+                  <Link to="/rentalList">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text">Rentals List</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav ">
-                  <a href="/addRental">
+                  <Link to="/addRental">
                     <i className="fa"></i>
                     <span className="nav-text">Add Rentals</span>
                     <i className="fa fa-angle-right fa-3x"></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <li>
@@ -103,18 +103,18 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new2">
                 <li className="has-subnav">
-                  <a href="/viewReservation">
+                  <Link to="/viewReservation">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text"> Reservations List</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav ">
-                  <a href="/addReservation">
+                  <Link to="/addReservation">
                     <i className="fa"></i>
                     <span className="nav-text">Add Reservation</span>
                     <i className="fa fa-angle-right fa-3x"></i>
-                  </a>
+                  </Link>
                 </li>
 
               </ul>
@@ -128,19 +128,19 @@ function Header(props) {
               </li>
               <ul class="sub-menu collapse" id="new3">
                 <li class="has-subnav ">
-                  <a href="/vehicleList ">
+                  <Link to="/vehicleList ">
                     <i class="fa"></i>
                     <span className="nav-text">Vehicle List</span>
 
                     <i class="fa fa-angle-right fa-3x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav">
-                  <a href="/addVehicle">
+                  <Link to="/addVehicle">
                     <i className="fa  fa-2x"></i>
                     <span class="nav-text">Add Vehicle</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <li>
@@ -153,18 +153,18 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new4">
                 <li className="has-subnav ">
-                  <a href="/empList">
+                  <Link to="/empList">
                     <i className="fa"></i>
                     <span className="nav-text">Employee List</span>
                     <i className="fa fa-angle-right fa-3x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav">
-                  <a href="/addEmployee">
+                  <Link to="/addEmployee">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text">Add New Employee</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -175,43 +175,43 @@ function Header(props) {
               </li>
               <ul className="sub-menu collapse" id="new">
                 <li className="has-subnav ">
-                  <a href="/employee/report">
+                  <Link to="/employee/report">
                     <i className="fa"></i>
                     <span className="nav-text">Employees</span>
                     <i className="fa fa-angle-right fa-3x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav">
-                  <a href="/rental/report">
+                  <Link to="/rental/report">
                     <i className="fa  fa-2x"></i>
                     <span className="nav-text">Rentals</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav">
-                  <a href="/reservation/report">
+                  <Link to="/reservation/report">
                     <i className="fa fa-2x"></i>
                     <span className="nav-text">Reservations</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li className="has-subnav">
-                  <a href="/vehicle/report">
+                  <Link to="/vehicle/report">
                     <i className="fa fa-2x"></i>
                     <span className="nav-text">Vehicle Inventory</span>
                     <i className="fa fa-angle-right fa-2x"></i>
-                  </a>
+                  </Link>
                 </li>
 
               </ul>
             </li>
             <hr></hr>
             <li>
-              <a href="/makeInquiry">
+              <Link to="/makeInquiry">
                 <i className="fa fa-question-circle-o fa-2x"></i>
                 <span className="nav-text">Make an Inquiry</span>
                 <i className="fa fa-angle-right fa-2x"></i>
-              </a>
+              </Link>
             </li>
             <hr></hr>
           </ul>
