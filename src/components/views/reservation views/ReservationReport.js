@@ -118,8 +118,8 @@ const ref = React.createRef();
                 })
             }
             else if (eventtype == "") {
-                const eve = "null"
-                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${packagename}/${eve}`).then((res) => { //fetching the count of rentals placed on current date
+                const evet = "null"
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -134,8 +134,8 @@ const ref = React.createRef();
                     //alert(error)
                 })
             } else if (packagename == "") {
-                const packtype = "null"
-                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${packtype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                const ptype = "null"
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${from}/${to}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
