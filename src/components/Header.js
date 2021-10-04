@@ -128,7 +128,7 @@ function Header(props) {
               </li>
               <ul class="sub-menu collapse" id="new3">
                 <li class="has-subnav ">
-                  <Link to="/vehicleList ">
+                  <Link to="/vehicleList">
                     <i class="fa"></i>
                     <span className="nav-text">Vehicle List</span>
 
