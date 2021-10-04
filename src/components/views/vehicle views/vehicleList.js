@@ -148,7 +148,13 @@ function VehicleList() {
 
             setVehicles(res.data.data.reverse());
         }).catch((error) => {
-            alert(error.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No data found!',
+                confirmButtonColor: '#207159',
+
+            })
         })
     }
 
