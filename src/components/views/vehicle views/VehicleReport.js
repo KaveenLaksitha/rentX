@@ -250,7 +250,7 @@ function VehicleReport() {
                                                 <td >{vehicle.VehicleType}</td>
                                                 <td >{vehicle.VehicleBrand}</td>
                                                 <td >{vehicle.VehicleModel}</td>
-                                                <td >{vehicle.YearsRent}</td>
+                                                <td class="text-center">{vehicle.YearsRent}</td>
 
                                             </tr>
                                         );
