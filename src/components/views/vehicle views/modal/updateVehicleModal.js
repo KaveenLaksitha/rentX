@@ -70,6 +70,8 @@ function UpdateVehicleModal(vehicle) {
     const [vehPic, setvehPic] = useState("");
     const [vehDoc, setvehDoc] = useState("");
 
+    const [YearsErr, setYearsErr] = useState("");
+
 
     const uptVehicle = {
 
@@ -106,82 +108,135 @@ function UpdateVehicleModal(vehicle) {
 
         e.preventDefault();
 
-        // const isValid = formValidation();
-        // const teleValid = TeleValidation();
-        // const NICValid  = NICValidation();
+        const YearsValid = YearsValidation();
 
-
-        // if(isValid && teleValid && NICValid){
+        if (YearsValid) {
 
 
 
 
-        const newVehicle = {
+            const newVehicle = {
 
-            VehicleID,
-            OwnerName,
-            OwnerNIC,
-            TeleNo,
-            Address,
-            Email,
-            Date,
-            VehicleRegNo,
-            VehicleModel,
-            VehicleType,
-            VehicleBrand,
-            Mileage,
-            InsType,
-            InsComName,
-            Transmission,
-            AirC,
-            NoOfSeats,
-            RatePDay,
-            YearsRent,
-            vehPic,
-            vehDoc
+                VehicleID,
+                OwnerName,
+                OwnerNIC,
+                TeleNo,
+                Address,
+                Email,
+                Date,
+                VehicleRegNo,
+                VehicleModel,
+                VehicleType,
+                VehicleBrand,
+                Mileage,
+                InsType,
+                InsComName,
+                Transmission,
+                AirC,
+                NoOfSeats,
+                RatePDay,
+                YearsRent,
+                vehPic,
+                vehDoc
 
 
 
-        }
+            }
 
-        // const updateVehicle (VehicleID, newVehicle).then((response) => {
-        //     // const message = response.ok
-        //     //     ? "Employee insertion successful"
-        //     //     : response.err;
-        //     // alert(message);
-        //     //window.location.replace("/empList");
-        // });
+            // const updateVehicle (VehicleID, newVehicle).then((response) => {
+            //     // const message = response.ok
+            //     //     ? "Employee insertion successful"
+            //     //     : response.err;
+            //     // alert(message);
+            //     //window.location.replace("/empList");
+            // });
 
-        axios.put(`https://rent-x-api.herokuapp.com/vehicle/updateV/${VehicleID}`, newVehicle)
+            axios.put(`https://rent-x-api.herokuapp.com/vehicle/updateV/${VehicleID}`, newVehicle)
 
-            .then(() => {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Vehicle Details Added Succesfully',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 2000
-                }
-                ).then(() => {
+                .then(() => {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Vehicle Details Added Succesfully',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                    ).then(() => {
+                        window.location.replace("/vehicleList");
+
+                    })
                     window.location.replace("/vehicleList");
 
+                }).catch((err) => {
+                    const msgerr = err.response.data.status
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: `${msgerr}`,
+                        confirmButtonColor: '#1fc191',
+
+                    })
                 })
-                window.location.replace("/vehicleList");
 
-            }).catch((err) => {
-                const msgerr = err.response.data.status
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Oops...',
-                    text: `${msgerr}`,
-                    confirmButtonColor: '#1fc191',
-
-                })
-            })
-
-        // }
+            // }
+        }
     }
 
+    const [isYearsValid, setYearsValid] = useState(false);
+    const [Yearmessage, setYearMessage] = useState('');
+
+
+    const validateYears = (event) => {
+        const YearsRent = event.target.value;
+        if (YearsRent == 0) {
+            setYearsValid(false);
+            setYearMessage('Number of years should be more than 0 !');
+        }
+        else if (YearsRent < 11) {
+            setYearsValid(true);
+            setYearMessage('Years of rent loking good ');
+        } else {
+            setYearsValid(false);
+            setYearMessage('Number of years should be less than 10 !');
+        }
+    };
+
+
+    const YearsValidation = () => {//validate function
+
+        const YearsErr = {}; //State
+        let YearsValid = true; //setting flag
+
+
+        if (YearsRent == 0) {
+            YearsErr.InValidYears = " Number of years should be More than 0"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid ',
+                text: ' Number of years should be more than 0!!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+        }
+        else if (YearsRent > 10) {
+            YearsErr.InValidYears = " Number of years should be less than 10 !"; // error msg
+            YearsValid = false;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Numbers Years Invalid',
+                text: 'Number of years should be less than 10!!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+        }
+
+
+        setYearsErr(YearsErr);//update error objects
+        return YearsValid;
+
+
+    }
 
 
 
@@ -390,10 +445,15 @@ function UpdateVehicleModal(vehicle) {
                                         value={YearsRent}
                                         onChange={(e) => {
                                             setYearsRent(e.target.value);
+                                            validateYears(e);
                                         }}
-
-
                                     />
+                                    <div className={`message ${isYearsValid ? 'success' : 'error'}`}>
+                                        {Yearmessage}
+                                    </div>
+                                    {Object.keys(YearsErr).map((key) => {
+                                        // return<div style={{color :"red"}}>{RegNoErr[key]}</div>
+                                    })}
                                 </div>
                             </div>
 
