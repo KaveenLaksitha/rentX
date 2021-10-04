@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DatePicker from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -18,7 +18,12 @@ function VehicleReport() {
     const [years, setYears] = useState("");
     const [vehicles, setVehicles] = useState([]);
 
+    const date = new Date();
 
+    useEffect(() => {
+        document.getElementById("dateDisplay").innerHTML = date;
+
+    }, []);
 
     function sendData(e) {
 
