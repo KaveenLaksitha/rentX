@@ -41,9 +41,11 @@ function Header(props) {
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <button class="btn text-light" href="/dashboard">
-                    Home <span class="sr-only">(current)</span>
-                  </button>
+                  <Link to="/dashboard">
+                    <button class="btn text-light">
+                      Home <span class="sr-only">(current)</span>
+                    </button>
+                  </Link>
                 </li>
                 <li class="nav-item">
                   <button class="btn text-light"

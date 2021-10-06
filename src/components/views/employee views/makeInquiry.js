@@ -23,7 +23,7 @@ function MakeInquiry() {
 
         addInquiry(newInquiry).then((response) => {
             const message = response.ok
-                ? "Employee insertion successful"
+                ? "Inquiry submission successful!"
                 : response.err;
 
             if (response.ok) {
@@ -35,7 +35,7 @@ function MakeInquiry() {
                     timer: 1500
                 }
                 ).then(() => {
-                    window.location.replace("/empList");;
+                    window.location.replace("/dashboard");;
                 })
 
             }
