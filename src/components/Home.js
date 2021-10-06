@@ -58,8 +58,8 @@ function Home() {
                 <Route path="/rental/removedRentalList" exact component={RemovedRentalList} />
                 <Route path="/deleteVehicles" exact component={DeleteVehicles} />
                 <Route path="/imageUpload" exact component={imageUplaod} />
-                <Footer />
             </Switch>
+            <Footer />
         </Router>
     );
 }

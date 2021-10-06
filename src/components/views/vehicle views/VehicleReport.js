@@ -22,12 +22,10 @@ function VehicleReport() {
 
     const date = new Date();
 
-
     useEffect(() => {
         document.getElementById("dateDisplay").innerHTML = date;
 
     }, []);
-
 
     function sendData(e) {
 
@@ -37,9 +35,9 @@ function VehicleReport() {
 
         axios.get(`https://rent-x-api.herokuapp.com/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res) => {
             // const message = "No record found!"
-            console.log("data in vehicle list page", res.data);
+            // console.log("data in vehicle list page", res.data);
             setVehicles(res.data);
-            console.log("list", vehicles);
+            //console.log("list", vehicles);
 
             if (res.data == 0) {
                 Swal.fire({
@@ -241,7 +239,7 @@ function VehicleReport() {
                                 </thead>
                                 <tbody>
                                     {vehicles.map((vehicle) => {
-                                        console.log("table", vehicle.Date);
+                                        // console.log("table", vehicle.Date);
                                         return (
 
 
@@ -252,7 +250,7 @@ function VehicleReport() {
                                                 <td >{vehicle.VehicleType}</td>
                                                 <td >{vehicle.VehicleBrand}</td>
                                                 <td >{vehicle.VehicleModel}</td>
-                                                <td >{vehicle.YearsRent}</td>
+                                                <td class="text-center">{vehicle.YearsRent}</td>
 
                                             </tr>
                                         );

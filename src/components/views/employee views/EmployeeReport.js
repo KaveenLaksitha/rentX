@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 import 'react-datetime/css/react-datetime.css';
 
@@ -18,6 +18,13 @@ function ReservationReport() {
     const [gender, setGender] = useState("");
     const [empList, setempList] = useState([]);
 
+    const date = new Date();
+
+    useEffect(() => {
+        document.getElementById("dateDisplay").innerHTML = date;
+
+    }, []);
+
     function sendData(e) {
         e.preventDefault();
         changeBoxes();
@@ -26,7 +33,6 @@ function ReservationReport() {
 
         searchForReport(payload).then((data) => {
             const message = "No record found!"
-            console.log("data in emp list page", data);
             if (data.ok) {
 
                 setempList(data.data.reverse());

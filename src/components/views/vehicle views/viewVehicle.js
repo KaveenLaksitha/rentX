@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 function ViewVehicle(vehicle) {
 
-    console.log("model open", vehicle)
+    //console.log("model open", vehicle)
 
     return (
         <div>
@@ -119,7 +119,7 @@ function ViewVehicle(vehicle) {
                                     <th class="text-left" scope="row">
                                         Rate Per Day
                                     </th>
-                                    <td class="text-left">{vehicle.data.RatePDay}</td>
+                                    <td class="text-left">Rs.{vehicle.data.RatePDay}.00</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left" scope="row">

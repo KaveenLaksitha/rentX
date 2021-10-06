@@ -34,7 +34,7 @@ function VehicleList() {
 
 
                 setVehicles(res.data.reverse());
-                console.log("Data recieved");
+                //console.log("Data recieved");
 
             }).catch((error) => {
                 // alert(error.message);
@@ -68,7 +68,7 @@ function VehicleList() {
             })
 
             const value = axios.post("https://rent-x-api.herokuapp.com/vehicle/deleteV", modalDataDelete);
-            console.log("deletedddd", value);
+            //console.log("deletedddd", value);
             if (value) {
                 // alert("**Permenantly deleted the Vehicle Record");
                 // window.location.replace("/viewReservation");
@@ -119,8 +119,8 @@ function VehicleList() {
 
 
     const handleViewOnClick = () => {
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
+        //console.log("req came for modal");
+        // console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
 
@@ -131,7 +131,7 @@ function VehicleList() {
 
     const openModalUpdate = (data) => {
 
-        console.log("request came for modal updateeeeeee", data);
+        //console.log("request came for modal updateeeeeee", data);
         setModalDataUpdate(data);
         setModalUpdate(true);
 
@@ -142,7 +142,7 @@ function VehicleList() {
 
 
         e.preventDefault();
-        console.log("search val", search);
+        //console.log("search val", search);
         axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchV/${search}`).then((res) => {
 
 
