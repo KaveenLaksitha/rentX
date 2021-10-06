@@ -25,163 +25,175 @@ function RentalReport() {
 
     function sendData(e) {
         e.preventDefault();
-        changeBoxes();
+        if (status == "Pending" || status == "Completed") {
 
-        var fromDate = moment(from).format('YYYY-MMMM-DD');
-        var ToDate = moment(to).format('YYYY-MMMM-DD');
+            changeBoxes();
 
-        if (status == "Pending") {
+            var fromDate = moment(from).format('YYYY-MMMM-DD');
+            var ToDate = moment(to).format('YYYY-MMMM-DD');
 
-            if ((customerName == "") && (vehicleType == "")) {
-                const cust = "null"
-                const vehi = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
+            if (status == "Pending") {
+
+                if ((customerName == "") && (vehicleType == "")) {
+                    const cust = "null"
+                    const vehi = "null"
+                    axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                }
+                else if (customerName == "") {
+                    const cus = "null"
+                    axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                } else if (vehicleType == "") {
+                    const veh = "null"
+                    axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+
+                } else {
+
+                    axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+                        console.log(res.data);
+                        setRentalList(res.data);
+
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                }
             }
-            else if (customerName == "") {
-                const cus = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
-            } else if (vehicleType == "") {
-                const veh = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
+            else if (status == "Completed") {
+                if ((customerName == "") && (vehicleType == "")) {
+                    const cust = "null"
+                    const vehi = "null"
 
-            } else {
+                    axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
 
-                axios.get(`https://rent-x-api.herokuapp.com/rental/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
-                    console.log(res.data);
-                    setRentalList(res.data);
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                }
+                else if (customerName == "") {
+                    const cus = "null"
 
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
+                    axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
+
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                } else if (vehicleType == "") {
+                    const veh = "null"
+
+                    axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+
+                } else {
+
+
+                    axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
+
+                        console.log(res.data);
+                        setRentalList(res.data);
+                    }).catch((error) => {
+                        Swal.fire({
+                            title: 'Oops!',
+                            text: `${error}`,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                        )
+                        //alert(error)
+                    })
+                }
+
             }
+        } else {
+            Swal.fire({
+                title: 'Oops!',
+                text: `Status of the report you want must be selected`,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            }
+            )
+
         }
-        else if (status == "Completed") {
-            if ((customerName == "") && (vehicleType == "")) {
-                const cust = "null"
-                const vehi = "null"
-
-                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehi}/${cust}`).then((res) => { //fetching the count of rentals placed on current date
-
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
-            }
-            else if (customerName == "") {
-                const cus = "null"
-
-                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${cus}`).then((res) => { //fetching the count of rentals placed on current date
-
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
-            } else if (vehicleType == "") {
-                const veh = "null"
-
-                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${veh}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
-
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
-
-            } else {
-
-
-                axios.get(`https://rent-x-api.herokuapp.com/deletedRentals/generateReport/${fromDate}/${ToDate}/${vehicleType}/${customerName}`).then((res) => { //fetching the count of rentals placed on current date
-
-                    console.log(res.data);
-                    setRentalList(res.data);
-                }).catch((error) => {
-                    Swal.fire({
-                        title: 'Oops!',
-                        text: `${error}`,
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }
-                    )
-                    //alert(error)
-                })
-            }
-
-        }
-
     }
 
     function changeBoxes() {
