@@ -67,7 +67,7 @@ function AddVehicle() {
                 vehPic
             }
 
-            console.log("image eka", file);
+            //console.log("image eka", file);
 
             axios.post("https://rent-x-api.herokuapp.com/upload/uploadImage", formData)
                 .then((res) => {
@@ -145,7 +145,7 @@ function AddVehicle() {
                 })
 
             const txt = path;
-            console.log("path ekaa dooo", imgPath);
+            // console.log("path ekaa dooo", imgPath);
 
 
 
@@ -288,7 +288,7 @@ function AddVehicle() {
             YearsValid = false;
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...Numbers Years Invalid ',
+                title: 'Oops...Numbers of Years Invalid ',
                 text: ' Number of years should be more than 0!!',
                 confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
@@ -299,7 +299,7 @@ function AddVehicle() {
             YearsValid = false;
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...Numbers Years Invalid',
+                title: 'Oops...Numbers of Years Invalid',
                 text: 'Number of years should be less than 10!!',
                 confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
@@ -352,7 +352,7 @@ function AddVehicle() {
     const [isNICValid, setNICIsValid] = useState(false);
     const [NICmessage, setNICMessage] = useState('');
 
-    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V.v]$/;
     const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
 
     const validateNIC = (event) => {
@@ -403,7 +403,7 @@ function AddVehicle() {
         }
         else if (YearsRent < 11) {
             setYearsValid(true);
-            setYearMessage('Years of rent loking good ');
+            setYearMessage('Years of rent looking good ');
         } else {
             setYearsValid(false);
             setYearMessage('Number of years should be less than 10 !');
@@ -534,6 +534,8 @@ function AddVehicle() {
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
                                                 />
+
+
 
                                             </div>
 
