@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 
 function ViewVehicle(vehicle) {
 
-    console.log("model open", vehicle)
+    //console.log("model open", vehicle)
 
     return (
         <div>
