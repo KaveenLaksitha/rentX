@@ -1,70 +1,39 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# RentX
 
-## Available Scripts
+web based management application for vehicle rental company.
 
-In the project directory, you can run:
+![](https://i.ibb.co/mDn4bQv/spm.png)
 
-### `npm start`
+## About
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The automobile rental management system is a web application developed for the purpose of managing vehicle reservations under two major
+categories: 
+- renting vehicles for daily requirements
+-  reserving a set of vehicles as event reservations.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The system would be beneficial for several stakeholders such as rental company owners, managers, administrators, drivers, and customers/clients. However, the system would mainly be handled by the company administrators under four significant functions.   The   four   primary   functions   are   employee   management, vehicle management, rental process management, and event reservation management.
+Under employee management, the application would facilitate the administrator to handle details of the new recruiting or already recruited employees by providing the necessary insert, update, delete, view, and search functions. For vehicle management administrator is facilitated with the opportunity to handle registering of new vehicles with the system from external clients and company-owned vehicles so that they can be used for renting and event reservations. Thereby insert function is developed to create new vehicle records within the system. In order to manage the details of such created vehicle records, update, delete, view, and search functions are developed. Under the rental process management renting vehicles for daily vehicle requirements of customers is managed. The available vehicles can be rented for a specific period (agreed rental period). In case of a late return of the vehicle, penalty charges get applied on the final payment. Thereby to handle these scenarios, firstly administrator is facilitated with an insert function to insert a new rental record and then update, delete view search, and payment calculation functions are facilitated to manipulate the inserted records and complete the rental process upon the returning of vehicle by customers. Event reservation management allows customers to make reservations on multiple numbers of vehicles at the same time for specific events for an agreed time period. Such event reservation records are facilitated to be inserted into the system as event reservation records by the insert function, whereas handling of the inserted record details at the end of the agreed period is facilitated with the update, delete, view, and search functions. However, the event reservations which do not get completed within the agreed time period due to the reasoning of customers not returning all the vehicles on time are handled under the payment function.
 
-### `npm test`
+### Technologies Used
+```
+React.js
+Node.js
+Express.js
+MongoDB
+CSS
+Bootstrap 4
+```
+> Link for API: https://github.com/KaveenLaksitha/rentX-API.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+- simply clone this repository and API repository
+- run "npm install"
+- run npm start
+- you're good to go!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br />  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> PS: *This project was done for educational purposes only .*
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
