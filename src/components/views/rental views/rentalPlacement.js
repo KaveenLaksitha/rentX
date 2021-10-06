@@ -307,7 +307,17 @@ function RentalPlacement() {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...Invalid Mobile No',
-                text: '*Invalid Mobile Number, Try Again !!',
+                text: '*Invalid Mobile Number! Insert 10 numbers only, Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+            MobileValid = false;
+        } else if (contactNo.trim().length == 10 && !isMobileValid) {
+            MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Mobile No',
+                text: '*Invalid Mobile Number! Insert 10 numbers not letters, Try Again !!',
                 confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
             })
@@ -317,7 +327,7 @@ function RentalPlacement() {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...Invalid Mobile No',
-                text: '*Invalid Mobile Number, Try Again !!',
+                text: '*Invalid Mobile Number! Insert 10 numbers, Try Again !!',
                 confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
             })
@@ -388,12 +398,32 @@ function RentalPlacement() {
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
             })
             NICValid = false;
+        } else if (customerNIC.trim().length == 12 && !isNICValid) {
+            NICErr.InValidNIC = " *Invalid NIC Number, must Include numbers only"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*Length 12 NIC must inlcude numbers only , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+            NICValid = false;
         } else if (customerNIC.trim().length == 10 && customerNIC.charAt(9) !== "V") {
             NICErr.InValidNIC = " *Invalid NIC Number last Letter is not V"; // error msg
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...Invalid NIC',
                 text: '*Invalid NIC Number last Letter is not V , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+            NICValid = false;
+        } else if (customerNIC.trim().length == 10 && !isNICValid) {
+            NICErr.InValidNIC = " *Invalid NIC Number"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*NIC has letters! Can only have 9 numbers and V , Try Again !!',
                 confirmButtonColor: '#1fc191',
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
             })
@@ -408,7 +438,7 @@ function RentalPlacement() {
                 // footer: '<a href=""#home">Why do I have this issue?</a>'
             })
             NICValid = false;
-        } else if (customerNIC.trim().length < 10) {
+        } else if (customerNIC.trim().length < 9) {
             NICErr.InValidNIC = " *Invalid NIC Number characters are lesser"; // error msg
             Swal.fire({
                 icon: 'error',
