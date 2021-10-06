@@ -525,15 +525,15 @@ function Reservation() {
                                                 <label class="form-label-emp" for="to">To</label>
                                                 <DatePicker
                                                     required
-                                                     
+
                                                     class="form-control formInput"
                                                     id="to"
                                                     name="to"
                                                     placeholder=""
-                                                    
+
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
-                                                   
+
                                                     onChange={(event) => {
                                                         setto(event);
                                                     }
@@ -802,7 +802,7 @@ function Reservation() {
                                                     name="customername"
                                                     placeholder="Full Name"
                                                     tabindex="1"
-                                                    //required 
+                                                    required
                                                     onChange={(event) => {
                                                         setcustomername(event.target.value);
                                                     }
@@ -887,7 +887,7 @@ function Reservation() {
                                                 name="customeraddress"
                                                 placeholder="Customer Address"
                                                 //tabindex="4"
-                                                //required
+                                                required
                                                 onChange={(event) => {
                                                     setcustomeraddress(event.target.value);
                                                 }
@@ -923,7 +923,7 @@ function Reservation() {
                                                     name="eventtype"
                                                     placeholder="Event Type (Wedding)"
                                                     //tabindex="7"
-                                                    //required 
+                                                    required
                                                     onChange={(event) => {
                                                         seteventtype(event.target.value);
                                                     }
@@ -955,6 +955,7 @@ function Reservation() {
                                                     id="advancedpayment"
                                                     name="advancedpayment"
                                                     placeholder="Advanced Payment (10000.00)"
+                                                    required
                                                     //tabindex="9"
                                                     onChange={(event) => {
                                                         setadvancedpayment(event.target.value);
