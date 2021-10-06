@@ -69,7 +69,7 @@ function AddVehicle() {
 
             console.log("image eka", file);
 
-            axios.post("https://rent-x-api.herokuapp.com/upload/uploadImage", formData)
+            axios.post("http://localhost:4000/upload/uploadImage", formData)
                 .then((res) => {
 
                     path = res.data.toString();
@@ -106,7 +106,7 @@ function AddVehicle() {
 
                     }
 
-                    axios.post("https://rent-x-api.herokuapp.com/vehicle/addVehicle", newVehicle)
+                    axios.post("http://localhost:4000/vehicle/addVehicle", newVehicle)
 
 
 

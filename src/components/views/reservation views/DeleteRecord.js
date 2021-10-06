@@ -22,7 +22,7 @@ function DeleteRecord() {
 
 
         function getReservation() {
-            axios.get("https://rent-x-api.herokuapp.com/deletedReservations/displayRemovedReservation").then((res) => { //normally the fetched rental record details are displayed through this
+            axios.get("http://localhost:4000/deletedReservations/displayRemovedReservation").then((res) => { //normally the fetched rental record details are displayed through this
                 //setRentals(res.data.reverse());
                 setviewreservation(res.data.reverse());
             }).catch((error) => {

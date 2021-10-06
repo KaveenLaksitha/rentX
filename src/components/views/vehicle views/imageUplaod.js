@@ -23,7 +23,7 @@ function ImageUplaod() {
 
         console.log("image eka", file);
 
-        axios.post("https://rent-x-api.herokuapp.com/upload/uploadImage", formData)
+        axios.post("http://localhost:4000/upload/uploadImage", formData)
             .then(() => {
                 console.log("image sent", file);
 

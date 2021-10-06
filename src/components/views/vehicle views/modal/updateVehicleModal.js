@@ -152,7 +152,7 @@ function UpdateVehicleModal(vehicle) {
         //     //window.location.replace("/empList");
         // });
 
-        axios.put(`https://rent-x-api.herokuapp.com/vehicle/updateV/${VehicleID}`, newVehicle)
+        axios.put(`http://localhost:4000/vehicle/updateV/${VehicleID}`, newVehicle)
 
             .then(() => {
                 Swal.fire({

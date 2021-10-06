@@ -43,20 +43,20 @@ function Dashboard() {
         })
 
 
-        axios.get("https://rent-x-api.herokuapp.com/rental/VehiclesRentedToday").then((res) => { //fetching the count of rentals placed on current date
+        axios.get("http://localhost:4000/rental/VehiclesRentedToday").then((res) => { //fetching the count of rentals placed on current date
             setNewRentals(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
-        axios.get("https://rent-x-api.herokuapp.com/deletedRentals/VehiclesReturnedToday").then((res) => { //fetching the count of rentals returned on current date
+        axios.get("http://localhost:4000/deletedRentals/VehiclesReturnedToday").then((res) => { //fetching the count of rentals returned on current date
             setReturnedRentals(res.data);
         }).catch((error) => {
             alert(error)
         })
 
         function readRentals() {
-            axios.get("https://rent-x-api.herokuapp.com/rental/getLatestRentalsOnly").then((res) => { //fetching the latestly placed three rentals
+            axios.get("http://localhost:4000/rental/getLatestRentalsOnly").then((res) => { //fetching the latestly placed three rentals
                 setRentalList(res.data);
             }).catch((error) => {
                 alert(error)
@@ -64,20 +64,20 @@ function Dashboard() {
         }
         readRentals();
 
-        axios.get("https://rent-x-api.herokuapp.com/reservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals placed on current date
+        axios.get("http://localhost:4000/reservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals placed on current date
             setNewReservation(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
-        axios.get("https://rent-x-api.herokuapp.com/deletedReservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals returned on current date
+        axios.get("http://localhost:4000/deletedReservations/VehiclesReservationToday").then((res) => { //fetching the count of rentals returned on current date
             setReturnedReservation(("0" + res.data).slice(-1));
         }).catch((error) => {
             alert(error)
         })
 
         function readReservation() {
-            axios.get("https://rent-x-api.herokuapp.com/reservations/getLatestReservationOnly").then((res) => { //fetching the latestly placed three rentals
+            axios.get("http://localhost:4000/reservations/getLatestReservationOnly").then((res) => { //fetching the latestly placed three rentals
                 setReservationList(res.data);
             }).catch((error) => {
                 alert(error)
@@ -85,13 +85,13 @@ function Dashboard() {
         }
         readReservation();
 
-        axios.get("https://rent-x-api.herokuapp.com/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
+        axios.get("http://localhost:4000/vehicle/VehiclesAvailable").then((res) => { //fetching the count of rentals placed on current date
             setNewVehicle(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)
         })
 
-        axios.get("https://rent-x-api.herokuapp.com/api/EmployeeAvailable").then((res) => { //fetching the count of rentals placed on current date
+        axios.get("http://localhost:4000/api/EmployeeAvailable").then((res) => { //fetching the count of rentals placed on current date
             setavailableEmployee(("0" + res.data).slice(-2));
         }).catch((error) => {
             alert(error)

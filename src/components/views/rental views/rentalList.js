@@ -34,7 +34,7 @@ function RentalList() {
 
         } else {
             function getRentals() {
-                axios.get("https://rent-x-api.herokuapp.com/rental/displayRentals").then((res) => { //normally the fetched rental record details are displayed through this
+                axios.get("http://localhost:4000/rental/displayRentals").then((res) => { //normally the fetched rental record details are displayed through this
                     //setRentals(res.data.reverse());
                     setRentalList(res.data.reverse());
                 }).catch((error) => {
@@ -90,7 +90,7 @@ function RentalList() {
         document.getElementById('addRec').innerHTML = "Completed Rentals";
         document.getElementById('addRecs').href = "/rental/removedRentalList";
         function getPendingRentals() {
-            axios.get("https://rent-x-api.herokuapp.com/rental/searchPendingRentalRecords/").then((res) => {
+            axios.get("http://localhost:4000/rental/searchPendingRentalRecords/").then((res) => {
                 //setRentals(res.data.reverse());
                 setRentalList(res.data);
             }).catch((error) => {
@@ -105,7 +105,7 @@ function RentalList() {
     function searchRentals(e) {
         e.preventDefault();
         if (search.substring(0, 4) === "2021") {
-            axios.get(`https://rent-x-api.herokuapp.com/rental/searchByFromDate/${search}`).then((res) => {
+            axios.get(`http://localhost:4000/rental/searchByFromDate/${search}`).then((res) => {
                 //setRentals(res.data);
                 setRentalList(res.data.reverse());
             }).catch((error) => {
@@ -114,7 +114,7 @@ function RentalList() {
             })
         }
         else if (!isNaN(search.charAt(0))) {//checking if the value entered at the search box is for NIC or normal name
-            axios.get(`https://rent-x-api.herokuapp.com/rental/searchRentalRecs/${search}`).then((res) => {
+            axios.get(`http://localhost:4000/rental/searchRentalRecs/${search}`).then((res) => {
                 //setRentals(res.data);
                 setRentalList(res.data.reverse());
             }).catch((error) => {
@@ -123,7 +123,7 @@ function RentalList() {
             })
         } else {
 
-            axios.get(`https://rent-x-api.herokuapp.com/rental/searchRentalRecordsX/${search}`).then((res) => {
+            axios.get(`http://localhost:4000/rental/searchRentalRecordsX/${search}`).then((res) => {
                 //setRentals(res.data);
                 setRentalList(res.data.reverse());
             }).catch((error) => {

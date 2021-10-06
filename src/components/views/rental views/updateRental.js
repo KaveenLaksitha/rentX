@@ -106,7 +106,7 @@ function UpdateRental() {
 
                 const newRental = { from, to, status, payment, vehicleType, model, pickAddress, addPrice, advPayment, finalPrice, customerName, customerName, customerNIC, customerAdd, contactNo, NICcopy, penDay, penaltyCharges, returnDate, rem }
 
-                axios.put(`https://rent-x-api.herokuapp.com/rental/updateRental/${rentalId}`, newRental).then(() => {
+                axios.put(`http://localhost:4000/rental/updateRental/${rentalId}`, newRental).then(() => {
                     //alert("Rental Record successfully Updated");
                     Swal.fire({
                         title: "Rental Record successfully Updated! ",
@@ -142,7 +142,7 @@ function UpdateRental() {
     }
 
     const loadRental = async () => {
-        await axios.get(`https://rent-x-api.herokuapp.com/rental/getRentalByID/${rentalId}`).then((res) => {
+        await axios.get(`http://localhost:4000/rental/getRentalByID/${rentalId}`).then((res) => {
             console.log(res.data)
             setFrom(res.data.rental.from);
             setTo(res.data.rental.to);

@@ -109,7 +109,7 @@ function Updatereservation(reservations) {
 
 
     const loadReservation = async () => {
-        await axios.get(`https://rent-x-api.herokuapp.com/reservations/getReservation/${RID}`).then((res) => {
+        await axios.get(`http://localhost:4000/reservations/getReservation/${RID}`).then((res) => {
             console.log(res.data)
             setcustomername(res.data.reservation.customername);
             setcontactnumber(res.data.reservation.contactnumber);
@@ -180,7 +180,7 @@ function Updatereservation(reservations) {
                     //remaining
                 }
 
-                axios.put(`https://rent-x-api.herokuapp.com/reservations/updateReservation/${RID}`, newReservation).then(() => {
+                axios.put(`http://localhost:4000/reservations/updateReservation/${RID}`, newReservation).then(() => {
 
                     Swal.fire({
                         title: "Reservation Record successfully Completed! ",

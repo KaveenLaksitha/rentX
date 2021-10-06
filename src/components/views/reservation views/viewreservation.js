@@ -33,7 +33,7 @@ function Viewreservation() {
 
         } else {
             function getReservation() {
-                axios.get("https://rent-x-api.herokuapp.com/reservations/displayReservation").then((res) => {
+                axios.get("http://localhost:4000/reservations/displayReservation").then((res) => {
                     setviewreservation(res.data.reverse());
                 }).catch((error) => {
 
@@ -84,7 +84,7 @@ function Viewreservation() {
     //search all completed record after clicking completed button
     function pendingRecords() {
         function getPendingReservation() {
-            axios.get("https://rent-x-api.herokuapp.com/reservations/searchCompletedReservationRecords/").then((res) => {
+            axios.get("http://localhost:4000/reservations/searchCompletedReservationRecords/").then((res) => {
                 setviewreservation(res.data.reverse());
             }).catch((error) => {
                 alert(error.message);
@@ -98,7 +98,7 @@ function Viewreservation() {
     function searchReservation(e) {
         e.preventDefault();
         if (!isNaN(search.charAt(0))) {
-            axios.get(`https://rent-x-api.herokuapp.com/reservations/searchReservationRecs/${search}`).then((res) => {
+            axios.get(`http://localhost:4000/reservations/searchReservationRecs/${search}`).then((res) => {
 
                 setviewreservation(res.data);
             }).catch((error) => {
@@ -106,7 +106,7 @@ function Viewreservation() {
             })
         } else {
 
-            axios.get(`https://rent-x-api.herokuapp.com/reservations/searchReservationRecordsX/${search}`).then((res) => {
+            axios.get(`http://localhost:4000/reservations/searchReservationRecordsX/${search}`).then((res) => {
 
                 setviewreservation(res.data);
             }).catch((error) => {
@@ -120,7 +120,7 @@ function Viewreservation() {
     //handle delete from reservation and add to the remove reservation list
     const deleteReservation = async (data) => {
 
-        await axios.post("https://rent-x-api.herokuapp.com/deletedReservations/addRemovedReservation", { data }).then(() => {
+        await axios.post("http://localhost:4000/deletedReservations/addRemovedReservation", { data }).then(() => {
 
             Swal.fire({
                 title: "Completed Reservation removed! ",
@@ -130,7 +130,7 @@ function Viewreservation() {
 
             })
 
-            const value = axios.post("https://rent-x-api.herokuapp.com/reservations/deleteReservation", modalDataDelete);
+            const value = axios.post("http://localhost:4000/reservations/deleteReservation", modalDataDelete);
 
             if (value) {
 

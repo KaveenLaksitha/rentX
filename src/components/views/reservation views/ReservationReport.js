@@ -36,7 +36,7 @@ function ReservationReport() {
             if ((eventtype == "") && (packagename == "")) {
                 const pack = "null"
                 const event = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${fromDate}/${toDate}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/reservations/generateReport/${fromDate}/${toDate}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -53,7 +53,7 @@ function ReservationReport() {
             }
             else if (eventtype == "") {
                 const evet = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${fromDate}/${toDate}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/reservations/generateReport/${fromDate}/${toDate}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -69,7 +69,7 @@ function ReservationReport() {
                 })
             } else if (packagename == "") {
                 const ptype = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${fromDate}/${toDate}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/reservations/generateReport/${fromDate}/${toDate}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -86,7 +86,7 @@ function ReservationReport() {
 
             } else {
 
-                axios.get(`https://rent-x-api.herokuapp.com/reservations/generateReport/${fromDate}/${toDate}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/reservations/generateReport/${fromDate}/${toDate}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -106,7 +106,7 @@ function ReservationReport() {
             if ((eventtype == "") && (packagename == "")) {
                 const pack = "null"
                 const event = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${fromDate}/${toDate}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${fromDate}/${toDate}/${pack}/${event}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -123,7 +123,7 @@ function ReservationReport() {
             }
             else if (eventtype == "") {
                 const evet = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${fromDate}/${toDate}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${fromDate}/${toDate}/${packagename}/${evet}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -139,7 +139,7 @@ function ReservationReport() {
                 })
             } else if (packagename == "") {
                 const ptype = "null"
-                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${fromDate}/${toDate}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${fromDate}/${toDate}/${ptype}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {
@@ -156,7 +156,7 @@ function ReservationReport() {
 
             } else {
 
-                axios.get(`https://rent-x-api.herokuapp.com/deletedReservations/generateReport/${fromDate}/${toDate}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
+                axios.get(`http://localhost:4000/deletedReservations/generateReport/${fromDate}/${toDate}/${packagename}/${eventtype}`).then((res) => { //fetching the count of rentals placed on current date
                     console.log(res.data);
                     setviewreservation(res.data);
                 }).catch((error) => {

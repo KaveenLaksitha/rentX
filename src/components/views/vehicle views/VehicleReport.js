@@ -35,7 +35,7 @@ function VehicleReport() {
         changeBoxes();
 
 
-        axios.get(`https://rent-x-api.herokuapp.com/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res) => {
+        axios.get(`http://localhost:4000/vehicle/reportV/${dateFrom}/${dateTo}/${Type}/${Brand}/${years}`).then((res) => {
             // const message = "No record found!"
             console.log("data in vehicle list page", res.data);
             setVehicles(res.data);

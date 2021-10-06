@@ -18,7 +18,7 @@ function DeleteVehicles() {
     useEffect(() => {
 
         function getVehicles() {
-            axios.get("https://rent-x-api.herokuapp.com/vehicleRemove/viewRemove").then((res) => {
+            axios.get("http://localhost:4000/vehicleRemove/viewRemove").then((res) => {
 
 
                 setVehicles(res.data.reverse());

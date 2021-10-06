@@ -64,7 +64,7 @@ function Reservation() {
     //send data to data base after submit the form
     function sendData(e) {
         e.preventDefault();
-
+        console.log("from date", from);
         const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
 
         const NICValid = NICValidation();
@@ -85,7 +85,7 @@ function Reservation() {
                 if (result.isConfirmed) {
                     const newReservation = { customername, contactnumber, nic, customernic, customeraddress, packagename, eventtype, from, to, discount, advancedpayment, totalreservation, status }
 
-                    axios.post("https://rent-x-api.herokuapp.com/reservations/addReservation", newReservation).then(() => {
+                    axios.post("http://localhost:4000/reservations/addReservation", newReservation).then(() => {
 
                         Swal.fire({
                             title: 'Reservation Completed!',
@@ -173,7 +173,7 @@ function Reservation() {
     //calculate charge per day
     function calculateRentPerDate() {
         function getRentFirstVehicle() {
-            axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType}/${model}`).then((res) => {
                 setPerDayCharge(res.data)
                 console.log(res.data);
             }).catch((error) => {
@@ -191,7 +191,7 @@ function Reservation() {
     //calculate charge per day for second vehicle
     function calculateRentPerDate1() {
         function getRentFirstVehicle2() {
-            axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
+            axios.get(`http://localhost:4000/vehicle/searchPerDayRentalPrice/${vehicleType1}/${model1}`).then((res) => {
                 setPerDayCharge1(res.data)
                 console.log(res.data);
             }).catch((error) => {
@@ -464,7 +464,7 @@ function Reservation() {
 
 
     return (
-        <div className="page-component-body pl-5">
+        <div className="page-component-body pl-0">
             <Header></Header>
             <div class="container input-main-form pl-5">
                 <br></br>
@@ -525,15 +525,15 @@ function Reservation() {
                                                 <label class="form-label-emp" for="to">To</label>
                                                 <DatePicker
                                                     required
-                                                    //type="date" 
+                                                     
                                                     class="form-control formInput"
                                                     id="to"
                                                     name="to"
                                                     placeholder=""
-                                                    //tabindex="6"
+                                                    
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
-                                                    //isValidDate={disableFutureDt}
+                                                   
                                                     onChange={(event) => {
                                                         setto(event);
                                                     }
@@ -1033,7 +1033,7 @@ export default Reservation
     useEffect(() => {
 
         function getCarList() {
-            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Car").then((res) => {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Car").then((res) => {
                 setCarList(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -1041,7 +1041,7 @@ export default Reservation
         }
 
         function getBusList() {
-            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Bus").then((res) => {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Bus").then((res) => {
                 setBusList(res.data);
             }).catch((error) => {
                 alert(error.message);
@@ -1049,7 +1049,7 @@ export default Reservation
         }
 
         function getVanList() {
-            axios.get("https://rent-x-api.herokuapp.com/vehicle/searchVehicleModels/Van").then((res) => {
+            axios.get("http://localhost:4000/vehicle/searchVehicleModels/Van").then((res) => {
                 setVanList(res.data);
             }).catch((error) => {
                 alert(error.message);

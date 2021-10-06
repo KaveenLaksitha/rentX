@@ -17,7 +17,7 @@ function Login() {
     function checkUser(e) {//function checks the availbilty of the admin within the system
         e.preventDefault();
         //pass the username and password and if exact user exsits will be directed to dashbord else it will display error for unavailable user
-        axios.get(`https://rent-x-api.herokuapp.com/login/get/${username}/${password}`).then((response) => {
+        axios.get(`http://localhost:4000/login/get/${username}/${password}`).then((response) => {
             console.log(response.data);
             setLogin(response.data.login);
             if (response.data.login === null) {
