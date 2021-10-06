@@ -187,7 +187,7 @@ function AddEmployee() {
     const [isNICValid, setNICIsValid] = useState(false);
     const [NICmessage, setNICMessage] = useState('');
 
-    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V]$/;
+    const NICRegex1 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][V.v]$/;
     const NICRegex2 = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
 
     const validateNIC = (event) => {

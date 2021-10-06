@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 function UpdateVehicleModal(vehicle) {
 
-    console.log("update modal dataaaaaa", vehicle);
+    //console.log("update modal dataaaaaa", vehicle);
 
     useEffect(() => {
         try {
@@ -101,7 +101,7 @@ function UpdateVehicleModal(vehicle) {
 
     }
 
-    console.log("came dataaaaa", uptVehicle)
+    // console.log("came dataaaaa", uptVehicle)
 
 
     function sendData(e) {
