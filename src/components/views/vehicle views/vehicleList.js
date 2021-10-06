@@ -67,8 +67,13 @@ function VehicleList() {
                 timer: 1500
             })
 
+<<<<<<< HEAD
+            const value = axios.post("https://rent-x-api.herokuapp.com/vehicle/deleteV", modalDataDelete);
+            console.log("deletedddd", value);
+=======
             const value = axios.post("https://rent-x-api.herokuapp.com/vehicle/deleteV", modalDataDelete);
             //console.log("deletedddd", value);
+>>>>>>> 18cbcd9b66ac5d8a693b6fa8c1fc4325a7b01cb8
             if (value) {
                 // alert("**Permenantly deleted the Vehicle Record");
                 // window.location.replace("/viewReservation");
@@ -142,8 +147,13 @@ function VehicleList() {
 
 
         e.preventDefault();
+<<<<<<< HEAD
+        console.log("search val", search);
+        axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchV/${search}`).then((res) => {
+=======
         //console.log("search val", search);
         axios.get(`https://rent-x-api.herokuapp.com/vehicle/searchV/${search}`).then((res) => {
+>>>>>>> 18cbcd9b66ac5d8a693b6fa8c1fc4325a7b01cb8
 
 
             setVehicles(res.data.data.reverse());

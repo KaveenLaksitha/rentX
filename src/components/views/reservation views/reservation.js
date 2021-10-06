@@ -464,7 +464,7 @@ function Reservation() {
 
 
     return (
-        <div className="page-component-body pl-5">
+        <div className="page-component-body pl-0">
             <Header></Header>
             <div class="container input-main-form pl-5">
                 <br></br>

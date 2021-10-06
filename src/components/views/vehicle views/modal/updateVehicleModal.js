@@ -164,7 +164,29 @@ function UpdateVehicleModal(vehicle) {
                     ).then(() => {
                         window.location.replace("/vehicleList");
 
+<<<<<<< HEAD
+        // const updateVehicle (VehicleID, newVehicle).then((response) => {
+        //     // const message = response.ok
+        //     //     ? "Employee insertion successful"
+        //     //     : response.err;
+        //     // alert(message);
+        //     //window.location.replace("/empList");
+        // });
+
+        axios.put(`https://rent-x-api.herokuapp.com/vehicle/updateV/${VehicleID}`, newVehicle)
+
+            .then(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Vehicle Details Added Succesfully',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+                ).then(() => {
+=======
                     })
+>>>>>>> 18cbcd9b66ac5d8a693b6fa8c1fc4325a7b01cb8
                     window.location.replace("/vehicleList");
 
                 }).catch((err) => {
