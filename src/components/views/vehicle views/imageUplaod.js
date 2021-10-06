@@ -21,7 +21,7 @@ function ImageUplaod() {
             image
         }
 
-        console.log("image eka", file);
+        //console.log("image eka", file);
 
         axios.post("http://localhost:4000/upload/uploadImage", formData)
             .then(() => {

@@ -22,7 +22,7 @@ function DeleteVehicles() {
 
 
                 setVehicles(res.data.reverse());
-                console.log("Data recieved");
+                // console.log("Data recieved");
             }).catch((error) => {
                 alert(error.message);
             })
@@ -40,8 +40,8 @@ function DeleteVehicles() {
 
 
     const handleViewOnClick = () => {
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
+        // console.log("req came for modal");
+        // console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
 

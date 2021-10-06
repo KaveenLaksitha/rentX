@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
 import 'react-datetime/css/react-datetime.css';
 
@@ -17,6 +17,13 @@ function ReservationReport() {
     const [ageTo, setAgeTo] = useState("");
     const [gender, setGender] = useState("");
     const [empList, setempList] = useState([]);
+
+    const date = new Date();
+
+    useEffect(() => {
+        document.getElementById("dateDisplay").innerHTML = date;
+
+    }, []);
 
     function sendData(e) {
         e.preventDefault();
