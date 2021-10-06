@@ -61,7 +61,7 @@ export default function EmpList() {
         e.preventDefault();
 
         searchEmployeesService(search).then((data) => {
-            console.log("data in emp list page", data);
+
             if (data.ok) {
 
                 // setIsFetching(true);
@@ -88,8 +88,6 @@ export default function EmpList() {
 
     const handleViewOnClick = () => {
 
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
         setModalShow(true);
 
     }
@@ -103,7 +101,6 @@ export default function EmpList() {
 
     const openModalUpdate = (data) => {
 
-        console.log("request came for modal updateeeeeee", data);
         setModalDataUpdate(data);
         setModalUpdate(true);
 

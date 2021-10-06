@@ -27,7 +27,6 @@ function EmpTest() {
         setFetch({ isFetching: true });
         getAllEmployeesService().then((data) => {
             setEmp(data.data);
-            console.log(data.data, "component did mount on new list")
         }
         )
     }, []);
@@ -44,8 +43,6 @@ function EmpTest() {
     }
 
     const handleViewOnClick = () => {
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalzzzz");
         handleShow()
         // this.setState({ redirect: `/viewEmp/${userId}` });
     }

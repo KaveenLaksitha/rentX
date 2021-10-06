@@ -63,8 +63,6 @@ export default function PastEmpList() {
     }
 
     const handleViewOnClick = () => {
-        console.log("req came for modal");
-        console.log(modalData, "data came for modalllllll");
         setModalShow(true);
     }
 
