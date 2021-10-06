@@ -57,7 +57,7 @@ nav.main-menu.expanded {
   z-index: 1000;
 }
 
-.main-menu > ul {
+.main-menu>ul {
   margin: 7px 0;
 }
 
@@ -67,7 +67,7 @@ nav.main-menu.expanded {
   width: 250px;
 }
 
-.main-menu li > a {
+.main-menu li>a {
   position: relative;
   display: table;
   border-collapse: collapse;
@@ -129,8 +129,8 @@ nav li {
   padding: 0;
 }
 
-.main-menu li:hover > a,
-nav.main-menu li.active > a,
+.main-menu li:hover>a,
+nav.main-menu li.active>a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
   border-left: 6px solid #1fc191 !important;
@@ -150,8 +150,7 @@ nav.main-menu li.active > a,
   font-style: normal;
   font-weight: 300;
   src: local("Titillium WebLight"), local("TitilliumWeb-Light"),
-    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff)
-      format("woff");
+    url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format("woff");
 }
 
 /*header css part*/
@@ -452,7 +451,7 @@ a.nav-link:link {
 .customersize:after {
   content: "";
   display: block;
-  width: 39rem;
+  width: 37rem;
   height: 1px;
   background: #656568;
   right: 0;
@@ -476,7 +475,7 @@ a.nav-link:link {
 .reservesize:after {
   content: "";
   display: block;
-  width: 38rem;
+  width: 36rem;
   height: 1px;
   background: #656568;
   right: 0;
@@ -569,7 +568,7 @@ a.nav-link:link {
   padding-left: 1rem;
 }
 
-.searchbar:hover > .search_icon {
+.searchbar:hover>.search_icon {
   color: #000000;
 }
 
@@ -734,6 +733,7 @@ a.nav-link:link {
   border-color: #b1b1b1;
   border-width: 0.1rem;
 }
+
 .btn-info-total {
   background-color: #1fc191;
   color: white;
