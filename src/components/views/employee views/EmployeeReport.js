@@ -33,7 +33,6 @@ function ReservationReport() {
 
         searchForReport(payload).then((data) => {
             const message = "No record found!"
-            console.log("data in emp list page", data);
             if (data.ok) {
 
                 setempList(data.data.reverse());

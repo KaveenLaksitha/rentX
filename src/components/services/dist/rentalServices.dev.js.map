@@ -1,0 +1,1 @@
+{"version":3,"sources":["rentalServices.js"],"names":["HOST"],"mappings":";;AAAA;;;;AAEA,IAAMA,IAAI,GAAG,kCAAb","sourcesContent":["import axios from \"axios\";\r\n\r\nconst HOST = \"https://rent-x-api.herokuapp.com\";\r\n"],"file":"rentalServices.dev.js"}

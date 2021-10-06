@@ -64,7 +64,7 @@ function Reservation() {
     //send data to data base after submit the form
     function sendData(e) {
         e.preventDefault();
-
+        console.log("from date", from);
         const finalpay = document.getElementById('FinalreservationPrice').value = (document.getElementById('total').value - advancedpayment);
 
         const NICValid = NICValidation();
@@ -464,7 +464,7 @@ function Reservation() {
 
 
     return (
-        <div className="page-component-body pl-5">
+        <div className="page-component-body pl-0">
             <Header></Header>
             <div class="container input-main-form pl-5">
                 <br></br>
@@ -525,15 +525,15 @@ function Reservation() {
                                                 <label class="form-label-emp" for="to">To</label>
                                                 <DatePicker
                                                     required
-                                                    //type="date" 
+                                                     
                                                     class="form-control formInput"
                                                     id="to"
                                                     name="to"
                                                     placeholder=""
-                                                    //tabindex="6"
+                                                    
                                                     timeFormat={false}
                                                     isValidDate={disablePastDt}
-                                                    //isValidDate={disableFutureDt}
+                                                   
                                                     onChange={(event) => {
                                                         setto(event);
                                                     }
