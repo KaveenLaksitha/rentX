@@ -304,9 +304,23 @@ function RentalPlacement() {
         if (contactNo.trim().length > 10) {
 
             MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Mobile No',
+                text: '*Invalid Mobile Number, Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             MobileValid = false;
         } else if (contactNo.trim().length < 10) {
             MobileErr.InValidMobileNo = " *Invalid Telephone Number"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Mobile No',
+                text: '*Invalid Mobile Number, Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             MobileValid = false;
         }
 
@@ -324,9 +338,29 @@ function RentalPlacement() {
         let AdValid = true; //setting flag
 
 
-        if (advPayment >= 10000) {
+        if (advPayment <= 1000) {
+
+            AdErr.InValidAdvance = " *Advance Payment should be greater than Rs . 1000/="; // error msg
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Advance Payment',
+                text: 'Advance Payment should be greater than Rs . 1000/= , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
+            AdValid = false;
+        }
+        else if (advPayment >= 10000) {
 
             AdErr.InValidAdvance = " *Advance Payment should be less than Rs . 10,000/="; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid Advance Payment',
+                text: 'Advance Payment should be less than Rs . 10,000/= , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             AdValid = false;
         }
 
@@ -346,15 +380,43 @@ function RentalPlacement() {
         if (customerNIC.trim().length > 12) {
 
             NICErr.InValidNIC = " *Invalid NIC Number characters cannot exceed 12"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*Invalid NIC Number characters cannot exceed 12 , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             NICValid = false;
         } else if (customerNIC.trim().length == 10 && customerNIC.charAt(9) !== "V") {
             NICErr.InValidNIC = " *Invalid NIC Number last Letter is not V"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*Invalid NIC Number last Letter is not V , Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             NICValid = false;
         } else if (customerNIC.trim().length == 9) {
             NICErr.InValidNIC = " *Invalid NIC Number ending V is missing"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*Invalid NIC Number ending V is missing, Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             NICValid = false;
         } else if (customerNIC.trim().length < 10) {
             NICErr.InValidNIC = " *Invalid NIC Number characters are lesser"; // error msg
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...Invalid NIC',
+                text: '*Invalid NIC Number characters are lesser, Try Again !!',
+                confirmButtonColor: '#1fc191',
+                // footer: '<a href=""#home">Why do I have this issue?</a>'
+            })
             NICValid = false;
         }
 
@@ -411,11 +473,21 @@ function RentalPlacement() {
 
     const validateAdvance = (event) => {
         const Advance = event.target.value;
-        if (Advance <= 10000) {
+
+        if (Advance <= 1000) {
+            setAdvanceValid(false);
+            // setRegMessage('Vehicle Registation Number looks good!');
+            setAdvMessage('Advance payment amount should be greater than 1000');
+        }
+
+        else if (Advance <= 10000) {
             setAdvanceValid(true);
             // setRegMessage('Vehicle Registation Number looks good!');
             setAdvMessage('Advance paymnet amount is valid');
-        } else {
+        }
+
+
+        else {
             setAdvanceValid(false);
             setAdvMessage('Advance paymnet should be less than Rs 10,000/=');
         }
