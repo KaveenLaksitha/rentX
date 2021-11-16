@@ -3,7 +3,7 @@
 
 Chi - Lanka is a web application developed for the procument process of contruction industry based on relative given case study.
 
-![](https://i.ibb.co/x5Yc01J/Screenshot-2021-11-15-013846.png)
+![](https://i.ibb.co/L94jBtF/chi-lanka.png)
 
 ## About
 
